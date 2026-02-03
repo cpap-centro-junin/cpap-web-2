@@ -20,8 +20,8 @@
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/css/modern.css'])
+    <!-- Vite Assets -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     @yield('styles')
 </head>
@@ -37,9 +37,8 @@
     <!-- Footer -->
     @include('partials.footer')
     
-    <!-- Scripts -->
+    <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    @vite(['resources/js/app.js', 'resources/js/modern.js', 'resources/js/slider.js'])
     
     <script>
         // Initialize AOS
