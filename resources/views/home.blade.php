@@ -379,12 +379,8 @@
 
         <div class="events-timeline">
             <div class="event-item" data-aos="fade-right">
-                <div class="event-date">
-                    <span class="day">15</span>
-                    <span class="month">Feb</span>
-                </div>
                 <div class="event-content">
-                    <h3>Taller de Metodología de Investigación Cualitativa</h3>
+                    <h3>15 Feb - Taller de Metodología de Investigación Cualitativa</h3>
                     <p>Modalidad virtual. Inscripciones abiertas para colegiados.</p>
                     <div class="event-meta">
                         <span><i class="fas fa-clock"></i> 6:00 PM - 8:00 PM</span>
@@ -394,12 +390,8 @@
             </div>
 
             <div class="event-item" data-aos="fade-right" data-aos-delay="100">
-                <div class="event-date">
-                    <span class="day">20</span>
-                    <span class="month">Feb</span>
-                </div>
                 <div class="event-content">
-                    <h3>Conversatorio: Antropología y Desarrollo Sostenible</h3>
+                    <h3>20 Feb - Conversatorio: Antropología y Desarrollo Sostenible</h3>
                     <p>Con la participación de destacados antropólogos de la región.</p>
                     <div class="event-meta">
                         <span><i class="fas fa-clock"></i> 7:00 PM - 9:00 PM</span>
@@ -409,12 +401,8 @@
             </div>
 
             <div class="event-item" data-aos="fade-right" data-aos-delay="200">
-                <div class="event-date">
-                    <span class="day">28</span>
-                    <span class="month">Feb</span>
-                </div>
                 <div class="event-content">
-                    <h3>Asamblea General Ordinaria 2026</h3>
+                    <h3>28 Feb - Asamblea General Ordinaria 2026</h3>
                     <p>Convocatoria a todos los colegiados hábiles. Agenda e informes disponibles.</p>
                     <div class="event-meta">
                         <span><i class="fas fa-clock"></i> 5:00 PM - 8:00 PM</span>

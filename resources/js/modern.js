@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Navbar Scroll Effect
+    // Navbar Scroll Effect - Animación sutil sin afectar altura
     const navbar = document.getElementById('navbar');
     let lastScroll = 0;
 
@@ -73,11 +73,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 100) {
-            navbar.style.padding = '10px 0';
-            navbar.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            navbar.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.backdropFilter = 'blur(8px)';
         } else {
-            navbar.style.padding = '20px 0';
             navbar.style.boxShadow = '0 4px 8px rgba(0,0,0,0.12)';
+            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.backdropFilter = 'blur(0px)';
         }
 
         lastScroll = currentScroll;

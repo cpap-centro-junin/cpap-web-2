@@ -150,22 +150,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, { passive: true });
 
-    // Mouse drag
+    // Mouse drag - Mejorado para funcionar en imágenes también
     let isDragging = false;
     let dragStartX = 0;
+    const sliderWrapper = document.getElementById('bannerSliderWrapper');
 
-    slider.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        dragStartX = e.clientX;
-        slider.style.cursor = 'grabbing';
+    // Prevenir drag nativo de imágenes
+    const images = slider.querySelectorAll('img');
+    images.forEach(img => {
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+        img.style.userSelect = 'none';
+        img.style.pointerEvents = 'none'; // Las imágenes no bloquean el drag
     });
 
-    slider.addEventListener('mousemove', (e) => {
+    sliderWrapper.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        dragStartX = e.clientX;
+        sliderWrapper.style.cursor = 'grabbing';
+        e.preventDefault(); // Prevenir selección de texto
+    });
+
+    sliderWrapper.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         e.preventDefault();
     });
 
-    slider.addEventListener('mouseup', (e) => {
+    sliderWrapper.addEventListener('mouseup', (e) => {
         if (!isDragging) return;
         
         const diff = dragStartX - e.clientX;
@@ -179,13 +189,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         isDragging = false;
-        slider.style.cursor = 'grab';
+        sliderWrapper.style.cursor = 'grab';
     });
 
-    slider.addEventListener('mouseleave', () => {
+    sliderWrapper.addEventListener('mouseleave', () => {
         if (isDragging) {
             isDragging = false;
-            slider.style.cursor = 'grab';
+            sliderWrapper.style.cursor = 'grab';
         }
     });
 
