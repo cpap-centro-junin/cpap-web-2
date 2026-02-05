@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 // Página principal
 Route::get('/', function () {
@@ -32,3 +33,20 @@ Route::get('/nosotros/consejo-directivo', function () {
     return view('nosotros.consejo-directivo');
 })->name('nosotros.consejo-directivo');
 
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin']);
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::get('/register', [AuthController::class, 'showRegister']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
