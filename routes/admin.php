@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 // Dashboard
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -44,3 +45,9 @@ Route::get('/invitaciones', [App\Http\Controllers\Admin\InvitacionController::cl
 
 Route::post('/invitaciones/enviar', [App\Http\Controllers\Admin\InvitacionController::class, 'enviar'])
     ->name('admin.invitaciones.enviar');
+
+
+use App\Http\Controllers\Admin\NoticiaController;
+
+Route::resource('noticias', NoticiaController::class)
+    ->names('admin.noticias');

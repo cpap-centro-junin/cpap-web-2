@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/#noticias') }}" class="nav-link">
+                    <a href="{{ url(route('noticias.index')) }}" class="nav-link">
                         <i class="fas fa-newspaper"></i>
                         Noticias
                     </a>

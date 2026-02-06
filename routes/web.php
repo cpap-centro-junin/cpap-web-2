@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\Admin\NoticiaController as AdminNoticiaController;
+
 
 // Página principal
 Route::get('/', function () {
@@ -56,4 +59,27 @@ Route::middleware('auth')->group(function () {
 
     // Aquí jalamos las rutas del panel admin
     Route::prefix('admin')->group(base_path('routes/admin.php'));
+});
+
+//ruta de nocticias hascia la vista publica
+
+Route::get('/noticias', [NoticiaController::class, 'index'])
+    ->name('noticias.index');
+
+Route::get('/noticias', [NoticiaController::class, 'index'])
+    ->name('noticias.index');
+
+Route::get('/noticias/{noticia}', [NoticiaController::class, 'show'])
+    ->name('noticias.show');
+
+ 
+
+
+// PUBLICO
+Route::get('/noticias', [NoticiaController::class, 'index'])
+    ->name('noticias.index');
+
+// ADMIN
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('noticias', AdminNoticiaController::class);
 });
