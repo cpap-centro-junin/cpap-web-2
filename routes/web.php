@@ -63,14 +63,13 @@ Route::middleware('auth')->group(function () {
 
 //ruta de nocticias hascia la vista publica
 
-Route::get('/noticias', [NoticiaController::class, 'index'])
-    ->name('noticias.index');
-
+// Noticias públicas
 Route::get('/noticias', [NoticiaController::class, 'index'])
     ->name('noticias.index');
 
 Route::get('/noticias/{noticia}', [NoticiaController::class, 'show'])
     ->name('noticias.show');
+
 
  
 
@@ -83,3 +82,4 @@ Route::get('/noticias', [NoticiaController::class, 'index'])
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('noticias', AdminNoticiaController::class);
 });
+    

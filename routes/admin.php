@@ -49,5 +49,6 @@ Route::post('/invitaciones/enviar', [App\Http\Controllers\Admin\InvitacionContro
 
 use App\Http\Controllers\Admin\NoticiaController;
 
-Route::resource('noticias', NoticiaController::class)
-    ->names('admin.noticias');
+Route::get('/noticias', [NoticiaController::class, 'index'])
+    ->name('admin.noticias');
+
