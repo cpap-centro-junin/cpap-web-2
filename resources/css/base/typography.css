@@ -1,0 +1,212 @@
+/* ============================================
+   TIPOGRAFÍA - PROYECTO CPAP
+   Estilos tipográficos unificados
+   ============================================ */
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    color: var(--dark);
+    margin-bottom: var(--spacing-md);
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    /* 40px - 56px responsive */
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    /* 32px - 40px responsive */
+}
+
+h3 {
+    font-size: var(--font-3xl);
+    /* 30px */
+}
+
+h4 {
+    font-size: var(--font-2xl);
+    /* 24px */
+}
+
+h5 {
+    font-size: var(--font-xl);
+    /* 20px */
+}
+
+h6 {
+    font-size: var(--font-lg);
+    /* 18px */
+}
+
+/* Párrafos */
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--dark-secondary);
+    line-height: var(--leading-relaxed);
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+/* Texto con gradiente */
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+.gradient-secondary-text {
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+/* Utilidades de texto */
+.text-primary {
+    color: var(--primary);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.text-dark {
+    color: var(--dark);
+}
+
+.text-light {
+    color: var(--light);
+}
+
+.text-gray {
+    color: var(--medium-gray);
+}
+
+/* Alineación */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Tamaños de texto */
+.text-xs {
+    font-size: var(--font-xs);
+}
+
+.text-sm {
+    font-size: var(--font-sm);
+}
+
+.text-base {
+    font-size: var(--font-base);
+}
+
+.text-lg {
+    font-size: var(--font-lg);
+}
+
+.text-xl {
+    font-size: var(--font-xl);
+}
+
+.text-2xl {
+    font-size: var(--font-2xl);
+}
+
+.text-3xl {
+    font-size: var(--font-3xl);
+}
+
+/* Pesos de fuente */
+.font-light {
+    font-weight: var(--font-light);
+}
+
+.font-normal {
+    font-weight: var(--font-normal);
+}
+
+.font-medium {
+    font-weight: var(--font-medium);
+}
+
+.font-semibold {
+    font-weight: var(--font-semibold);
+}
+
+.font-bold {
+    font-weight: var(--font-bold);
+}
+
+.font-extrabold {
+    font-weight: var(--font-extrabold);
+}
+
+/* Transformaciones de texto */
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+/* Enlaces */
+.link {
+    color: var(--primary);
+    text-decoration: underline;
+    transition: opacity var(--transition-fast);
+}
+
+.link:hover {
+    opacity: 0.8;
+}
+
+/* Lead text */
+.lead {
+    font-size: var(--font-xl);
+    font-weight: var(--font-light);
+    line-height: var(--leading-relaxed);
+    color: var(--medium-gray);
+}
+
+/* Texto truncado */
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Login - Colegio de Antropólogos</title>
 
-    @vite(['resources/css/login.css'])
+    {{-- Estilos principales --}}
+    @vite(['resources/css/app.css', 'resources/js/modules/login.js'])
 
     <style>
         .background {

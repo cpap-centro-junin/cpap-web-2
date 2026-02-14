@@ -1,0 +1,415 @@
+/* ============================================
+   SISTEMA DE BADGES Y TAGS - PROYECTO CPAP
+   Consolidado de múltiples archivos
+   ============================================ */
+
+/* ============================================
+   BADGE BASE
+   ============================================ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    font-size: var(--font-sm);
+    font-weight: var(--font-semibold);
+    line-height: 1;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+/* ============================================
+   VARIANTES DE BADGES
+   ============================================ */
+
+/* Primary */
+.badge-primary {
+    background: var(--gradient-primary);
+    color: var(--light);
+    box-shadow: 0 2px 8px rgba(139, 21, 56, 0.2);
+}
+
+/* Secondary */
+.badge-secondary {
+    background: var(--gradient-secondary);
+    color: var(--dark);
+    box-shadow: 0 2px 8px rgba(201, 169, 97, 0.2);
+}
+
+/* Success */
+.badge-success,
+.bg-success {
+    background: var(--success);
+    color: var(--light);
+}
+
+/* Warning */
+.badge-warning,
+.bg-warning {
+    background: var(--warning);
+    color: var(--light);
+}
+
+/* Danger */
+.badge-danger,
+.bg-danger {
+    background: var(--danger);
+    color: var(--light);
+}
+
+/* Info */
+.badge-info {
+    background: var(--info);
+    color: var(--light);
+}
+
+/* Light */
+.badge-light {
+    background: var(--light-gray);
+    color: var(--dark);
+    border: 1px solid var(--border);
+}
+
+/* Dark */
+.badge-dark {
+    background: var(--dark);
+    color: var(--light);
+}
+
+/* ============================================
+   BADGES OUTLINE
+   ============================================ */
+
+.badge-outline-primary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.badge-outline-secondary {
+    background: transparent;
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
+}
+
+.badge-outline-success {
+    background: transparent;
+    color: var(--success);
+    border: 2px solid var(--success);
+}
+
+.badge-outline-danger {
+    background: transparent;
+    color: var(--danger);
+    border: 2px solid var(--danger);
+}
+
+/* ============================================
+   SECTION BADGE - Badge de encabezado de sección
+   ============================================ */
+
+.section-badge {
+    display: inline-block;
+    padding: 10px 24px;
+    background: var(--gradient-secondary);
+    color: var(--dark);
+    font-size: var(--font-sm);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 15px rgba(201, 169, 97, 0.3);
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   TAGS - Etiquetas de categorías
+   ============================================ */
+
+.tag,
+.tags {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 6px 14px;
+    font-size: var(--font-xs);
+    font-weight: var(--font-medium);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+/* Tags de Trabajos */
+.tag-fulltime,
+.tag-tiempo-completo {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.tag-parttime,
+.tag-medio-tiempo {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+.tag-consultoria,
+.tag-consultor {
+    background: var(--info-light);
+    color: var(--info);
+}
+
+.tag-remote,
+.tag-remoto {
+    background: #f3e5f5;
+    color: #6a1b9a;
+}
+
+.tag-new,
+.tag-nuevo {
+    background: var(--gradient-secondary);
+    color: var(--dark);
+}
+
+.tag-featured,
+.tag-destacado {
+    background: var(--gradient-primary);
+    color: var(--light);
+}
+
+/* Hover effect en tags clickeables */
+.tag:hover,
+.tags:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   STATUS BADGES - Estados
+   ============================================ */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 4px 10px;
+    font-size: var(--font-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+}
+
+.status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Active / Published */
+.status-active,
+.status-publicado {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.status-active::before,
+.status-publicado::before {
+    background: var(--success);
+}
+
+/* Inactive / Draft */
+.status-inactive,
+.status-borrador {
+    background: var(--light-gray);
+    color: var(--medium-gray);
+}
+
+.status-inactive::before,
+.status-borrador::before {
+    background: var(--medium-gray);
+}
+
+/* Pending */
+.status-pending,
+.status-pendiente {
+    background: var(--warning-light);
+    color: var(--warning);
+}
+
+.status-pending::before,
+.status-pendiente::before {
+    background: var(--warning);
+}
+
+/* Used / Completed */
+.badge.used,
+.status-usado {
+    background: var(--light-gray);
+    color: var(--medium-gray);
+}
+
+/* Active / Available */
+.badge.active,
+.status-activo {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+/* ============================================
+   BADGE CON ICONO
+   ============================================ */
+
+.badge-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.badge-icon i {
+    font-size: 1em;
+}
+
+/* ============================================
+   BADGE CON CONTADOR
+   ============================================ */
+
+.badge-counter {
+    position: relative;
+    display: inline-block;
+}
+
+.badge-counter .badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    font-size: 11px;
+    line-height: 20px;
+}
+
+/* ============================================
+   TAMAÑOS DE BADGES
+   ============================================ */
+
+.badge-sm {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+}
+
+.badge-lg {
+    padding: 8px 16px;
+    font-size: var(--font-base);
+}
+
+.badge-xl {
+    padding: 10px 20px;
+    font-size: var(--font-lg);
+}
+
+/* ============================================
+   BADGE PILL - Más redondeado
+   ============================================ */
+
+.badge-pill {
+    border-radius: var(--radius-full);
+}
+
+/* ============================================
+   BADGE DOT - Solo punto indicador
+   ============================================ */
+
+.badge-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.badge-dot-lg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ============================================
+   BADGE GROUP - Grupo de badges
+   ============================================ */
+
+.badge-group {
+    display: inline-flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   BADGES EN CARDS
+   ============================================ */
+
+.card .badge {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    z-index: 10;
+}
+
+.card .badge-top-left {
+    left: var(--spacing-md);
+    right: auto;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+
+    .section-badge {
+        padding: 8px 18px;
+        font-size: 0.7rem;
+    }
+
+    .badge-group {
+        gap: 6px;
+    }
+}
+
+/* ============================================
+   ANIMACIONES DE BADGES
+   ============================================ */
+
+.badge-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes badge-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Badge con efecto de notificación */
+.badge-notification {
+    animation: badge-notification 1.5s ease-in-out infinite;
+}
+
+@keyframes badge-notification {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

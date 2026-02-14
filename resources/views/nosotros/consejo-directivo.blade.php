@@ -3,10 +3,9 @@
 
 @section('title', 'Consejo Directivo')
 
-{{-- CSS y JS con VITE --}}
+{{-- JS con VITE --}}
 @vite([
-    'resources/css/consejo.css',
-    'resources/js/consejo.js'
+    'resources/js/modules/consejo.js'
 ])
 
 @section('content')

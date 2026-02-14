@@ -5,11 +5,10 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 
-                // 👉 AGREGA ESTOS
-                'resources/css/consejo.css',
-                'resources/js/consejo.js',
-                'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js'
+            ],
             refresh: true,
         }),
         tailwindcss(),

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@vite('resources/css/admin-invitaciones.css')
+{{-- admin-invitaciones.css eliminado - estilos en admin.css --}}
 
 @section('title', 'Invitaciones')
 

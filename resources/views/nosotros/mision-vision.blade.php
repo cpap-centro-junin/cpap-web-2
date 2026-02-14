@@ -2,10 +2,9 @@
 
 @section('title', 'Misión y Visión')
 
-@vite([
-    'resources/css/mision-vision.css',
-    'resources/js/mision-vision.js'
-])
+{{-- CSS ya incluido en app.css --}}
+{{-- JS específico --}}
+@vite(['resources/js/modules/mision-vision.js'])
 
 @section('content')
 

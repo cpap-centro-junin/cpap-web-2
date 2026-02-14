@@ -1,3 +1,8 @@
+/* ============================================
+   CPAP - Sistema de Estilos Unificado
+   ============================================ */
+
+/* Tailwind CSS */
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -6,8 +11,47 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
-@import './modern.css';
+/* ============================================
+   BASE - Variables, Reset, Typography, Animations
+   ============================================ */
+@import './base/variables.css';
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/animations.css';
+
+/* ============================================
+   COMPONENTS - Botones, Cards, Forms, etc
+   ============================================ */
+@import './components/buttons.css';
+@import './components/cards.css';
+@import './components/forms.css';
+@import './components/badges.css';
+@import './components/navbar.css';
+@import './components/footer.css';
+@import './components/pagination.css';
+@import './components/slider.css';
+
+/* ============================================
+   LAYOUTS - Sections, Admin, Grid
+   ============================================ */
+@import './layouts/sections.css';
+@import './layouts/grid.css';
+
+/* ============================================
+   PAGES - Estilos específicos de páginas
+   ============================================ */
+@import './pages/bolsa-trabajo.css';
+@import './pages/biblioteca.css';
+@import './pages/auth.css';
+@import './pages/historia.css';
+@import './pages/mision-vision.css';
+
+/* ============================================
+   ADMIN - Estilos del Panel Admin
+   ============================================ */
+@import './admin.css';
+
+/* ✅ modern.css ELIMINADO - Todo extraído al nuevo sistema */

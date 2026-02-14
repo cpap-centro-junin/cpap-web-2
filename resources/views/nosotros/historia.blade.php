@@ -3,10 +3,9 @@
 
 @section('title', 'Historia')
 
-@vite([
-    'resources/css/historia.css',
-    'resources/js/historia.js'
-])
+{{-- CSS ya incluido en app.css --}}
+{{-- JS específico --}}
+@vite(['resources/js/modules/historia.js'])
 
 @section('content')
 

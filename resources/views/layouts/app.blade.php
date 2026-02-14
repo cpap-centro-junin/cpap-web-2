@@ -26,19 +26,18 @@
     @yield('styles')
 </head>
 <body>
-    <!-- Navbar -->
-    @include('partials.navbar')
-    
+    <!-- Navbar Component -->
+    <x-navbar />
+
     <!-- Main Content -->
     <main>
         @yield('content')
     </main>
-    
-    <!-- Footer -->
-    @include('partials.footer')
+
+    <!-- Footer Component -->
+    <x-footer />
 
     @stack('styles')
-    ...
     @stack('scripts')
     
     <!-- AOS Animation Script -->

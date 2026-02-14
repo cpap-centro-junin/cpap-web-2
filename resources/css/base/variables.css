@@ -1,0 +1,218 @@
+/* ============================================
+   VARIABLES CSS UNIFICADAS - PROYECTO CPAP
+   Sistema de diseño centralizado
+   ============================================ */
+
+:root {
+    /* ============================================
+       COLORES - UNIFICADOS
+       ============================================ */
+
+    /* Primarios (Granate institucional) */
+    --primary: #8B1538;
+    --primary-dark: #6B0F2A;
+    --primary-light: #A02050;
+
+    /* Secundarios (Dorado/Bronce) */
+    --secondary: #C9A961;
+    --accent: #D4AF37;
+    --secondary-dark: #B89850;
+
+    /* Neutrales */
+    --dark: #1a1a1a;
+    --dark-secondary: #2C3E50;
+    --light: #FFFFFF;
+    --light-gray: #F8F9FA;
+    --medium-gray: #6C757D;
+    --border: #E9ECEF;
+
+    /* Estados */
+    --success: #2e7d32;
+    --success-light: #e8f5e9;
+    --warning: #e65100;
+    --warning-light: #fff3e0;
+    --danger: #d32f2f;
+    --danger-light: #ffebee;
+    --info: #1565c0;
+    --info-light: #e3f2fd;
+
+    /* ============================================
+       GRADIENTES
+       ============================================ */
+
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 100%);
+    --gradient-light: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+
+    /* Overlays */
+    --overlay-dark: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+    --overlay-primary: radial-gradient(circle at center, rgba(139, 21, 56, 0.3) 0%, rgba(139, 21, 56, 0.8) 100%);
+
+    /* ============================================
+       TIPOGRAFÍA
+       ============================================ */
+
+    /* Familias de fuente */
+    --font-primary: 'Poppins', sans-serif;
+    --font-heading: 'Nunito', sans-serif;
+
+    /* Tamaños de fuente */
+    --font-xs: 0.75rem;      /* 12px */
+    --font-sm: 0.875rem;     /* 14px */
+    --font-base: 1rem;       /* 16px */
+    --font-lg: 1.125rem;     /* 18px */
+    --font-xl: 1.25rem;      /* 20px */
+    --font-2xl: 1.5rem;      /* 24px */
+    --font-3xl: 1.875rem;    /* 30px */
+    --font-4xl: 2.25rem;     /* 36px */
+    --font-5xl: 3rem;        /* 48px */
+
+    /* Pesos de fuente */
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+
+    /* Altura de línea */
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+
+    /* ============================================
+       ESPACIADO
+       ============================================ */
+
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --spacing-4xl: 80px;
+    --spacing-5xl: 96px;
+    --spacing-6xl: 128px;
+
+    /* Section padding */
+    --section-padding: var(--spacing-4xl) 0;
+    --section-padding-sm: var(--spacing-3xl) 0;
+    --section-padding-lg: var(--spacing-5xl) 0;
+
+    /* ============================================
+       SOMBRAS
+       ============================================ */
+
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+    --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
+    --shadow-2xl: 0 25px 80px rgba(0,0,0,0.25);
+
+    /* Sombras de colores */
+    --shadow-primary: 0 8px 20px rgba(139, 21, 56, 0.3);
+    --shadow-secondary: 0 8px 20px rgba(201, 169, 97, 0.3);
+
+    /* ============================================
+       TRANSICIONES Y ANIMACIONES
+       ============================================ */
+
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-slower: 0.8s ease;
+
+    /* Curvas de animación */
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+
+    /* ============================================
+       BORDER RADIUS
+       ============================================ */
+
+    --radius-none: 0;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-full: 50px;
+    --radius-circle: 50%;
+
+    /* ============================================
+       CONTENEDORES Y ANCHOS
+       ============================================ */
+
+    --container-max: 1200px;
+    --container-wide: 1400px;
+    --container-narrow: 800px;
+
+    /* ============================================
+       Z-INDEX
+       ============================================ */
+
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+
+    /* ============================================
+       EFECTOS
+       ============================================ */
+
+    /* Blur */
+    --blur-xs: 4px;
+    --blur-sm: 8px;
+    --blur-md: 12px;
+    --blur-lg: 16px;
+    --blur-xl: 24px;
+
+    /* Backdrop filter */
+    --backdrop-blur: blur(10px);
+    --backdrop-blur-sm: blur(5px);
+    --backdrop-blur-lg: blur(20px);
+
+    /* ============================================
+       BREAKPOINTS (para referencia)
+       ============================================ */
+
+    /*
+    sm: 640px
+    md: 768px
+    lg: 1024px
+    xl: 1280px
+    2xl: 1536px
+    */
+}
+
+/* ============================================
+   VARIABLES ESPECÍFICAS PARA ADMIN
+   ============================================ */
+
+:root {
+    --admin-sidebar-width: 270px;
+    --admin-topbar-height: 70px;
+    --admin-card-padding: 26px;
+    --admin-bg: #f6f7fb;
+}
+
+/* ============================================
+   VARIABLES PARA MODOS OSCUROS (FUTURO)
+   ============================================ */
+
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --primary: #A02050;
+        --background: #1a1a1a;
+        --text: #f8f9fa;
+    }
+} */

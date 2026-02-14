@@ -8,6 +8,9 @@
     <div class="hero-overlay"></div>
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
+            <div class="hero-logo-container" style="margin-bottom: 30px;" data-aos="zoom-in" data-aos-delay="200">
+                <img src="{{ asset('images/logos/logo-cpap-web-elecciones.png') }}" alt="Logo CPAP" style="max-width: 220px; height: auto; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));">
+            </div>
             <span class="hero-badge">Bienvenidos</span>
             <h1 class="hero-title">Colegio Profesional de<br><span class="gradient-text">Antropólogos del Perú</span></h1>
             <p class="hero-subtitle">Región Centro - Promoviendo la excelencia profesional y la investigación antropológica desde 1985</p>
@@ -575,4 +578,50 @@
         </div>
     </div>
 </section>
+@endsection
+
+@section('scripts')
+<script>
+// Contador animado para las estadísticas
+document.addEventListener('DOMContentLoaded', function() {
+    const stats = document.querySelectorAll('.stat-number');
+    const statsSection = document.querySelector('.stats-section');
+    let animated = false;
+
+    function animateNumber(element) {
+        const target = parseInt(element.getAttribute('data-count'));
+        const duration = 2000;
+        const increment = target / (duration / 16);
+        let current = 0;
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target.toLocaleString();
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current).toLocaleString();
+            }
+        }, 16);
+    }
+
+    // Observer para iniciar la animación cuando la sección sea visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !animated) {
+                animated = true;
+                stats.forEach((stat, index) => {
+                    setTimeout(() => {
+                        animateNumber(stat);
+                    }, index * 100);
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+});
+</script>
 @endsection

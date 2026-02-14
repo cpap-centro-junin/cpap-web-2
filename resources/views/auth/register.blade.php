@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Registro - CPAP</title>
 
-    @vite(['resources/css/register.css'])
+    @vite(['resources/css/app.css'])
 
     <style>
         .background {

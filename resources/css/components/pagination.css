@@ -1,0 +1,89 @@
+/* ============================================
+   PAGINACIÓN - Laravel Pagination
+   Extraído de: modern.css (líneas 2482-2527)
+   ============================================ */
+
+.pagination-wrapper {
+    margin-top: var(--spacing-3xl);
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    display: flex;
+    gap: var(--spacing-sm);
+    list-style: none;
+}
+
+.page-item {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.page-item.active .page-link {
+    background: var(--primary);
+    color: var(--light);
+    border-color: var(--primary);
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 var(--spacing-sm);
+    background: var(--light);
+    border: 2px solid var(--border);
+    color: var(--dark);
+    font-weight: var(--font-semibold);
+    transition: var(--transition-normal);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.page-link:hover:not(.disabled) {
+    background: var(--primary);
+    color: var(--light);
+    border-color: var(--primary);
+}
+
+/* Iconos de navegación */
+.page-link i {
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .pagination {
+        gap: 6px;
+    }
+
+    .page-link {
+        min-width: 35px;
+        height: 35px;
+        font-size: var(--font-sm);
+        padding: 0 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination {
+        gap: 4px;
+    }
+
+    .page-link {
+        min-width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
+    }
+}

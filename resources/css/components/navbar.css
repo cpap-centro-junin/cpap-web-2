@@ -1,0 +1,398 @@
+/* ============================================
+   NAVBAR MODERNO - REDISEÑO COMPLETO CPAP
+   ============================================ */
+
+/* NAVBAR PRINCIPAL - Glassmorphism Style */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    z-index: var(--z-fixed);
+    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(139, 21, 56, 0.1);
+}
+
+.navbar-scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
+    border-bottom-color: rgba(139, 21, 56, 0.15);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* BRAND / LOGO - Mejorado */
+.navbar-brand {
+    flex-shrink: 0;
+    z-index: calc(var(--z-fixed) + 1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateY(-2px);
+}
+
+.logo-image-main {
+    height: 70px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(139, 21, 56, 0.15));
+    transition: filter 0.3s ease;
+}
+
+.logo-image-main:hover {
+    filter: drop-shadow(0 6px 16px rgba(139, 21, 56, 0.25));
+}
+
+/* NAVBAR MENU - Centrado y Espaciado */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+}
+
+.navbar-nav {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    position: relative;
+}
+
+.nav-link i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: linear-gradient(135deg, rgba(139, 21, 56, 0.08) 0%, rgba(255, 107, 107, 0.08) 100%);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.nav-link:hover i {
+    transform: scale(1.1);
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, rgba(139, 21, 56, 0.12) 0%, rgba(255, 107, 107, 0.12) 100%);
+}
+
+/* DROPDOWN MENU - Modernizado */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-icon {
+    font-size: 0.7rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: 2px;
+}
+
+.dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    min-width: 240px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px;
+    z-index: var(--z-dropdown);
+    border: 1px solid rgba(139, 21, 56, 0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    color: #2c3e50;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-radius: 10px;
+}
+
+.dropdown-menu li a:hover {
+    background: linear-gradient(135deg, rgba(139, 21, 56, 0.08) 0%, rgba(255, 107, 107, 0.08) 100%);
+    color: var(--primary);
+    transform: translateX(5px);
+}
+
+.dropdown-menu li a i {
+    font-size: 0.9rem;
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+/* NAVBAR CTA - Botón de Acción */
+.navbar-cta {
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.navbar-cta .btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(139, 21, 56, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-cta .btn:hover {
+    box-shadow: 0 6px 25px rgba(139, 21, 56, 0.3);
+    transform: translateY(-2px);
+}
+
+/* NAVBAR TOGGLE (Hamburger) - Mobile */
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: calc(var(--z-fixed) + 1);
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.navbar-toggle:hover {
+    background: rgba(139, 21, 56, 0.08);
+}
+
+.navbar-toggle span {
+    width: 26px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .navbar-container {
+        padding: 12px 40px;
+    }
+
+    .nav-link {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar-container {
+        padding: 10px 30px;
+    }
+
+    .nav-link {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .navbar-cta .btn {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: flex;
+    }
+
+    .navbar-container {
+        padding: 10px 20px;
+    }
+
+    .logo-image-main {
+        height: 60px;
+        max-width: 140px;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 320px;
+        max-width: 85vw;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 100px 30px 30px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: var(--z-fixed);
+    }
+
+    .navbar-menu.active {
+        right: 0;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 1rem;
+        justify-content: flex-start;
+        border-radius: 14px;
+    }
+
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        margin-top: 8px;
+        margin-left: 20px;
+        background: rgba(139, 21, 56, 0.04);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0 8px;
+        border: none;
+    }
+
+    .dropdown.active .dropdown-menu {
+        max-height: 500px;
+        padding: 8px;
+    }
+
+    .dropdown-icon {
+        margin-left: auto;
+        order: 2;
+    }
+
+    .navbar-cta {
+        width: 100%;
+        margin: 20px 0 0;
+    }
+
+    .navbar-cta .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+}
+
+/* Overlay para cerrar menu en mobile */
+.navbar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: calc(var(--z-fixed) - 1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .navbar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-menu {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .logo-image-main {
+        height: 55px;
+        max-width: 130px;
+    }
+}

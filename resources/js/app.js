@@ -1,6 +1,19 @@
+// Bootstrap de Laravel
 import './bootstrap';
-import './modern';
+
+// Slider global
 import './slider';
-import './bootstrap';
-import '../css/noticias.css';
-import './noticias';
+
+// AOS (Animate On Scroll) - Si está instalado
+// import AOS from 'aos';
+// import 'aos/dist/aos.css';
+
+// Inicializar AOS
+// AOS.init({
+//     duration: 800,
+//     once: true,
+//     offset: 100
+// });
+
+// Los módulos específicos (consejo, historia, login, etc.) ahora están en modules/
+// y se cargan dinámicamente en cada vista Blade usando @vite

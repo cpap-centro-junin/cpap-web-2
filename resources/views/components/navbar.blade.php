@@ -1,0 +1,153 @@
+{{-- Navbar Component - Diseño Moderno CPAP --}}
+<nav class="navbar" id="navbar">
+    <div class="navbar-container">
+        <a href="{{ url('/') }}" class="navbar-brand">
+            <div class="logo-container">
+                <img src="{{ asset('images/logos/logo-cpap-web-elecciones.png') }}" alt="CPAP Logo" class="logo-image-main">
+            </div>
+        </a>
+
+        <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="navbar-menu" id="navbarMenu">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="{{ url('/') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
+                        <i class="fas fa-home"></i>
+                        Inicio
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        Nosotros
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('nosotros.mision-vision') }}"><i class="fas fa-bullseye"></i> Misión y Visión</a></li>
+                        <li><a href="{{ route('nosotros.historia') }}"><i class="fas fa-history"></i> Historia</a></li>
+                        <li><a href="{{ route('nosotros.consejo-directivo') }}"><i class="fas fa-users-cog"></i> Consejo Directivo</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('noticias.index') }}" class="nav-link {{ request()->is('noticias*') ? 'active' : '' }}">
+                        <i class="fas fa-newspaper"></i>
+                        Noticias
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        Servicios
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('biblioteca') }}"><i class="fas fa-book"></i> Biblioteca Virtual</a></li>
+                        <li><a href="{{ route('bolsa-trabajo') }}"><i class="fas fa-briefcase"></i> Bolsa de Trabajo</a></li>
+                        <li><a href="{{ url('/#colegiatura') }}"><i class="fas fa-user-graduate"></i> Colegiatura</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/#contacto') }}" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+
+            <div class="navbar-cta">
+                @auth
+                    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">
+                        <i class="fas fa-user-shield"></i>
+                        Panel Admin
+                    </a>
+                @else
+                    <a href="{{ url('/#colegiatura') }}" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        Colegiarme
+                    </a>
+                @endauth
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="navbar-overlay" id="navbarOverlay"></div>
+
+@push('scripts')
+<script>
+// Navbar Functionality - Moderno
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.getElementById('navbar');
+    const toggle = document.getElementById('navbarToggle');
+    const menu = document.getElementById('navbarMenu');
+    const overlay = document.getElementById('navbarOverlay');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    // Hamburger toggle
+    if (toggle && menu) {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', function() {
+            menu.classList.remove('active');
+            toggle.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+    }
+
+    // Dropdown toggle for mobile
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('.nav-link');
+        link.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+
+    // Navbar scroll effect
+    if (navbar) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    }
+
+    // Smooth scroll to anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== 'javascript:void(0)') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const offsetTop = target.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu
+                    menu.classList.remove('active');
+                    toggle.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+    });
+});
+</script>
+@endpush
