@@ -57,8 +57,11 @@
 }
 
 .btn-primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    color: var(--dark);
+    border-color: var(--secondary);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(139, 21, 56, 0.4);
+    box-shadow: 0 8px 25px rgba(201, 169, 97, 0.5);
 }
 
 .btn-primary:active:not(:disabled) {
@@ -180,7 +183,7 @@
 }
 
 .btn-text:hover:not(:disabled) {
-    color: var(--primary-dark);
+    color: var(--secondary);
     gap: 12px;
 }
 

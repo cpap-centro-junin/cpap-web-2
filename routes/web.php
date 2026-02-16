@@ -48,7 +48,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect()->route('admin.dashboard');
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);

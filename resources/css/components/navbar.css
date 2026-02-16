@@ -1,26 +1,28 @@
 /* ============================================
-   NAVBAR MODERNO - REDISEÑO COMPLETO CPAP
+   NAVBAR FIXED - REESCRITO DESDE CERO
+   Sistema simple y funcional
    ============================================ */
 
-/* NAVBAR PRINCIPAL - Glassmorphism Style */
+/* NAVBAR PRINCIPAL */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    z-index: var(--z-fixed);
-    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.06);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 9999 !important;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
     border-bottom: 1px solid rgba(139, 21, 56, 0.1);
 }
 
 .navbar-scrolled {
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
-    border-bottom-color: rgba(139, 21, 56, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+    border-bottom-color: rgba(139, 21, 56, 0.2);
 }
 
 .navbar-container {
@@ -30,12 +32,17 @@
     padding: 12px 60px;
     max-width: 1400px;
     margin: 0 auto;
+    transition: padding 0.3s ease;
 }
 
-/* BRAND / LOGO - Mejorado */
+.navbar-scrolled .navbar-container {
+    padding: 8px 60px;
+}
+
+/* BRAND / LOGO */
 .navbar-brand {
     flex-shrink: 0;
-    z-index: calc(var(--z-fixed) + 1);
+    z-index: 10001;
 }
 
 .logo-container {
@@ -55,14 +62,19 @@
     max-width: 160px;
     object-fit: contain;
     filter: drop-shadow(0 4px 12px rgba(139, 21, 56, 0.15));
-    transition: filter 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.navbar-scrolled .logo-image-main {
+    height: 60px;
+    max-width: 140px;
 }
 
 .logo-image-main:hover {
     filter: drop-shadow(0 6px 16px rgba(139, 21, 56, 0.25));
 }
 
-/* NAVBAR MENU - Centrado y Espaciado */
+/* NAVBAR MENU */
 .navbar-menu {
     display: flex;
     align-items: center;
@@ -90,7 +102,7 @@
     font-weight: 600;
     font-size: 0.95rem;
     border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     white-space: nowrap;
     position: relative;
 }
@@ -115,14 +127,14 @@
     background: linear-gradient(135deg, rgba(139, 21, 56, 0.12) 0%, rgba(255, 107, 107, 0.12) 100%);
 }
 
-/* DROPDOWN MENU - Modernizado */
+/* DROPDOWN MENU */
 .dropdown {
     position: relative;
 }
 
 .dropdown-icon {
     font-size: 0.7rem;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s ease;
     margin-left: 2px;
 }
 
@@ -142,9 +154,9 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
     padding: 8px;
-    z-index: var(--z-dropdown);
+    z-index: 10000;
     border: 1px solid rgba(139, 21, 56, 0.1);
 }
 
@@ -182,7 +194,7 @@
     opacity: 0.8;
 }
 
-/* NAVBAR CTA - Botón de Acción */
+/* NAVBAR CTA */
 .navbar-cta {
     margin-left: 20px;
     flex-shrink: 0;
@@ -195,7 +207,7 @@
     white-space: nowrap;
     letter-spacing: 0.3px;
     box-shadow: 0 4px 15px rgba(139, 21, 56, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 }
 
 .navbar-cta .btn:hover {
@@ -203,7 +215,7 @@
     transform: translateY(-2px);
 }
 
-/* NAVBAR TOGGLE (Hamburger) - Mobile */
+/* NAVBAR TOGGLE (Hamburger) */
 .navbar-toggle {
     display: none;
     flex-direction: column;
@@ -212,7 +224,7 @@
     border: none;
     cursor: pointer;
     padding: 8px;
-    z-index: calc(var(--z-fixed) + 1);
+    z-index: 10001;
     border-radius: 8px;
     transition: background 0.3s ease;
 }
@@ -226,7 +238,7 @@
     height: 3px;
     background: var(--primary);
     border-radius: 3px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
 }
 
 .navbar-toggle.active span:nth-child(1) {
@@ -248,6 +260,10 @@
         padding: 12px 40px;
     }
 
+    .navbar-scrolled .navbar-container {
+        padding: 8px 40px;
+    }
+
     .nav-link {
         padding: 10px 14px;
         font-size: 0.9rem;
@@ -257,6 +273,10 @@
 @media (max-width: 1024px) {
     .navbar-container {
         padding: 10px 30px;
+    }
+
+    .navbar-scrolled .navbar-container {
+        padding: 8px 30px;
     }
 
     .nav-link {
@@ -279,9 +299,18 @@
         padding: 10px 20px;
     }
 
+    .navbar-scrolled .navbar-container {
+        padding: 8px 20px;
+    }
+
     .logo-image-main {
         height: 60px;
         max-width: 140px;
+    }
+
+    .navbar-scrolled .logo-image-main {
+        height: 55px;
+        max-width: 130px;
     }
 
     .navbar-menu {
@@ -297,9 +326,9 @@
         justify-content: flex-start;
         padding: 100px 30px 30px;
         box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: right 0.4s ease;
         overflow-y: auto;
-        z-index: var(--z-fixed);
+        z-index: 10000;
     }
 
     .navbar-menu.active {
@@ -373,7 +402,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
-    z-index: calc(var(--z-fixed) - 1);
+    z-index: 9998;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -394,5 +423,10 @@
     .logo-image-main {
         height: 55px;
         max-width: 130px;
+    }
+
+    .navbar-scrolled .logo-image-main {
+        height: 50px;
+        max-width: 120px;
     }
 }

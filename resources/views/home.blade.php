@@ -8,9 +8,6 @@
     <div class="hero-overlay"></div>
     <div class="container">
         <div class="hero-content" data-aos="fade-up">
-            <div class="hero-logo-container" style="margin-bottom: 30px;" data-aos="zoom-in" data-aos-delay="200">
-                <img src="{{ asset('images/logos/logo-cpap-web-elecciones.png') }}" alt="Logo CPAP" style="max-width: 220px; height: auto; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.4));">
-            </div>
             <span class="hero-badge">Bienvenidos</span>
             <h1 class="hero-title">Colegio Profesional de<br><span class="gradient-text">Antropólogos del Perú</span></h1>
             <p class="hero-subtitle">Región Centro - Promoviendo la excelencia profesional y la investigación antropológica desde 1985</p>
@@ -30,8 +27,7 @@
 
 <!-- Banner Slider Section - Optimizado -->
 <section class="banner-slider-section">
-    <div class="container">
-        <div class="banner-slider-wrapper" id="bannerSliderWrapper">
+    <div class="banner-slider-wrapper" id="bannerSliderWrapper">
             <div class="banner-slider" id="bannerSlider">
                 <!-- Slide 1: Colegiatura 2026 -->
                 <div class="banner-slide">
@@ -110,12 +106,11 @@
             </button>
             
             <!-- Indicadores -->
-            <div class="slider-indicators" 
-                 id="sliderIndicators" 
-                 role="tablist" 
+            <div class="slider-indicators"
+                 id="sliderIndicators"
+                 role="tablist"
                  aria-label="Seleccionar slide"></div>
         </div>
-    </div>
 </section>
 
 <!-- Stats Section -->
@@ -157,68 +152,6 @@
                     <h3 class="stat-number" data-count="500">0</h3>
                     <p class="stat-label">Publicaciones</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- About Section -->
-<section class="section-padding bg-light" id="nosotros">
-    <div class="container">
-        <div class="section-header text-center" data-aos="fade-up">
-            <span class="section-badge">Sobre Nosotros</span>
-            <h2 class="section-title">Quiénes Somos</h2>
-            <p class="section-subtitle">Más de tres décadas promoviendo la antropología en la región centro del Perú</p>
-        </div>
-
-        <div class="about-content">
-            <div class="about-image" data-aos="fade-right">
-                <img src="{{ asset('images/about-cpap.jpg') }}" alt="Sobre CPAP" onerror="this.src='https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800'">
-                <div class="about-badge">
-                    <i class="fas fa-certificate"></i>
-                </div>
-            </div>
-
-            <div class="about-text" data-aos="fade-left">
-                <h3 id="mision">Nuestra Misión</h3>
-                <p>El Colegio Profesional de Antropólogos del Perú - Región Centro tiene como misión promover la excelencia profesional, la ética y el desarrollo de la antropología en nuestra región, contribuyendo al desarrollo sostenible y al bienestar de la sociedad.</p>
-
-                <div class="about-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h4>Visión Profesional</h4>
-                            <p>Ser reconocidos como la institución líder en la formación y desarrollo de antropólogos en la región centro.</p>
-                        </div>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-hands-helping"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h4>Compromiso Social</h4>
-                            <p>Promover la investigación aplicada y el servicio a la comunidad desde una perspectiva antropológica.</p>
-                        </div>
-                    </div>
-
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <div class="feature-content">
-                            <h4>Desarrollo Continuo</h4>
-                            <p>Fomentar la capacitación permanente y la actualización profesional de nuestros colegiados.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="{{ url('/#contacto') }}" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i>
-                    Contáctanos
-                </a>
             </div>
         </div>
     </div>

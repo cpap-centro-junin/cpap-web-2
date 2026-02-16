@@ -71,14 +71,15 @@
 
 .section-header {
     margin-bottom: 60px;
+    text-align: center;
 }
 
 .section-title {
     font-size: 2.25rem;
     margin-bottom: var(--spacing-lg);
-    position: relative;
     font-weight: var(--font-extrabold);
     color: var(--dark);
+    text-align: center;
 }
 
 .section-subtitle {
@@ -88,6 +89,7 @@
     margin: 0 auto;
     line-height: 1.7;
     font-weight: var(--font-normal);
+    text-align: center;
 }
 
 /* ============================================

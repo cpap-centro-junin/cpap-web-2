@@ -25,7 +25,7 @@
     
     @yield('styles')
 </head>
-<body>
+<body class="app-layout">
     <!-- Navbar Component -->
     <x-navbar />
 
