@@ -1,27 +1,35 @@
 /**
- * Misión y Visión - Tabs Funcionalidades
+ * Misión y Visión - Gestión de tabs navegables
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Misión-Visión module loaded');
+document.addEventListener('DOMContentLoaded', function () {
+    const navItems = document.querySelectorAll('.mv-nav-item');
+    const radios   = document.querySelectorAll('input[name="mv-tabs"]');
 
-    // Los tabs ya funcionan con CSS puro (input radio + label)
-    // Este archivo existe para futuras mejoras
+    if (!navItems.length || !radios.length) return;
 
-    // Detectar cambio de tab para analytics o animaciones
-    const tabs = document.querySelectorAll('input[name="mv-tabs"]');
-
-    tabs.forEach((tab, index) => {
-        tab.addEventListener('change', function() {
-            if (this.checked) {
-                console.log('Tab ' + (index + 1) + ' seleccionado');
-
-                // Animar contenido del tab
-                const content = this.nextElementSibling;
-                if (content) {
-                    content.style.animation = 'fadeIn 0.5s ease';
-                }
+    // Sincroniza el estado .active de los labels con el radio seleccionado
+    function syncActive() {
+        radios.forEach((radio, i) => {
+            if (navItems[i]) {
+                navItems[i].classList.toggle('active', radio.checked);
             }
         });
+    }
+
+    // Al hacer clic en un label se marca el radio por el atributo for;
+    // esperamos un tick para leer el nuevo estado
+    navItems.forEach((label) => {
+        label.addEventListener('click', () => {
+            requestAnimationFrame(syncActive);
+        });
     });
+
+    // Soporte para navegación por teclado
+    radios.forEach(radio => {
+        radio.addEventListener('change', syncActive);
+    });
+
+    // Estado inicial
+    syncActive();
 });

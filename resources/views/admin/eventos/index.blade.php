@@ -2,19 +2,19 @@
 
 @extends('layouts.admin')
 
-@section('title', 'Noticias')
-@section('page-title', 'Gestión de Noticias')
+@section('title', 'Eventos')
+@section('page-title', 'Gestión de Eventos')
 
 @section('content')
 
 {{-- HEADER --}}
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
     <div>
-        <h1 style="font-size:22px;font-weight:700;color:var(--dark);margin:0 0 4px;">Noticias</h1>
-        <p style="color:var(--medium-gray);font-size:14px;margin:0;">{{ $noticias->total() }} noticia{{ $noticias->total() !== 1 ? 's' : '' }} en total</p>
+        <h1 style="font-size:22px;font-weight:700;color:var(--dark);margin:0 0 4px;">Eventos</h1>
+        <p style="color:var(--medium-gray);font-size:14px;margin:0;">{{ $eventos->total() }} evento{{ $eventos->total() !== 1 ? 's' : '' }} en total</p>
     </div>
-    <a href="{{ route('admin.noticias.create') }}" class="primary-btn">
-        <i class="fas fa-plus"></i> Nueva Noticia
+    <a href="{{ route('admin.eventos.create') }}" class="primary-btn">
+        <i class="fas fa-plus"></i> Nuevo Evento
     </a>
 </div>
 
@@ -33,33 +33,35 @@
                 <th style="width:60px;">Portada</th>
                 <th>Título</th>
                 <th>Categoría</th>
-                <th>Autor</th>
+                <th>Fecha</th>
                 <th>Estado</th>
-                <th>Publicado</th>
                 <th style="text-align:center;width:160px;">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($noticias as $noticia)
+            @forelse($eventos as $evento)
             <tr>
                 <td>
-                    @if($noticia->imagen)
-                        <img src="{{ asset('storage/' . $noticia->imagen) }}" alt=""
+                    @if($evento->imagen_portada)
+                        <img src="{{ asset('storage/' . $evento->imagen_portada) }}" alt=""
                              style="width:52px;height:40px;object-fit:cover;border-radius:6px;display:block;">
                     @else
                         <div style="width:52px;height:40px;background:var(--light-gray);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                            <i class="fas fa-newspaper" style="color:var(--border);font-size:14px;"></i>
+                            <i class="fas fa-calendar-alt" style="color:var(--border);font-size:14px;"></i>
                         </div>
                     @endif
                 </td>
                 <td>
                     <div style="font-weight:600;color:var(--dark);font-size:14px;margin-bottom:3px;">
-                        {{ Str::limit($noticia->titulo, 60) }}
+                        {{ Str::limit($evento->titulo, 60) }}
                     </div>
-                    @if($noticia->resumen)
-                    <div style="color:var(--medium-gray);font-size:12px;">{{ Str::limit($noticia->resumen, 80) }}</div>
+                    @if($evento->lugar)
+                    <div style="color:var(--medium-gray);font-size:12px;display:flex;align-items:center;gap:4px;">
+                        <i class="fas fa-map-marker-alt" style="color:var(--primary);font-size:10px;"></i>
+                        {{ Str::limit($evento->lugar, 50) }}
+                    </div>
                     @endif
-                    @if($noticia->destacado)
+                    @if($evento->destacado)
                     <span style="display:inline-flex;align-items:center;gap:3px;margin-top:4px;background:rgba(212,175,55,0.12);color:#b8960c;padding:2px 8px;border-radius:50px;font-size:11px;font-weight:600;">
                         <i class="fas fa-star" style="font-size:9px;"></i> Destacado
                     </span>
@@ -67,30 +69,40 @@
                 </td>
                 <td>
                     <span style="background:rgba(139,21,56,0.08);color:var(--primary);padding:4px 10px;border-radius:50px;font-size:12px;font-weight:600;">
-                        {{ $noticia->categoria }}
+                        {{ $evento->categoria }}
                     </span>
                 </td>
-                <td style="color:var(--medium-gray);font-size:13px;">{{ $noticia->autor }}</td>
                 <td>
-                    <span class="badge {{ $noticia->activo ? 'published' : 'hidden' }}">
-                        <i class="fas fa-circle" style="font-size:7px;"></i>
-                        {{ $noticia->activo ? 'Publicado' : 'Oculto' }}
+                    <div style="font-size:13px;font-weight:600;color:var(--dark);">{{ $evento->fecha_inicio->format('d/m/Y') }}</div>
+                    @if($evento->hora_inicio)
+                    <div style="font-size:12px;color:var(--medium-gray);">
+                        <i class="fas fa-clock" style="color:var(--primary);font-size:10px;"></i>
+                        {{ \Carbon\Carbon::parse($evento->hora_inicio)->format('H:i') }} hrs
+                    </div>
+                    @endif
+                    <span style="font-size:11px;padding:2px 8px;border-radius:50px;font-weight:600;{{ $evento->es_proximo ? 'background:var(--success-light);color:var(--success);' : 'background:var(--light-gray);color:var(--medium-gray);' }}">
+                        {{ $evento->es_proximo ? 'Próximo' : 'Realizado' }}
                     </span>
                 </td>
-                <td style="color:var(--medium-gray);font-size:13px;">{{ $noticia->created_at->format('d/m/Y') }}</td>
+                <td>
+                    <span class="badge {{ $evento->activo ? 'published' : 'hidden' }}">
+                        <i class="fas fa-circle" style="font-size:7px;"></i>
+                        {{ $evento->activo ? 'Publicado' : 'Oculto' }}
+                    </span>
+                </td>
                 <td>
                     <div style="display:flex;gap:6px;justify-content:center;">
-                        <a href="{{ route('noticias.show', $noticia) }}" target="_blank"
+                        <a href="{{ route('eventos.show', $evento) }}" target="_blank"
                            style="display:inline-flex;align-items:center;padding:6px 10px;background:var(--info-light);color:var(--info);border-radius:var(--radius-sm);font-size:12px;text-decoration:none;"
                            title="Ver en sitio">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href="{{ route('admin.noticias.edit', $noticia) }}"
+                        <a href="{{ route('admin.eventos.edit', $evento) }}"
                            style="display:inline-flex;align-items:center;gap:4px;padding:6px 10px;background:var(--warning-light);color:var(--warning);border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <form action="{{ route('admin.noticias.destroy', $noticia) }}" method="POST" style="display:inline;"
-                              onsubmit="return confirm('¿Eliminar esta noticia? Esta acción no se puede deshacer.')">
+                        <form action="{{ route('admin.eventos.destroy', $evento) }}" method="POST" style="display:inline;"
+                              onsubmit="return confirm('¿Eliminar este evento? Esta acción no se puede deshacer.')">
                             @csrf @method('DELETE')
                             <button type="submit"
                                     style="display:inline-flex;align-items:center;padding:6px 10px;background:var(--danger-light);color:var(--danger);border-radius:var(--radius-sm);font-size:12px;border:none;cursor:pointer;">
@@ -102,12 +114,12 @@
             </tr>
             @empty
             <tr>
-                <td colspan="7">
+                <td colspan="6">
                     <div class="empty-state">
-                        <i class="fas fa-newspaper"></i>
-                        <p>No hay noticias registradas.<br>Crea tu primera noticia para comenzar.</p>
-                        <a href="{{ route('admin.noticias.create') }}" class="primary-btn" style="display:inline-flex;">
-                            <i class="fas fa-plus"></i> Crear Noticia
+                        <i class="fas fa-calendar-times"></i>
+                        <p>No hay eventos registrados.<br>Crea tu primer evento para comenzar.</p>
+                        <a href="{{ route('admin.eventos.create') }}" class="primary-btn" style="display:inline-flex;">
+                            <i class="fas fa-plus"></i> Crear Evento
                         </a>
                     </div>
                 </td>
@@ -117,9 +129,9 @@
     </table>
 </div>
 
-@if($noticias->hasPages())
+@if($eventos->hasPages())
 <div style="margin-top:20px;display:flex;justify-content:center;">
-    {{ $noticias->links() }}
+    {{ $eventos->links() }}
 </div>
 @endif
 

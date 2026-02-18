@@ -48,9 +48,11 @@
 @import './pages/auth.css';
 @import './pages/historia.css';
 @import './pages/mision-vision.css';
+@import './pages/consejo-directivo.css';
 @import './pages/colegiados.css';
 @import './pages/colegiado-perfil.css';
 @import './pages/verificacion.css';
+@import './pages/actualidad.css';
 
 /* ✅ modern.css ELIMINADO - Todo extraído al nuevo sistema */
 /* Admin CSS → resources/css/admin.css (entry point propio en vite.config.js) */

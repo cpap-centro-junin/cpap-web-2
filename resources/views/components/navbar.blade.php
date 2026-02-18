@@ -33,11 +33,16 @@
                         <li><a href="{{ route('nosotros.consejo-directivo') }}"><i class="fas fa-users-cog"></i> Consejo Directivo</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('noticias.index') }}" class="nav-link {{ request()->is('noticias*') ? 'active' : '' }}">
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="nav-link {{ request()->is('noticias*') || request()->is('eventos*') ? 'active' : '' }}">
                         <i class="fas fa-newspaper"></i>
-                        Noticias
+                        Actualidad
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('noticias.index') }}"><i class="fas fa-newspaper"></i> Noticias</a></li>
+                        <li><a href="{{ route('eventos.index') }}"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('colegiados.index') }}" class="nav-link {{ request()->is('colegiados*') ? 'active' : '' }}">

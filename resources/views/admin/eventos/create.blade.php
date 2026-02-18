@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Nueva Noticia')
-@section('page-title', 'Nueva Noticia')
+@section('title', 'Nuevo Evento')
+@section('page-title', 'Nuevo Evento')
 
 @section('content')
 
@@ -9,57 +9,91 @@
 
     {{-- HEADER --}}
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
-        <a href="{{ route('admin.noticias.index') }}"
+        <a href="{{ route('admin.eventos.index') }}"
            style="width:36px;height:36px;border-radius:50%;background:var(--light-gray);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--medium-gray);text-decoration:none;">
             <i class="fas fa-arrow-left" style="font-size:13px;"></i>
         </a>
         <div>
-            <h1 style="font-size:22px;font-weight:700;color:var(--dark);margin:0 0 2px;">Nueva Noticia</h1>
-            <p style="color:var(--medium-gray);font-size:13px;margin:0;">Completa el formulario para publicar</p>
+            <h1 style="font-size:22px;font-weight:700;color:var(--dark);margin:0 0 2px;">Nuevo Evento</h1>
+            <p style="color:var(--medium-gray);font-size:13px;margin:0;">Completa el formulario para publicar un evento</p>
         </div>
     </div>
 
     {{-- ERRORES --}}
     @if($errors->any())
     <div style="background:var(--danger-light);color:var(--danger);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:20px;">
-        <strong style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><i class="fas fa-exclamation-circle"></i> Corrige los siguientes errores:</strong>
+        <strong style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><i class="fas fa-exclamation-circle"></i> Corrige los errores:</strong>
         <ul style="margin:0;padding-left:20px;font-size:13px;">
             @foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach
         </ul>
     </div>
     @endif
 
-    <form action="{{ route('admin.noticias.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.eventos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;">
 
             {{-- COLUMNA PRINCIPAL --}}
             <div>
+                {{-- Contenido --}}
                 <div class="admin-card" style="margin-bottom:16px;">
                     <h3 style="font-size:14px;font-weight:700;color:var(--dark);margin:0 0 16px;display:flex;align-items:center;gap:6px;">
-                        <i class="fas fa-pen" style="color:var(--primary);"></i> Contenido
+                        <i class="fas fa-pen" style="color:var(--primary);"></i> Información del Evento
                     </h3>
                     <div style="margin-bottom:14px;">
                         <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">Título <span style="color:var(--danger);">*</span></label>
                         <input type="text" name="titulo" value="{{ old('titulo') }}"
-                               placeholder="Escribe el título de la noticia"
+                               placeholder="Ej: Congreso Nacional de Antropología 2026"
                                class="admin-input" required>
                     </div>
                     <div style="margin-bottom:14px;">
                         <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">
                             Resumen <span style="color:var(--medium-gray);font-weight:400;">(aparece en el listado)</span>
                         </label>
-                        <textarea name="resumen" rows="3" maxlength="300"
-                                  placeholder="Breve descripción para el listado (opcional)"
+                        <textarea name="resumen" rows="3" maxlength="400"
+                                  placeholder="Breve descripción del evento (opcional)"
                                   class="admin-input">{{ old('resumen') }}</textarea>
                     </div>
                     <div>
-                        <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">Contenido completo <span style="color:var(--danger);">*</span></label>
-                        <textarea name="contenido" rows="14"
-                                  placeholder="Escribe aquí el contenido completo..."
-                                  class="admin-input" required>{{ old('contenido') }}</textarea>
-                        <p style="color:var(--medium-gray);font-size:11px;margin:6px 0 0;">Puedes usar HTML básico: &lt;b&gt;, &lt;i&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;h2&gt;, &lt;h3&gt;</p>
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">Descripción completa <span style="color:var(--danger);">*</span></label>
+                        <textarea name="descripcion" rows="12"
+                                  placeholder="Descripción detallada del evento, programa, ponentes, etc."
+                                  class="admin-input" required>{{ old('descripcion') }}</textarea>
+                        <p style="color:var(--medium-gray);font-size:11px;margin:6px 0 0;">Puedes usar HTML básico: &lt;b&gt;, &lt;i&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;h2&gt;</p>
+                    </div>
+                </div>
+
+                {{-- Fechas y Lugar --}}
+                <div class="admin-card" style="margin-bottom:16px;">
+                    <h3 style="font-size:14px;font-weight:700;color:var(--dark);margin:0 0 16px;display:flex;align-items:center;gap:6px;">
+                        <i class="fas fa-calendar-alt" style="color:var(--primary);"></i> Fechas y Lugar
+                    </h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+                        <div>
+                            <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">Fecha inicio <span style="color:var(--danger);">*</span></label>
+                            <input type="date" name="fecha_inicio" value="{{ old('fecha_inicio') }}" class="admin-input" required>
+                        </div>
+                        <div>
+                            <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">
+                                Fecha fin <span style="color:var(--medium-gray);font-weight:400;">(si aplica)</span>
+                            </label>
+                            <input type="date" name="fecha_fin" value="{{ old('fecha_fin') }}" class="admin-input">
+                        </div>
+                    </div>
+                    <div style="margin-bottom:14px;">
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">
+                            Hora de inicio <span style="color:var(--medium-gray);font-weight:400;">(opcional)</span>
+                        </label>
+                        <input type="time" name="hora_inicio" value="{{ old('hora_inicio') }}" class="admin-input" style="max-width:200px;">
+                    </div>
+                    <div>
+                        <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">
+                            Lugar / Dirección <span style="color:var(--medium-gray);font-weight:400;">(opcional)</span>
+                        </label>
+                        <input type="text" name="lugar" value="{{ old('lugar') }}"
+                               placeholder="Ej: Auditorio UNCP, Jr. Loreto 123, Huancayo"
+                               class="admin-input">
                     </div>
                 </div>
             </div>
@@ -78,15 +112,11 @@
                             <option value="0" {{ old('activo')=='0'?'selected':'' }}>Borrador</option>
                         </select>
                     </div>
-                    <div style="margin-bottom:12px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Autor</label>
-                        <input type="text" name="autor" value="{{ old('autor','Redacción CPAP') }}" class="admin-input">
-                    </div>
                     <div style="margin-bottom:14px;">
                         <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Categoría</label>
                         <select name="categoria" class="admin-input">
-                            @foreach(['Institucional','Académico','Investigación','Gremial','Convocatoria','Internacional','Otro'] as $cat)
-                            <option value="{{ $cat }}" {{ old('categoria','Institucional')==$cat?'selected':'' }}>{{ $cat }}</option>
+                            @foreach(['Académico','Institucional','Cultural','Gremial','Formación','Internacional','Otro'] as $cat)
+                            <option value="{{ $cat }}" {{ old('categoria','Académico')==$cat?'selected':'' }}>{{ $cat }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -95,7 +125,7 @@
                         <input type="checkbox" name="destacado" value="1" {{ old('destacado')?'checked':'' }}
                                style="width:16px;height:16px;accent-color:var(--primary);flex-shrink:0;">
                         <div>
-                            <div style="font-size:13px;font-weight:600;color:var(--dark);"><i class="fas fa-star" style="color:var(--accent);"></i> Destacar noticia</div>
+                            <div style="font-size:13px;font-weight:600;color:var(--dark);"><i class="fas fa-star" style="color:var(--accent);"></i> Destacar evento</div>
                             <div style="font-size:11px;color:var(--medium-gray);">Aparece en sección destacados</div>
                         </div>
                     </label>
@@ -106,15 +136,15 @@
                     <h3 style="font-size:14px;font-weight:700;color:var(--dark);margin:0 0 14px;display:flex;align-items:center;gap:6px;">
                         <i class="fas fa-image" style="color:var(--primary);"></i> Imagen Portada
                     </h3>
-                    <div id="dropZone" onclick="document.getElementById('imagenInput').click()"
+                    <div id="dropZone" onclick="document.getElementById('imgInput').click()"
                          style="border:2px dashed var(--border);border-radius:var(--radius-sm);padding:20px;text-align:center;cursor:pointer;transition:all 0.2s;">
-                        <div id="dropZoneContent">
+                        <div id="dzContent">
                             <i class="fas fa-cloud-upload-alt" style="font-size:24px;color:var(--border);display:block;margin-bottom:6px;"></i>
                             <p style="font-size:12px;color:var(--medium-gray);margin:0;">Clic o arrastra una imagen<br><span style="font-size:11px;">JPG, PNG, WEBP — máx. 3MB</span></p>
                         </div>
                         <img id="preview" src="" alt="" style="display:none;width:100%;height:140px;object-fit:cover;border-radius:6px;">
                     </div>
-                    <input type="file" id="imagenInput" name="imagen" accept="image/*" style="display:none;" onchange="handleImg(this)">
+                    <input type="file" id="imgInput" name="imagen_portada" accept="image/*" style="display:none;" onchange="handleImg(this)">
                     <button type="button" id="removeBtn" onclick="removeImg()"
                             style="display:none;width:100%;margin-top:8px;padding:6px;background:var(--danger-light);color:var(--danger);border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;">
                         <i class="fas fa-times"></i> Quitar imagen
@@ -122,7 +152,7 @@
                 </div>
 
                 <button type="submit" class="primary-btn" style="width:100%;justify-content:center;font-size:15px;padding:13px;">
-                    <i class="fas fa-save"></i> Publicar Noticia
+                    <i class="fas fa-save"></i> Crear Evento
                 </button>
             </div>
         </div>
@@ -137,16 +167,16 @@ function handleImg(input) {
     reader.onload = e => {
         document.getElementById('preview').src = e.target.result;
         document.getElementById('preview').style.display = 'block';
-        document.getElementById('dropZoneContent').style.display = 'none';
+        document.getElementById('dzContent').style.display = 'none';
         document.getElementById('removeBtn').style.display = 'block';
     };
     reader.readAsDataURL(input.files[0]);
 }
 function removeImg() {
-    document.getElementById('imagenInput').value = '';
+    document.getElementById('imgInput').value = '';
     document.getElementById('preview').src = '';
     document.getElementById('preview').style.display = 'none';
-    document.getElementById('dropZoneContent').style.display = 'block';
+    document.getElementById('dzContent').style.display = 'block';
     document.getElementById('removeBtn').style.display = 'none';
 }
 const dz = document.getElementById('dropZone');
@@ -157,7 +187,7 @@ dz.addEventListener('drop', e => {
     const f = e.dataTransfer.files[0];
     if (f && f.type.startsWith('image/')) {
         const dt = new DataTransfer(); dt.items.add(f);
-        const inp = document.getElementById('imagenInput');
+        const inp = document.getElementById('imgInput');
         inp.files = dt.files; handleImg(inp);
     }
 });

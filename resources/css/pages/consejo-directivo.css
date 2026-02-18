@@ -1,0 +1,201 @@
+/* ============================================
+   CONSEJO DIRECTIVO - CPAP
+   Cards profesionales e institucionales
+   ============================================ */
+
+/* ============================================
+   GRID DE CARDS
+   3 en primera fila, 2 centrados en segunda
+   ============================================ */
+.consejo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 20px;
+}
+
+/* ============================================
+   CARD
+   ============================================ */
+.consejo-card {
+    flex: 0 0 calc(33.33% - 22px);
+    max-width: 320px;
+    min-width: 260px;
+    background: var(--light);
+    border-radius: var(--radius-xl);
+    padding: 40px 30px 32px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Acento superior granate */
+.consejo-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-slow);
+}
+
+.consejo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-primary);
+    border-color: rgba(139, 21, 56, 0.2);
+}
+
+.consejo-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* ============================================
+   FOTO
+   ============================================ */
+.consejo-card__photo {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+}
+
+/* Fallback (siempre presente detrás) */
+.consejo-card__photo-fallback {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: var(--radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+    color: var(--light);
+    border: 4px solid var(--light);
+    box-shadow: var(--shadow-primary);
+    z-index: 1;
+}
+
+/* Imagen por encima del fallback */
+.consejo-card__photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-circle);
+    border: 4px solid var(--light);
+    box-shadow: var(--shadow-primary);
+    z-index: 2;
+}
+
+/* Cuando la imagen falla: se oculta la img, queda el fallback */
+.consejo-card__photo.no-photo img {
+    display: none;
+}
+
+/* ============================================
+   BADGE DE CARGO
+   ============================================ */
+.consejo-card__cargo {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 18px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--light);
+    font-family: var(--font-primary);
+    font-size: var(--font-xs);
+    font-weight: var(--font-bold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-primary);
+    margin-bottom: 18px;
+}
+
+.consejo-card__cargo i {
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+
+/* ============================================
+   CUERPO
+   ============================================ */
+.consejo-card__body {
+    margin-bottom: 20px;
+}
+
+.consejo-card__nombre {
+    font-family: var(--font-heading);
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    color: var(--dark-secondary);
+    margin-bottom: 10px;
+    line-height: var(--leading-tight);
+}
+
+.consejo-card__especialidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: var(--font-sm);
+    color: var(--medium-gray);
+    font-weight: var(--font-medium);
+}
+
+.consejo-card__especialidad i {
+    color: var(--secondary);
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   FOOTER DE LA CARD
+   ============================================ */
+.consejo-card__footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+}
+
+.consejo-card__periodo {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: var(--font-xs);
+    color: var(--medium-gray);
+    font-weight: var(--font-medium);
+}
+
+.consejo-card__periodo i {
+    color: var(--primary);
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .consejo-card {
+        flex: 0 0 calc(50% - 16px);
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 600px) {
+    .consejo-grid {
+        gap: 20px;
+    }
+
+    .consejo-card {
+        flex: 0 0 100%;
+        max-width: 360px;
+    }
+}

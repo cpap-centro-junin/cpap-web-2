@@ -3,92 +3,60 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\VerificacionController;
 use App\Http\Controllers\ColegiadoPublicoController;
 use App\Http\Controllers\Admin\NoticiaController as AdminNoticiaController;
+use App\Http\Controllers\Admin\EventoController  as AdminEventoController;
 
 
-// Página principal
+// ============================================
+// PÁGINA PRINCIPAL
+// ============================================
 Route::get('/', function () {
-    return view('home');
+    $anuncio = \App\Models\PopupAnuncio::where('activo', true)->latest()->first();
+    return view('home', compact('anuncio'));
 })->name('home');
 
-// Bolsa de Trabajo
+// ============================================
+// SERVICIOS PÚBLICOS
+// ============================================
 Route::get('/bolsa-trabajo', function () {
     return view('bolsa-trabajo');
 })->name('bolsa-trabajo');
 
-// Biblioteca Virtual
 Route::get('/biblioteca', function () {
     return view('biblioteca');
 })->name('biblioteca');
 
-// Nosotros - Misión y Visión
+// ============================================
+// NOSOTROS
+// ============================================
 Route::get('/nosotros/mision-vision', function () {
     return view('nosotros.mision-vision');
 })->name('nosotros.mision-vision');
 
-//historia
 Route::get('/nosotros/historia', function () {
     return view('nosotros.historia');
 })->name('nosotros.historia');
 
-//consejo directivo
 Route::get('/nosotros/consejo-directivo', function () {
-    return view('nosotros.consejo-directivo');
+    $consejo = \App\Models\Directivo::where('activo', true)->orderBy('orden')->orderBy('id')->get();
+    return view('nosotros.consejo-directivo', compact('consejo'));
 })->name('nosotros.consejo-directivo');
 
+// ============================================
+// ACTUALIDAD: NOTICIAS Y EVENTOS (PÚBLICO)
+// ============================================
+Route::get('/noticias', [NoticiaController::class, 'index'])->name('noticias.index');
+Route::get('/noticias/{noticia}', [NoticiaController::class, 'show'])->name('noticias.show');
 
-
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLogin']);
-    Route::post('/login', [AuthController::class, 'login']);
-
-    Route::get('/register', [AuthController::class, 'showRegister']);
-    Route::post('/register', [AuthController::class, 'register']);
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return redirect()->route('admin.dashboard');
-    });
-
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
-
-Route::middleware('auth')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
-
-    // Aquí jalamos las rutas del panel admin
-    Route::prefix('admin')->group(base_path('routes/admin.php'));
-});
-
-//ruta de nocticias hascia la vista publica
-
-// Noticias públicas
-Route::get('/noticias', [NoticiaController::class, 'index'])
-    ->name('noticias.index');
-
-Route::get('/noticias/{noticia}', [NoticiaController::class, 'show'])
-    ->name('noticias.show');
-
-
- 
-
-
-// PUBLICO
-Route::get('/noticias', [NoticiaController::class, 'index'])
-    ->name('noticias.index');
-
-// ADMIN
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('noticias', AdminNoticiaController::class);
-});
+Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
 
 // ============================================
-// SECCIÓN CPAP - DIRECTORIO PÚBLICO DE COLEGIADOS
+// COLEGIADOS PÚBLICO
 // ============================================
-
 Route::get('/colegiados', [ColegiadoPublicoController::class, 'index'])
     ->name('colegiados.index');
 
@@ -99,17 +67,42 @@ Route::get('/colegiados/{colegiado:codigo_cpap}/cv', [ColegiadoPublicoController
     ->name('colegiados.descargar-cv');
 
 // ============================================
-// RUTAS DE VERIFICACIÓN PÚBLICA (CPAP)
+// VERIFICACIÓN PÚBLICA
 // ============================================
-
-// URL corta de verificación (estilo Udemy: ude.my/{codigo})
 Route::get('/v/{codigo}', [VerificacionController::class, 'verificarCorto'])
     ->name('verificacion.corto');
 
-// URL completa de verificación
 Route::get('/verificar/{codigo}', [VerificacionController::class, 'verificar'])
     ->name('verificacion.show');
 
-// Descargar documento verificado (desde vista pública)
 Route::get('/verificar/{codigo}/descargar', [VerificacionController::class, 'descargar'])
     ->name('verificacion.descargar');
+
+// ============================================
+// AUTENTICACIÓN
+// ============================================
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin']);
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return redirect()->route('admin.dashboard');
+    });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Rutas del panel admin (admin.php)
+    Route::prefix('admin')->group(base_path('routes/admin.php'));
+});
+
+// ============================================
+// ADMIN: NOTICIAS Y EVENTOS (CRUD)
+// ============================================
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('noticias', AdminNoticiaController::class);
+    Route::resource('eventos', AdminEventoController::class);
+});

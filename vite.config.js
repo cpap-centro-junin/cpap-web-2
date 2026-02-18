@@ -8,7 +8,12 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/css/admin.css',
-                'resources/js/app.js'
+                'resources/js/app.js',
+                'resources/js/modules/mision-vision.js',
+                'resources/js/modules/consejo.js',
+                'resources/js/modules/historia.js',
+                'resources/js/modules/login.js',
+                'resources/js/modules/noticias.js',
             ],
             refresh: true,
         }),

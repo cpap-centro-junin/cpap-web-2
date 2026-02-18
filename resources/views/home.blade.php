@@ -511,7 +511,39 @@
         </div>
     </div>
 </section>
+@if(isset($anuncio) && $anuncio)
+<div id="popupAnuncio"
+     style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:99999;align-items:center;justify-content:center;padding:20px;"
+     onclick="if(event.target===this)cerrarPopup()">
+    <div style="position:relative;max-width:580px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+        <button onclick="cerrarPopup()"
+                style="position:absolute;top:10px;right:10px;width:36px;height:36px;background:rgba(0,0,0,0.65);color:white;border:none;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;z-index:2;"
+                aria-label="Cerrar anuncio">
+            &times;
+        </button>
+        <img src="{{ asset('storage/' . $anuncio->imagen) }}"
+             alt="Anuncio"
+             style="width:100%;display:block;">
+    </div>
+</div>
+@endif
 @endsection
+
+@if(isset($anuncio) && $anuncio)
+@push('scripts')
+<script>
+(function(){
+    if (!sessionStorage.getItem('popup_dismissed_{{ $anuncio->id }}')) {
+        document.getElementById('popupAnuncio').style.display = 'flex';
+    }
+})();
+function cerrarPopup() {
+    document.getElementById('popupAnuncio').style.display = 'none';
+    sessionStorage.setItem('popup_dismissed_{{ $anuncio->id }}', '1');
+}
+</script>
+@endpush
+@endif
 
 @push('scripts')
 <script>

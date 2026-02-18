@@ -119,7 +119,7 @@
             </div>
         </a>
 
-        <a href="{{ route('admin.eventos') }}" class="card">
+        <a href="{{ route('admin.eventos.index') }}" class="card">
             <div class="card-icon" style="background: linear-gradient(135deg, #e65100 0%, #d84315 100%);">
                 <i class="fas fa-calendar-check"></i>
             </div>

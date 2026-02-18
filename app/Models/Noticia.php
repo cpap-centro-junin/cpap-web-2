@@ -11,10 +11,17 @@ class Noticia extends Model
 
     protected $fillable = [
         'titulo',
+        'resumen',
         'contenido',
         'imagen',
-        'activo'
+        'autor',
+        'categoria',
+        'activo',
+        'destacado',
+    ];
+
+    protected $casts = [
+        'activo'    => 'boolean',
+        'destacado' => 'boolean',
     ];
 }
-
-

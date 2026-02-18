@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Noticia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NoticiaController extends Controller
 {
     public function index()
     {
-        $noticias = Noticia::latest()->get();
+        $noticias = Noticia::latest()->paginate(20);
         return view('admin.noticias.index', compact('noticias'));
     }
 
@@ -21,27 +22,27 @@ class NoticiaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'titulo' => 'required|string|max:255',
+        $data = $request->validate([
+            'titulo'    => 'required|string|max:255',
+            'resumen'   => 'nullable|string|max:400',
             'contenido' => 'required|string',
-            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'autor'     => 'nullable|string|max:150',
+            'categoria' => 'required|string',
+            'imagen'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
         ]);
 
-        $noticia = new Noticia();
-        $noticia->titulo = $request->titulo;
-        $noticia->contenido = $request->contenido;
-        $noticia->activo = $request->has('activo');
+        $data['activo']    = $request->boolean('activo');
+        $data['destacado'] = $request->boolean('destacado');
+        $data['autor']     = $data['autor'] ?? 'Redacción CPAP';
 
-        // ✅ GUARDAR IMAGEN
         if ($request->hasFile('imagen')) {
-            $path = $request->file('imagen')->store('noticias', 'public');
-            $noticia->imagen = $path;
+            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
         }
 
-        $noticia->save();
+        Noticia::create($data);
 
         return redirect()->route('admin.noticias.index')
-            ->with('success', 'Noticia creada correctamente');
+            ->with('success', 'Noticia creada correctamente.');
     }
 
     public function edit(Noticia $noticia)
@@ -51,32 +52,39 @@ class NoticiaController extends Controller
 
     public function update(Request $request, Noticia $noticia)
     {
-        $request->validate([
-            'titulo' => 'required|string|max:255',
+        $data = $request->validate([
+            'titulo'    => 'required|string|max:255',
+            'resumen'   => 'nullable|string|max:400',
             'contenido' => 'required|string',
-            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'autor'     => 'nullable|string|max:150',
+            'categoria' => 'required|string',
+            'imagen'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:3072',
         ]);
 
-        $noticia->titulo = $request->titulo;
-        $noticia->contenido = $request->contenido;
-        $noticia->activo = $request->has('activo');
+        $data['activo']    = $request->boolean('activo');
+        $data['destacado'] = $request->boolean('destacado');
+        $data['autor']     = $data['autor'] ?? 'Redacción CPAP';
 
-        // ✅ ACTUALIZAR IMAGEN
         if ($request->hasFile('imagen')) {
-            $path = $request->file('imagen')->store('noticias', 'public');
-            $noticia->imagen = $path;
+            if ($noticia->imagen) {
+                Storage::disk('public')->delete($noticia->imagen);
+            }
+            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
         }
 
-        $noticia->save();
+        $noticia->update($data);
 
         return redirect()->route('admin.noticias.index')
-            ->with('success', 'Noticia actualizada correctamente');
+            ->with('success', 'Noticia actualizada correctamente.');
     }
 
     public function destroy(Noticia $noticia)
     {
+        if ($noticia->imagen) {
+            Storage::disk('public')->delete($noticia->imagen);
+        }
         $noticia->delete();
-        return back()->with('success', 'Noticia eliminada');
+        return back()->with('success', 'Noticia eliminada.');
     }
 
     public function show(Noticia $noticia)
@@ -84,3 +92,4 @@ class NoticiaController extends Controller
         return view('noticias.show', compact('noticia'));
     }
 }
+

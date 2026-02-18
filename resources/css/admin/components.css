@@ -275,3 +275,24 @@
     margin: 0 auto;
     padding: 0 20px;
 }
+
+/* ---- INPUTS ADMIN GENÉRICOS (usados en formularios de noticias/eventos) ---- */
+.admin-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-primary);
+    font-size: 14px;
+    color: var(--dark);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.admin-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139, 21, 56, 0.08);
+}

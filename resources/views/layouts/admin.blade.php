@@ -39,7 +39,7 @@
                 <i class="fas fa-home"></i>
                 <span class="menu-text">Dashboard</span>
             </a>
-            <a href="{{ route('admin.directivos') }}" class="menu-item {{ request()->routeIs('admin.directivos') ? 'active' : '' }}">
+            <a href="{{ route('admin.directivos.index') }}" class="menu-item {{ request()->routeIs('admin.directivos*') ? 'active' : '' }}">
                 <i class="fas fa-user-tie"></i>
                 <span class="menu-text">Directivos</span>
             </a>
@@ -59,13 +59,17 @@
                 <i class="fas fa-newspaper"></i>
                 <span class="menu-text">Noticias</span>
             </a>
-            <a href="{{ route('admin.eventos') }}" class="menu-item {{ request()->routeIs('admin.eventos') ? 'active' : '' }}">
+            <a href="{{ route('admin.eventos.index') }}" class="menu-item {{ request()->routeIs('admin.eventos*') ? 'active' : '' }}">
                 <i class="fas fa-calendar-alt"></i>
                 <span class="menu-text">Eventos</span>
             </a>
             <a href="{{ route('admin.documentos') }}" class="menu-item {{ request()->routeIs('admin.documentos') ? 'active' : '' }}">
                 <i class="fas fa-file-pdf"></i>
                 <span class="menu-text">Documentos</span>
+            </a>
+            <a href="{{ route('admin.anuncios.index') }}" class="menu-item {{ request()->routeIs('admin.anuncios*') ? 'active' : '' }}">
+                <i class="fas fa-bullhorn"></i>
+                <span class="menu-text">Anuncios</span>
             </a>
         </nav>
 

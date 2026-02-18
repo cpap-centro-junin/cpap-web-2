@@ -1,6 +1,5 @@
 /* =================================================
-   HISTORIA CPAP – TIMELINE GRANATE CLARO
-   (CSS encapsulado, no afecta navbar)
+   HISTORIA CPAP – TIMELINE GRANATE
    ================================================= */
 
 /* CONTENEDOR PRINCIPAL */
@@ -8,13 +7,13 @@
     display: flex;
     background: linear-gradient(
         135deg,
-        #8c1d2d,
-        #5f0f1b
+        var(--primary) 0%,
+        var(--primary-dark) 100%
     );
-    height: 100vh;
-    min-height: 650px;
+    height: calc(100vh - 90px);
+    min-height: 600px;
     overflow: hidden;
-    font-family: 'Source Sans Pro', system-ui, sans-serif;
+    font-family: var(--font-primary);
 }
 
 /* ITEM */

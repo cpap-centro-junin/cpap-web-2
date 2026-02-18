@@ -772,3 +772,98 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+   PAGE HEADER - Cabecera de páginas internas
+   Usada en: biblioteca, bolsa-trabajo, nosotros
+   ============================================ */
+.page-header {
+    position: relative;
+    padding: 130px 20px 70px;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 40%, var(--primary-dark) 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.page-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.35) 100%);
+    z-index: 1;
+}
+
+.page-header-content {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-5xl);
+    font-weight: var(--font-extrabold);
+    color: var(--light);
+    margin-bottom: 18px;
+    line-height: var(--leading-tight);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.page-title i {
+    margin-right: 14px;
+    color: var(--accent);
+}
+
+.page-subtitle {
+    font-size: var(--font-lg);
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 28px;
+    line-height: var(--leading-relaxed);
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--font-sm);
+    color: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: var(--backdrop-blur-sm);
+    padding: 8px 22px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.breadcrumb a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+    color: var(--accent);
+}
+
+.breadcrumb span {
+    color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        padding: 100px 20px 50px;
+    }
+
+    .page-title {
+        font-size: var(--font-4xl);
+    }
+
+    .page-subtitle {
+        font-size: var(--font-base);
+    }
+}

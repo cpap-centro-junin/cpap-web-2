@@ -9,9 +9,15 @@ Route::get('/dashboard', function () {
 })->name('admin.dashboard');
 
 // Directivos
-Route::get('/directivos', function () {
-    return view('admin.directivos.index');
-})->name('admin.directivos');
+Route::resource('directivos', \App\Http\Controllers\Admin\DirectivoController::class)->names([
+    'index'   => 'admin.directivos.index',
+    'create'  => 'admin.directivos.create',
+    'store'   => 'admin.directivos.store',
+    'show'    => 'admin.directivos.show',
+    'edit'    => 'admin.directivos.edit',
+    'update'  => 'admin.directivos.update',
+    'destroy' => 'admin.directivos.destroy',
+]);
 
 // Invitaciones
 Route::get('/invitaciones', function () {
@@ -28,10 +34,8 @@ Route::get('/contenido', function () {
     return view('admin.contenido.index');
 })->name('admin.contenido');
 
-// Eventos
-Route::get('/eventos', function () {
-    return view('admin.eventos.index');
-})->name('admin.eventos');
+// Eventos - gestionado por resource route en web.php (admin.eventos.*)
+// Route removida para evitar conflicto con Route::resource('eventos', ...)
 
 // Documentos
 Route::get('/documentos', function () {
@@ -47,12 +51,10 @@ Route::post('/invitaciones/enviar', [App\Http\Controllers\Admin\InvitacionContro
     ->name('admin.invitaciones.enviar');
 
 
-use App\Http\Controllers\Admin\NoticiaController;
 use App\Http\Controllers\Admin\ColegiadoController;
 use App\Http\Controllers\Admin\HabilitacionController;
 
-Route::get('/noticias', [NoticiaController::class, 'index'])
-    ->name('admin.noticias');
+// Noticias - gestionado por resource route en web.php (admin.noticias.*)
 
 // ============================================
 // RUTAS DE COLEGIADOS (CPAP)
@@ -102,3 +104,20 @@ Route::patch('/habilitaciones/{habilitacion}/reactivar', [HabilitacionController
 // Eliminar habilitación
 Route::delete('/habilitaciones/{habilitacion}', [HabilitacionController::class, 'destroy'])
     ->name('admin.habilitaciones.destroy');
+
+// ============================================
+// POPUP ANUNCIOS EMERGENTES
+// ============================================
+
+Route::resource('anuncios', \App\Http\Controllers\Admin\PopupAnuncioController::class)->names([
+    'index'   => 'admin.anuncios.index',
+    'create'  => 'admin.anuncios.create',
+    'store'   => 'admin.anuncios.store',
+    'show'    => 'admin.anuncios.show',
+    'edit'    => 'admin.anuncios.edit',
+    'update'  => 'admin.anuncios.update',
+    'destroy' => 'admin.anuncios.destroy',
+]);
+
+Route::patch('/anuncios/{anuncio}/toggle', [\App\Http\Controllers\Admin\PopupAnuncioController::class, 'toggleActivo'])
+    ->name('admin.anuncios.toggle');
