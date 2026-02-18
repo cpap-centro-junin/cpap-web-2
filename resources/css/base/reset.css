@@ -37,11 +37,16 @@ body {
 body.app-layout {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
 }
 
 main {
     flex: 1 0 auto;
+}
+
+/* Offset the fixed public navbar so content starts below it */
+body.app-layout > main {
+    padding-top: 0;
 }
 
 /* Enlaces */

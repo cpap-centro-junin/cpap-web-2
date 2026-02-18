@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\VerificacionController;
+use App\Http\Controllers\ColegiadoPublicoController;
 use App\Http\Controllers\Admin\NoticiaController as AdminNoticiaController;
 
 
@@ -82,4 +84,32 @@ Route::get('/noticias', [NoticiaController::class, 'index'])
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('noticias', AdminNoticiaController::class);
 });
-    
+
+// ============================================
+// SECCIÓN CPAP - DIRECTORIO PÚBLICO DE COLEGIADOS
+// ============================================
+
+Route::get('/colegiados', [ColegiadoPublicoController::class, 'index'])
+    ->name('colegiados.index');
+
+Route::get('/colegiados/{colegiado:codigo_cpap}', [ColegiadoPublicoController::class, 'show'])
+    ->name('colegiados.show');
+
+Route::get('/colegiados/{colegiado:codigo_cpap}/cv', [ColegiadoPublicoController::class, 'descargarCV'])
+    ->name('colegiados.descargar-cv');
+
+// ============================================
+// RUTAS DE VERIFICACIÓN PÚBLICA (CPAP)
+// ============================================
+
+// URL corta de verificación (estilo Udemy: ude.my/{codigo})
+Route::get('/v/{codigo}', [VerificacionController::class, 'verificarCorto'])
+    ->name('verificacion.corto');
+
+// URL completa de verificación
+Route::get('/verificar/{codigo}', [VerificacionController::class, 'verificar'])
+    ->name('verificacion.show');
+
+// Descargar documento verificado (desde vista pública)
+Route::get('/verificar/{codigo}/descargar', [VerificacionController::class, 'descargar'])
+    ->name('verificacion.descargar');

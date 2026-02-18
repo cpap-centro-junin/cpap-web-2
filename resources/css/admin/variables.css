@@ -1,0 +1,39 @@
+/* ============================================
+   ADMIN - VARIABLES Y BASE
+   resources/css/admin/variables.css
+   ============================================ */
+
+/* Variables propias del panel admin */
+:root {
+    --admin-sidebar-width: 270px;
+    --admin-sidebar-collapsed: 88px;
+    --admin-topbar-height: 70px;
+    --admin-card-padding: 26px;
+    --admin-bg: #f6f7fb;
+    --admin-content-padding: 34px;
+}
+
+/* Override del body para el admin (el reset base pone background blanco) */
+body.admin-layout {
+    background: var(--admin-bg);
+    display: block;
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}

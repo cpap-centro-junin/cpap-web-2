@@ -48,10 +48,9 @@
 @import './pages/auth.css';
 @import './pages/historia.css';
 @import './pages/mision-vision.css';
-
-/* ============================================
-   ADMIN - Estilos del Panel Admin
-   ============================================ */
-@import './admin.css';
+@import './pages/colegiados.css';
+@import './pages/colegiado-perfil.css';
+@import './pages/verificacion.css';
 
 /* ✅ modern.css ELIMINADO - Todo extraído al nuevo sistema */
+/* Admin CSS → resources/css/admin.css (entry point propio en vite.config.js) */

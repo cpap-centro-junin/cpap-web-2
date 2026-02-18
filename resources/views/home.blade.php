@@ -513,7 +513,7 @@
 </section>
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
 // Contador animado para las estadísticas
 document.addEventListener('DOMContentLoaded', function() {
@@ -557,4 +557,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-@endsection
+@endpush

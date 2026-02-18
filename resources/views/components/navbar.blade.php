@@ -39,6 +39,12 @@
                         Noticias
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('colegiados.index') }}" class="nav-link {{ request()->is('colegiados*') ? 'active' : '' }}">
+                        <i class="fas fa-id-card"></i>
+                        Colegiados
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
                     <a href="javascript:void(0)" class="nav-link">
                         <i class="fas fa-briefcase"></i>
@@ -116,15 +122,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Navbar scroll effect
+    // Navbar scroll effect - throttled con requestAnimationFrame para evitar lag
     if (navbar) {
+        let ticking = false;
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
+            if (!ticking) {
+                requestAnimationFrame(function() {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('navbar-scrolled');
+                    } else {
+                        navbar.classList.remove('navbar-scrolled');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
-        });
+        }, { passive: true });
     }
 
     // Smooth scroll to anchors

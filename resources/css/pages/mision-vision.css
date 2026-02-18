@@ -9,15 +9,17 @@
 
 }
 
-header,
 .navbar {
-    position: relative;
-    z-index: 9999;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 /* SECTION */
 .mv-section {
-    position: relative;
+    position: sticky;
     min-height: calc(100vh - var(--navbar-height));
     margin-top: var(--navbar-height);
     overflow: hidden;

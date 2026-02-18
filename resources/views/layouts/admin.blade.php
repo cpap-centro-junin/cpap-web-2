@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Panel Administrativo CPAP</title>
 
+    <!-- Fonts (mismas que el sitio público) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     @vite(['resources/css/admin.css'])
+    @stack('styles')
 </head>
 
-<body>
+<body class="admin-layout">
 
 <div class="admin-wrapper">
 
@@ -44,6 +50,10 @@
             <a href="{{ route('admin.usuarios') }}" class="menu-item {{ request()->routeIs('admin.usuarios') ? 'active' : '' }}">
                 <i class="fas fa-users"></i>
                 <span class="menu-text">Usuarios</span>
+            </a>
+            <a href="{{ route('admin.colegiados.index') }}" class="menu-item {{ request()->routeIs('admin.colegiados*') || request()->routeIs('admin.habilitaciones*') ? 'active' : '' }}">
+                <i class="fas fa-id-card"></i>
+                <span class="menu-text">Colegiados</span>
             </a>
             <a href="{{ route('admin.noticias.index') }}" class="menu-item {{ request()->routeIs('admin.noticias*') ? 'active' : '' }}">
                 <i class="fas fa-newspaper"></i>
@@ -113,53 +123,57 @@
 </div>
 
 <script>
-// Toggle sidebar
-const toggleBtn = document.getElementById('toggleSidebar');
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('adminSidebar');
-const overlay = document.getElementById('overlay');
+const toggleBtn  = document.getElementById('toggleSidebar');
+const hamburger  = document.getElementById('hamburger');
+const sidebar    = document.getElementById('adminSidebar');
+const overlay    = document.getElementById('overlay');
 
+// Desktop: colapsa/expande sidebar
+// Mobile:  abre/cierra el drawer
 function toggleSidebar() {
-    sidebar.classList.toggle('show');
-    overlay.classList.toggle('show');
+    if (window.innerWidth > 900) {
+        // ── DESKTOP: colapsar / expandir ──
+        sidebar.classList.toggle('collapsed');
+        // Guardar preferencia en localStorage
+        const isCollapsed = sidebar.classList.contains('collapsed');
+        localStorage.setItem('sidebar-collapsed', isCollapsed);
+    } else {
+        // ── MOBILE: drawer ──
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+    }
 }
 
-function closeSidebar() {
+function closeMobileSidebar() {
     sidebar.classList.remove('show');
     overlay.classList.remove('show');
 }
 
-// Click en botones toggle
-if (toggleBtn) {
-    toggleBtn.addEventListener('click', toggleSidebar);
+// Restaurar estado guardado al cargar (solo desktop)
+if (window.innerWidth > 900) {
+    const savedCollapsed = localStorage.getItem('sidebar-collapsed');
+    if (savedCollapsed === 'true') {
+        sidebar.classList.add('collapsed');
+    }
 }
 
-if (hamburger) {
-    hamburger.addEventListener('click', toggleSidebar);
-}
+if (toggleBtn) toggleBtn.addEventListener('click', toggleSidebar);
+if (hamburger) hamburger.addEventListener('click', toggleSidebar);
+if (overlay)   overlay.addEventListener('click', closeMobileSidebar);
 
-// Click en overlay para cerrar
-if (overlay) {
-    overlay.addEventListener('click', closeSidebar);
-}
-
-// Click en items del menu para cerrar (solo en móvil)
-const menuItems = document.querySelectorAll('.menu-item');
-menuItems.forEach(item => {
+// Cerrar mobile drawer al hacer click en un item
+document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', function() {
-        if (window.innerWidth <= 900) {
-            closeSidebar();
-        }
+        if (window.innerWidth <= 900) closeMobileSidebar();
     });
 });
 
-// Cerrar sidebar cuando se redimensiona a pantalla grande
+// Limpiar estado mobile al redimensionar a desktop
 window.addEventListener('resize', function() {
-    if (window.innerWidth > 900) {
-        closeSidebar();
-    }
+    if (window.innerWidth > 900) closeMobileSidebar();
 });
 </script>
 
+@stack('scripts')
 </body>
 </html>

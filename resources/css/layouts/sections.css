@@ -14,7 +14,7 @@
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
     overflow: hidden;
-    padding: 140px 20px 60px;
+    padding: 140px 20px 60px; /* top padding > navbar height (92px) so content stays visible */
     z-index: 1;
 }
 

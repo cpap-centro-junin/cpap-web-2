@@ -1,0 +1,606 @@
+/* ============================================
+   PAGE: VERIFICACIÓN DE DOCUMENTOS (válida e inválida)
+   resources/css/pages/verificacion.css
+   ============================================ */
+
+/* ---- SECCIÓN CONTENEDOR ---- */
+.verificacion-section {
+    background: #f0f2f5;
+    min-height: 100vh;
+    padding: 108px 20px 64px;
+}
+
+/* inválida: fondo distinto */
+.verificacion-section.invalida {
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    padding-bottom: 80px;
+}
+
+.verificacion-container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* ---- HEADER ---- */
+.verificacion-header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.verificacion-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.verificacion-icon.success {
+    background: linear-gradient(135deg, #1e7e34 0%, #28a745 100%);
+    box-shadow: 0 6px 24px rgba(40, 167, 69, 0.35);
+}
+
+.verificacion-icon.error {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    box-shadow: 0 8px 24px rgba(220, 53, 69, 0.3);
+}
+
+.verificacion-icon i {
+    font-size: 38px;
+    color: white;
+}
+
+.verificacion-icon.error i {
+    font-size: 48px;
+}
+
+.verificacion-header h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: #1a202c;
+    margin-bottom: 8px;
+}
+
+.verificacion-header .subtitle {
+    font-size: 1rem;
+    color: #718096;
+}
+
+/* ---- LAYOUT PRINCIPAL (válida: 2 columnas) ---- */
+.verificacion-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* ── SIDEBAR ── */
+.verificacion-sidebar {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border: 1px solid #e2e8f0;
+}
+
+.sidebar-perfil {
+    background: linear-gradient(135deg, #8B1538 0%, #6B0F2A 100%);
+    padding: 32px 24px;
+    text-align: center;
+    color: white;
+}
+
+.sidebar-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.9);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    display: block;
+    margin: 0 auto 16px;
+}
+
+.sidebar-avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.9);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: white;
+    margin: 0 auto 16px;
+}
+
+.sidebar-nombre {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    line-height: 1.3;
+    color: white;
+}
+
+.sidebar-codigo {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    color: white;
+}
+
+.estado-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.estado-pill.activo {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: white;
+}
+
+.estado-pill.inactivo {
+    background: rgba(220,53,69,0.3);
+    border: 1px solid rgba(220,53,69,0.5);
+    color: white;
+}
+
+.sidebar-info,
+.sidebar-doc {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f4;
+}
+
+.sidebar-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.sidebar-field:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-field > i {
+    font-size: 16px;
+    color: #8B1538;
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 18px;
+    text-align: center;
+}
+
+.sidebar-field label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.sidebar-field span {
+    font-size: 0.88rem;
+    color: #2d3748;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.sidebar-field code {
+    font-size: 0.72rem;
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 3px 8px;
+    color: #4a5568;
+    word-break: break-all;
+    display: inline-block;
+    line-height: 1.6;
+}
+
+.sidebar-nota {
+    padding: 20px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #f8f9fc;
+}
+
+.sidebar-nota > i {
+    color: #8B1538;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.sidebar-nota p {
+    font-size: 0.78rem;
+    color: #718096;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ── VISOR PDF ── */
+.pdf-viewer-col {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #1a202c;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pdf-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.pdf-toolbar-icon {
+    color: #fc4444;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.pdf-toolbar-title {
+    color: #e2e8f0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pdf-toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pdf-toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #cbd5e0;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.pdf-toolbar-btn:hover {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    text-decoration: none;
+}
+
+.pdf-toolbar-btn-primary {
+    background: #8B1538;
+    border-color: #8B1538;
+    color: white;
+}
+
+.pdf-toolbar-btn-primary:hover {
+    background: #6B0F2A;
+    color: white;
+}
+
+.pdf-frame-wrapper {
+    flex: 1;
+    min-height: 0;
+    background: #525659;
+    position: relative;
+}
+
+.pdf-frame {
+    width: 100%;
+    height: 700px;
+    display: block;
+    border: none;
+    background: #525659;
+}
+
+.pdf-frame-footer {
+    padding: 10px 20px;
+    background: #f8f9fc;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.78rem;
+    color: #a0aec0;
+}
+
+.pdf-frame-footer a {
+    color: #8B1538;
+    font-weight: 600;
+}
+
+/* ---- PÁGINA INVÁLIDA: CARD DE ERROR ---- */
+.verificacion-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.error-card {
+    border-top: 5px solid #dc3545;
+}
+
+.verificacion-body {
+    padding: 48px;
+}
+
+.error-content {
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 80px;
+    color: #dc3545;
+    margin-bottom: 24px;
+}
+
+.error-content h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 32px;
+}
+
+.error-details {
+    margin: 32px 0;
+    padding: 24px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.error-details p {
+    margin-bottom: 12px;
+    color: #6c757d;
+}
+
+.error-details code {
+    font-size: 18px;
+    padding: 12px 20px;
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    display: inline-block;
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.revocado-notice {
+    margin: 32px 0;
+    padding: 32px;
+    background: #fff3cd;
+    border-left: 5px solid #ffc107;
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+}
+
+.revocado-notice i {
+    font-size: 48px;
+    color: #ffc107;
+}
+
+.revocado-notice h3 {
+    font-size: 20px;
+    color: #856404;
+    margin-bottom: 12px;
+}
+
+.revocado-notice p {
+    color: #856404;
+    line-height: 1.6;
+}
+
+.invalido-notice {
+    margin: 32px 0;
+    padding: 32px;
+    background: #f8d7da;
+    border-left: 5px solid #dc3545;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.invalido-notice h3 {
+    font-size: 18px;
+    color: #721c24;
+    margin-bottom: 16px;
+}
+
+.invalido-notice ul {
+    list-style: none;
+    padding: 0;
+}
+
+.invalido-notice ul li {
+    padding: 10px 0;
+    color: #721c24;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.invalido-notice ul li i {
+    color: #dc3545;
+}
+
+.acciones {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.help-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 800px;
+    margin: 40px auto 0;
+    padding: 32px;
+    background: white;
+    border-radius: 16px;
+    border-left: 5px solid #17a2b8;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.help-icon {
+    flex-shrink: 0;
+}
+
+.help-icon i {
+    font-size: 48px;
+    color: #17a2b8;
+}
+
+.help-text h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #2c3e50;
+}
+
+.help-text p {
+    margin: 8px 0;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.contact-box {
+    margin-top: 16px;
+    padding: 20px;
+    background: #e7f7f9;
+    border-radius: 10px;
+    color: #0c5460;
+}
+
+.contact-box strong {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.contact-box a {
+    color: #17a2b8;
+    text-decoration: none;
+}
+
+.contact-box a:hover {
+    text-decoration: underline;
+}
+
+/* ---- RESPONSIVE (válida) ---- */
+@media (max-width: 1024px) {
+    .verificacion-layout {
+        grid-template-columns: 300px 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .verificacion-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .verificacion-sidebar {
+        order: 2;
+    }
+
+    .pdf-viewer-col {
+        order: 1;
+    }
+
+    .pdf-frame {
+        height: 520px;
+    }
+
+    .pdf-toolbar-left {
+        flex: 1;
+        min-width: 0;
+    }
+
+    /* inválida */
+    .verificacion-body {
+        padding: 24px;
+    }
+
+    .error-icon {
+        font-size: 60px;
+    }
+
+    .error-content h2 {
+        font-size: 22px;
+    }
+
+    .acciones {
+        flex-direction: column;
+    }
+
+    .help-card,
+    .revocado-notice {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .pdf-frame {
+        height: 420px;
+    }
+
+    .pdf-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+@media print {
+    .pdf-toolbar,
+    .pdf-frame-footer {
+        display: none;
+    }
+}

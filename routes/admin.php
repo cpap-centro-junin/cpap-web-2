@@ -48,7 +48,57 @@ Route::post('/invitaciones/enviar', [App\Http\Controllers\Admin\InvitacionContro
 
 
 use App\Http\Controllers\Admin\NoticiaController;
+use App\Http\Controllers\Admin\ColegiadoController;
+use App\Http\Controllers\Admin\HabilitacionController;
 
 Route::get('/noticias', [NoticiaController::class, 'index'])
     ->name('admin.noticias');
 
+// ============================================
+// RUTAS DE COLEGIADOS (CPAP)
+// ============================================
+
+// CRUD de Colegiados
+Route::resource('colegiados', ColegiadoController::class)->names([
+    'index' => 'admin.colegiados.index',
+    'create' => 'admin.colegiados.create',
+    'store' => 'admin.colegiados.store',
+    'show' => 'admin.colegiados.show',
+    'edit' => 'admin.colegiados.edit',
+    'update' => 'admin.colegiados.update',
+    'destroy' => 'admin.colegiados.destroy',
+]);
+
+// Toggle estado (activo/inactivo)
+Route::patch('/colegiados/{colegiado}/toggle-estado', [ColegiadoController::class, 'toggleEstado'])
+    ->name('admin.colegiados.toggle-estado');
+
+// ============================================
+// RUTAS DE HABILITACIONES
+// ============================================
+
+// Crear nueva habilitación
+Route::get('/colegiados/{colegiado}/habilitaciones/create', [HabilitacionController::class, 'create'])
+    ->name('admin.habilitaciones.create');
+
+Route::post('/colegiados/{colegiado}/habilitaciones', [HabilitacionController::class, 'store'])
+    ->name('admin.habilitaciones.store');
+
+// Descargar documento de habilitación
+Route::get('/habilitaciones/{habilitacion}/descargar', [HabilitacionController::class, 'descargar'])
+    ->name('admin.habilitaciones.descargar');
+
+// Descargar QR Code
+Route::get('/habilitaciones/{habilitacion}/descargar-qr', [HabilitacionController::class, 'descargarQR'])
+    ->name('admin.habilitaciones.descargar-qr');
+
+// Revocar/Reactivar
+Route::patch('/habilitaciones/{habilitacion}/revocar', [HabilitacionController::class, 'revocar'])
+    ->name('admin.habilitaciones.revocar');
+
+Route::patch('/habilitaciones/{habilitacion}/reactivar', [HabilitacionController::class, 'reactivar'])
+    ->name('admin.habilitaciones.reactivar');
+
+// Eliminar habilitación
+Route::delete('/habilitaciones/{habilitacion}', [HabilitacionController::class, 'destroy'])
+    ->name('admin.habilitaciones.destroy');

@@ -89,8 +89,11 @@
 }
 
 .btn-outline:hover:not(:disabled) {
-    background: var(--primary);
-    color: var(--light);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    color: var(--dark);
+    border-color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(201, 169, 97, 0.4);
 }
 
 /* Outline Light - Botón con borde blanco */

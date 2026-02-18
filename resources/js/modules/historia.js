@@ -1,22 +1,24 @@
 /**
  * Historia - Timeline Funcionalidades
+ * Usa IntersectionObserver en lugar de scroll handler para mejor rendimiento
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Historia module loaded');
-
-    // Efectos de parallax en el timeline
     const timelineItems = document.querySelectorAll('.tl-item');
+    if (!timelineItems.length) return;
 
-    window.addEventListener('scroll', function() {
-        timelineItems.forEach((item, index) => {
-            const rect = item.getBoundingClientRect();
-            const isVisible = rect.top < window.innerHeight * 0.8;
-
-            if (isVisible) {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('tl-visible');
+                // Dejar de observar una vez visible (no necesita re-dispararse)
+                observer.unobserve(entry.target);
             }
         });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
     });
+
+    timelineItems.forEach(item => observer.observe(item));
 });

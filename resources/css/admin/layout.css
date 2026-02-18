@@ -1,0 +1,225 @@
+/* ============================================
+   ADMIN - LAYOUT PRINCIPAL
+   resources/css/admin/layout.css
+   Incluye: wrapper, sidebar, content, overlay
+   ============================================ */
+
+/* WRAPPER */
+.admin-wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ---- SIDEBAR ---- */
+.sidebar {
+    width: var(--admin-sidebar-width);
+    background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 100;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.sidebar.collapsed {
+    width: var(--admin-sidebar-collapsed);
+}
+
+.sidebar.collapsed .menu-text {
+    opacity: 0;
+    display: none;
+}
+
+.sidebar.collapsed .logo-text {
+    display: none;
+}
+
+/* Sidebar Header — compacto para que el footer siempre sea visible */
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+
+.logo-box {
+    background: white;
+    padding: 10px;
+    border-radius: 14px;
+    display: inline-block;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.logo-box:hover {
+    transform: translateY(-2px) scale(1.04);
+}
+
+.logo {
+    width: 52px;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo-text {
+    margin-top: 4px;
+}
+
+.logo-text h3 {
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    margin: 0 0 3px 0;
+    color: white;
+}
+
+.logo-text p {
+    font-size: 11px;
+    opacity: 0.8;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+/* Ocultar texto del logo cuando está colapsado */
+.sidebar.collapsed .logo-text {
+    display: none;
+}
+
+.sidebar.collapsed .logo {
+    width: 42px;
+}
+
+/* Menú sidebar */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.menu-item {
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.menu-item i {
+    font-size: 18px;
+    min-width: 22px;
+    text-align: center;
+}
+
+.menu-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    transition: width 0.25s ease;
+    z-index: -1;
+}
+
+.menu-item:hover::before {
+    width: 100%;
+}
+
+.menu-item:hover {
+    transform: translateX(6px);
+}
+
+.menu-item.active {
+    background: rgba(255, 255, 255, 0.22);
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.menu-item.active::before {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    width: 4px;
+    border-radius: 0 12px 12px 0;
+}
+
+/* Sidebar Footer — siempre pegado al fondo */
+.sidebar-footer {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+
+.sidebar-footer .menu-item {
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 14px;
+}
+
+.sidebar-footer .menu-item:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* ---- CONTENIDO PRINCIPAL ---- */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    background: var(--admin-bg);
+}
+
+/* Page content */
+.page-content {
+    padding: var(--admin-content-padding);
+    animation: fade 0.35s ease;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- OVERLAY MOBILE ---- */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 99;
+}
+
+.overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}

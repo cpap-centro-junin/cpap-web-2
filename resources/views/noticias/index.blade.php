@@ -6,9 +6,6 @@
 
 @section('title', 'Noticias')
 
-@vite(['resources/js/app.js'])
-
-
 @section('content')
 
 <header class="noticias-header">

@@ -1,0 +1,73 @@
+/* ============================================
+   ADMIN - RESPONSIVE
+   resources/css/admin/responsive.css
+   ============================================ */
+
+@media (max-width: 900px) {
+    /* Sidebar oculto en mobile */
+    .sidebar {
+        position: fixed;
+        left: -270px;
+        top: 0;
+        width: 270px;
+        height: 100vh;
+        z-index: 999;
+        box-shadow: 8px 0 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    /* Hamburger visible */
+    .hamburger {
+        display: block;
+    }
+
+    /* Ajuste topbar */
+    .topbar {
+        justify-content: space-between;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    /* Content full width */
+    .content {
+        width: 100%;
+    }
+
+    /* Cards 1 columna */
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    /* Form row apilado */
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .sidebar {
+        width: 240px;
+        left: -240px;
+    }
+
+    .page-content {
+        padding: 18px;
+    }
+
+    .admin-card {
+        padding: 20px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
