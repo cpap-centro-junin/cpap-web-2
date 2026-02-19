@@ -35,7 +35,7 @@
         {{-- Imagen de portada --}}
         @if($noticia->imagen)
             <img
-                src="{{ asset('storage/' . $noticia->imagen) }}"
+                src="{{ $noticia->imagen }}"
                 alt="{{ $noticia->titulo }}"
                 class="article-cover"
             >
@@ -97,7 +97,7 @@
                 @foreach($relacionadas as $rel)
                 <a href="{{ route('noticias.show', $rel) }}" class="mini-card">
                     @if($rel->imagen)
-                        <img src="{{ asset('storage/' . $rel->imagen) }}" alt="{{ $rel->titulo }}" class="mini-card__image">
+                        <img src="{{ $rel->imagen }}" alt="{{ $rel->titulo }}" class="mini-card__image">
                     @else
                         <div class="mini-card__placeholder">
                             <i class="fas fa-newspaper"></i>

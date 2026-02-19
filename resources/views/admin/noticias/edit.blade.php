@@ -108,7 +108,7 @@
                     @if($noticia->imagen)
                     <div style="margin-bottom:10px;">
                         <p style="font-size:12px;color:var(--medium-gray);margin:0 0 6px;">Imagen actual:</p>
-                        <img src="{{ asset('storage/' . $noticia->imagen) }}" alt=""
+                        <img src="{{ $noticia->imagen }}" alt=""
                              id="currentImage"
                              style="width:100%;height:120px;object-fit:cover;border-radius:6px;display:block;">
                     </div>

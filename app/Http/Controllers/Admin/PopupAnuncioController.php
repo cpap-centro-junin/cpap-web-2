@@ -33,7 +33,8 @@ class PopupAnuncioController extends Controller
             PopupAnuncio::query()->update(['activo' => false]);
         }
 
-        $data['imagen'] = $request->file('imagen')->store('anuncios', 'public');
+        $file = $request->file('imagen');
+        $data['imagen'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
 
         PopupAnuncio::create($data);
 
@@ -60,8 +61,12 @@ class PopupAnuncioController extends Controller
         }
 
         if ($request->hasFile('imagen')) {
-            Storage::disk('public')->delete($anuncio->imagen);
-            $data['imagen'] = $request->file('imagen')->store('anuncios', 'public');
+            $rawImagen = $anuncio->getOriginal('imagen');
+            if ($rawImagen && !str_starts_with($rawImagen, 'data:')) {
+                Storage::disk('public')->delete($rawImagen);
+            }
+            $file = $request->file('imagen');
+            $data['imagen'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         $anuncio->update($data);
@@ -72,7 +77,10 @@ class PopupAnuncioController extends Controller
 
     public function destroy(PopupAnuncio $anuncio)
     {
-        Storage::disk('public')->delete($anuncio->imagen);
+        $rawImagen = $anuncio->getOriginal('imagen');
+        if ($rawImagen && !str_starts_with($rawImagen, 'data:')) {
+            Storage::disk('public')->delete($rawImagen);
+        }
         $anuncio->delete();
 
         return back()->with('success', 'Anuncio eliminado.');

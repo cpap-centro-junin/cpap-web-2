@@ -38,8 +38,8 @@ class EventoController extends Controller
         $data['destacado'] = $request->boolean('destacado');
 
         if ($request->hasFile('imagen_portada')) {
-            $data['imagen_portada'] = $request->file('imagen_portada')
-                ->store('eventos', 'public');
+            $file = $request->file('imagen_portada');
+            $data['imagen_portada'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         Evento::create($data);
@@ -71,12 +71,12 @@ class EventoController extends Controller
         $data['destacado'] = $request->boolean('destacado');
 
         if ($request->hasFile('imagen_portada')) {
-            // Eliminar imagen anterior
-            if ($evento->imagen_portada) {
-                Storage::disk('public')->delete($evento->imagen_portada);
+            $rawImagen = $evento->getOriginal('imagen_portada');
+            if ($rawImagen && !str_starts_with($rawImagen, 'data:')) {
+                Storage::disk('public')->delete($rawImagen);
             }
-            $data['imagen_portada'] = $request->file('imagen_portada')
-                ->store('eventos', 'public');
+            $file = $request->file('imagen_portada');
+            $data['imagen_portada'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         $evento->update($data);
@@ -87,8 +87,9 @@ class EventoController extends Controller
 
     public function destroy(Evento $evento)
     {
-        if ($evento->imagen_portada) {
-            Storage::disk('public')->delete($evento->imagen_portada);
+        $rawImagen = $evento->getOriginal('imagen_portada');
+        if ($rawImagen && !str_starts_with($rawImagen, 'data:')) {
+            Storage::disk('public')->delete($rawImagen);
         }
         $evento->delete();
 

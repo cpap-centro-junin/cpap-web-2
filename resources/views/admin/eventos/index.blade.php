@@ -43,7 +43,7 @@
             <tr>
                 <td>
                     @if($evento->imagen_portada)
-                        <img src="{{ asset('storage/' . $evento->imagen_portada) }}" alt=""
+                        <img src="{{ $evento->imagen_portada }}" alt=""
                              style="width:52px;height:40px;object-fit:cover;border-radius:6px;display:block;">
                     @else
                         <div style="width:52px;height:40px;background:var(--light-gray);border-radius:6px;display:flex;align-items:center;justify-content:center;">

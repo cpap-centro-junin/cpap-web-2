@@ -60,7 +60,7 @@
             @foreach($destacadas->skip(1) as $noticia)
             <a href="{{ route('noticias.show', $noticia) }}" class="featured-card featured-card--side">
                 @if($noticia->imagen)
-                    <img src="{{ asset('storage/' . $noticia->imagen) }}" alt="{{ $noticia->titulo }}" class="featured-card__image">
+                    <img src="{{ $noticia->imagen }}" alt="{{ $noticia->titulo }}" class="featured-card__image">
                 @else
                     <div class="featured-card__placeholder">
                         <i class="fas fa-newspaper"></i>
@@ -100,7 +100,7 @@
             <a href="{{ route('noticias.show', $noticia) }}" class="news-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
                 <div class="news-card__image-wrap">
                     @if($noticia->imagen)
-                        <img src="{{ asset('storage/' . $noticia->imagen) }}" alt="{{ $noticia->titulo }}" class="news-card__image">
+                        <img src="{{ $noticia->imagen }}" alt="{{ $noticia->titulo }}" class="news-card__image">
                     @else
                         <div class="news-card__image-placeholder">
                             <i class="fas fa-newspaper"></i>

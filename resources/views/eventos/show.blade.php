@@ -34,7 +34,7 @@
 
         @if($evento->imagen_portada)
             <img
-                src="{{ asset('storage/' . $evento->imagen_portada) }}"
+                src="{{ $evento->imagen_portada }}"
                 alt="{{ $evento->titulo }}"
                 class="article-cover"
             >
@@ -167,7 +167,7 @@
                 @foreach($relacionados as $rel)
                 <a href="{{ route('eventos.show', $rel) }}" class="mini-card">
                     @if($rel->imagen_portada)
-                        <img src="{{ asset('storage/' . $rel->imagen_portada) }}" alt="{{ $rel->titulo }}" class="mini-card__image">
+                        <img src="{{ $rel->imagen_portada }}" alt="{{ $rel->titulo }}" class="mini-card__image">
                     @else
                         <div class="mini-card__placeholder">
                             <i class="fas fa-calendar-alt"></i>

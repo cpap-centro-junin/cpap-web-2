@@ -44,7 +44,7 @@
             <tr>
                 <td>
                     @if($noticia->imagen)
-                        <img src="{{ asset('storage/' . $noticia->imagen) }}" alt=""
+                        <img src="{{ $noticia->imagen }}" alt=""
                              style="width:52px;height:40px;object-fit:cover;border-radius:6px;display:block;">
                     @else
                         <div style="width:52px;height:40px;background:var(--light-gray);border-radius:6px;display:flex;align-items:center;justify-content:center;">

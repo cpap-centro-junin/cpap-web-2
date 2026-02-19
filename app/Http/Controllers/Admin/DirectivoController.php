@@ -36,7 +36,8 @@ class DirectivoController extends Controller
         $data['periodo'] = $data['periodo'] ?? '2024-2026';
 
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('directivos', 'public');
+            $file = $request->file('foto');
+            $data['foto'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         Directivo::create($data);
@@ -65,10 +66,12 @@ class DirectivoController extends Controller
         $data['orden']  = $data['orden'] ?? $directivo->orden;
 
         if ($request->hasFile('foto')) {
-            if ($directivo->foto) {
-                Storage::disk('public')->delete($directivo->foto);
+            $rawFoto = $directivo->getOriginal('foto');
+            if ($rawFoto && !str_starts_with($rawFoto, 'data:')) {
+                Storage::disk('public')->delete($rawFoto);
             }
-            $data['foto'] = $request->file('foto')->store('directivos', 'public');
+            $file = $request->file('foto');
+            $data['foto'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         $directivo->update($data);
@@ -79,8 +82,9 @@ class DirectivoController extends Controller
 
     public function destroy(Directivo $directivo)
     {
-        if ($directivo->foto) {
-            Storage::disk('public')->delete($directivo->foto);
+        $rawFoto = $directivo->getOriginal('foto');
+        if ($rawFoto && !str_starts_with($rawFoto, 'data:')) {
+            Storage::disk('public')->delete($rawFoto);
         }
         $directivo->delete();
 

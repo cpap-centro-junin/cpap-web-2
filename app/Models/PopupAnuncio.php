@@ -20,4 +20,11 @@ class PopupAnuncio extends Model
     {
         return $query->where('activo', true);
     }
+
+    public function getImagenAttribute($value): ?string
+    {
+        if (!$value) return null;
+        if (str_starts_with($value, 'data:')) return $value;
+        return asset('storage/' . $value);
+    }
 }

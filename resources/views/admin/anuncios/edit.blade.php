@@ -40,7 +40,7 @@
 
                 <div style="margin-bottom:12px;">
                     <p style="font-size:12px;color:var(--medium-gray);margin:0 0 8px;">Imagen actual:</p>
-                    <img src="{{ asset('storage/' . $anuncio->imagen) }}" alt="{{ $anuncio->titulo }}"
+                    <img src="{{ $anuncio->imagen }}" alt="{{ $anuncio->titulo }}"
                          id="currentImg"
                          style="max-width:100%;max-height:300px;object-fit:contain;border-radius:6px;display:block;">
                 </div>

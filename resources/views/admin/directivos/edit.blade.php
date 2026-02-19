@@ -107,7 +107,7 @@
                     @if($directivo->foto)
                     <div style="margin-bottom:10px;">
                         <p style="font-size:12px;color:var(--medium-gray);margin:0 0 6px;">Foto actual:</p>
-                        <img src="{{ asset('storage/' . $directivo->foto) }}" alt="{{ $directivo->nombre }}"
+                        <img src="{{ $directivo->foto }}" alt="{{ $directivo->nombre }}"
                              id="currentImg"
                              style="width:100%;height:140px;object-fit:cover;border-radius:6px;display:block;">
                     </div>

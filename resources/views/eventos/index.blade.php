@@ -38,7 +38,7 @@
             @php $main = $destacados->first(); @endphp
             <a href="{{ route('eventos.show', $main) }}" class="featured-card featured-card--main">
                 @if($main->imagen_portada)
-                    <img src="{{ asset('storage/' . $main->imagen_portada) }}" alt="{{ $main->titulo }}" class="featured-card__image">
+                    <img src="{{ $main->imagen_portada }}" alt="{{ $main->titulo }}" class="featured-card__image">
                 @else
                     <div class="featured-card__placeholder">
                         <i class="fas fa-calendar-alt"></i>
@@ -60,7 +60,7 @@
             @foreach($destacados->skip(1) as $evento)
             <a href="{{ route('eventos.show', $evento) }}" class="featured-card featured-card--side">
                 @if($evento->imagen_portada)
-                    <img src="{{ asset('storage/' . $evento->imagen_portada) }}" alt="{{ $evento->titulo }}" class="featured-card__image">
+                    <img src="{{ $evento->imagen_portada }}" alt="{{ $evento->titulo }}" class="featured-card__image">
                 @else
                     <div class="featured-card__placeholder">
                         <i class="fas fa-calendar-alt"></i>
@@ -100,7 +100,7 @@
             <a href="{{ route('eventos.show', $evento) }}" class="evento-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 }}">
                 <div class="evento-card__image-wrap">
                     @if($evento->imagen_portada)
-                        <img src="{{ asset('storage/' . $evento->imagen_portada) }}" alt="{{ $evento->titulo }}" class="evento-card__image">
+                        <img src="{{ $evento->imagen_portada }}" alt="{{ $evento->titulo }}" class="evento-card__image">
                     @else
                         <div class="news-card__image-placeholder">
                             <i class="fas fa-calendar-alt" style="color:var(--border);font-size:2.5rem;"></i>

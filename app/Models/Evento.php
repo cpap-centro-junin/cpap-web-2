@@ -36,4 +36,11 @@ class Evento extends Model
         $fin = $this->fecha_fin ?? $this->fecha_inicio;
         return $fin->greaterThanOrEqualTo(now()->startOfDay());
     }
+
+    public function getImagenPortadaAttribute($value): ?string
+    {
+        if (!$value) return null;
+        if (str_starts_with($value, 'data:')) return $value;
+        return asset('storage/' . $value);
+    }
 }

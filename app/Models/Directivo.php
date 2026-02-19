@@ -34,4 +34,11 @@ class Directivo extends Model
             default                    => 'fa-handshake',
         };
     }
+
+    public function getFotoAttribute($value): ?string
+    {
+        if (!$value) return null;
+        if (str_starts_with($value, 'data:')) return $value;
+        return asset('storage/' . $value);
+    }
 }

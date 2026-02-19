@@ -24,4 +24,11 @@ class Noticia extends Model
         'activo'    => 'boolean',
         'destacado' => 'boolean',
     ];
+
+    public function getImagenAttribute($value): ?string
+    {
+        if (!$value) return null;
+        if (str_starts_with($value, 'data:')) return $value;
+        return asset('storage/' . $value);
+    }
 }

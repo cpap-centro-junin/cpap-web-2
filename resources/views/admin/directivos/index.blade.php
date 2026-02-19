@@ -52,7 +52,7 @@
             <tr>
                 <td>
                     @if($directivo->foto)
-                        <img src="{{ asset('storage/' . $directivo->foto) }}" alt="{{ $directivo->nombre }}"
+                        <img src="{{ $directivo->foto }}" alt="{{ $directivo->nombre }}"
                              style="width:44px;height:44px;object-fit:cover;border-radius:50%;display:block;">
                     @else
                         <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:50%;display:flex;align-items:center;justify-content:center;">

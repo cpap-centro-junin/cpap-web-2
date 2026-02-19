@@ -158,7 +158,7 @@
                         <i class="fas fa-user-tie"></i>
                     </div>
                     @if($miembro->foto)
-                    <img src="{{ asset('storage/' . $miembro->foto) }}"
+                    <img src="{{ $miembro->foto }}"
                          alt="{{ $miembro->nombre }}"
                          loading="lazy"
                          onerror="document.getElementById('photo-{{ $loop->index }}').classList.add('no-photo')">

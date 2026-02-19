@@ -427,6 +427,123 @@
 </section>
 
 
+
+
+{{-- SECCIÓN CONTACTO --}}
+<section class="home-contact-section" id="contacto">
+    <div class="cpap-container">
+        <div class="home-contact-grid">
+
+            <div class="home-contact-info" data-aos="fade-right">
+                <div class="home-contact-eyebrow">
+                    <i class="fas fa-envelope-open-text"></i>
+                    Contáctanos
+                </div>
+                <h2>¿Tienes alguna consulta?</h2>
+                <p>Nuestro equipo está disponible para orientarte en el proceso de colegiatura, resolver consultas institucionales y brindarte toda la información que necesites sobre el CPAP Región Centro.</p>
+
+                <div class="home-contact-items">
+                    <div class="home-contact-item">
+                        <div class="home-contact-item-icon home-ci--primary"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <strong>Horario de atención</strong>
+                            <span>Lun – Vie · 09:00 a.m. – 06:00 p.m.</span>
+                        </div>
+                    </div>
+                    <div class="home-contact-item">
+                        <div class="home-contact-item-icon home-ci--gold"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <strong>Dirección</strong>
+                            <span>Jr. Arequipa 734, Huancayo – Junín</span>
+                        </div>
+                    </div>
+                    <div class="home-contact-item">
+                        <div class="home-contact-item-icon home-ci--primary"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <strong>WhatsApp</strong>
+                            <span>(+51) 900 000 000</span>
+                        </div>
+                    </div>
+                    <div class="home-contact-item">
+                        <div class="home-contact-item-icon home-ci--gold"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <strong>Mesa de Partes</strong>
+                            <span>mesadepartes@cpaprc.org.pe</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-contact-actions">
+                    <a href="{{ url('/contacto') }}" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Enviar mensaje
+                    </a>
+                    <a href="https://wa.me/51900000000" target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <div class="home-contact-form-col" data-aos="fade-left">
+                <div class="home-contact-form-card">
+                    <h3>Escríbenos directamente</h3>
+                    <form action="{{ route('contact.send') }}" method="POST" id="homeContactForm">
+                        @csrf
+                        <div class="home-cf-field">
+                            <input type="text" name="nombre" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="home-cf-field">
+                            <input type="email" name="email" placeholder="Correo electrónico" required>
+                        </div>
+                        <div class="home-cf-field">
+                            <input type="text" name="asunto" placeholder="Asunto" required>
+                        </div>
+                        <div class="home-cf-field">
+                            <textarea name="mensaje" rows="4" placeholder="Tu mensaje..." required></textarea>
+                        </div>
+                        <button type="submit" class="home-cf-btn" id="homeCfBtn">
+                            <span class="home-cf-btn-text"><i class="fas fa-paper-plane"></i> Enviar</span>
+                            <span class="home-cf-btn-loader"><span class="home-cf-spinner"></span></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+(function(){
+    const form = document.getElementById('homeContactForm');
+    if(!form) return;
+    const btn = document.getElementById('homeCfBtn');
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+        btn.classList.add('loading');
+        btn.disabled = true;
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
+        })
+        .then(r => { if(!r.ok) throw new Error(); return r.json(); })
+        .then(data => {
+            btn.classList.remove('loading');
+            btn.disabled = false;
+            if(data.success){
+                form.reset();
+                Swal.fire({ icon: 'success', title: 'Mensaje enviado', text: data.message, confirmButtonColor: '#8B1538' });
+            }
+        })
+        .catch(() => {
+            btn.classList.remove('loading');
+            btn.disabled = false;
+            Swal.fire({ icon: 'error', title: 'Error', text: 'Hubo un problema al enviar el mensaje.' });
+        });
+    });
+})();
+</script>
+
 @if(isset($anuncio) && $anuncio)
 <div id="popupAnuncio"
      style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:99999;align-items:center;justify-content:center;padding:20px;"
@@ -437,7 +554,7 @@
                 aria-label="Cerrar anuncio">
             &times;
         </button>
-        <img src="{{ asset('storage/' . $anuncio->imagen) }}"
+        <img src="{{ $anuncio->imagen }}"
              alt="Anuncio"
              style="width:100%;display:block;">
     </div>

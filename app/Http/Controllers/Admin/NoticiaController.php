@@ -36,7 +36,8 @@ class NoticiaController extends Controller
         $data['autor']     = $data['autor'] ?? 'Redacción CPAP';
 
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
+            $file = $request->file('imagen');
+            $data['imagen'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         Noticia::create($data);
@@ -66,10 +67,12 @@ class NoticiaController extends Controller
         $data['autor']     = $data['autor'] ?? 'Redacción CPAP';
 
         if ($request->hasFile('imagen')) {
-            if ($noticia->imagen) {
-                Storage::disk('public')->delete($noticia->imagen);
+            $rawImagen = $noticia->getOriginal('imagen');
+            if ($rawImagen && !str_starts_with($rawImagen, 'data:')) {
+                Storage::disk('public')->delete($rawImagen);
             }
-            $data['imagen'] = $request->file('imagen')->store('noticias', 'public');
+            $file = $request->file('imagen');
+            $data['imagen'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
         }
 
         $noticia->update($data);
@@ -80,8 +83,9 @@ class NoticiaController extends Controller
 
     public function destroy(Noticia $noticia)
     {
-        if ($noticia->imagen) {
-            Storage::disk('public')->delete($noticia->imagen);
+        $rawImagen = $noticia->getOriginal('imagen');
+        if ($rawImagen && !str_starts_with($rawImagen, 'data:')) {
+            Storage::disk('public')->delete($rawImagen);
         }
         $noticia->delete();
         return back()->with('success', 'Noticia eliminada.');
@@ -92,4 +96,3 @@ class NoticiaController extends Controller
         return view('noticias.show', compact('noticia'));
     }
 }
-

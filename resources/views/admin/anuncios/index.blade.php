@@ -41,7 +41,7 @@
             @forelse($anuncios as $anuncio)
             <tr>
                 <td>
-                    <img src="{{ asset('storage/' . $anuncio->imagen) }}" alt="{{ $anuncio->titulo }}"
+                    <img src="{{ $anuncio->imagen }}" alt="{{ $anuncio->titulo }}"
                          style="width:100px;height:70px;object-fit:cover;border-radius:6px;display:block;">
                 </td>
                 <td style="font-weight:600;color:var(--dark);font-size:14px;">{{ $anuncio->titulo }}</td>
