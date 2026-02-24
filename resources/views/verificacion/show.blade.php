@@ -27,7 +27,7 @@
                 {{-- Foto y nombre --}}
                 <div class="sidebar-perfil">
                     @if($colegiado->foto)
-                        <img src="{{ asset($colegiado->foto) }}"
+                        <img src="{{ Storage::url($colegiado->foto) }}"
                              alt="{{ $colegiado->nombre_completo }}"
                              class="sidebar-avatar">
                     @else
@@ -141,7 +141,7 @@
                            class="pdf-toolbar-btn pdf-toolbar-btn-primary"
                            download>
                             <i class="fas fa-download"></i>
-                            Descargar
+                            Descargar PDF
                         </a>
                     </div>
                 </div>

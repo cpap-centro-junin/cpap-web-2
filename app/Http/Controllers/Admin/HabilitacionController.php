@@ -119,10 +119,13 @@ class HabilitacionController extends Controller
     }
 
     /**
-     * Descargar documento de habilitación
+     * Ver/servir el documento de habilitación usando el código de verificación como URL.
+     * Ej: /admin/habilitaciones/HC-xxxx-xxxx/documento
      */
-    public function descargar(Habilitacion $habilitacion)
+    public function documento(string $codigo)
     {
+        $habilitacion = Habilitacion::where('codigo_verificacion', $codigo)->firstOrFail();
+
         if (!Storage::exists($habilitacion->documento_path)) {
             abort(404, 'Documento no encontrado');
         }

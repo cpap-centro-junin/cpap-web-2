@@ -394,11 +394,29 @@
     border: 1px solid var(--border);
 }
 
-.no-results i {
-    font-size: 48px;
-    color: var(--medium-gray);
-    margin-bottom: 16px;
+.no-results-icon {
     display: block;
+    margin-bottom: 20px;
+}
+
+.no-results-icon i {
+    font-size: 52px;
+    color: var(--medium-gray);
+}
+
+.no-results h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    color: var(--dark);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.no-results p {
+    color: var(--medium-gray);
+    font-size: var(--font-sm);
+    margin-bottom: 28px;
 }
 
 /* ---- PAGINACIÓN ---- */
@@ -457,4 +475,32 @@
     .colegiados-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ---- AJAX: SPINNER DE BÚSQUEDA ---- */
+.search-spinner-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 0 8px;
+    font-size: var(--font-sm);
+    color: var(--medium-gray);
+}
+
+.search-spinner-wrap i {
+    font-size: 22px;
+    color: var(--primary);
+}
+
+/* ---- SIN RESULTADOS: ICONO Y TEXTO ---- */
+.no-results-icon {
+    font-size: 52px;
+    color: var(--medium-gray);
+    margin-bottom: 20px;
+}
+
+.no-results h3 em {
+    color: var(--primary);
+    font-style: normal;
 }

@@ -118,10 +118,6 @@
                 <i class="fas fa-bars"></i>
             </button>
 
-            <div class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
-
             <div class="topbar-center">
                 <span class="page-title">@yield('page-title', 'Dashboard')</span>
             </div>

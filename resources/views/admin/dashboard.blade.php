@@ -102,7 +102,7 @@
 
         <div class="cpap-summary-card cpap-summary-hab">
             <div class="cpap-summary-icon">
-                <i class="fas fa-certificate"></i>
+                <i class="fas fa-certificate" style="color: white;"></i>
             </div>
             <div class="cpap-summary-body">
                 <span class="cpap-summary-label">Habilitaciones</span>
@@ -123,7 +123,7 @@
     <div class="cards">
         <a href="{{ route('admin.colegiados.index') }}" class="card card-featured">
             <div class="card-icon" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
-                <i class="fas fa-id-card"></i>
+                <i class="fas fa-id-card" style="color: white;"></i>
             </div>
             <div class="card-content">
                 <strong>Gestión de Colegiados</strong>
@@ -136,7 +136,7 @@
 
         <a href="{{ route('admin.noticias.index') }}" class="card card-featured">
             <div class="card-icon">
-                <i class="fas fa-newspaper"></i>
+                <i class="fas fa-newspaper" style="color: white;"></i>
             </div>
             <div class="card-content">
                 <strong>Gestión de Noticias</strong>
@@ -237,7 +237,7 @@
                     <div class="activity-card">
                         <div class="activity-icon">
                             @if($colegiado->foto)
-                                <img src="{{ asset($colegiado->foto) }}" alt="{{ $colegiado->nombre_completo }}" class="activity-avatar">
+                                <img src="{{ Storage::url($colegiado->foto) }}" alt="{{ $colegiado->nombre_completo }}" class="activity-avatar">
                             @else
                                 <span class="activity-initials">{{ strtoupper(substr($colegiado->nombres, 0, 1) . substr($colegiado->apellidos, 0, 1)) }}</span>
                             @endif

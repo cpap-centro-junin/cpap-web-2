@@ -10,14 +10,8 @@ class Colegiado extends Model
 {
     use HasFactory;
 
-    /**
-     * Nombre de la tabla
-     */
     protected $table = 'colegiados';
 
-    /**
-     * Campos asignables masivamente
-     */
     protected $fillable = [
         'codigo_cpap',
         'dni',
@@ -28,34 +22,51 @@ class Colegiado extends Model
         'fecha_nacimiento',
         'foto',
         'especialidad',
+        'orientacion',
         'universidad',
         'anio_graduacion',
         'descripcion',
         'cv_path',
         'estado',
         'fecha_colegiatura',
+        // Visibilidad
+        'perfil_oculto',
+        'ocultar_email',
+        'ocultar_telefono',
+        'ocultar_descripcion',
+        'ocultar_especialidad',
+        'ocultar_orientacion',
+        'ocultar_universidad',
+        'ocultar_anio_graduacion',
+        'ocultar_fecha_colegiatura',
+        'ocultar_foto',
+        'ocultar_cv',
     ];
 
-    /**
-     * Casteo de atributos
-     */
     protected $casts = [
-        'fecha_nacimiento' => 'date',
-        'fecha_colegiatura' => 'date',
-        'anio_graduacion' => 'integer',
+        'fecha_nacimiento'   => 'date',
+        'fecha_colegiatura'  => 'date',
+        'anio_graduacion'    => 'integer',
+        'perfil_oculto'             => 'boolean',
+        'ocultar_email'             => 'boolean',
+        'ocultar_telefono'          => 'boolean',
+        'ocultar_descripcion'       => 'boolean',
+        'ocultar_especialidad'      => 'boolean',
+        'ocultar_orientacion'       => 'boolean',
+        'ocultar_universidad'       => 'boolean',
+        'ocultar_anio_graduacion'   => 'boolean',
+        'ocultar_fecha_colegiatura' => 'boolean',
+        'ocultar_foto'              => 'boolean',
+        'ocultar_cv'                => 'boolean',
     ];
 
-    /**
-     * Relación: Un colegiado tiene muchas habilitaciones
-     */
+    // ─── Relaciones ──────────────────────────────────────────────
+
     public function habilitaciones(): HasMany
     {
         return $this->hasMany(Habilitacion::class);
     }
 
-    /**
-     * Relación: Obtener la habilitación activa actual
-     */
     public function habilitacionActiva()
     {
         return $this->hasOne(Habilitacion::class)
@@ -63,17 +74,13 @@ class Colegiado extends Model
             ->latest('fecha_subida');
     }
 
-    /**
-     * Accessor: Nombre completo
-     */
+    // ─── Accessors ───────────────────────────────────────────────
+
     public function getNombreCompletoAttribute(): string
     {
         return "{$this->nombres} {$this->apellidos}";
     }
 
-    /**
-     * Accessor: Estado badge para vista
-     */
     public function getEstadoBadgeAttribute(): string
     {
         return $this->estado === 'activo'
@@ -82,50 +89,58 @@ class Colegiado extends Model
     }
 
     /**
-     * Scope: Buscar colegiados activos
+     * Verifica si el perfil puede mostrarse en el directorio público:
+     * - No debe estar oculto (perfil_oculto = false)
+     * - Debe tener al menos una habilitación activa
      */
+    public function getEsVisiblePublicoAttribute(): bool
+    {
+        if ($this->perfil_oculto) {
+            return false;
+        }
+        return $this->habilitaciones()->where('activo', true)->exists();
+    }
+
+    // ─── Scopes ──────────────────────────────────────────────────
+
     public function scopeActivos($query)
     {
         return $query->where('estado', 'activo');
     }
 
-    /**
-     * Scope: Buscar colegiados inactivos
-     */
     public function scopeInactivos($query)
     {
         return $query->where('estado', 'inactivo');
     }
 
     /**
-     * Scope: Búsqueda por DNI, código o nombres
-     *
-     * Soporta:
-     *  - "12345678"           → DNI exacto
-     *  - "CPAP-2026-001"      → código CPAP
-     *  - "María Elena"        → solo nombres
-     *  - "García Torres"      → solo apellidos
-     *  - "María Elena García" → nombre + apellido parcial
-     *  - "María Elena García Torres" → nombre completo
+     * Scope para el directorio público:
+     * - No oculto manualmente
+     * - Tiene al menos una habilitación registrada (activa o revocada)
+     *   → Sin ningún documento = perfil incompleto, invisible en público
+     *   → Con documento revocado = aparece como "No Habilitado" (transparencia)
+     */
+    public function scopeVisiblesPublico($query)
+    {
+        return $query
+            ->where('perfil_oculto', false)
+            ->whereHas('habilitaciones');
+    }
+
+    /**
+     * Búsqueda por DNI, código, nombre o especialidad/orientación.
      */
     public function scopeBuscar($query, $termino)
     {
         $termino = trim($termino);
 
         return $query->where(function ($q) use ($termino) {
-
-            // 1. DNI y código CPAP (usan índice B-tree, muy rápido)
             $q->where('dni', 'like', "%{$termino}%")
               ->orWhere('codigo_cpap', 'like', "%{$termino}%");
 
-            // 2. Nombre completo en orden normal: "María Elena García Torres"
             $q->orWhereRaw("CONCAT(nombres, ' ', apellidos) LIKE ?", ["%{$termino}%"]);
-
-            // 3. Nombre completo en orden invertido: "García Torres María Elena"
             $q->orWhereRaw("CONCAT(apellidos, ' ', nombres) LIKE ?", ["%{$termino}%"]);
 
-            // 4. FULLTEXT search (usa índice idx_busqueda, escala a miles de registros)
-            //    Cada palabra de 3+ chars debe aparecer en el registro → "+María* +Elena* +García*"
             $palabras = array_filter(
                 preg_split('/\s+/', $termino),
                 fn($p) => mb_strlen($p) >= 3
@@ -133,7 +148,7 @@ class Colegiado extends Model
             if (!empty($palabras)) {
                 $boolQuery = implode(' ', array_map(fn($p) => "+{$p}*", $palabras));
                 $q->orWhereRaw(
-                    "MATCH(nombres, apellidos, especialidad) AGAINST(? IN BOOLEAN MODE)",
+                    "MATCH(nombres, apellidos, especialidad, orientacion) AGAINST(? IN BOOLEAN MODE)",
                     [$boolQuery]
                 );
             }

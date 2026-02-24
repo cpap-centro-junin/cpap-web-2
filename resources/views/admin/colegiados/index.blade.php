@@ -38,11 +38,22 @@
                     <option value="inactivo" {{ request('estado') == 'inactivo' ? 'selected' : '' }}>Inactivos</option>
                 </select>
             </div>
+            <div class="filter-group">
+                <select name="visibilidad" class="form-control">
+                    <option value="">Toda visibilidad</option>
+                    <option value="visible" {{ request('visibilidad') == 'visible' ? 'selected' : '' }}>
+                        Visible en público
+                    </option>
+                    <option value="oculto" {{ request('visibilidad') == 'oculto' ? 'selected' : '' }}>
+                        Ocultos de público
+                    </option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-search"></i>
                 Buscar
             </button>
-            @if(request()->anyFilled(['buscar', 'estado']))
+            @if(request()->anyFilled(['buscar', 'estado', 'visibilidad']))
                 <a href="{{ route('admin.colegiados.index', ['sort' => $sort, 'order' => $order]) }}" class="btn btn-secondary">
                     <i class="fas fa-times"></i>
                     Limpiar
@@ -78,7 +89,7 @@
                             </th>
                             <th>
                                 <a href="{{ route('admin.colegiados.index', array_merge(request()->query(), ['sort' => 'especialidad', 'order' => $sort === 'especialidad' && $order === 'asc' ? 'desc' : 'asc'])) }}" class="sortable-header">
-                                    Especialidad
+                                    Especialidad / Orientación
                                     <i class="fas fa-sort{{ $sort === 'especialidad' ? ($order === 'asc' ? '-up' : '-down') : '' }}"></i>
                                 </a>
                             </th>
@@ -99,7 +110,7 @@
                     </thead>
                     <tbody>
                         @foreach($colegiados as $colegiado)
-                            <tr>
+                            <tr class="{{ $colegiado->perfil_oculto ? 'row-perfil-oculto' : '' }}">
                                 <td>
                                     <strong class="text-primary">{{ $colegiado->codigo_cpap }}</strong>
                                 </td>
@@ -107,17 +118,34 @@
                                 <td>
                                     <div class="user-cell">
                                         @if($colegiado->foto)
-                                            <img src="{{ asset($colegiado->foto) }}" alt="{{ $colegiado->nombre_completo }}" class="user-avatar-small">
+                                            <img src="{{ Storage::url($colegiado->foto) }}" alt="{{ $colegiado->nombre_completo }}" class="user-avatar-small">
                                         @else
                                             <div class="user-avatar-small">
                                                 {{ strtoupper(substr($colegiado->nombres, 0, 1) . substr($colegiado->apellidos, 0, 1)) }}
                                             </div>
                                         @endif
-                                        <span>{{ $colegiado->nombre_completo }}</span>
+                                        <div>
+                                            <span>{{ $colegiado->nombre_completo }}</span>
+                                            @if($colegiado->perfil_oculto)
+                                                <span class="badge-oculto-sm">
+                                                    <i class="fas fa-eye-slash"></i> Oculto
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="text-muted">{{ $colegiado->especialidad ?? 'No especificada' }}</span>
+                                    @if($colegiado->especialidad)
+                                        <span class="text-muted">{{ $colegiado->especialidad }}</span>
+                                        @if($colegiado->orientacion)
+                                            <br>
+                                            <small class="orientacion-sub">
+                                                <i class="fas fa-angle-right"></i> {{ $colegiado->orientacion }}
+                                            </small>
+                                        @endif
+                                    @else
+                                        <span class="text-muted fst-italic">No especificada</span>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($colegiado->estado === 'activo')
@@ -139,6 +167,17 @@
                                         <a href="{{ route('admin.colegiados.edit', $colegiado) }}" class="btn-icon btn-warning" title="Editar">
                                             <i class="fas fa-edit"></i>
                                         </a>
+                                        {{-- Toggle visibilidad pública --}}
+                                        <form action="{{ route('admin.colegiados.toggle-perfil-oculto', $colegiado) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit"
+                                                    class="btn-icon {{ $colegiado->perfil_oculto ? 'btn-orange' : 'btn-teal' }}"
+                                                    title="{{ $colegiado->perfil_oculto ? 'Mostrar en directorio público' : 'Ocultar de directorio público' }}">
+                                                <i class="fas {{ $colegiado->perfil_oculto ? 'fa-eye' : 'fa-eye-slash' }}"></i>
+                                            </button>
+                                        </form>
+                                        {{-- Toggle estado --}}
                                         <form action="{{ route('admin.colegiados.toggle-estado', $colegiado) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('PATCH')
@@ -170,8 +209,8 @@
             <div class="empty-state">
                 <i class="fas fa-users"></i>
                 <h3>No se encontraron colegiados</h3>
-                <p>{{ request('buscar') || request('estado') ? 'Intenta con otros filtros de búsqueda.' : 'Comienza agregando el primer colegiado.' }}</p>
-                @if(!request()->anyFilled(['buscar', 'estado']))
+                <p>{{ request('buscar') || request('estado') || request('visibilidad') ? 'Intenta con otros filtros de búsqueda.' : 'Comienza agregando el primer colegiado.' }}</p>
+                @if(!request()->anyFilled(['buscar', 'estado', 'visibilidad']))
                     <a href="{{ route('admin.colegiados.create') }}" class="btn btn-primary">
                         <i class="fas fa-plus"></i>
                         Agregar Primer Colegiado

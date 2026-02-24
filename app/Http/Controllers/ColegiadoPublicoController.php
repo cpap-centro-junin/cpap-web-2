@@ -9,62 +9,86 @@ use Illuminate\Support\Facades\Storage;
 class ColegiadoPublicoController extends Controller
 {
     /**
-     * Buscador público de colegiados
-     * Ruta: GET /colegiados
+     * Buscador público de colegiados.
+     * Solo muestra perfiles NO ocultos con habilitación activa.
      */
     public function index(Request $request)
     {
-        // Solo columnas necesarias para las cards → no carga descripcion, cv_path, etc.
-        $query = Colegiado::select('id', 'codigo_cpap', 'nombres', 'apellidos', 'foto', 'especialidad', 'estado');
+        // Solo columnas necesarias para las cards
+        $query = Colegiado::select(
+            'id', 'codigo_cpap', 'nombres', 'apellidos',
+            'foto', 'especialidad', 'orientacion', 'estado',
+            'perfil_oculto'
+        )
+        ->visiblesPublico();
 
-        // Búsqueda por DNI, código CPAP o nombres (FULLTEXT + CONCAT)
         if ($request->filled('buscar')) {
             $query->buscar($request->buscar);
         }
 
-        // Filtro por estado
         if ($request->filled('estado') && in_array($request->estado, ['activo', 'inactivo'])) {
             $query->where('estado', $request->estado);
         }
 
-        // Solo mostrar resultados si hay búsqueda o filtro activo
-        $colegiados = ($request->filled('buscar') || $request->filled('estado'))
-            ? $query->orderBy('apellidos')->paginate(12)->withQueryString()
-            : null;
+        $colegiados = $query->orderBy('apellidos')->paginate(12)->withQueryString();
+
+        // Petición AJAX (búsqueda en tiempo real): devuelve solo el grid en JSON.
+        // Comprueba tanto X-Requested-With como Accept: application/json para evitar
+        // que navegaciones normales del navegador reciban JSON accidentalmente.
+        if ($request->ajax() && $request->wantsJson()) {
+            return response()->json([
+                'html'  => view('colegiados._grid', [
+                    'colegiados' => $colegiados,
+                    'buscar'     => trim($request->buscar ?? ''),
+                ])->render(),
+                'total' => $colegiados->total(),
+            ])->header('Cache-Control', 'no-store, no-cache, must-revalidate');
+        }
 
         return view('colegiados.index', [
             'colegiados' => $colegiados,
-            'buscar'     => $request->buscar,
-            'estado'     => $request->estado,
+            'buscar'     => $request->buscar ?? '',
+            'estado'     => $request->estado ?? '',
         ]);
     }
 
     /**
-     * Perfil público del colegiado
-     * Ruta: GET /colegiados/{colegiado}
+     * Perfil público del colegiado.
+     * Aborta 404 solo si el perfil está oculto manualmente.
      */
     public function show(Colegiado $colegiado)
     {
-        $habilitacion = $colegiado->habilitaciones()->first();
+        if ($colegiado->perfil_oculto) {
+            abort(404);
+        }
+
+        // Traemos la habilitación más reciente (activa O revocada).
+        // null = nunca tuvo documento → "Sin habilitación"
+        // activo=false → "Revocado"
+        // activo=true  → "Vigente"
+        $habilitacion = $colegiado->habilitaciones()
+            ->latest('fecha_subida')
+            ->first();
 
         return view('colegiados.show', compact('colegiado', 'habilitacion'));
     }
 
     /**
-     * Descarga pública del CV del colegiado (solo si está activo)
-     * Ruta: GET /colegiados/{colegiado}/cv
+     * Descarga pública del CV del colegiado.
      */
     public function descargarCV(Colegiado $colegiado)
     {
+        if ($colegiado->perfil_oculto) {
+            abort(404);
+        }
+
         if (!$colegiado->cv_path || !Storage::exists($colegiado->cv_path)) {
             abort(404, 'CV no disponible');
         }
 
-        $nombre = 'CV_' . $colegiado->codigo_cpap . '.pdf';
-
         return response()->file(Storage::path($colegiado->cv_path), [
             'Content-Type'        => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . $nombre . '"',
+            'Content-Disposition' => 'inline; filename="CV_' . $colegiado->codigo_cpap . '.pdf"',
         ]);
     }
 }

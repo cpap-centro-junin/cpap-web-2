@@ -5,47 +5,151 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Colegiado;
 use App\Models\Habilitacion;
+use App\Services\QRCodeService;
+use App\Services\PDFService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 
 class ColegiadoController extends Controller
 {
+    public function __construct(
+        protected QRCodeService $qrService,
+        protected PDFService    $pdfService
+    ) {}
+
     /**
-     * Listar todos los colegiados con paginación y ordenamiento
+     * Reglas de validación compartidas entre store y update.
+     * $forCreate = true agrega la validación del documento de habilitación (obligatorio).
+     */
+    private function validationRules(int $excludeId = 0, bool $forCreate = false): array
+    {
+        $rules = [
+            'codigo_cpap'        => "required|string|max:50|unique:colegiados,codigo_cpap,{$excludeId}",
+            'dni'                => "required|string|size:8|unique:colegiados,dni,{$excludeId}",
+            'nombres'            => 'required|string|max:100',
+            'apellidos'          => 'required|string|max:100',
+            'email'              => "nullable|email|max:100|unique:colegiados,email,{$excludeId}",
+            'telefono'           => 'nullable|string|max:15',
+            'fecha_nacimiento'   => 'nullable|date',
+            'foto'               => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'especialidad'       => 'nullable|string|max:150',
+            'orientacion'        => 'nullable|string|max:150',
+            'universidad'        => 'nullable|string|max:200',
+            'anio_graduacion'    => 'nullable|integer|min:1950|max:' . date('Y'),
+            'descripcion'        => 'nullable|string',
+            'cv'                 => 'nullable|file|mimes:pdf|max:5120',
+            'estado'             => 'required|in:activo,inactivo',
+            'fecha_colegiatura'  => 'required|date',
+        ];
+
+        if ($forCreate) {
+            $rules['documento'] = 'required|file|mimes:pdf|max:10240';
+        }
+
+        return $rules;
+    }
+
+    /**
+     * Procesa campos booleanos de visibilidad desde checkboxes HTML.
+     */
+    private function resolveVisibilityFields(Request $request): array
+    {
+        return [
+            'perfil_oculto'             => $request->boolean('perfil_oculto'),
+            'ocultar_email'             => $request->boolean('ocultar_email'),
+            'ocultar_telefono'          => $request->boolean('ocultar_telefono'),
+            'ocultar_descripcion'       => $request->boolean('ocultar_descripcion'),
+            'ocultar_especialidad'      => $request->boolean('ocultar_especialidad'),
+            'ocultar_orientacion'       => $request->boolean('ocultar_orientacion'),
+            'ocultar_universidad'       => $request->boolean('ocultar_universidad'),
+            'ocultar_anio_graduacion'   => $request->boolean('ocultar_anio_graduacion'),
+            'ocultar_fecha_colegiatura' => $request->boolean('ocultar_fecha_colegiatura'),
+            'ocultar_foto'              => $request->boolean('ocultar_foto'),
+            'ocultar_cv'                => $request->boolean('ocultar_cv'),
+        ];
+    }
+
+    /**
+     * Genera y guarda el documento de habilitación para un colegiado.
+     * Misma lógica que HabilitacionController::store().
+     * Lanza excepción en caso de error (para rollback de transacción).
+     */
+    private function crearHabilitacion(Colegiado $colegiado, $archivo): void
+    {
+        $qrPath               = null;
+        $rutaTempRelativa     = null;
+        $pdfModificadoTempPath = null;
+
+        $codigoVerificacion = $this->qrService->generarCodigoUnicoGarantizado();
+        $qrPath             = $this->qrService->generarQR($codigoVerificacion, $colegiado->nombre_completo);
+
+        $rutaTempRelativa = 'habilitaciones/temp/' . $codigoVerificacion . '_original.pdf';
+        Storage::put($rutaTempRelativa, file_get_contents($archivo));
+
+        $urlVerificacion       = url("/v/{$codigoVerificacion}");
+        $pdfModificadoTempPath = $this->pdfService->embederQREnPDFTemporal(
+            Storage::path($rutaTempRelativa),
+            $qrPath,
+            $codigoVerificacion,
+            $urlVerificacion
+        );
+
+        $documentoPath = 'habilitaciones/' . $codigoVerificacion . '.pdf';
+        Storage::put($documentoPath, file_get_contents($pdfModificadoTempPath));
+
+        Storage::delete($rutaTempRelativa);
+        if (file_exists($pdfModificadoTempPath)) {
+            @unlink($pdfModificadoTempPath);
+        }
+
+        Habilitacion::create([
+            'colegiado_id'        => $colegiado->id,
+            'codigo_verificacion' => $codigoVerificacion,
+            'documento_path'      => $documentoPath,
+            'qr_path'             => $qrPath,
+            'generado_por'        => Auth::id(),
+            'activo'              => true,
+        ]);
+
+        // El colegiado queda activo al tener un documento vigente
+        $colegiado->update(['estado' => 'activo']);
+    }
+
+    /**
+     * Listar todos los colegiados con paginación, búsqueda y filtros.
      */
     public function index(Request $request)
     {
         $query = Colegiado::query();
 
-        // Búsqueda
         if ($request->filled('buscar')) {
             $query->buscar($request->buscar);
         }
 
-        // Filtro por estado
         if ($request->filled('estado')) {
             $query->where('estado', $request->estado);
         }
 
-        // Ordenamiento - Solo permitir columnas específicas por seguridad
+        if ($request->filled('visibilidad')) {
+            if ($request->visibilidad === 'oculto') {
+                $query->where('perfil_oculto', true);
+            } elseif ($request->visibilidad === 'visible') {
+                $query->where('perfil_oculto', false);
+            }
+        }
+
         $sortableColumns = ['codigo_cpap', 'dni', 'nombres', 'apellidos', 'especialidad', 'estado', 'fecha_colegiatura', 'created_at'];
-        $sort = $request->get('sort', 'created_at');
-        $order = $request->get('order', 'desc');
-
-        // Validar que sort sea una columna permitida
-        if (!in_array($sort, $sortableColumns)) {
-            $sort = 'created_at';
-        }
-
-        // Validar dirección (asc o desc)
-        if (!in_array(strtolower($order), ['asc', 'desc'])) {
-            $order = 'desc';
-        }
+        $sort  = in_array($request->get('sort', 'created_at'), $sortableColumns)
+            ? $request->get('sort', 'created_at')
+            : 'created_at';
+        $order = in_array(strtolower($request->get('order', 'desc')), ['asc', 'desc'])
+            ? strtolower($request->get('order', 'desc'))
+            : 'desc';
 
         $colegiados = $query->orderBy($sort, $order)->paginate(10);
 
-        // Pasar variables de ordenamiento a la vista
         return view('admin.colegiados.index', compact('colegiados', 'sort', 'order'));
     }
 
@@ -58,60 +162,88 @@ class ColegiadoController extends Controller
     }
 
     /**
-     * Guardar nuevo colegiado
+     * Guardar nuevo colegiado junto con su documento de habilitación (obligatorio).
+     * Si el procesamiento del documento falla, se hace rollback completo.
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'codigo_cpap' => 'required|string|max:50|unique:colegiados,codigo_cpap',
-            'dni' => 'required|string|size:8|unique:colegiados,dni',
-            'nombres' => 'required|string|max:100',
-            'apellidos' => 'required|string|max:100',
-            'email' => 'nullable|email|max:100|unique:colegiados,email',
-            'telefono' => 'nullable|string|max:15',
-            'fecha_nacimiento' => 'nullable|date',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'especialidad' => 'nullable|string|max:150',
-            'universidad' => 'nullable|string|max:200',
-            'anio_graduacion' => 'nullable|integer|min:1950|max:' . date('Y'),
-            'descripcion' => 'nullable|string',
-            'cv' => 'nullable|file|mimes:pdf|max:5120',
-            'estado' => 'required|in:activo,inactivo',
-            'fecha_colegiatura' => 'required|date',
-        ]);
+        $validated = $request->validate($this->validationRules(0, true));
+        $validated = array_merge($validated, $this->resolveVisibilityFields($request));
 
-        // Upload de foto
+        // Procesar foto y CV antes de la transacción (son operaciones de disco simples)
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $nombreFoto = $validated['dni'] . '.' . $foto->getClientOriginalExtension();
-            $foto->move(public_path('images/colegiados'), $nombreFoto);
-            $validated['foto'] = 'images/colegiados/' . $nombreFoto;
+            $foto       = $request->file('foto');
+            $ext        = strtolower($foto->getClientOriginalExtension());
+            $nombreFoto = $validated['dni'] . '.' . $ext;
+
+            Storage::disk('public')->putFileAs('colegiados', $foto, $nombreFoto);
+            $ruta = Storage::disk('public')->path('colegiados/' . $nombreFoto);
+
+            // Redimensionar si excede 800×800 (GD)
+            $src = match($ext) {
+                'jpg', 'jpeg' => @imagecreatefromjpeg($ruta),
+                'png'         => @imagecreatefrompng($ruta),
+                default       => null,
+            };
+            if ($src) {
+                $w = imagesx($src); $h = imagesy($src);
+                if ($w > 800 || $h > 800) {
+                    $ratio = min(800 / $w, 800 / $h);
+                    $nw = (int)($w * $ratio); $nh = (int)($h * $ratio);
+                    $dst = imagecreatetruecolor($nw, $nh);
+                    if ($ext === 'png') { imagealphablending($dst, false); imagesavealpha($dst, true); }
+                    imagecopyresampled($dst, $src, 0, 0, 0, 0, $nw, $nh, $w, $h);
+                    $ext === 'png' ? imagepng($dst, $ruta) : imagejpeg($dst, $ruta, 85);
+                    imagedestroy($dst);
+                }
+                imagedestroy($src);
+            }
+
+            $validated['foto'] = 'colegiados/' . $nombreFoto;
         }
 
-        // Upload de CV
         if ($request->hasFile('cv')) {
-            $cv = $request->file('cv');
+            $cv       = $request->file('cv');
             $nombreCV = $validated['dni'] . '_cv.pdf';
             $cv->storeAs('cv', $nombreCV);
             $validated['cv_path'] = 'cv/' . $nombreCV;
         }
 
-        // Crear colegiado
-        Colegiado::create($validated);
+        $colegiado = null;
 
-        return redirect()->route('admin.colegiados.index')
-            ->with('success', 'Colegiado registrado exitosamente.');
+        try {
+            DB::transaction(function () use ($validated, $request, &$colegiado) {
+                $colegiado = Colegiado::create($validated);
+                $this->crearHabilitacion($colegiado, $request->file('documento'));
+            });
+        } catch (\Exception $e) {
+            // Limpiar archivos subidos si la transacción falló
+            if (isset($validated['foto']) && Storage::disk('public')->exists($validated['foto'])) {
+                Storage::disk('public')->delete($validated['foto']);
+            }
+            if (isset($validated['cv_path']) && Storage::exists($validated['cv_path'])) {
+                Storage::delete($validated['cv_path']);
+            }
+
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['documento' => 'Error al procesar el documento de habilitación: ' . $e->getMessage()]);
+        }
+
+        return redirect()->route('admin.colegiados.show', $colegiado)
+            ->with('success', 'Colegiado registrado con habilitación exitosamente.');
     }
 
     /**
-     * Mostrar detalle del colegiado
+     * Mostrar detalle del colegiado (admin)
      */
     public function show(Colegiado $colegiado)
     {
-        // Cargar relación de habilitaciones
         $colegiado->load('habilitaciones');
+        $tieneAlgunaHabilitacion = $colegiado->habilitaciones->count() > 0;
+        $tieneHabilitacionActiva = $colegiado->habilitaciones->where('activo', true)->count() > 0;
 
-        return view('admin.colegiados.show', compact('colegiado'));
+        return view('admin.colegiados.show', compact('colegiado', 'tieneAlgunaHabilitacion', 'tieneHabilitacionActiva'));
     }
 
     /**
@@ -127,54 +259,55 @@ class ColegiadoController extends Controller
      */
     public function update(Request $request, Colegiado $colegiado)
     {
-        $validated = $request->validate([
-            'codigo_cpap' => 'required|string|max:50|unique:colegiados,codigo_cpap,' . $colegiado->id,
-            'dni' => 'required|string|size:8|unique:colegiados,dni,' . $colegiado->id,
-            'nombres' => 'required|string|max:100',
-            'apellidos' => 'required|string|max:100',
-            'email' => 'nullable|email|max:100|unique:colegiados,email,' . $colegiado->id,
-            'telefono' => 'nullable|string|max:15',
-            'fecha_nacimiento' => 'nullable|date',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'especialidad' => 'nullable|string|max:150',
-            'universidad' => 'nullable|string|max:200',
-            'anio_graduacion' => 'nullable|integer|min:1950|max:' . date('Y'),
-            'descripcion' => 'nullable|string',
-            'cv' => 'nullable|file|mimes:pdf|max:5120',
-            'estado' => 'required|in:activo,inactivo',
-            'fecha_colegiatura' => 'required|date',
-        ]);
+        $validated = $request->validate($this->validationRules($colegiado->id));
+        $validated = array_merge($validated, $this->resolveVisibilityFields($request));
 
-        // Upload de nueva foto
         if ($request->hasFile('foto')) {
-            // Eliminar foto anterior
-            if ($colegiado->foto && File::exists(public_path($colegiado->foto))) {
-                File::delete(public_path($colegiado->foto));
+            if ($colegiado->foto && Storage::disk('public')->exists($colegiado->foto)) {
+                Storage::disk('public')->delete($colegiado->foto);
+            }
+            $foto       = $request->file('foto');
+            $ext        = strtolower($foto->getClientOriginalExtension());
+            $nombreFoto = $validated['dni'] . '.' . $ext;
+
+            Storage::disk('public')->putFileAs('colegiados', $foto, $nombreFoto);
+            $ruta = Storage::disk('public')->path('colegiados/' . $nombreFoto);
+
+            // Redimensionar si excede 800×800 (GD)
+            $src = match($ext) {
+                'jpg', 'jpeg' => @imagecreatefromjpeg($ruta),
+                'png'         => @imagecreatefrompng($ruta),
+                default       => null,
+            };
+            if ($src) {
+                $w = imagesx($src); $h = imagesy($src);
+                if ($w > 800 || $h > 800) {
+                    $ratio = min(800 / $w, 800 / $h);
+                    $nw = (int)($w * $ratio); $nh = (int)($h * $ratio);
+                    $dst = imagecreatetruecolor($nw, $nh);
+                    if ($ext === 'png') { imagealphablending($dst, false); imagesavealpha($dst, true); }
+                    imagecopyresampled($dst, $src, 0, 0, 0, 0, $nw, $nh, $w, $h);
+                    $ext === 'png' ? imagepng($dst, $ruta) : imagejpeg($dst, $ruta, 85);
+                    imagedestroy($dst);
+                }
+                imagedestroy($src);
             }
 
-            $foto = $request->file('foto');
-            $nombreFoto = $validated['dni'] . '.' . $foto->getClientOriginalExtension();
-            $foto->move(public_path('images/colegiados'), $nombreFoto);
-            $validated['foto'] = 'images/colegiados/' . $nombreFoto;
+            $validated['foto'] = 'colegiados/' . $nombreFoto;
         }
 
-        // Upload de nuevo CV
         if ($request->hasFile('cv')) {
-            // Eliminar CV anterior
             if ($colegiado->cv_path && Storage::exists($colegiado->cv_path)) {
                 Storage::delete($colegiado->cv_path);
             }
-
-            $cv = $request->file('cv');
+            $cv       = $request->file('cv');
             $nombreCV = $validated['dni'] . '_cv.pdf';
             $cv->storeAs('cv', $nombreCV);
             $validated['cv_path'] = 'cv/' . $nombreCV;
         }
 
-        // Actualizar colegiado
         $colegiado->update($validated);
 
-        // Sincronizar habilitación con el nuevo estado
         Habilitacion::where('colegiado_id', $colegiado->id)
             ->update(['activo' => $validated['estado'] === 'activo']);
 
@@ -183,21 +316,17 @@ class ColegiadoController extends Controller
     }
 
     /**
-     * Eliminar colegiado
+     * Eliminar colegiado y sus archivos asociados
      */
     public function destroy(Colegiado $colegiado)
     {
-        // Eliminar foto
-        if ($colegiado->foto && File::exists(public_path($colegiado->foto))) {
-            File::delete(public_path($colegiado->foto));
+        if ($colegiado->foto && Storage::disk('public')->exists($colegiado->foto)) {
+            Storage::disk('public')->delete($colegiado->foto);
         }
-
-        // Eliminar CV
         if ($colegiado->cv_path && Storage::exists($colegiado->cv_path)) {
             Storage::delete($colegiado->cv_path);
         }
 
-        // Eliminar colegiado (las habilitaciones se eliminan en cascada)
         $colegiado->delete();
 
         return redirect()->route('admin.colegiados.index')
@@ -213,33 +342,41 @@ class ColegiadoController extends Controller
             abort(404, 'CV no disponible');
         }
 
-        $nombre = 'CV_' . $colegiado->codigo_cpap . '.pdf';
-
         return response()->file(Storage::path($colegiado->cv_path), [
             'Content-Type'        => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . $nombre . '"',
+            'Content-Disposition' => 'inline; filename="CV_' . $colegiado->codigo_cpap . '.pdf"',
         ]);
     }
 
     /**
-     * Toggle estado activo/inactivo
-     *
-     * Al cambiar el estado, sincroniza la habilitación del colegiado:
-     * - ACTIVO  → reactiva su documento de habilitación (si tiene)
-     * - INACTIVO → revoca su documento de habilitación (si tiene)
+     * Toggle estado activo/inactivo. Sincroniza habilitaciones.
      */
     public function toggleEstado(Colegiado $colegiado)
     {
         $nuevoEstado = $colegiado->estado === 'activo' ? 'inactivo' : 'activo';
         $colegiado->update(['estado' => $nuevoEstado]);
 
-        // Sincronizar habilitación usando query directa (evita problemas de caché del modelo)
         Habilitacion::where('colegiado_id', $colegiado->id)
             ->update(['activo' => $nuevoEstado === 'activo']);
 
         $mensaje = $nuevoEstado === 'activo'
             ? 'Colegiado activado. Su documento de habilitación fue reactivado.'
             : 'Colegiado desactivado. Su documento de habilitación fue revocado.';
+
+        return redirect()->back()->with('success', $mensaje);
+    }
+
+    /**
+     * Toggle visibilidad del perfil en el directorio público.
+     */
+    public function togglePerfilOculto(Colegiado $colegiado)
+    {
+        $nuevoEstado = !$colegiado->perfil_oculto;
+        $colegiado->update(['perfil_oculto' => $nuevoEstado]);
+
+        $mensaje = $nuevoEstado
+            ? 'Perfil ocultado del directorio público.'
+            : 'Perfil ahora visible en el directorio público.';
 
         return redirect()->back()->with('success', $mensaje);
     }

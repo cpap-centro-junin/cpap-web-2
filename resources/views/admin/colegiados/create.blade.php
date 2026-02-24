@@ -25,7 +25,7 @@
                 <h2><i class="fas fa-user-plus"></i> Datos del Colegiado</h2>
             </div>
 
-            {{-- Identificación --}}
+            {{-- ── IDENTIFICACIÓN ──────────────────────────────── --}}
             <div class="form-section">
                 <h3 class="section-title">Identificación</h3>
                 <div class="form-row">
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            {{-- Información Personal --}}
+            {{-- ── INFORMACIÓN PERSONAL ────────────────────────── --}}
             <div class="form-section">
                 <h3 class="section-title">Información Personal</h3>
                 <div class="form-row">
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="email" class="form-control @error('email') is-invalid @enderror"
                                id="email" name="email" value="{{ old('email') }}">
                         @error('email')
@@ -81,7 +81,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="telefono">Teléfono</label>
+                        <label for="telefono">Teléfono <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="text" class="form-control @error('telefono') is-invalid @enderror"
                                id="telefono" name="telefono" value="{{ old('telefono') }}"
                                placeholder="987654321">
@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                        <label for="fecha_nacimiento">Fecha de Nacimiento <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror"
                                id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}">
                         @error('fecha_nacimiento')
@@ -100,7 +100,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="foto">Foto de Perfil</label>
+                        <label for="foto">Foto de Perfil <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="file" class="form-control @error('foto') is-invalid @enderror"
                                id="foto" name="foto" accept="image/*">
                         <small class="form-text">JPG, JPEG o PNG. Máximo 2MB.</small>
@@ -111,21 +111,37 @@
                 </div>
             </div>
 
-            {{-- Información Profesional --}}
+            {{-- ── INFORMACIÓN PROFESIONAL ─────────────────────── --}}
             <div class="form-section">
                 <h3 class="section-title">Información Profesional</h3>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="especialidad">Especialidad</label>
+                        <label for="especialidad">Especialidad <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="text" class="form-control @error('especialidad') is-invalid @enderror"
                                id="especialidad" name="especialidad" value="{{ old('especialidad') }}"
-                               placeholder="Antropología Social">
+                               placeholder="Ej: Antropología Social">
                         @error('especialidad')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="universidad">Universidad</label>
+                        <label for="orientacion">
+                            Orientación <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span>
+                            <span class="field-hint" title="Enfoque específico dentro de la especialidad">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </label>
+                        <input type="text" class="form-control @error('orientacion') is-invalid @enderror"
+                               id="orientacion" name="orientacion" value="{{ old('orientacion') }}"
+                               placeholder="Ej: Antropología Forense, Etnografía">
+                        @error('orientacion')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="universidad">Universidad <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="text" class="form-control @error('universidad') is-invalid @enderror"
                                id="universidad" name="universidad" value="{{ old('universidad') }}"
                                placeholder="Universidad Nacional Mayor de San Marcos">
@@ -133,10 +149,8 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group">
-                        <label for="anio_graduacion">Año de Graduación</label>
+                        <label for="anio_graduacion">Año de Graduación <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="number" class="form-control @error('anio_graduacion') is-invalid @enderror"
                                id="anio_graduacion" name="anio_graduacion" value="{{ old('anio_graduacion') }}"
                                min="1950" max="{{ date('Y') }}" placeholder="{{ date('Y') }}">
@@ -144,8 +158,10 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="cv">Curriculum Vitae (PDF)</label>
+                        <label for="cv">Curriculum Vitae (PDF) <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="file" class="form-control @error('cv') is-invalid @enderror"
                                id="cv" name="cv" accept=".pdf">
                         <small class="form-text">Archivo PDF. Máximo 5MB.</small>
@@ -153,9 +169,12 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        {{-- Espacio reservado para mantener el grid --}}
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="descripcion">Descripción Profesional</label>
+                    <label for="descripcion">Descripción Profesional <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                     <textarea class="form-control @error('descripcion') is-invalid @enderror"
                               id="descripcion" name="descripcion" rows="4"
                               placeholder="Breve descripción de la experiencia y especialización del colegiado...">{{ old('descripcion') }}</textarea>
@@ -165,7 +184,7 @@
                 </div>
             </div>
 
-            {{-- Estado y Colegiatura --}}
+            {{-- ── ESTADO Y COLEGIATURA ────────────────────────── --}}
             <div class="form-section">
                 <h3 class="section-title">Estado y Colegiatura</h3>
                 <div class="form-row">
@@ -191,6 +210,281 @@
                 </div>
             </div>
 
+            {{-- ── VISIBILIDAD DEL PERFIL ──────────────────────── --}}
+            <div class="form-section form-section-visibility">
+                <h3 class="section-title">
+                    <i class="fas fa-eye-slash"></i>
+                    Visibilidad del Perfil
+                </h3>
+                <p class="section-description">
+                    Controla qué información es visible en el directorio público.
+                    El administrador siempre puede ver todos los datos.
+                </p>
+
+                {{-- Ocultar perfil completo --}}
+                <div class="visibility-toggle-card visibility-toggle-card--danger">
+                    <div class="visibility-toggle-card__icon">
+                        <i class="fas fa-user-slash"></i>
+                    </div>
+                    <div class="visibility-toggle-card__info">
+                        <strong>Ocultar perfil del directorio público</strong>
+                        <span>El colegiado no aparecerá en la búsqueda ni en el listado público. Solo visible desde el panel de administración.</span>
+                    </div>
+                    <div class="visibility-toggle-card__control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" name="perfil_oculto" value="1"
+                                   {{ old('perfil_oculto') ? 'checked' : '' }}>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                {{-- Campos individuales agrupados --}}
+                <div class="vis-groups-container">
+
+                    {{-- Grupo: Presentación --}}
+                    <div class="vis-group">
+                        <p class="vis-group-label"><i class="fas fa-image"></i> Presentación visual</p>
+                        <div class="visibility-fields-grid">
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-user-circle"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Foto de perfil</strong>
+                                        <span>Ocultar foto en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_foto" value="1" {{ old('ocultar_foto') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Grupo: Contacto --}}
+                    <div class="vis-group">
+                        <p class="vis-group-label"><i class="fas fa-address-book"></i> Datos de contacto</p>
+                        <div class="visibility-fields-grid">
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-envelope"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Correo electrónico</strong>
+                                        <span>Ocultar email en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_email" value="1" {{ old('ocultar_email') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-phone"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Teléfono</strong>
+                                        <span>Ocultar teléfono en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_telefono" value="1" {{ old('ocultar_telefono') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Grupo: Información académica --}}
+                    <div class="vis-group">
+                        <p class="vis-group-label"><i class="fas fa-graduation-cap"></i> Información académica y profesional</p>
+                        <div class="visibility-fields-grid">
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-flask"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Especialidad</strong>
+                                        <span>Ocultar especialidad en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_especialidad" value="1" {{ old('ocultar_especialidad') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-compass"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Orientación</strong>
+                                        <span>Ocultar orientación en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_orientacion" value="1" {{ old('ocultar_orientacion') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-university"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Universidad</strong>
+                                        <span>Ocultar universidad en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_universidad" value="1" {{ old('ocultar_universidad') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-calendar-check"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Año de graduación</strong>
+                                        <span>Ocultar año de graduación en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_anio_graduacion" value="1" {{ old('ocultar_anio_graduacion') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-id-card"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Fecha de colegiatura</strong>
+                                        <span>Ocultar fecha de colegiatura en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_fecha_colegiatura" value="1" {{ old('ocultar_fecha_colegiatura') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Grupo: Descripción y documentos --}}
+                    <div class="vis-group">
+                        <p class="vis-group-label"><i class="fas fa-file-alt"></i> Descripción y documentos</p>
+                        <div class="visibility-fields-grid">
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-align-left"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Descripción profesional</strong>
+                                        <span>Ocultar descripción en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_descripcion" value="1" {{ old('ocultar_descripcion') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-file-pdf"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Curriculum Vitae</strong>
+                                        <span>Ocultar enlace de CV en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_cv" value="1" {{ old('ocultar_cv') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="visibility-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span>
+                        <strong>Nota:</strong> Para aparecer en el directorio público, el colegiado también
+                        debe tener un <strong>documento de habilitación activo</strong>. Sin habilitación,
+                        el perfil no se muestra aunque esté visible.
+                    </span>
+                </div>
+            </div>
+
+            {{-- ── DOCUMENTO DE HABILITACIÓN ────────────────────── --}}
+            <div class="form-section form-section-habilitacion">
+                <h3 class="section-title">
+                    <i class="fas fa-certificate"></i>
+                    Documento de Habilitación <span class="required">*</span>
+                </h3>
+                <p class="section-description">
+                    Obligatorio para que el perfil aparezca en el directorio público. Se generarán
+                    automáticamente un <strong>código UUID único</strong>, un <strong>código QR</strong>
+                    y una <strong>URL de verificación</strong> que se embeben en el PDF.
+                    El colegiado quedará marcado como <strong>ACTIVO</strong> automáticamente.
+                </p>
+
+                <div class="generation-grid" style="margin-bottom: 20px;">
+                    <div class="generation-item">
+                        <i class="fas fa-fingerprint"></i>
+                        <div>
+                            <strong>Código UUID único</strong>
+                            <span>Irrepetible, embebido en el PDF</span>
+                        </div>
+                    </div>
+                    <div class="generation-item">
+                        <i class="fas fa-qrcode"></i>
+                        <div>
+                            <strong>Código QR</strong>
+                            <span>Apunta a la URL de verificación pública</span>
+                        </div>
+                    </div>
+                    <div class="generation-item">
+                        <i class="fas fa-link"></i>
+                        <div>
+                            <strong>URL de verificación</strong>
+                            <span>Acceso público para validar el documento</span>
+                        </div>
+                    </div>
+                    <div class="generation-item">
+                        <i class="fas fa-user-check"></i>
+                        <div>
+                            <strong>Estado ACTIVO</strong>
+                            <span>El colegiado se activa automáticamente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="upload-container">
+                    <div class="upload-box" id="habUploadBox">
+                        <i class="fas fa-file-pdf upload-icon"></i>
+                        <h4>Selecciona el documento PDF</h4>
+                        <p class="upload-hint">Haz clic o arrastra el archivo aquí</p>
+                        <p class="upload-specs">PDF • Máximo 10 MB</p>
+                    </div>
+
+                    <input
+                        type="file"
+                        name="documento"
+                        id="documento"
+                        class="upload-input @error('documento') is-invalid @enderror"
+                        accept=".pdf"
+                        required
+                    >
+
+                    <div class="file-info" id="habFileInfo" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="habFileName"></span>
+                        <span id="habFileSize"></span>
+                    </div>
+
+                    @error('documento')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
             {{-- Botones --}}
             <div class="form-footer">
                 <a href="{{ route('admin.colegiados.index') }}" class="btn btn-secondary">
@@ -198,13 +492,55 @@
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i>
-                    Guardar Colegiado
+                    <i class="fas fa-magic"></i>
+                    Registrar y Generar Habilitación
                 </button>
             </div>
         </form>
     </div>
 
 </div>
+
+@push('scripts')
+<script>
+(function () {
+    const input    = document.getElementById('documento');
+    const box      = document.getElementById('habUploadBox');
+    const info     = document.getElementById('habFileInfo');
+    const nameSpan = document.getElementById('habFileName');
+    const sizeSpan = document.getElementById('habFileSize');
+
+    function mostrarArchivo(file) {
+        nameSpan.textContent = file.name;
+        sizeSpan.textContent = '(' + (file.size / 1024 / 1024).toFixed(2) + ' MB)';
+        info.style.display   = 'flex';
+        box.style.opacity    = '0.5';
+    }
+
+    input.addEventListener('change', function () {
+        if (this.files.length > 0) {
+            mostrarArchivo(this.files[0]);
+        } else {
+            info.style.display = 'none';
+            box.style.opacity  = '1';
+        }
+    });
+
+    box.addEventListener('click', () => input.click());
+
+    box.addEventListener('dragover', (e) => { e.preventDefault(); box.classList.add('drag-over'); });
+    box.addEventListener('dragleave', () => box.classList.remove('drag-over'));
+    box.addEventListener('drop', (e) => {
+        e.preventDefault();
+        box.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        if (files.length > 0 && files[0].type === 'application/pdf') {
+            input.files = files;
+            mostrarArchivo(files[0]);
+        }
+    });
+})();
+</script>
+@endpush
 
 @endsection

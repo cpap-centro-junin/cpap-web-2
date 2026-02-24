@@ -110,7 +110,6 @@
 /* Wrapper para que el texto + code-block apilen verticalmente */
 .alert-body {
     flex: 1;
-    display: flex;
     flex-direction: column;
     gap: 0;
 }
@@ -1381,6 +1380,585 @@ div.user-avatar-small {
 }
 
 /* ============================================================
+   BADGE BASE + VARIANTES (index table)
+   ============================================================ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   NUEVOS BTN-ICON VARIANTS (toggle-perfil-oculto)
+   ============================================================ */
+.btn-teal {
+    background: rgba(0, 150, 136, 0.1);
+    color: #00796b;
+}
+
+.btn-teal:hover {
+    background: #00796b;
+    color: white;
+}
+
+.btn-orange {
+    background: rgba(230, 81, 0, 0.1);
+    color: #e65100;
+}
+
+.btn-orange:hover {
+    background: #e65100;
+    color: white;
+}
+
+/* ============================================================
+   ORIENTACIÓN (sub-texto en tabla index)
+   ============================================================ */
+.orientacion-sub {
+    font-size: 12px;
+    color: var(--medium-gray);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 3px;
+    line-height: 1.3;
+}
+
+.orientacion-sub i {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+/* ============================================================
+   ROW PERFIL OCULTO (fila atenuada en tabla)
+   ============================================================ */
+.row-perfil-oculto {
+    background: rgba(230, 81, 0, 0.025) !important;
+    opacity: 0.82;
+}
+
+.row-perfil-oculto:hover {
+    background: rgba(230, 81, 0, 0.05) !important;
+    opacity: 1;
+}
+
+/* ============================================================
+   BADGE PERFIL OCULTO (show + index)
+   ============================================================ */
+.badge-perfil-oculto {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(230, 81, 0, 0.1);
+    color: #e65100;
+    border: 1px solid rgba(230, 81, 0, 0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.badge-oculto-sm {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(230, 81, 0, 0.1);
+    color: #e65100;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+/* ============================================================
+   BANNER BADGE OCULTO (edit context banner)
+   ============================================================ */
+.banner-badge-oculto {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(230, 81, 0, 0.18);
+    color: #ff6d00;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   FIELD HIDDEN INDICATOR (show.blade - campos ocultos)
+   ============================================================ */
+.field-hidden-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #e65100;
+    background: rgba(230, 81, 0, 0.08);
+    border-radius: 10px;
+    padding: 1px 7px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.field-hidden-indicator i { font-size: 10px; }
+
+/* ============================================================
+   SECTION-DESCRIPTION + FIELD-HINT
+   ============================================================ */
+.section-description {
+    font-size: 13px;
+    color: var(--medium-gray);
+    margin: -8px 0 20px;
+    line-height: 1.6;
+}
+
+.field-hint {
+    display: inline-flex;
+    align-items: center;
+    color: var(--medium-gray);
+    cursor: help;
+    font-size: 13px;
+    margin-left: 4px;
+    transition: color 0.2s;
+}
+
+.field-hint:hover { color: var(--primary); }
+
+/* ============================================================
+   FORM SECTION HABILITACIÓN (create - obligatoria)
+   ============================================================ */
+.form-section-habilitacion {
+    background: linear-gradient(135deg, rgba(201,169,97,0.05) 0%, rgba(255,255,255,0) 60%);
+    border-bottom: 1.5px solid var(--border);
+    padding: 24px 28px;
+}
+
+.form-section-habilitacion .section-title {
+    color: var(--secondary);
+    border-bottom-color: rgba(201,169,97,0.25);
+}
+
+.form-section-habilitacion .section-title .required {
+    color: var(--danger);
+}
+
+/* ============================================================
+   FORM SECTION VISIBILITY
+   ============================================================ */
+.form-section-visibility {
+    background: linear-gradient(135deg, rgba(230,81,0,0.02) 0%, rgba(255,255,255,0) 100%);
+    border-bottom: 1.5px solid var(--border);
+    padding: 24px 28px;
+}
+
+.form-section-visibility .section-title {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #e65100;
+    margin: 0 0 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(230, 81, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ============================================================
+   TOGGLE SWITCH (checkbox personalizado)
+   ============================================================ */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #d1d5db;
+    border-radius: 26px;
+    transition: background 0.25s ease;
+    cursor: pointer;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.25s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: var(--primary);
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+    transform: translateX(22px);
+}
+
+.toggle-switch input:focus-visible + .toggle-slider {
+    outline: 2px solid var(--secondary);
+    outline-offset: 2px;
+}
+
+/* Variante pequeña */
+.toggle-switch--sm {
+    width: 38px;
+    height: 22px;
+}
+
+.toggle-switch--sm .toggle-slider::before {
+    width: 16px;
+    height: 16px;
+    left: 3px;
+    top: 3px;
+}
+
+.toggle-switch--sm input:checked + .toggle-slider::before {
+    transform: translateX(16px);
+}
+
+/* ============================================================
+   VISIBILITY TOGGLE CARD (ocultar perfil completo)
+   ============================================================ */
+.visibility-toggle-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    background: white;
+    margin-bottom: 20px;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.visibility-toggle-card--danger {
+    border-color: rgba(230, 81, 0, 0.2);
+}
+
+.visibility-toggle-card--danger .visibility-toggle-card__icon {
+    color: #e65100;
+    background: rgba(230, 81, 0, 0.08);
+}
+
+.visibility-toggle-card--active {
+    background: rgba(230, 81, 0, 0.04);
+    border-color: rgba(230, 81, 0, 0.35);
+}
+
+.visibility-toggle-card__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.visibility-toggle-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.visibility-toggle-card__info strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 3px;
+}
+
+.visibility-toggle-card__info span {
+    font-size: 12px;
+    color: var(--medium-gray);
+    line-height: 1.4;
+}
+
+.visibility-toggle-card__control {
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   VISIBILITY FIELDS GRID (campos individuales)
+   ============================================================ */
+.visibility-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.visibility-field-item {
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    background: white;
+    transition: border-color 0.2s, background 0.2s;
+    overflow: hidden;
+}
+
+.visibility-field-item--hidden {
+    background: rgba(230, 81, 0, 0.03);
+    border-color: rgba(230, 81, 0, 0.25);
+}
+
+.visibility-field-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+    margin: 0;
+}
+
+.visibility-field-label:hover { background: rgba(0,0,0,0.015); }
+
+.visibility-field-label__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: var(--medium-gray);
+    flex-shrink: 0;
+}
+
+.visibility-field-item--hidden .visibility-field-label__icon {
+    background: rgba(230, 81, 0, 0.08);
+    color: #e65100;
+}
+
+.visibility-field-label__text {
+    flex: 1;
+    min-width: 0;
+}
+
+.visibility-field-label__text strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 2px;
+}
+
+.visibility-field-label__text span {
+    font-size: 11px;
+    color: var(--medium-gray);
+}
+
+/* ============================================================
+   VISIBILITY GROUPS CONTAINER (create / edit forms)
+   ============================================================ */
+.vis-groups-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.vis-group-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--medium-gray);
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.vis-group-label i {
+    font-size: 12px;
+    color: var(--primary);
+    opacity: 0.65;
+}
+
+/* ============================================================
+   VISIBILITY NOTE (nota informativa)
+   ============================================================ */
+.visibility-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    background: rgba(201, 169, 97, 0.08);
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--medium-gray);
+    line-height: 1.5;
+}
+
+.visibility-note i {
+    color: var(--secondary);
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.visibility-note strong { color: var(--dark); }
+
+/* ============================================================
+   VISIBILITY SUMMARY PANEL (show.blade)
+   ============================================================ */
+.visibility-summary-panel {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    border: 2px solid var(--border);
+    background: white;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.visibility-summary-panel--visible {
+    border-color: rgba(46, 125, 50, 0.25);
+    background: rgba(46, 125, 50, 0.02);
+}
+
+.visibility-summary-panel--oculto {
+    border-color: rgba(230, 81, 0, 0.3);
+    background: rgba(230, 81, 0, 0.03);
+}
+
+.vis-summary-status {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 180px;
+}
+
+.vis-summary-status strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vis-summary-status strong i { font-size: 14px; }
+
+.visibility-summary-panel--visible .vis-summary-status strong i { color: var(--success); }
+.visibility-summary-panel--oculto .vis-summary-status strong i { color: #e65100; }
+
+.vis-summary-status span {
+    font-size: 12px;
+    color: var(--medium-gray);
+    line-height: 1.4;
+}
+
+.vis-badge-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+/* Badges container directo en el show panel (admin) */
+.visibility-summary-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.vis-badge-group-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--medium-gray);
+    margin-bottom: 6px;
+    display: block;
+    width: 100%;
+}
+
+.vis-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.vis-badge--visible {
+    background: rgba(46, 125, 50, 0.08);
+    color: #2e7d32;
+    border-color: rgba(46, 125, 50, 0.2);
+}
+
+.vis-badge--hidden {
+    background: rgba(230, 81, 0, 0.08);
+    color: #e65100;
+    border-color: rgba(230, 81, 0, 0.2);
+}
+
+/* ============================================================
+   ALERT LINK
+   ============================================================ */
+.alert-link {
+    font-weight: 700;
+    text-decoration: underline;
+    color: inherit;
+}
+
+.alert-link:hover { opacity: 0.8; }
+
+/* ============================================================
+   UTILITY: italic
+   ============================================================ */
+.fst-italic { font-style: italic; }
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 768px) {
@@ -1484,5 +2062,21 @@ div.user-avatar-small {
     .pagination-wrapper .pagination li:first-child a,
     .pagination-wrapper .pagination li:last-child a {
         min-width: 32px;
+    }
+
+    .visibility-fields-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .visibility-toggle-card {
+        flex-wrap: wrap;
+    }
+
+    .visibility-summary-panel {
+        flex-direction: column;
+    }
+
+    .vis-summary-status {
+        min-width: auto;
     }
 }

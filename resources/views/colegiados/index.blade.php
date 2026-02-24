@@ -17,18 +17,21 @@
         <p>Consulta el estado de habilitación de los miembros del Colegio Profesional de Antropólogos del Perú &mdash; Región Centro</p>
 
         {{-- Formulario de búsqueda --}}
-        <form action="{{ route('colegiados.index') }}" method="GET">
+        <form id="search-form" action="{{ route('colegiados.index') }}" method="GET" autocomplete="off">
             @if(request('estado'))
                 <input type="hidden" name="estado" value="{{ request('estado') }}">
             @endif
             <div class="search-box">
                 <i class="fas fa-search" style="color: var(--medium-gray);"></i>
                 <input
+                    id="search-input"
                     type="text"
                     name="buscar"
                     value="{{ $buscar }}"
                     placeholder="Buscar por nombre, DNI o código CPAP..."
                     autocomplete="off"
+                    spellcheck="false"
+                    data-url="{{ route('colegiados.index') }}"
                 >
                 <button type="submit" class="btn-search">
                     <i class="fas fa-search"></i>
@@ -58,11 +61,9 @@
             </a>
         </div>
 
-        @if($colegiados)
-            <span class="results-count">
-                {{ $colegiados->total() }} resultado{{ $colegiados->total() !== 1 ? 's' : '' }}
-            </span>
-        @endif
+        <span id="results-count" class="results-count">
+            {{ $colegiados->total() }} resultado{{ $colegiados->total() !== 1 ? 's' : '' }}
+        </span>
     </div>
 </div>
 
@@ -70,96 +71,143 @@
 <section class="cpap-main">
     <div class="cpap-container">
 
-        {{-- Estado inicial sin búsqueda --}}
-        @if(!$colegiados)
-            <div class="empty-state" data-aos="fade-up">
-                <div class="empty-state-icon">
-                    <i class="fas fa-search"></i>
-                </div>
-                <h3>Busca un colegiado</h3>
-                <p>Ingresa el nombre, DNI o código CPAP del profesional que deseas consultar, o usa los filtros para explorar el directorio.</p>
-                <a href="{{ route('colegiados.index', ['estado' => 'activo']) }}" class="btn btn-primary">
-                        <i class="fas fa-check-circle"></i>
-                        Ver Habilitados
-                    </a>
-            </div>
+        {{-- Spinner de búsqueda (oculto por defecto) --}}
+        <div id="search-spinner" hidden class="search-spinner-wrap">
+            <i class="fas fa-circle-notch fa-spin"></i>
+            <span>Buscando...</span>
+        </div>
 
-        @elseif($colegiados->total() === 0)
-            {{-- Sin resultados --}}
-            <div class="no-results" data-aos="fade-up">
-                <i class="fas fa-user-times"></i>
-                <h3 style="font-family:'Nunito',sans-serif; font-weight:700; margin-bottom:8px;">
-                    Sin resultados para "{{ $buscar }}"
-                </h3>
-                <p style="color:var(--medium-gray); margin-bottom:24px;">
-                    Intenta con el DNI completo, apellidos o código CPAP exacto.
-                </p>
-                <a href="{{ route('colegiados.index') }}" class="btn btn-outline">
-                    <i class="fas fa-arrow-left"></i> Nueva búsqueda
-                </a>
-            </div>
-
-        @else
-            {{-- GRID DE RESULTADOS --}}
-            <div class="colegiados-grid">
-                @foreach($colegiados as $index => $colegiado)
-                    <a href="{{ route('colegiados.show', $colegiado) }}"
-                       class="colegiado-card"
-                       data-aos="fade-up"
-                       data-aos-delay="{{ min(($index % 4) * 80, 300) }}">
-
-                        <div class="card-header-bg">
-                            <div class="card-avatar-wrapper">
-                                @if($colegiado->foto)
-                                    <img src="{{ asset($colegiado->foto) }}"
-                                         alt="{{ $colegiado->nombre_completo }}"
-                                         class="card-avatar">
-                                @else
-                                    <div class="card-avatar-placeholder">
-                                        {{ strtoupper(substr($colegiado->nombres, 0, 1) . substr($colegiado->apellidos, 0, 1)) }}
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="card-name">{{ $colegiado->nombre_completo }}</div>
-                            <div class="card-code">{{ $colegiado->codigo_cpap }}</div>
-                            <div class="card-specialty">
-                                {{ $colegiado->especialidad ?? 'Antropólogo Profesional' }}
-                            </div>
-                            <div>
-                                @if($colegiado->estado === 'activo')
-                                    <span class="estado-badge activo">
-                                        <i class="fas fa-circle" style="font-size:7px;"></i>
-                                        HABILITADO
-                                    </span>
-                                @else
-                                    <span class="estado-badge inactivo">
-                                        <i class="fas fa-circle" style="font-size:7px;"></i>
-                                        NO HABILITADO
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="card-footer-action">
-                            <i class="fas fa-eye"></i>
-                            Ver Perfil
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-
-            {{-- PAGINACIÓN --}}
-            @if($colegiados->hasPages())
-                <div class="pagination-wrapper">
-                    {{ $colegiados->links() }}
-                </div>
-            @endif
-        @endif
+        {{-- Grid de resultados --}}
+        <div id="colegiados-grid-container">
+            @include('colegiados._grid', ['colegiados' => $colegiados, 'buscar' => $buscar])
+        </div>
 
     </div>
 </section>
 
 @endsection
+
+@push('scripts')
+<script>
+(function () {
+    'use strict';
+
+    var input   = document.getElementById('search-input');
+    var form    = document.getElementById('search-form');
+    var grid    = document.getElementById('colegiados-grid-container');
+    var counter = document.getElementById('results-count');
+    var spinner = document.getElementById('search-spinner');
+
+    if (!input || !grid) { return; }
+
+    var BASE_URL  = input.dataset.url;
+    var timer     = null;
+    var activeXHR = null;
+
+    // ─── Estado de carga ───────────────────────────────────────────────────
+    function startLoading() {
+        spinner.hidden            = false;
+        grid.style.opacity        = '0.35';
+        grid.style.pointerEvents  = 'none';
+        grid.style.transition     = 'opacity 0.15s';
+    }
+
+    function stopLoading() {
+        spinner.hidden            = true;
+        grid.style.opacity        = '';
+        grid.style.pointerEvents  = '';
+        grid.style.transition     = '';
+    }
+
+    // ─── URL con los parámetros actuales ───────────────────────────────────
+    function buildUrl() {
+        var params = new URLSearchParams(window.location.search);
+        var q = input.value.trim();
+        if (q) { params.set('buscar', q); }
+        else   { params.delete('buscar'); }
+        params.delete('page'); // siempre volver a página 1 en búsqueda nueva
+        var qs = params.toString();
+        return BASE_URL + (qs ? '?' + qs : '');
+    }
+
+    // ─── Petición AJAX ─────────────────────────────────────────────────────
+    function doSearch() {
+        // Cancelar cualquier petición en vuelo
+        if (activeXHR) {
+            activeXHR.abort();
+            activeXHR = null;
+        }
+
+        var url = buildUrl();
+        window.history.replaceState(null, '', url);
+        startLoading();
+
+        var xhr = new XMLHttpRequest();
+        activeXHR = xhr;
+
+        xhr.open('GET', url, true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.setRequestHeader('Accept', 'application/json');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) { return; }
+            // Ignorar si ya fue reemplazado por otra petición
+            if (xhr !== activeXHR) { return; }
+
+            activeXHR = null;
+            stopLoading();
+
+            if (xhr.status === 200) {
+                try {
+                    var data = JSON.parse(xhr.responseText);
+
+                    // Insertar HTML quitando atributos data-aos:
+                    // AOS pone los elementos en estado invisible antes de animarlos.
+                    // En contenido inyectado por AJAX eso causa que las cards queden
+                    // permanentemente invisibles si el layout no está listo al llamar
+                    // AOS.refresh(). Las cards del directorio no necesitan animación en
+                    // búsqueda en tiempo real; aparecen directamente.
+                    var tmp = document.createElement('div');
+                    tmp.innerHTML = data.html;
+                    tmp.querySelectorAll('[data-aos]').forEach(function (el) {
+                        el.removeAttribute('data-aos');
+                        el.removeAttribute('data-aos-delay');
+                    });
+                    grid.innerHTML = tmp.innerHTML;
+
+                    if (counter) {
+                        var n = Number(data.total);
+                        counter.textContent = n + ' resultado' + (n !== 1 ? 's' : '');
+                    }
+                } catch (parseErr) {
+                    // Servidor devolvió HTML de error (500, 419, etc.)
+                    // Solo ocultamos el spinner; el grid conserva su contenido anterior
+                    console.error('[CPAP] Respuesta de búsqueda no válida:', parseErr);
+                }
+            }
+            // Cualquier otro status (red, timeout, abort): stopLoading() ya fue llamado
+        };
+
+        xhr.send();
+    }
+
+    // ─── Eventos ───────────────────────────────────────────────────────────
+    input.addEventListener('input', function () {
+        clearTimeout(timer);
+        // Al borrar el campo: respuesta casi inmediata
+        // Al escribir: espera 400 ms para no saturar el servidor
+        var delay = (input.value.trim() === '') ? 80 : 400;
+        timer = setTimeout(doSearch, delay);
+    });
+
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            clearTimeout(timer);
+            doSearch();
+        });
+    }
+
+}());
+</script>
+@endpush

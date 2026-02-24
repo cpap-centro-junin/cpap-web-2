@@ -19,8 +19,8 @@
 
         {{-- Avatar --}}
         <div class="perfil-avatar-wrap">
-            @if($colegiado->foto)
-                <img src="{{ asset($colegiado->foto) }}"
+            @if($colegiado->foto && !$colegiado->ocultar_foto)
+                <img src="{{ Storage::url($colegiado->foto) }}"
                      alt="{{ $colegiado->nombre_completo }}"
                      class="perfil-avatar">
             @else
@@ -39,8 +39,11 @@
             <h1 class="perfil-nombre">{{ $colegiado->nombre_completo }}</h1>
             <p class="perfil-codigo">
                 {{ $colegiado->codigo_cpap }}
-                @if($colegiado->especialidad)
+                @if($colegiado->especialidad && !$colegiado->ocultar_especialidad)
                     &nbsp;&middot;&nbsp; {{ $colegiado->especialidad }}
+                    @if($colegiado->orientacion && !$colegiado->ocultar_orientacion)
+                        &nbsp;&middot;&nbsp; <span style="opacity:0.8;">{{ $colegiado->orientacion }}</span>
+                    @endif
                 @endif
             </p>
             @if($colegiado->estado === 'activo')
@@ -72,31 +75,52 @@
                     Datos Profesionales
                 </h2>
                 <div class="info-grid">
-                    @if($colegiado->especialidad)
+                    @if($colegiado->especialidad && !$colegiado->ocultar_especialidad)
                     <div class="info-field">
                         <label>Especialidad</label>
                         <span>{{ $colegiado->especialidad }}</span>
                     </div>
                     @endif
 
-                    @if($colegiado->universidad)
+                    @if($colegiado->orientacion && !$colegiado->ocultar_orientacion)
+                    <div class="info-field">
+                        <label>Orientación</label>
+                        <span>{{ $colegiado->orientacion }}</span>
+                    </div>
+                    @endif
+
+                    @if($colegiado->universidad && !$colegiado->ocultar_universidad)
                     <div class="info-field">
                         <label>Universidad</label>
                         <span>{{ $colegiado->universidad }}</span>
                     </div>
                     @endif
 
-                    @if($colegiado->anio_graduacion)
+                    @if($colegiado->anio_graduacion && !$colegiado->ocultar_anio_graduacion)
                     <div class="info-field">
                         <label>Año de Graduación</label>
                         <span>{{ $colegiado->anio_graduacion }}</span>
                     </div>
                     @endif
 
-                    @if($colegiado->fecha_colegiatura)
+                    @if($colegiado->fecha_colegiatura && !$colegiado->ocultar_fecha_colegiatura)
                     <div class="info-field">
                         <label>Fecha de Colegiatura</label>
                         <span>{{ $colegiado->fecha_colegiatura->format('d/m/Y') }}</span>
+                    </div>
+                    @endif
+
+                    @if($colegiado->email && !$colegiado->ocultar_email)
+                    <div class="info-field">
+                        <label>Correo Electrónico</label>
+                        <span>{{ $colegiado->email }}</span>
+                    </div>
+                    @endif
+
+                    @if($colegiado->telefono && !$colegiado->ocultar_telefono)
+                    <div class="info-field">
+                        <label>Teléfono</label>
+                        <span>{{ $colegiado->telefono }}</span>
                     </div>
                     @endif
 
@@ -112,8 +136,8 @@
                 </div>
             </div>
 
-            {{-- ---- DESCRIPCIÓN (si existe) ---- --}}
-            @if($colegiado->descripcion)
+            {{-- ---- DESCRIPCIÓN (si existe y no está oculta) ---- --}}
+            @if($colegiado->descripcion && !$colegiado->ocultar_descripcion)
             <div class="perfil-card-section">
                 <h2 class="section-title">
                     <i class="fas fa-align-left"></i>
@@ -195,7 +219,7 @@
                                     </span>
                                 @endif
 
-                                @if($colegiado->cv_path)
+                                @if($colegiado->cv_path && !$colegiado->ocultar_cv)
                                     <a href="{{ route('colegiados.descargar-cv', $colegiado) }}"
                                        class="btn btn-outline"
                                        target="_blank"

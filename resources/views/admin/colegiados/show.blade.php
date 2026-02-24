@@ -42,19 +42,118 @@
     {{-- Header con acciones --}}
     <div class="page-header">
         <div>
-            <h1 class="page-title">{{ $colegiado->nombre_completo }}</h1>
+            <h1 class="page-title">
+                {{ $colegiado->nombre_completo }}
+                @if($colegiado->perfil_oculto)
+                    <span class="badge-perfil-oculto">
+                        <i class="fas fa-eye-slash"></i> Oculto
+                    </span>
+                @endif
+            </h1>
             <p class="page-subtitle">{{ $colegiado->codigo_cpap }} &mdash; {{ $colegiado->dni }}</p>
         </div>
         <div class="action-header-buttons">
+            {{-- Toggle rápido de visibilidad --}}
+            <form action="{{ route('admin.colegiados.toggle-perfil-oculto', $colegiado) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PATCH')
+                <button type="submit"
+                        class="btn btn-lg {{ $colegiado->perfil_oculto ? 'btn-outline-warning' : 'btn-outline-secondary' }}"
+                        title="{{ $colegiado->perfil_oculto ? 'Hacer visible en directorio público' : 'Ocultar del directorio público' }}">
+                    <i class="fas {{ $colegiado->perfil_oculto ? 'fa-eye' : 'fa-eye-slash' }}"></i>
+                    {{ $colegiado->perfil_oculto ? 'Mostrar en público' : 'Ocultar de público' }}
+                </button>
+            </form>
             <a href="{{ route('admin.colegiados.edit', $colegiado) }}" class="btn btn-lg btn-secondary-outline">
                 <i class="fas fa-pencil-alt"></i>
-                Editar Información
+                Editar
             </a>
             <a href="{{ route('admin.habilitaciones.create', $colegiado) }}" class="btn btn-lg btn-primary">
                 <i class="fas fa-certificate"></i>
                 Subir Habilitación
             </a>
         </div>
+    </div>
+
+    {{-- Alerta: sin ningún documento (fue eliminado o nunca subido) --}}
+    @if(!$tieneAlgunaHabilitacion)
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div class="alert-body">
+                <strong>Sin habilitación activa.</strong>
+                Este colegiado no tiene ningún documento de habilitación activo.
+                No aparecerá en el directorio público hasta que se suba y active un documento.
+                <a href="{{ route('admin.habilitaciones.create', $colegiado) }}" class="alert-link">
+                    Subir habilitación →
+                </a>
+            </div>
+        </div>
+    {{-- Alerta: tiene documentos pero todos revocados --}}
+    @elseif(!$tieneHabilitacionActiva)
+        <div class="alert alert-warning">
+            <i class="fas fa-ban"></i>
+            <div class="alert-body">
+                <strong>Habilitación revocada.</strong>
+                El documento de habilitación fue revocado. El colegiado aparece en el directorio público como <strong>No Habilitado</strong>.
+                Para reactivarlo, usa el botón <em>Reactivar</em> en la sección de habilitaciones, o sube un nuevo documento.
+            </div>
+        </div>
+    @endif
+
+    {{-- Panel de visibilidad (resumen rápido) --}}
+    <div class="visibility-summary-panel {{ $colegiado->perfil_oculto ? 'visibility-summary-panel--oculto' : 'visibility-summary-panel--visible' }}">
+        <div class="visibility-summary-panel__icon">
+            <i class="fas {{ $colegiado->perfil_oculto ? 'fa-eye-slash' : 'fa-eye' }}"></i>
+        </div>
+        <div class="visibility-summary-panel__info">
+            <strong>{{ $colegiado->perfil_oculto ? 'Perfil oculto del directorio público' : 'Perfil visible en el directorio público' }}</strong>
+            <div class="visibility-summary-badges">
+                <span class="vis-badge {{ $colegiado->ocultar_foto ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-user-circle"></i>
+                    Foto {{ $colegiado->ocultar_foto ? 'oculta' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_email ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-envelope"></i>
+                    Email {{ $colegiado->ocultar_email ? 'oculto' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_telefono ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-phone"></i>
+                    Teléfono {{ $colegiado->ocultar_telefono ? 'oculto' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_especialidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-flask"></i>
+                    Especialidad {{ $colegiado->ocultar_especialidad ? 'oculta' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_orientacion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-compass"></i>
+                    Orientación {{ $colegiado->ocultar_orientacion ? 'oculta' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_universidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-university"></i>
+                    Universidad {{ $colegiado->ocultar_universidad ? 'oculta' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_anio_graduacion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-calendar-check"></i>
+                    Año grad. {{ $colegiado->ocultar_anio_graduacion ? 'oculto' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_fecha_colegiatura ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-id-card"></i>
+                    F. colegiatura {{ $colegiado->ocultar_fecha_colegiatura ? 'oculta' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_descripcion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-align-left"></i>
+                    Descripción {{ $colegiado->ocultar_descripcion ? 'oculta' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_cv ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-file-pdf"></i>
+                    CV {{ $colegiado->ocultar_cv ? 'oculto' : 'visible' }}
+                </span>
+            </div>
+        </div>
+        <a href="{{ route('admin.colegiados.edit', $colegiado) }}#visibilidad" class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-sliders-h"></i>
+            Cambiar visibilidad
+        </a>
     </div>
 
     {{-- Grid de tarjetas --}}
@@ -68,7 +167,14 @@
             <div class="card-body">
                 @if($colegiado->foto)
                     <div class="profile-photo">
-                        <img src="{{ asset($colegiado->foto) }}" alt="{{ $colegiado->nombre_completo }}">
+                        <img src="{{ Storage::url($colegiado->foto) }}" alt="{{ $colegiado->nombre_completo }}">
+                        @if($colegiado->ocultar_foto)
+                            <div style="margin-top:6px;">
+                                <span class="field-hidden-indicator" title="Foto oculta en perfil público">
+                                    <i class="fas fa-eye-slash"></i> Foto oculta en público
+                                </span>
+                            </div>
+                        @endif
                     </div>
                 @endif
 
@@ -84,14 +190,28 @@
 
                 @if($colegiado->email)
                     <div class="info-group">
-                        <label>Email</label>
+                        <label>
+                            Email
+                            @if($colegiado->ocultar_email)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
                         <p><a href="mailto:{{ $colegiado->email }}">{{ $colegiado->email }}</a></p>
                     </div>
                 @endif
 
                 @if($colegiado->telefono)
                     <div class="info-group">
-                        <label>Teléfono</label>
+                        <label>
+                            Teléfono
+                            @if($colegiado->ocultar_telefono)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
                         <p><a href="tel:{{ $colegiado->telefono }}">{{ $colegiado->telefono }}</a></p>
                     </div>
                 @endif
@@ -119,7 +239,14 @@
                 </div>
 
                 <div class="info-group">
-                    <label>Fecha de Colegiatura</label>
+                    <label>
+                        Fecha de Colegiatura
+                        @if($colegiado->ocultar_fecha_colegiatura)
+                            <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                <i class="fas fa-eye-slash"></i>
+                            </span>
+                        @endif
+                    </label>
                     <p>{{ $colegiado->fecha_colegiatura->format('d/m/Y') }}</p>
                 </div>
             </div>
@@ -133,35 +260,84 @@
             <div class="card-body">
                 @if($colegiado->especialidad)
                     <div class="info-group">
-                        <label>Especialidad</label>
+                        <label>
+                            Especialidad
+                            @if($colegiado->ocultar_especialidad)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
                         <p>{{ $colegiado->especialidad }}</p>
+                    </div>
+                @endif
+
+                @if($colegiado->orientacion)
+                    <div class="info-group">
+                        <label>
+                            Orientación
+                            @if($colegiado->ocultar_orientacion)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
+                        <p>{{ $colegiado->orientacion }}</p>
                     </div>
                 @endif
 
                 @if($colegiado->universidad)
                     <div class="info-group">
-                        <label>Universidad</label>
+                        <label>
+                            Universidad
+                            @if($colegiado->ocultar_universidad)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
                         <p>{{ $colegiado->universidad }}</p>
                     </div>
                 @endif
 
                 @if($colegiado->anio_graduacion)
                     <div class="info-group">
-                        <label>Año de Graduación</label>
+                        <label>
+                            Año de Graduación
+                            @if($colegiado->ocultar_anio_graduacion)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
                         <p>{{ $colegiado->anio_graduacion }}</p>
                     </div>
                 @endif
 
                 @if($colegiado->descripcion)
                     <div class="info-group">
-                        <label>Descripción Profesional</label>
+                        <label>
+                            Descripción Profesional
+                            @if($colegiado->ocultar_descripcion)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
                         <p>{{ $colegiado->descripcion }}</p>
                     </div>
                 @endif
 
                 @if($colegiado->cv_path)
                     <div class="info-group">
-                        <label>Curriculum Vitae</label>
+                        <label>
+                            Curriculum Vitae
+                            @if($colegiado->ocultar_cv)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
                         <p>
                             <a href="{{ route('admin.colegiados.descargar-cv', $colegiado) }}" target="_blank" rel="noopener" class="btn-link">
                                 <i class="fas fa-file-pdf text-danger"></i>
@@ -225,7 +401,7 @@
                             </div>
 
                             <div class="habilitacion-actions">
-                                <a href="{{ route('admin.habilitaciones.descargar', $habilitacion) }}"
+                                <a href="{{ route('admin.habilitaciones.documento', $habilitacion->codigo_verificacion) }}"
                                    class="btn btn-sm btn-info"
                                    target="_blank"
                                    rel="noopener">
@@ -277,7 +453,7 @@
                     <p>No hay documentos de habilitación cargados</p>
                     <a href="{{ route('admin.habilitaciones.create', $colegiado) }}" class="btn btn-primary">
                         <i class="fas fa-plus"></i>
-                        Subir Primer Documento
+                        Subir Documento de Habilitación
                     </a>
                 </div>
             @endif

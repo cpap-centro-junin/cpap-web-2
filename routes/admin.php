@@ -75,6 +75,10 @@ Route::resource('colegiados', ColegiadoController::class)->names([
 Route::patch('/colegiados/{colegiado}/toggle-estado', [ColegiadoController::class, 'toggleEstado'])
     ->name('admin.colegiados.toggle-estado');
 
+// Toggle visibilidad del perfil en el directorio público
+Route::patch('/colegiados/{colegiado}/toggle-perfil-oculto', [ColegiadoController::class, 'togglePerfilOculto'])
+    ->name('admin.colegiados.toggle-perfil-oculto');
+
 // Descargar CV de un colegiado
 Route::get('/colegiados/{colegiado}/descargar-cv', [ColegiadoController::class, 'descargarCV'])
     ->name('admin.colegiados.descargar-cv');
@@ -90,9 +94,9 @@ Route::get('/colegiados/{colegiado}/habilitaciones/create', [HabilitacionControl
 Route::post('/colegiados/{colegiado}/habilitaciones', [HabilitacionController::class, 'store'])
     ->name('admin.habilitaciones.store');
 
-// Descargar documento de habilitación
-Route::get('/habilitaciones/{habilitacion}/descargar', [HabilitacionController::class, 'descargar'])
-    ->name('admin.habilitaciones.descargar');
+// Ver documento de habilitación (URL usa código de verificación)
+Route::get('/habilitaciones/{codigo}/documento', [HabilitacionController::class, 'documento'])
+    ->name('admin.habilitaciones.documento');
 
 // Descargar QR Code
 Route::get('/habilitaciones/{habilitacion}/descargar-qr', [HabilitacionController::class, 'descargarQR'])
