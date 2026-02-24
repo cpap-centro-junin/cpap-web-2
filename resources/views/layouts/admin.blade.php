@@ -74,6 +74,10 @@
                 <i class="fas fa-bullhorn"></i>
                 <span class="menu-text">Anuncios</span>
             </a>
+            <a href="{{ route('admin.normativa.index') }}" class="menu-item {{ request()->routeIs('admin.normativa*') ? 'active' : '' }}">
+                <i class="fas fa-gavel"></i>
+                <span class="menu-text">Normativa</span>
+            </a>
             @php
                 $unreadMessages = \App\Models\ContactMessage::where('leido', false)->count();
             @endphp

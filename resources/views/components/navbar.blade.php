@@ -31,6 +31,7 @@
                         <li><a href="{{ route('nosotros.mision-vision') }}"><i class="fas fa-bullseye"></i> Misión y Visión</a></li>
                         <li><a href="{{ route('nosotros.historia') }}"><i class="fas fa-history"></i> Historia</a></li>
                         <li><a href="{{ route('nosotros.consejo-directivo') }}"><i class="fas fa-users-cog"></i> Consejo Directivo</a></li>
+                        <li><a href="{{ route('nosotros.normativa-legal') }}"><i class="fas fa-gavel"></i> Normativa Legal</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

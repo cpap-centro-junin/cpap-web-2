@@ -1,0 +1,374 @@
+/* =================================================
+   NORMATIVA LEGAL – CPAP Región Centro
+   ================================================= */
+
+/* ============================================
+   INTRO SECTION
+   ============================================ */
+.normativa-intro {
+    padding: 72px 0 56px;
+    background: #ffffff;
+}
+
+.normativa-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.normativa-intro-text .section-badge {
+    margin-bottom: 16px;
+}
+
+.normativa-intro-text h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-3xl);
+    font-weight: var(--font-extrabold);
+    color: var(--primary-dark);
+    margin-bottom: 20px;
+    line-height: var(--leading-tight);
+}
+
+.normativa-intro-text p {
+    font-size: var(--font-base);
+    color: var(--medium-gray);
+    line-height: var(--leading-relaxed);
+    margin-bottom: 14px;
+}
+
+/* Stats grid */
+.normativa-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.normativa-stat {
+    background: var(--light-gray);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border);
+    transition: var(--transition-normal);
+}
+
+.normativa-stat:hover {
+    border-color: rgba(139, 21, 56, 0.2);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
+}
+
+.normativa-stat i {
+    font-size: 22px;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.normativa-stat strong {
+    font-family: var(--font-heading);
+    font-size: var(--font-2xl);
+    font-weight: var(--font-extrabold);
+    color: var(--primary-dark);
+    line-height: 1;
+}
+
+.normativa-stat span {
+    font-size: var(--font-xs);
+    color: var(--medium-gray);
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   DOCS SECTION
+   ============================================ */
+.normativa-docs {
+    padding: var(--section-padding);
+    background: var(--light-gray);
+}
+
+.normativa-docs-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.normativa-docs-header .section-badge {
+    margin-bottom: 14px;
+}
+
+.normativa-docs-header h2 {
+    font-family: var(--font-heading);
+    font-size: var(--font-3xl);
+    font-weight: var(--font-extrabold);
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+}
+
+.normativa-docs-header p {
+    font-size: var(--font-lg);
+    color: var(--medium-gray);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: var(--leading-relaxed);
+}
+
+/* ============================================
+   CARDS GRID
+   ============================================ */
+.normativa-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* ============================================
+   CARD
+   ============================================ */
+.normativa-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+}
+
+.normativa-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(139, 21, 56, 0.15);
+}
+
+/* Top accent bar */
+.normativa-card-accent {
+    height: 4px;
+    background: var(--gradient-primary);
+    transition: height var(--transition-normal);
+}
+
+.normativa-card:hover .normativa-card-accent {
+    height: 6px;
+}
+
+/* Icon */
+.normativa-card-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        rgba(139, 21, 56, 0.08) 0%,
+        rgba(139, 21, 56, 0.15) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 28px auto 0;
+    transition: var(--transition-normal);
+}
+
+.normativa-card-icon i {
+    font-size: 26px;
+    color: var(--primary);
+    transition: var(--transition-normal);
+}
+
+.normativa-card:hover .normativa-card-icon {
+    background: var(--gradient-primary);
+    transform: scale(1.08);
+}
+
+.normativa-card:hover .normativa-card-icon i {
+    color: #ffffff;
+}
+
+/* Body */
+.normativa-card-body {
+    padding: 20px 24px 12px;
+    flex: 1;
+    text-align: center;
+}
+
+.normativa-card-body h3 {
+    font-family: var(--font-heading);
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.normativa-card-body p {
+    font-size: var(--font-sm);
+    color: var(--medium-gray);
+    line-height: var(--leading-relaxed);
+    margin: 0;
+}
+
+/* Actions */
+.normativa-card-actions {
+    padding: 16px 24px 24px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.normativa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: var(--font-sm);
+    font-weight: var(--font-semibold);
+    text-decoration: none;
+    transition: var(--transition-normal);
+    cursor: pointer;
+    border: none;
+}
+
+.normativa-btn-download {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(139, 21, 56, 0.25);
+}
+
+.normativa-btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 21, 56, 0.35);
+    color: #ffffff;
+}
+
+.normativa-btn-view {
+    background: rgba(139, 21, 56, 0.08);
+    color: var(--primary);
+}
+
+.normativa-btn-view:hover {
+    background: rgba(139, 21, 56, 0.15);
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.normativa-cta {
+    padding: var(--section-padding-sm);
+    background: #ffffff;
+}
+
+.normativa-cta-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(
+        135deg,
+        rgba(139, 21, 56, 0.04) 0%,
+        rgba(139, 21, 56, 0.08) 100%
+    );
+    border: 1px solid rgba(139, 21, 56, 0.12);
+    border-radius: var(--radius-lg);
+    padding: 36px 40px;
+    gap: 24px;
+}
+
+.normativa-cta-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.normativa-cta-content > i {
+    font-size: 40px;
+    color: var(--primary);
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.normativa-cta-content h3 {
+    font-family: var(--font-heading);
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    color: var(--dark);
+    margin-bottom: 4px;
+}
+
+.normativa-cta-content p {
+    font-size: var(--font-sm);
+    color: var(--medium-gray);
+    margin: 0;
+    line-height: var(--leading-relaxed);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .normativa-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .normativa-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .normativa-intro {
+        padding: 48px 0 36px;
+    }
+
+    .normativa-intro-text h2 {
+        font-size: var(--font-2xl);
+    }
+
+    .normativa-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .normativa-docs-header h2 {
+        font-size: var(--font-2xl);
+    }
+
+    .normativa-cta-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+    }
+
+    .normativa-cta-content {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .normativa-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .normativa-stat {
+        padding: 18px 14px;
+    }
+
+    .normativa-card-actions {
+        flex-direction: column;
+        padding: 12px 20px 20px;
+    }
+
+    .normativa-btn {
+        justify-content: center;
+        width: 100%;
+    }
+}

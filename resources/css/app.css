@@ -3,7 +3,7 @@
    ============================================ */
 
 /* Tailwind CSS */
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -11,50 +11,52 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-sans:
+        "Poppins", "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ============================================
    BASE - Variables, Reset, Typography, Animations
    ============================================ */
-@import './base/variables.css';
-@import './base/reset.css';
-@import './base/typography.css';
-@import './base/animations.css';
+@import "./base/variables.css";
+@import "./base/reset.css";
+@import "./base/typography.css";
+@import "./base/animations.css";
 
 /* ============================================
    COMPONENTS - Botones, Cards, Forms, etc
    ============================================ */
-@import './components/buttons.css';
-@import './components/cards.css';
-@import './components/forms.css';
-@import './components/badges.css';
-@import './components/navbar.css';
-@import './components/footer.css';
-@import './components/pagination.css';
-@import './components/slider.css';
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "./components/forms.css";
+@import "./components/badges.css";
+@import "./components/navbar.css";
+@import "./components/footer.css";
+@import "./components/pagination.css";
+@import "./components/slider.css";
 
 /* ============================================
    LAYOUTS - Sections, Admin, Grid
    ============================================ */
-@import './layouts/sections.css';
-@import './layouts/grid.css';
+@import "./layouts/sections.css";
+@import "./layouts/grid.css";
 
 /* ============================================
    PAGES - Estilos específicos de páginas
    ============================================ */
-@import './pages/bolsa-trabajo.css';
-@import './pages/biblioteca.css';
-@import './pages/auth.css';
-@import './pages/historia.css';
-@import './pages/mision-vision.css';
-@import './pages/consejo-directivo.css';
-@import './pages/colegiados.css';
-@import './pages/colegiado-perfil.css';
-@import './pages/verificacion.css';
-@import './pages/actualidad.css';
-@import './pages/contacto.css';
-@import './pages/colegiatura.css';
+@import "./pages/bolsa-trabajo.css";
+@import "./pages/biblioteca.css";
+@import "./pages/auth.css";
+@import "./pages/historia.css";
+@import "./pages/mision-vision.css";
+@import "./pages/consejo-directivo.css";
+@import "./pages/colegiados.css";
+@import "./pages/colegiado-perfil.css";
+@import "./pages/verificacion.css";
+@import "./pages/actualidad.css";
+@import "./pages/contacto.css";
+@import "./pages/colegiatura.css";
+@import "./pages/normativa-legal.css";
 
 /* ✅ modern.css ELIMINADO - Todo extraído al nuevo sistema */
 /* Admin CSS → resources/css/admin.css (entry point propio en vite.config.js) */

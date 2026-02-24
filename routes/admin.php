@@ -130,6 +130,16 @@ Route::resource('anuncios', \App\Http\Controllers\Admin\PopupAnuncioController::
 Route::patch('/anuncios/{anuncio}/toggle', [\App\Http\Controllers\Admin\PopupAnuncioController::class, 'toggleActivo'])
     ->name('admin.anuncios.toggle');
 
+// NORMATIVA LEGAL
+Route::resource('normativa', \App\Http\Controllers\Admin\NormativaController::class)->names([
+    'index'   => 'admin.normativa.index',
+    'create'  => 'admin.normativa.create',
+    'store'   => 'admin.normativa.store',
+    'edit'    => 'admin.normativa.edit',
+    'update'  => 'admin.normativa.update',
+    'destroy' => 'admin.normativa.destroy',
+]);
+
     use App\Http\Controllers\Admin\ContactMessageController;
 
 //MENSAJES

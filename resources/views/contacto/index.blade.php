@@ -5,25 +5,29 @@
 @section('content')
 
 {{-- PAGE HEADER --}}
-<section class="cpap-hero contacto-hero">
-    <div class="cpap-hero-content" data-aos="fade-up">
-        <div class="cpap-hero-badge">
-            <i class="fas fa-envelope-open-text"></i>
-            Información Institucional
+<section class="page-header">
+    <div class="page-header-overlay"></div>
+    <div class="container">
+        <div class="page-header-content" data-aos="fade-up">
+            <h1 class="page-title">
+                <i class="fas fa-envelope-open-text"></i>
+                Contáctanos
+            </h1>
+            <p class="page-subtitle">
+                Colegio Profesional de Antropólogos del Perú – Región Centro
+            </p>
+            <nav class="breadcrumb">
+                <a href="{{ url('/') }}">Inicio</a>
+                <span>/</span>
+                <span>Contacto</span>
+            </nav>
         </div>
-        <h1>Contáctanos</h1>
-        <p>Colegio Profesional de Antropólogos del Perú – Región Centro</p>
-        <nav class="cpap-breadcrumb">
-            <a href="{{ url('/') }}">Inicio</a>
-            <span>/</span>
-            <span>Contacto</span>
-        </nav>
     </div>
 </section>
 
 {{-- CANALES RÁPIDOS --}}
 <section class="ctc-channels">
-    <div class="cpap-container">
+    <div class="container">
         <div class="ctc-channels-grid">
             <a href="https://wa.me/51900000000" target="_blank" class="ctc-channel ctc-channel--whatsapp" data-aos="fade-up" data-aos-delay="0">
                 <div class="ctc-channel-icon"><i class="fab fa-whatsapp"></i></div>
@@ -55,7 +59,14 @@
 
 {{-- MAIN LAYOUT --}}
 <section class="ctc-main-section">
-    <div class="cpap-container">
+    <div class="container">
+        {{-- SECTION HEADER --}}
+        <div class="ctc-section-header" data-aos="fade-up">
+            <span class="section-badge">Escríbenos</span>
+            <h2>¿En qué podemos ayudarte?</h2>
+            <p>Completa el formulario o utiliza nuestros canales directos. Te responderemos a la brevedad.</p>
+        </div>
+
         <div class="ctc-main-grid">
 
             {{-- FORMULARIO --}}
@@ -65,7 +76,7 @@
                         <div class="ctc-form-icon"><i class="fas fa-paper-plane"></i></div>
                         <div>
                             <h2>Envíanos un mensaje</h2>
-                            <p>Te responderemos a la brevedad posible en horario de atención.</p>
+                            <p>Completa los campos y te contactaremos pronto.</p>
                         </div>
                     </div>
 
@@ -156,20 +167,25 @@
                                 <span>20123456789</span>
                             </div>
                         </div>
-                        <div class="ctc-info-item">
-                            <div class="ctc-info-item-icon ctc-icon--primary"><i class="fab fa-whatsapp"></i></div>
-                            <div class="ctc-info-item-body">
-                                <strong>Atención al Colegiado</strong>
-                                <span>WhatsApp: (+51) 900 000 000</span>
-                            </div>
-                        </div>
-                        <div class="ctc-info-item">
-                            <div class="ctc-info-item-icon ctc-icon--gold"><i class="fas fa-envelope"></i></div>
-                            <div class="ctc-info-item-body">
-                                <strong>Mesa de Partes</strong>
-                                <span>mesadepartes@cpaprc.org.pe</span>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                {{-- REDES SOCIALES --}}
+                <div class="ctc-social-card">
+                    <h3><i class="fas fa-share-alt"></i> Síguenos</h3>
+                    <div class="ctc-social-links">
+                        <a href="#" class="ctc-social-link ctc-social--fb" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="ctc-social-link ctc-social--ig" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="ctc-social-link ctc-social--yt" title="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="ctc-social-link ctc-social--tiktok" title="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
                     </div>
                 </div>
 

@@ -49,6 +49,14 @@ Route::get('/nosotros/consejo-directivo', function () {
     return view('nosotros.consejo-directivo', compact('consejo'));
 })->name('nosotros.consejo-directivo');
 
+Route::get('/nosotros/normativa-legal', function () {
+    $documentos = \App\Models\NormativaDocumento::activos()->orderBy('orden')->get();
+    return view('nosotros.normativa-legal', compact('documentos'));
+})->name('nosotros.normativa-legal');
+
+Route::get('/nosotros/normativa-legal/{documento}/descargar', [\App\Http\Controllers\Admin\NormativaController::class, 'descargar'])
+    ->name('nosotros.normativa.descargar');
+
 // CONTACTO PUBLICO
 Route::get('/contacto', [ContactoController::class, 'index'])
     ->name('contacto.index');
