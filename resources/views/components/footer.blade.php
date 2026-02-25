@@ -6,7 +6,9 @@
                 <!-- About Section -->
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <img src="{{ asset('images/logos/logo-cpap-web-elecciones.png') }}" alt="CPAP Logo">
+                        <div class="footer-logo-box">
+                            <img src="{{ asset('images/logos/logo-cpap-web-elecciones.png') }}" alt="CPAP Logo">
+                        </div>
                     </div>
                     <p class="footer-desc">
                         Colegio Profesional de Antropólogos del Perú - Región Centro.
@@ -46,9 +48,7 @@
                     <ul class="footer-links">
                         <li><a href="{{ route('biblioteca') }}"><i class="fas fa-chevron-right"></i> Biblioteca Virtual</a></li>
                         <li><a href="{{ route('bolsa-trabajo') }}"><i class="fas fa-chevron-right"></i> Bolsa de Trabajo</a></li>
-                        <li><a href="{{ url('/#certificaciones') }}"><i class="fas fa-chevron-right"></i> Certificaciones</a></li>
-                        <li><a href="{{ url('/#capacitaciones') }}"><i class="fas fa-chevron-right"></i> Capacitaciones</a></li>
-                        <li><a href="{{ url('/#documentos') }}"><i class="fas fa-chevron-right"></i> Documentos</a></li>
+                        <li><a href="{{ route('colegiatura.index') }}"><i class="fas fa-chevron-right"></i> Colegiarme</a></li>
                     </ul>
                 </div>
 

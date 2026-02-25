@@ -22,16 +22,16 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link">
+                    <a href="javascript:void(0)" class="nav-link {{ request()->is('nosotros*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         Nosotros
                         <i class="fas fa-chevron-down dropdown-icon"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('nosotros.mision-vision') }}"><i class="fas fa-bullseye"></i> Misión y Visión</a></li>
-                        <li><a href="{{ route('nosotros.historia') }}"><i class="fas fa-history"></i> Historia</a></li>
-                        <li><a href="{{ route('nosotros.consejo-directivo') }}"><i class="fas fa-users-cog"></i> Consejo Directivo</a></li>
-                        <li><a href="{{ route('nosotros.normativa-legal') }}"><i class="fas fa-gavel"></i> Normativa Legal</a></li>
+                        <li><a href="{{ route('nosotros.mision-vision') }}" class="{{ request()->routeIs('nosotros.mision-vision') ? 'active' : '' }}"><i class="fas fa-bullseye"></i> Misión y Visión</a></li>
+                        <li><a href="{{ route('nosotros.historia') }}" class="{{ request()->routeIs('nosotros.historia') ? 'active' : '' }}"><i class="fas fa-history"></i> Historia</a></li>
+                        <li><a href="{{ route('nosotros.consejo-directivo') }}" class="{{ request()->routeIs('nosotros.consejo-directivo') ? 'active' : '' }}"><i class="fas fa-users-cog"></i> Consejo Directivo</a></li>
+                        <li><a href="{{ route('nosotros.normativa-legal') }}" class="{{ request()->routeIs('nosotros.normativa-legal') ? 'active' : '' }}"><i class="fas fa-gavel"></i> Normativa Legal</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -41,8 +41,8 @@
                         <i class="fas fa-chevron-down dropdown-icon"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('noticias.index') }}"><i class="fas fa-newspaper"></i> Noticias</a></li>
-                        <li><a href="{{ route('eventos.index') }}"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
+                        <li><a href="{{ route('noticias.index') }}" class="{{ request()->routeIs('noticias.*') || request()->is('noticias*') ? 'active' : '' }}"><i class="fas fa-newspaper"></i> Noticias</a></li>
+                        <li><a href="{{ route('eventos.index') }}" class="{{ request()->routeIs('eventos.*') || request()->is('eventos*') ? 'active' : '' }}"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -52,26 +52,26 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="javascript:void(0)" class="nav-link">
+                    <a href="javascript:void(0)" class="nav-link {{ request()->is('biblioteca') || request()->is('bolsa-trabajo') || request()->is('colegiatura*') ? 'active' : '' }}">
                         <i class="fas fa-briefcase"></i>
                         Servicios
                         <i class="fas fa-chevron-down dropdown-icon"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ route('biblioteca') }}">
+                            <a href="{{ route('biblioteca') }}" class="{{ request()->routeIs('biblioteca') || request()->is('biblioteca') ? 'active' : '' }}">
                                 <i class="fas fa-book"></i> Biblioteca Virtual
                             </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('bolsa-trabajo') }}">
+                            <a href="{{ route('bolsa-trabajo') }}" class="{{ request()->routeIs('bolsa-trabajo') || request()->is('bolsa-trabajo') ? 'active' : '' }}">
                                 <i class="fas fa-briefcase"></i> Bolsa de Trabajo
                             </a>
                         </li>
 
                         <li>
-                            <a href="{{ route('colegiatura.index') }}">
+                            <a href="{{ route('colegiatura.index') }}" class="{{ request()->routeIs('colegiatura.*') || request()->is('colegiatura*') ? 'active' : '' }}">
                                 <i class="fas fa-user-graduate"></i> Colegiarme
                             </a>
                         </li>
@@ -79,7 +79,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('contacto.index') }}" class="nav-link">
+                    <a href="{{ route('contacto.index') }}" class="nav-link {{ request()->is('contacto*') ? 'active' : '' }}">
                         <i class="fas fa-envelope"></i>
                         Contacto
                     </a>

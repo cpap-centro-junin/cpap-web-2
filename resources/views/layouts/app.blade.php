@@ -7,7 +7,7 @@
     <title>@yield('title', 'CPAP Región Centro')</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logos/logo-cpap-web-elecciones.png') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logos/cpap-logo.jpg') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

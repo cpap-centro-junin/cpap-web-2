@@ -25,92 +25,203 @@
     </div>
 </section>
 
-<!-- Banner Slider Section - Optimizado -->
+<!-- Banner Slider Section -->
 <section class="banner-slider-section">
     <div class="banner-slider-wrapper" id="bannerSliderWrapper">
-            <div class="banner-slider" id="bannerSlider">
-                <!-- Slide 1: Colegiatura 2026 -->
-                <div class="banner-slide">
-                    <div class="banner-content">
-                        <div class="banner-image">
-                            <img src="{{ asset('images/banners/banner-colegiatura.png') }}" 
-                                 alt="Proceso de Colegiatura 2026" 
-                                 loading="lazy"
-                                 width="600"
-                                 height="500">
-                        </div>
-                        <div class="banner-info">
-                            <span class="banner-category">Proceso de Colegiatura</span>
-                            <h3>¡Proceso de Colegiatura 2026 Abierto!</h3>
-                            <p>Únete a nuestra comunidad profesional. Requisitos y formularios disponibles para nuevos colegiados.</p>
-                            <a href="{{ url('/#colegiatura') }}" class="btn btn-primary">
-                                <i class="fas fa-arrow-right"></i> Ver Más
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <div class="banner-slider" id="bannerSlider">
 
-                <!-- Slide 2: 39 Aniversario -->
-                <div class="banner-slide">
-                    <div class="banner-content">
-                        <div class="banner-image">
-                            <img src="{{ asset('images/noticias/39-Aniversario.jpg') }}" 
-                                 alt="39 Aniversario CPAP Región Centro" 
-                                 loading="lazy"
-                                 width="600"
-                                 height="500">
-                        </div>
-                        <div class="banner-info">
-                            <span class="banner-category">Aniversario Institucional</span>
-                            <h3>Celebramos 39 Años de Trayectoria</h3>
-                            <p>Cuatro décadas promoviendo la excelencia en la antropología peruana y la investigación social.</p>
-                            <a href="{{ url('/#noticias') }}" class="btn btn-primary">
-                                <i class="fas fa-arrow-right"></i> Leer Más
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Juramentación -->
-                <div class="banner-slide">
-                    <div class="banner-content">
-                        <div class="banner-image">
-                            <img src="{{ asset('images/noticias/Ceremonia-juramentacion.png') }}" 
-                                 alt="Ceremonia de Juramentación de Nuevos Colegiados" 
-                                 loading="lazy"
-                                 width="600"
-                                 height="500">
-                        </div>
-                        <div class="banner-info">
-                            <span class="banner-category">Ceremonia Especial</span>
-                            <h3>Juramentación de Nuevos Colegiados</h3>
-                            <p>Damos la bienvenida a los nuevos profesionales que se unen a nuestra institución.</p>
-                            <a href="{{ url('/#eventos') }}" class="btn btn-primary">
-                                <i class="fas fa-arrow-right"></i> Ver Galería
-                            </a>
-                        </div>
-                    </div>
+            <!-- Slide 1: Colegiatura 2026 -->
+            <div class="banner-slide">
+                <img class="slide-bg"
+                     src="{{ asset('images/banners/banner-colegiatura.png') }}"
+                     alt="Proceso de Colegiatura 2026"
+                     loading="lazy"
+                     draggable="false"
+                     width="1400" height="620">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-tag">Proceso de Colegiatura</span>
+                    <h3 class="slide-title">¡Proceso de Colegiatura<br>2026 Abierto!</h3>
+                    <div class="slide-divider"></div>
+                    <p class="slide-text">Únete a nuestra comunidad profesional. Requisitos y formularios disponibles para nuevos colegiados.</p>
+                    <a href="{{ url('/#colegiatura') }}" class="slide-btn">
+                        <i class="fas fa-arrow-right"></i> Ver Más
+                    </a>
                 </div>
             </div>
-            
-            <!-- Controles de Navegación -->
-            <button class="slider-control prev" 
-                    id="sliderPrev" 
-                    aria-label="Slide anterior">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="slider-control next" 
-                    id="sliderNext" 
-                    aria-label="Siguiente slide">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            
-            <!-- Indicadores -->
-            <div class="slider-indicators"
-                 id="sliderIndicators"
-                 role="tablist"
-                 aria-label="Seleccionar slide"></div>
+
+            <!-- Slide 2: 39 Aniversario -->
+            <div class="banner-slide">
+                <img class="slide-bg"
+                     src="{{ asset('images/noticias/39-Aniversario.jpg') }}"
+                     alt="39 Aniversario CPAP Región Centro"
+                     loading="lazy"
+                     draggable="false"
+                     width="1400" height="620">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-tag">Aniversario Institucional</span>
+                    <h3 class="slide-title">Celebramos 39 Años<br>de Trayectoria</h3>
+                    <div class="slide-divider"></div>
+                    <p class="slide-text">Cuatro décadas promoviendo la excelencia en la antropología peruana y la investigación social.</p>
+                    <a href="{{ url('/#noticias') }}" class="slide-btn">
+                        <i class="fas fa-arrow-right"></i> Leer Más
+                    </a>
+                </div>
+            </div>
+
+            <!-- Slide 3: Juramentación -->
+            <div class="banner-slide">
+                <img class="slide-bg"
+                     src="{{ asset('images/noticias/Ceremonia-juramentacion.png') }}"
+                     alt="Ceremonia de Juramentación de Nuevos Colegiados"
+                     loading="lazy"
+                     draggable="false"
+                     width="1400" height="620">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-tag">Ceremonia Especial</span>
+                    <h3 class="slide-title">Juramentación de<br>Nuevos Colegiados</h3>
+                    <div class="slide-divider"></div>
+                    <p class="slide-text">Damos la bienvenida a los nuevos profesionales que se unen a nuestra institución.</p>
+                    <a href="{{ url('/#eventos') }}" class="slide-btn">
+                        <i class="fas fa-arrow-right"></i> Ver Galería
+                    </a>
+                </div>
+            </div>
+
         </div>
+
+        <!-- Controles de Navegación -->
+        <button class="slider-control prev"
+                id="sliderPrev"
+                aria-label="Slide anterior">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-control next"
+                id="sliderNext"
+                aria-label="Siguiente slide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Indicadores -->
+        <div class="slider-indicators"
+             id="sliderIndicators"
+             role="tablist"
+             aria-label="Seleccionar slide"></div>
+
+        <!-- Barra de progreso del autoplay -->
+        <div class="slider-progress">
+            <div class="slider-progress-bar"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ─── Orientaciones de la Antropología ─── -->
+<section class="section-padding" id="orientaciones">
+    <div class="container">
+
+        <div class="section-header text-center" data-aos="fade-up">
+            <span class="section-badge">Marco Conceptual</span>
+            <h2 class="section-title">Orientaciones de la Antropología</h2>
+            <p class="section-subtitle">
+                Clasificación teórica que organiza el campo antropológico según dos dimensiones fundamentales de estudio
+            </p>
+        </div>
+
+        <div class="antro-diagram" data-aos="fade-up" data-aos-delay="100">
+
+            {{-- ── Barra superior: Antropología Cultural ── --}}
+            <div class="antro-bar antro-bar-top">
+                <i class="fas fa-people-group"></i>
+                <span>Antropología Cultural</span>
+            </div>
+
+            {{-- ── Cuerpo: [label-izq] + [cuadrantes] + [label-der] ── --}}
+            <div class="antro-body">
+
+                {{-- Etiqueta izquierda (texto vertical) --}}
+                <div class="antro-side-label antro-side-left">
+                    <span>Orientación Histórica</span>
+                </div>
+
+                {{-- Área del cruce de cuadrantes --}}
+                <div class="antro-cross-grid">
+
+                    {{-- ── 4 Cuadrantes ── --}}
+
+                    {{-- Q1: Cultural × Histórica --}}
+                    <div class="antro-quad antro-q1" data-aos="zoom-in" data-aos-delay="150">
+                        <div class="antro-circle-icon">
+                            <img src="{{ asset('images/antropologia/antro-q1-cultural-historica.jpg') }}"
+                                 alt="Origen y evolución de la cultura"
+                                 onerror="this.parentElement.innerHTML='<i class=\'fas fa-landmark\'></i>'">
+                        </div>
+                        <div class="antro-qbox">
+                            <p>Origen y evolución<br>de la cultura</p>
+                        </div>
+                    </div>
+
+                    {{-- Q2: Cultural × Científica --}}
+                    <div class="antro-quad antro-q2" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="antro-circle-icon">
+                            <img src="{{ asset('images/antropologia/antro-q2-cultural-cientifica.jpg') }}"
+                                 alt="Estructura y funciones de la cultura"
+                                 onerror="this.parentElement.innerHTML='<i class=\'fas fa-users\'></i>'">
+                        </div>
+                        <div class="antro-qbox">
+                            <p>Estructura y funciones<br>de la cultura</p>
+                        </div>
+                    </div>
+
+                    {{-- Q3: Biológica × Histórica --}}
+                    <div class="antro-quad antro-q3" data-aos="zoom-in" data-aos-delay="250">
+                        <div class="antro-circle-icon">
+                            <img src="{{ asset('images/antropologia/antro-q3-biologica-historica.jpg') }}"
+                                 alt="Origen y evolución del hombre"
+                                 onerror="this.parentElement.innerHTML='<i class=\'fas fa-bone\'></i>'">
+                        </div>
+                        <div class="antro-qbox">
+                            <p>Origen y evolución<br>del hombre</p>
+                        </div>
+                    </div>
+
+                    {{-- Q4: Biológica × Científica --}}
+                    <div class="antro-quad antro-q4" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="antro-circle-icon">
+                            <img src="{{ asset('images/antropologia/antro-q4-biologica-cientifica.jpg') }}"
+                                 alt="Estructura y funciones corporales"
+                                 onerror="this.parentElement.innerHTML='<i class=\'fas fa-dna\'></i>'">
+                        </div>
+                        <div class="antro-qbox">
+                            <p>Estructura y funciones<br>corporales</p>
+                        </div>
+                    </div>
+
+                    {{-- Etiquetas flotantes del eje vertical (en el cruce central) --}}
+                    <div class="antro-center-tag antro-center-top">Orientación Cultural</div>
+                    <div class="antro-center-tag antro-center-bottom">Orientación Biológica</div>
+
+                </div>{{-- /antro-cross-grid --}}
+
+                {{-- Etiqueta derecha (texto vertical) --}}
+                <div class="antro-side-label antro-side-right">
+                    <span>Orientación Científica</span>
+                </div>
+
+            </div>{{-- /antro-body --}}
+
+            {{-- ── Barra inferior: Antropología Biológica ── --}}
+            <div class="antro-bar antro-bar-bottom">
+                <i class="fas fa-dna"></i>
+                <span>Antropología Biológica</span>
+            </div>
+
+            <p class="antro-source">Fuente: <strong>A. Hoebel</strong></p>
+
+        </div>{{-- /antro-diagram --}}
+    </div>
 </section>
 
 <!-- Stats Section -->
@@ -191,17 +302,6 @@
 
             <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="service-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h3>Capacitaciones</h3>
-                <p>Talleres, seminarios y cursos especializados para el desarrollo profesional continuo.</p>
-                <a href="#eventos" class="btn-text">
-                    Ver Eventos <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-icon">
                     <i class="fas fa-briefcase"></i>
                 </div>
                 <h3>Bolsa de Trabajo</h3>
@@ -211,7 +311,7 @@
                 </a>
             </div>
 
-            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="service-icon">
                     <i class="fas fa-book-open"></i>
                 </div>
@@ -219,17 +319,6 @@
                 <p>Acceso a recursos bibliográficos, investigaciones y publicaciones especializadas.</p>
                 <a href="{{ route('biblioteca') }}" class="btn-text">
                     Explorar <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-
-            <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                <div class="service-icon">
-                    <i class="fas fa-hands-helping"></i>
-                </div>
-                <h3>Asesoría Profesional</h3>
-                <p>Orientación en temas deontológicos, éticos y de ejercicio profesional.</p>
-                <a href="{{ url('/#contacto') }}" class="btn-text">
-                    Consultar <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -426,123 +515,6 @@
     </div>
 </section>
 
-
-
-
-{{-- SECCIÓN CONTACTO --}}
-<section class="home-contact-section" id="contacto">
-    <div class="cpap-container">
-        <div class="home-contact-grid">
-
-            <div class="home-contact-info" data-aos="fade-right">
-                <div class="home-contact-eyebrow">
-                    <i class="fas fa-envelope-open-text"></i>
-                    Contáctanos
-                </div>
-                <h2>¿Tienes alguna consulta?</h2>
-                <p>Nuestro equipo está disponible para orientarte en el proceso de colegiatura, resolver consultas institucionales y brindarte toda la información que necesites sobre el CPAP Región Centro.</p>
-
-                <div class="home-contact-items">
-                    <div class="home-contact-item">
-                        <div class="home-contact-item-icon home-ci--primary"><i class="fas fa-clock"></i></div>
-                        <div>
-                            <strong>Horario de atención</strong>
-                            <span>Lun – Vie · 09:00 a.m. – 06:00 p.m.</span>
-                        </div>
-                    </div>
-                    <div class="home-contact-item">
-                        <div class="home-contact-item-icon home-ci--gold"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <strong>Dirección</strong>
-                            <span>Jr. Arequipa 734, Huancayo – Junín</span>
-                        </div>
-                    </div>
-                    <div class="home-contact-item">
-                        <div class="home-contact-item-icon home-ci--primary"><i class="fab fa-whatsapp"></i></div>
-                        <div>
-                            <strong>WhatsApp</strong>
-                            <span>(+51) 900 000 000</span>
-                        </div>
-                    </div>
-                    <div class="home-contact-item">
-                        <div class="home-contact-item-icon home-ci--gold"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <strong>Mesa de Partes</strong>
-                            <span>mesadepartes@cpaprc.org.pe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="home-contact-actions">
-                    <a href="{{ url('/contacto') }}" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Enviar mensaje
-                    </a>
-                    <a href="https://wa.me/51900000000" target="_blank" class="btn btn-whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                </div>
-            </div>
-
-            <div class="home-contact-form-col" data-aos="fade-left">
-                <div class="home-contact-form-card">
-                    <h3>Escríbenos directamente</h3>
-                    <form action="{{ route('contact.send') }}" method="POST" id="homeContactForm">
-                        @csrf
-                        <div class="home-cf-field">
-                            <input type="text" name="nombre" placeholder="Nombre completo" required>
-                        </div>
-                        <div class="home-cf-field">
-                            <input type="email" name="email" placeholder="Correo electrónico" required>
-                        </div>
-                        <div class="home-cf-field">
-                            <input type="text" name="asunto" placeholder="Asunto" required>
-                        </div>
-                        <div class="home-cf-field">
-                            <textarea name="mensaje" rows="4" placeholder="Tu mensaje..." required></textarea>
-                        </div>
-                        <button type="submit" class="home-cf-btn" id="homeCfBtn">
-                            <span class="home-cf-btn-text"><i class="fas fa-paper-plane"></i> Enviar</span>
-                            <span class="home-cf-btn-loader"><span class="home-cf-spinner"></span></span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-(function(){
-    const form = document.getElementById('homeContactForm');
-    if(!form) return;
-    const btn = document.getElementById('homeCfBtn');
-    form.addEventListener('submit', function(e){
-        e.preventDefault();
-        btn.classList.add('loading');
-        btn.disabled = true;
-        fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
-        })
-        .then(r => { if(!r.ok) throw new Error(); return r.json(); })
-        .then(data => {
-            btn.classList.remove('loading');
-            btn.disabled = false;
-            if(data.success){
-                form.reset();
-                Swal.fire({ icon: 'success', title: 'Mensaje enviado', text: data.message, confirmButtonColor: '#8B1538' });
-            }
-        })
-        .catch(() => {
-            btn.classList.remove('loading');
-            btn.disabled = false;
-            Swal.fire({ icon: 'error', title: 'Error', text: 'Hubo un problema al enviar el mensaje.' });
-        });
-    });
-})();
-</script>
 
 @if(isset($anuncio) && $anuncio)
 <div id="popupAnuncio"

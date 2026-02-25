@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Nueva Contraseña - CPAP</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logos/cpap-logo.jpg') }}">
+
     @vite(['resources/css/app.css'])
 
     <!-- SweetAlert2 -->

@@ -10,11 +10,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #1a1a1a 0%, #8B1538 25%, #6B0F2A 75%, #1a1a1a 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 40%, var(--primary-dark) 100%);
     background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    animation: gradientShift 12s ease infinite;
     overflow: hidden;
-    padding: 140px 20px 60px; /* top padding > navbar height (92px) so content stays visible */
+    padding: 55px 20px 60px; /* top padding > navbar height (92px) so content stays visible */
     z-index: 1;
 }
 
@@ -220,7 +220,7 @@
 /* SERVICES GRID - Cards 3D Effect */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 35px;
 }
 
@@ -865,5 +865,284 @@
 
     .page-subtitle {
         font-size: var(--font-base);
+    }
+}
+
+/* ============================================
+   ORIENTACIONES DE LA ANTROPOLOGÍA - Diagrama
+   ============================================ */
+
+.antro-diagram {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(139, 21, 56, 0.06);
+    overflow: hidden;
+}
+
+/* ── Barras top / bottom (categorías principales) ── */
+.antro-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 32px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.antro-bar i { font-size: 1.1rem; opacity: 0.85; }
+
+.antro-bar-top {
+    background: linear-gradient(135deg, #8B1538 0%, #6B0F2A 100%);
+}
+
+.antro-bar-bottom {
+    background: linear-gradient(135deg, #2C3E50 0%, #1a2535 100%);
+}
+
+/* ── Cuerpo: [etiq-izq] + [cuadrantes] + [etiq-der] ── */
+.antro-body {
+    display: grid;
+    grid-template-columns: 62px 1fr 62px;
+    align-items: stretch;
+    border-left: 1px solid rgba(139, 21, 56, 0.10);
+    border-right: 1px solid rgba(139, 21, 56, 0.10);
+}
+
+/* Etiquetas laterales (texto vertical) */
+.antro-side-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 21, 56, 0.04);
+    padding: 8px 0;
+}
+
+.antro-side-label span {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8B1538;
+}
+
+.antro-side-left {
+    border-right: 2px solid #2C3E50;
+}
+
+.antro-side-left span {
+    transform: rotate(180deg);
+}
+
+.antro-side-right {
+    border-left: 2px solid #2C3E50;
+}
+
+/* ── Cuadrícula del cruce (2 × 2) ── */
+.antro-cross-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+/* ── Cuadrantes individuales ── */
+.antro-quad {
+    position: relative;
+    padding: 62px 36px 46px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    min-height: 260px;
+    background: #fdfafa;
+    transition: background 0.3s ease;
+}
+
+.antro-quad:hover { background: rgba(139, 21, 56, 0.04); }
+
+/* Líneas del cruce vía bordes */
+.antro-q1 {
+    border-right: 2px solid #2C3E50;
+    border-bottom: 2px solid #2C3E50;
+}
+.antro-q2 {
+    border-bottom: 2px solid #2C3E50;
+}
+.antro-q3 {
+    border-right: 2px solid #2C3E50;
+}
+/* q4: sin bordes adicionales */
+
+/* ── Iconos circulares (esquina exterior de cada cuadrante) ── */
+.antro-circle-icon {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B1538 0%, #6B0F2A 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 2rem;
+    box-shadow: 0 4px 18px rgba(139, 21, 56, 0.32);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.35s ease;
+    overflow: hidden;
+}
+
+.antro-quad:hover .antro-circle-icon {
+    transform: scale(1.12);
+    box-shadow: 0 8px 28px rgba(139, 21, 56, 0.45);
+}
+
+/* Posición del ícono en la esquina exterior de cada cuadrante */
+.antro-q1 .antro-circle-icon { top: 16px; left: 16px; }
+.antro-q2 .antro-circle-icon { top: 16px; right: 16px; }
+.antro-q3 .antro-circle-icon { bottom: 16px; left: 16px; }
+.antro-q4 .antro-circle-icon { bottom: 16px; right: 16px; }
+
+/* ── Caja de texto del cuadrante ── */
+.antro-qbox {
+    background: rgba(139, 21, 56, 0.07);
+    border: 1.5px solid rgba(139, 21, 56, 0.20);
+    border-radius: 10px;
+    padding: 18px 24px;
+    text-align: center;
+    width: 100%;
+    max-width: 260px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.antro-quad:hover .antro-qbox {
+    background: rgba(139, 21, 56, 0.11);
+    border-color: rgba(139, 21, 56, 0.35);
+}
+
+.antro-qbox p {
+    color: #8B1538;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* ── Etiquetas del eje en el cruce central ── */
+.antro-center-tag {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    border: 1.5px solid #2C3E50;
+    border-radius: 6px;
+    padding: 4px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #2C3E50;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    white-space: nowrap;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+.antro-center-top    { top: 0;    transform: translate(-50%, -50%); }
+.antro-center-bottom { bottom: 0; transform: translate(-50%, 50%); }
+
+/* ── Fuente / referencia ── */
+.antro-source {
+    text-align: right;
+    font-size: 0.82rem;
+    color: #9ca3af;
+    font-style: italic;
+    margin: 0;
+    padding: 12px 24px 14px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: #fafafa;
+}
+
+.antro-source strong { color: #6b7280; }
+
+/* Imágenes dentro del ícono circular */
+.antro-circle-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* ============================================
+   RESPONSIVE - Diagrama
+   ============================================ */
+
+@media (max-width: 768px) {
+    .antro-body { grid-template-columns: 38px 1fr 38px; }
+
+    .antro-side-label span {
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+    }
+
+    .antro-quad {
+        padding: 46px 18px 28px;
+        min-height: 180px;
+        gap: 14px;
+    }
+
+    .antro-circle-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 1.3rem;
+    }
+
+    .antro-q1 .antro-circle-icon { top: 10px; left: 10px; }
+    .antro-q2 .antro-circle-icon { top: 10px; right: 10px; }
+    .antro-q3 .antro-circle-icon { bottom: 10px; left: 10px; }
+    .antro-q4 .antro-circle-icon { bottom: 10px; right: 10px; }
+
+    .antro-qbox { padding: 12px 14px; max-width: 170px; }
+    .antro-qbox p { font-size: 0.85rem; }
+
+    .antro-center-tag {
+        font-size: 0.58rem;
+        padding: 2px 8px;
+        letter-spacing: 0.8px;
+    }
+
+    .antro-bar {
+        font-size: 0.92rem;
+        padding: 14px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .antro-body { grid-template-columns: 30px 1fr 30px; }
+
+    .antro-side-label span {
+        font-size: 0.52rem;
+        letter-spacing: 0.5px;
+    }
+
+    .antro-quad {
+        padding: 36px 12px 22px;
+        min-height: 150px;
+        gap: 10px;
+    }
+
+    .antro-qbox p { font-size: 0.76rem; }
+
+    .antro-circle-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1rem;
     }
 }

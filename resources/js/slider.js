@@ -1,137 +1,211 @@
 /**
- * Banner Slider - Solución Robusta con Transform
- * Sistema de slides con translateX para transiciones suaves y confiables
+ * Banner Slider - Full Image Cinematic
+ * Crossfade con clase .active para Ken Burns + animación de texto
+ * Progress bar de autoplay con pausa/reanudación precisa
  */
 
-document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.getElementById('bannerSlider');
-    const slides = document.querySelectorAll('.banner-slide');
-    const prevBtn = document.getElementById('sliderPrev');
-    const nextBtn = document.getElementById('sliderNext');
-    const indicatorsContainer = document.getElementById('sliderIndicators');
-    
-    if (!slider || slides.length === 0) {
-        
-        return;
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    const slider        = document.getElementById('bannerSlider');
+    const slides        = document.querySelectorAll('.banner-slide');
+    const prevBtn       = document.getElementById('sliderPrev');
+    const nextBtn       = document.getElementById('sliderNext');
+    const indicatorsCt  = document.getElementById('sliderIndicators');
+    const progressBar   = document.querySelector('.slider-progress-bar');
 
-    // Variables de estado
-    let currentIndex = 0;
+    if (!slider || slides.length === 0) return;
+
+    // ── Estado ──────────────────────────────────
+    let currentIndex    = 0;
     let isTransitioning = false;
-    let autoplayTimer = null;
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    const AUTOPLAY_DELAY = 5000;
-    const TRANSITION_DURATION = 600;
-    const SWIPE_THRESHOLD = 50;
+    let autoplayTimer   = null;     // setTimeout o setInterval activo
+    let isInterval      = false;    // true cuando autoplayTimer es un setInterval
+    let slideStartedAt  = null;     // cuándo empezó el ciclo del slide actual
+    let pausedAt        = null;     // cuándo se pausó (hover)
+    let touchStartX     = 0;
+    let touchEndX       = 0;
+    let isDragging      = false;
+    let dragStartX      = 0;
 
-    // Inicializar slides
+    const AUTOPLAY_DELAY      = 4000;   // ms entre slides
+    const TRANSITION_DURATION = 850;    // debe coincidir con CSS opacity transition
+    const SWIPE_THRESHOLD     = 50;     // px mínimos para considerar swipe
+
+    // ── Inicializar slides ───────────────────────
     function initSlides() {
-        slides.forEach((slide, index) => {
-            slide.style.transform = `translateX(${index * 100}%)`;
-            slide.style.opacity = index === 0 ? '1' : '0';
-        });
-    }
-
-    // Crear indicadores
-    function createIndicators() {
-        if (!indicatorsContainer) return;
-        
-        indicatorsContainer.innerHTML = '';
-        slides.forEach((_, index) => {
-            const dot = document.createElement('button');
-            dot.className = 'slider-indicator';
-            dot.setAttribute('aria-label', `Slide ${index + 1}`);
-            if (index === 0) dot.classList.add('active');
-            
-            dot.addEventListener('click', () => goToSlide(index));
-            indicatorsContainer.appendChild(dot);
-        });
-    }
-
-    // Ir a un slide específico
-    function goToSlide(index) {
-        if (isTransitioning) return;
-        if (index === currentIndex) return;
-        
-        isTransitioning = true;
-        
-        // Normalizar índice
-        if (index >= slides.length) index = 0;
-        if (index < 0) index = slides.length - 1;
-        
-        const direction = index > currentIndex ? -1 : 1;
-        
-        // Animar slides
         slides.forEach((slide, i) => {
-            const offset = (i - index) * 100;
-            slide.style.transform = `translateX(${offset}%)`;
-            slide.style.opacity = i === index ? '1' : '0';
+            slide.style.opacity = i === 0 ? '1' : '0';
+            if (i === 0) slide.classList.add('active');
         });
-        
+    }
+
+    // ── Indicadores ────────────────────────────
+    function createIndicators() {
+        if (!indicatorsCt) return;
+        indicatorsCt.innerHTML = '';
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'slider-indicator' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Slide ${i + 1}`);
+            dot.setAttribute('role', 'tab');
+            dot.addEventListener('click', () => { goToSlide(i); resetAutoplay(); });
+            indicatorsCt.appendChild(dot);
+        });
+    }
+
+    function updateIndicators() {
+        if (!indicatorsCt) return;
+        indicatorsCt.querySelectorAll('.slider-indicator').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+            dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+        });
+    }
+
+    // ── Ir a slide ──────────────────────────────
+    function goToSlide(index) {
+        if (isTransitioning || index === currentIndex) return;
+        isTransitioning = true;
+
+        // Normalizar índice circular
+        if (index >= slides.length) index = 0;
+        if (index < 0)              index = slides.length - 1;
+
+        // Saliente: quitar active + ocultar
+        slides[currentIndex].classList.remove('active');
+        slides[currentIndex].style.opacity = '0';
+
+        // Entrante: activar
+        slides[index].classList.add('active');
+        slides[index].style.opacity = '1';
+
         currentIndex = index;
         updateIndicators();
-        
-        setTimeout(() => {
-            isTransitioning = false;
-        }, TRANSITION_DURATION);
+
+        setTimeout(() => { isTransitioning = false; }, TRANSITION_DURATION);
     }
 
-    // Actualizar indicadores
-    function updateIndicators() {
-        if (!indicatorsContainer) return;
-        
-        const dots = indicatorsContainer.querySelectorAll('.slider-indicator');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-        });
+    const nextSlide = () => goToSlide(currentIndex + 1);
+    const prevSlide = () => goToSlide(currentIndex - 1);
+
+    // ── Autoplay ────────────────────────────────
+    function clearAutoplayTimer() {
+        if (autoplayTimer === null) return;
+        if (isInterval) clearInterval(autoplayTimer);
+        else            clearTimeout(autoplayTimer);
+        autoplayTimer = null;
+        isInterval    = false;
     }
 
-    // Siguiente slide
-    function nextSlide() {
-        goToSlide(currentIndex + 1);
-    }
-
-    // Slide anterior
-    function prevSlide() {
-        goToSlide(currentIndex - 1);
-    }
-
-    // Auto-play
+    /**
+     * Inicia un ciclo completamente nuevo desde 0.
+     * Usar cuando se cambia de slide manualmente o al inicializar.
+     */
     function startAutoplay() {
-        stopAutoplay();
-        autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+        clearAutoplayTimer();
+        slideStartedAt = Date.now();
+        pausedAt       = null;
+        startProgress();
+        autoplayTimer = setInterval(() => {
+            nextSlide();
+            slideStartedAt = Date.now();
+            resetProgress();
+        }, AUTOPLAY_DELAY);
+        isInterval = true;
     }
 
-    function stopAutoplay() {
-        if (autoplayTimer) {
-            clearInterval(autoplayTimer);
-            autoplayTimer = null;
-        }
+    /**
+     * Pausa el autoplay guardando el instante de pausa.
+     * La barra de progreso queda congelada en su posición actual.
+     */
+    function pauseAutoplay() {
+        clearAutoplayTimer();
+        pausedAt = Date.now();
+        pauseProgress();
     }
 
+    /**
+     * Reanuda el autoplay desde donde se pausó.
+     * Calcula el tiempo restante y usa setTimeout + setInterval.
+     */
+    function resumeAutoplay() {
+        clearAutoplayTimer();
+
+        // Calcular tiempo ya transcurrido antes de la pausa
+        const elapsed  = (slideStartedAt && pausedAt)
+                           ? Math.max(0, pausedAt - slideStartedAt)
+                           : 0;
+        const remaining = Math.max(200, AUTOPLAY_DELAY - elapsed);
+
+        pausedAt = null;
+        resumeProgress(remaining);
+
+        // Esperar el tiempo restante → cambiar slide → continuar con cadencia normal
+        autoplayTimer = setTimeout(() => {
+            nextSlide();
+            slideStartedAt = Date.now();
+            startProgress();
+            autoplayTimer = setInterval(() => {
+                nextSlide();
+                slideStartedAt = Date.now();
+                resetProgress();
+            }, AUTOPLAY_DELAY);
+            isInterval = true;
+        }, remaining);
+        isInterval = false;
+    }
+
+    /**
+     * Reinicio completo (al pulsar prev/next o un indicador).
+     */
     function resetAutoplay() {
-        stopAutoplay();
+        pausedAt = null;
         startAutoplay();
     }
 
-    // Event listeners
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            resetAutoplay();
-        });
+    // ── Progress bar ────────────────────────────
+    function startProgress() {
+        if (!progressBar) return;
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+        progressBar.offsetHeight; // eslint-disable-line no-unused-expressions
+        progressBar.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
+        progressBar.style.width = '100%';
     }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            resetAutoplay();
-        });
+    function resetProgress() {
+        if (!progressBar) return;
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+        progressBar.offsetHeight; // eslint-disable-line no-unused-expressions
+        progressBar.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
+        progressBar.style.width = '100%';
     }
 
-    // Touch/Swipe
+    function pauseProgress() {
+        if (!progressBar) return;
+        const computed = parseFloat(getComputedStyle(progressBar).width);
+        const parentW  = progressBar.parentElement.offsetWidth;
+        const pct      = parentW > 0 ? (computed / parentW) * 100 : 0;
+        progressBar.style.transition = 'none';
+        progressBar.style.width = pct + '%';
+    }
+
+    /**
+     * Continúa la barra desde su posición actual hasta el 100%
+     * usando exactamente `remaining` milisegundos.
+     */
+    function resumeProgress(remaining) {
+        if (!progressBar) return;
+        // La barra está congelada (pauseProgress ya la fijó)
+        progressBar.offsetHeight; // eslint-disable-line no-unused-expressions
+        progressBar.style.transition = `width ${remaining}ms linear`;
+        progressBar.style.width = '100%';
+    }
+
+    // ── Botones prev / next ─────────────────────
+    if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+
+    // ── Touch / Swipe ───────────────────────────
     slider.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
     }, { passive: true });
@@ -139,105 +213,73 @@ document.addEventListener('DOMContentLoaded', function() {
     slider.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].clientX;
         const diff = touchStartX - touchEndX;
-        
         if (Math.abs(diff) > SWIPE_THRESHOLD) {
-            if (diff > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
+            diff > 0 ? nextSlide() : prevSlide();
             resetAutoplay();
         }
     }, { passive: true });
 
-    // Mouse drag - Mejorado para funcionar en imágenes también
-    let isDragging = false;
-    let dragStartX = 0;
+    // ── Mouse drag ──────────────────────────────
     const sliderWrapper = document.getElementById('bannerSliderWrapper');
 
     // Prevenir drag nativo de imágenes
-    const images = slider.querySelectorAll('img');
-    images.forEach(img => {
-        img.addEventListener('dragstart', (e) => e.preventDefault());
-        img.style.userSelect = 'none';
-        img.style.pointerEvents = 'none'; // Las imágenes no bloquean el drag
+    slider.querySelectorAll('img').forEach(img => {
+        img.addEventListener('dragstart', e => e.preventDefault());
+        img.style.userSelect    = 'none';
+        img.style.pointerEvents = 'none';
     });
 
     sliderWrapper.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        dragStartX = e.clientX;
+        isDragging  = true;
+        dragStartX  = e.clientX;
         sliderWrapper.style.cursor = 'grabbing';
-        e.preventDefault(); // Prevenir selección de texto
+        e.preventDefault();
     });
 
     sliderWrapper.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
+        if (isDragging) e.preventDefault();
     });
 
     sliderWrapper.addEventListener('mouseup', (e) => {
         if (!isDragging) return;
-        
         const diff = dragStartX - e.clientX;
         if (Math.abs(diff) > SWIPE_THRESHOLD) {
-            if (diff > 0) {
-                nextSlide();
-            } else {
-                prevSlide();
-            }
+            diff > 0 ? nextSlide() : prevSlide();
             resetAutoplay();
         }
-        
         isDragging = false;
         sliderWrapper.style.cursor = 'grab';
     });
 
     sliderWrapper.addEventListener('mouseleave', () => {
-        if (isDragging) {
-            isDragging = false;
-            sliderWrapper.style.cursor = 'grab';
-        }
+        if (isDragging) { isDragging = false; sliderWrapper.style.cursor = 'grab'; }
     });
 
-    // Pausar en hover
-    const wrapper = document.getElementById('bannerSliderWrapper');
-    if (wrapper) {
-        wrapper.addEventListener('mouseenter', stopAutoplay);
-        wrapper.addEventListener('mouseleave', startAutoplay);
-    }
+    // ── Pausa en hover / Reanudación al salir ───
+    sliderWrapper.addEventListener('mouseenter', pauseAutoplay);
+    sliderWrapper.addEventListener('mouseleave', resumeAutoplay);
 
-    // Pausar cuando no está visible
+    // ── Pausa cuando la pestaña está oculta ─────
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            stopAutoplay();
-        } else {
-            startAutoplay();
-        }
+        document.hidden ? pauseAutoplay() : resumeAutoplay();
     });
 
-    // Teclado
+    // ── Teclado ─────────────────────────────────
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-            resetAutoplay();
-        } else if (e.key === 'ArrowRight') {
-            nextSlide();
-            resetAutoplay();
-        }
+        if (e.key === 'ArrowLeft')  { prevSlide(); resetAutoplay(); }
+        if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); }
     });
 
-    // Inicializar
+    // ── Inicializar ─────────────────────────────
     initSlides();
     createIndicators();
     startAutoplay();
-    
-    console.log('✅ Slider inicializado:', slides.length, 'slides');
 
-    // Exponer controles
+    // Exponer controles globalmente (útil para debug o integración futura)
     window.sliderControls = {
-        next: nextSlide,
-        prev: prevSlide,
-        goto: goToSlide,
-        current: () => currentIndex
+        next    : nextSlide,
+        prev    : prevSlide,
+        goto    : goToSlide,
+        current : () => currentIndex,
     };
 });
