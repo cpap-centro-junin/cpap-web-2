@@ -199,6 +199,19 @@
             </div>
         </a>
 
+        <a href="{{ route('admin.bolsa.index') }}" class="card">
+            <div class="card-icon" style="background: linear-gradient(135deg, #00695c 0%, #004d40 100%);">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="card-content">
+                <strong>Bolsa de Trabajo</strong>
+                <p>Gestionar ofertas laborales</p>
+            </div>
+            <div class="card-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </a>
+
         <a href="{{ route('admin.documentos') }}" class="card">
             <div class="card-icon" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);">
                 <i class="fas fa-file-pdf"></i>

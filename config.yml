@@ -1,0 +1,7 @@
+tunnel: mi-tunel
+credentials-file: C:\Users\TU_USUARIO\.cloudflared\mi-tunel.json
+
+ingress:
+  - hostname: proyectojuan.cfargotunnel.com
+    service: http://localhost:8000
+  - service: http_status:404

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Biblioteca - CPAP Región Centro')
+@section('title', 'Biblioteca Virtual - CPAP Región Centro')
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('resources/css/pages/biblioteca.css') }}">
+@endpush
 
 @section('content')
 <!-- Page Header -->
@@ -26,35 +30,66 @@
 <section class="section-padding">
     <div class="container">
         <div class="library-search" data-aos="fade-up">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar libros, artículos, tesis, investigaciones...">
-                <button class="btn btn-primary">Buscar</button>
+            <form method="GET" action="{{ route('biblioteca') }}">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" name="q" value="{{ request('q') }}"
+                           placeholder="Buscar libros, artículos, tesis, investigaciones...">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+                <div class="search-filters">
+                    <select name="tipo" class="filter-select" onchange="this.form.submit()">
+                        <option value="">Tipo de Documento</option>
+                        <option value="libro" {{ request('tipo')=='libro'?'selected':'' }}>Libros</option>
+                        <option value="articulo" {{ request('tipo')=='articulo'?'selected':'' }}>Artículos</option>
+                        <option value="tesis" {{ request('tipo')=='tesis'?'selected':'' }}>Tesis</option>
+                        <option value="documento" {{ request('tipo')=='documento'?'selected':'' }}>Documentos CPAP</option>
+                        <option value="revista" {{ request('tipo')=='revista'?'selected':'' }}>Revistas</option>
+                        <option value="multimedia" {{ request('tipo')=='multimedia'?'selected':'' }}>Multimedia</option>
+                    </select>
+                    <select name="area" class="filter-select" onchange="this.form.submit()">
+                        <option value="">Área Temática</option>
+                        <option value="cultural" {{ request('area')=='cultural'?'selected':'' }}>Antropología Cultural</option>
+                        <option value="social" {{ request('area')=='social'?'selected':'' }}>Antropología Social</option>
+                        <option value="arqueologia" {{ request('area')=='arqueologia'?'selected':'' }}>Arqueología</option>
+                        <option value="linguistica" {{ request('area')=='linguistica'?'selected':'' }}>Lingüística</option>
+                        <option value="biologica" {{ request('area')=='biologica'?'selected':'' }}>Antropología Biológica</option>
+                    </select>
+                    <select name="anio" class="filter-select" onchange="this.form.submit()">
+                        <option value="">Año</option>
+                        <option value="2024" {{ request('anio')=='2024'?'selected':'' }}>2024-2026</option>
+                        <option value="2020" {{ request('anio')=='2020'?'selected':'' }}>2020-2023</option>
+                        <option value="2015" {{ request('anio')=='2015'?'selected':'' }}>2015-2019</option>
+                        <option value="older" {{ request('anio')=='older'?'selected':'' }}>Anteriores</option>
+                    </select>
+                </div>
+                @if(request()->hasAny(['q','tipo','area','anio']))
+                <div style="text-align:center;margin-top:15px;">
+                    <a href="{{ route('biblioteca') }}" class="filter-chip">
+                        <i class="fas fa-times"></i> Limpiar filtros
+                    </a>
+                </div>
+                @endif
+            </form>
+        </div>
+
+        {{-- Stats bar --}}
+        <div class="library-stats" data-aos="fade-up" data-aos-delay="100">
+            <div class="library-stat-item">
+                <div class="library-stat-number">{{ $totalRecursos }}</div>
+                <div class="library-stat-label">Recursos Totales</div>
             </div>
-            <div class="search-filters">
-                <select class="filter-select">
-                    <option value="">Tipo de Documento</option>
-                    <option value="libro">Libros</option>
-                    <option value="articulo">Artículos</option>
-                    <option value="tesis">Tesis</option>
-                    <option value="investigacion">Investigaciones</option>
-                    <option value="revista">Revistas</option>
-                </select>
-                <select class="filter-select">
-                    <option value="">Área Temática</option>
-                    <option value="cultural">Antropología Cultural</option>
-                    <option value="social">Antropología Social</option>
-                    <option value="arqueologia">Arqueología</option>
-                    <option value="linguistica">Lingüística</option>
-                    <option value="biologica">Antropología Biológica</option>
-                </select>
-                <select class="filter-select">
-                    <option value="">Año</option>
-                    <option value="2024">2024-2026</option>
-                    <option value="2020">2020-2023</option>
-                    <option value="2015">2015-2019</option>
-                    <option value="older">Anteriores</option>
-                </select>
+            <div class="library-stat-item">
+                <div class="library-stat-number">{{ $conteos['libro'] + $conteos['revista'] }}</div>
+                <div class="library-stat-label">Libros y Revistas</div>
+            </div>
+            <div class="library-stat-item">
+                <div class="library-stat-number">{{ $conteos['articulo'] + $conteos['tesis'] }}</div>
+                <div class="library-stat-label">Artículos y Tesis</div>
+            </div>
+            <div class="library-stat-item">
+                <div class="library-stat-number">{{ $conteos['documento'] + $conteos['multimedia'] }}</div>
+                <div class="library-stat-label">Docs y Multimedia</div>
             </div>
         </div>
     </div>
@@ -67,158 +102,195 @@
             <span class="section-badge">Colecciones</span>
             <h2 class="section-title">Categorías Principales</h2>
         </div>
-        
+
         <div class="library-categories">
-            <div class="category-card" data-aos="fade-up" data-aos-delay="100">
+            <a href="{{ route('biblioteca', ['tipo'=>'libro']) }}" class="category-card {{ request('tipo')=='libro'?'active-cat':'' }}" data-aos="fade-up" data-aos-delay="100">
                 <div class="category-icon">
                     <i class="fas fa-book-open"></i>
                 </div>
                 <h3>Libros Digitales</h3>
-                <p>Más de 500 títulos disponibles</p>
-                <a href="#" class="btn btn-text">Explorar <i class="fas fa-arrow-right"></i></a>
-            </div>
+                <span class="category-count">{{ $conteos['libro'] }} disponibles</span>
+            </a>
 
-            <div class="category-card" data-aos="fade-up" data-aos-delay="200">
+            <a href="{{ route('biblioteca', ['tipo'=>'articulo']) }}" class="category-card {{ request('tipo')=='articulo'?'active-cat':'' }}" data-aos="fade-up" data-aos-delay="200">
                 <div class="category-icon">
                     <i class="fas fa-newspaper"></i>
                 </div>
                 <h3>Artículos Académicos</h3>
-                <p>Publicaciones científicas recientes</p>
-                <a href="#" class="btn btn-text">Explorar <i class="fas fa-arrow-right"></i></a>
-            </div>
+                <span class="category-count">{{ $conteos['articulo'] }} disponibles</span>
+            </a>
 
-            <div class="category-card" data-aos="fade-up" data-aos-delay="300">
+            <a href="{{ route('biblioteca', ['tipo'=>'tesis']) }}" class="category-card {{ request('tipo')=='tesis'?'active-cat':'' }}" data-aos="fade-up" data-aos-delay="300">
                 <div class="category-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <h3>Tesis y Disertaciones</h3>
-                <p>Trabajos de investigación</p>
-                <a href="#" class="btn btn-text">Explorar <i class="fas fa-arrow-right"></i></a>
-            </div>
+                <span class="category-count">{{ $conteos['tesis'] }} disponibles</span>
+            </a>
 
-            <div class="category-card" data-aos="fade-up" data-aos-delay="400">
+            <a href="{{ route('biblioteca', ['tipo'=>'documento']) }}" class="category-card {{ request('tipo')=='documento'?'active-cat':'' }}" data-aos="fade-up" data-aos-delay="400">
                 <div class="category-icon">
                     <i class="fas fa-file-pdf"></i>
                 </div>
                 <h3>Documentos CPAP</h3>
-                <p>Publicaciones institucionales</p>
-                <a href="#" class="btn btn-text">Explorar <i class="fas fa-arrow-right"></i></a>
-            </div>
+                <span class="category-count">{{ $conteos['documento'] }} disponibles</span>
+            </a>
 
-            <div class="category-card" data-aos="fade-up" data-aos-delay="500">
+            <a href="{{ route('biblioteca', ['tipo'=>'revista']) }}" class="category-card {{ request('tipo')=='revista'?'active-cat':'' }}" data-aos="fade-up" data-aos-delay="500">
                 <div class="category-icon">
                     <i class="fas fa-globe-americas"></i>
                 </div>
                 <h3>Revistas Especializadas</h3>
-                <p>Publicaciones periódicas</p>
-                <a href="#" class="btn btn-text">Explorar <i class="fas fa-arrow-right"></i></a>
-            </div>
+                <span class="category-count">{{ $conteos['revista'] }} disponibles</span>
+            </a>
 
-            <div class="category-card" data-aos="fade-up" data-aos-delay="600">
+            <a href="{{ route('biblioteca', ['tipo'=>'multimedia']) }}" class="category-card {{ request('tipo')=='multimedia'?'active-cat':'' }}" data-aos="fade-up" data-aos-delay="600">
                 <div class="category-icon">
                     <i class="fas fa-video"></i>
                 </div>
                 <h3>Multimedia</h3>
-                <p>Videos y documentales</p>
-                <a href="#" class="btn btn-text">Explorar <i class="fas fa-arrow-right"></i></a>
-            </div>
+                <span class="category-count">{{ $conteos['multimedia'] }} disponibles</span>
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Featured Resources -->
+{{-- Featured Resources (si hay destacados y NO hay filtro activo) --}}
+@if($destacados->isNotEmpty() && !request()->hasAny(['q','tipo','area','anio']))
 <section class="section-padding">
     <div class="container">
         <div class="section-header text-center" data-aos="fade-up">
             <span class="section-badge">Destacados</span>
-            <h2 class="section-title">Recursos Destacados del Mes</h2>
+            <h2 class="section-title">Recursos Destacados</h2>
         </div>
 
         <div class="resources-grid">
-            <!-- Resource 1 -->
-            <div class="resource-card" data-aos="fade-up" data-aos-delay="100">
+            @foreach($destacados as $dest)
+            <div class="resource-card featured" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 + 100 }}">
                 <div class="resource-thumbnail">
-                    <i class="fas fa-book"></i>
-                    <span class="resource-type">Libro</span>
+                    @if($dest->imagen_portada)
+                        <img src="{{ asset('storage/' . $dest->imagen_portada) }}" alt="{{ $dest->titulo }}">
+                    @else
+                        <i class="fas {{ $dest->tipo_icon }}"></i>
+                    @endif
+                    <span class="resource-type">{{ $dest->tipo_label }}</span>
                 </div>
                 <div class="resource-content">
-                    <h3>Antropología Cultural en los Andes</h3>
-                    <p class="resource-author"><i class="fas fa-user"></i> Dr. Carlos Mendoza</p>
-                    <p class="resource-year"><i class="fas fa-calendar"></i> 2024</p>
+                    <h3>{{ $dest->titulo }}</h3>
+                    <p class="resource-author"><i class="fas fa-user"></i> {{ $dest->autor }}</p>
+                    @if($dest->anio_publicacion)
+                    <p class="resource-year"><i class="fas fa-calendar"></i> {{ $dest->anio_publicacion }}</p>
+                    @endif
                     <p class="resource-description">
-                        Estudio exhaustivo sobre las prácticas culturales en las comunidades andinas del Perú central.
+                        {{ Str::limit($dest->descripcion, 120) }}
                     </p>
-                    <div class="resource-tags">
-                        <span class="tag">Antropología Cultural</span>
-                        <span class="tag">Andes</span>
+                    {{-- Copyright badge --}}
+                    <div class="resource-copyright">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>{{ $dest->licencia_badge }}</span>
+                        @if($dest->solo_colegiados)
+                            <span class="copyright-lock"><i class="fas fa-lock"></i> Solo colegiados</span>
+                        @endif
                     </div>
                     <div class="resource-actions">
-                        <a href="#" class="btn btn-outline">
-                            <i class="fas fa-eye"></i> Ver
+                        <a href="{{ route('biblioteca.show', $dest) }}" class="btn btn-outline">
+                            <i class="fas fa-eye"></i> Ver detalle
                         </a>
-                        <a href="#" class="btn btn-primary">
+                        @if($dest->puede_descargar)
+                        <a href="{{ route('biblioteca.descargar', $dest) }}" class="btn btn-primary">
                             <i class="fas fa-download"></i> Descargar
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>
-
-            <!-- Resource 2 -->
-            <div class="resource-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="resource-thumbnail">
-                    <i class="fas fa-file-pdf"></i>
-                    <span class="resource-type">Artículo</span>
-                </div>
-                <div class="resource-content">
-                    <h3>Metodología Etnográfica Contemporánea</h3>
-                    <p class="resource-author"><i class="fas fa-user"></i> Dra. María Torres</p>
-                    <p class="resource-year"><i class="fas fa-calendar"></i> 2025</p>
-                    <p class="resource-description">
-                        Análisis de las nuevas tendencias metodológicas en la investigación etnográfica.
-                    </p>
-                    <div class="resource-tags">
-                        <span class="tag">Metodología</span>
-                        <span class="tag">Etnografía</span>
-                    </div>
-                    <div class="resource-actions">
-                        <a href="#" class="btn btn-outline">
-                            <i class="fas fa-eye"></i> Ver
-                        </a>
-                        <a href="#" class="btn btn-primary">
-                            <i class="fas fa-download"></i> Descargar
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Resource 3 -->
-            <div class="resource-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="resource-thumbnail">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span class="resource-type">Tesis</span>
-                </div>
-                <div class="resource-content">
-                    <h3>Identidad Cultural en Comunidades Urbanas</h3>
-                    <p class="resource-author"><i class="fas fa-user"></i> Lic. Juan Pérez</p>
-                    <p class="resource-year"><i class="fas fa-calendar"></i> 2025</p>
-                    <p class="resource-description">
-                        Investigación sobre la construcción de identidad en contextos urbanos migratorios.
-                    </p>
-                    <div class="resource-tags">
-                        <span class="tag">Identidad</span>
-                        <span class="tag">Migración</span>
-                    </div>
-                    <div class="resource-actions">
-                        <a href="#" class="btn btn-outline">
-                            <i class="fas fa-eye"></i> Ver
-                        </a>
-                        <a href="#" class="btn btn-primary">
-                            <i class="fas fa-download"></i> Descargar
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
+    </div>
+</section>
+@endif
+
+{{-- All Resources / Search Results --}}
+<section class="section-padding">
+    <div class="container">
+        @if(request()->hasAny(['q','tipo','area','anio']))
+        <div class="section-header text-center" data-aos="fade-up">
+            <span class="section-badge">Resultados</span>
+            <h2 class="section-title">
+                {{ $recursos->total() }} recurso{{ $recursos->total() !== 1 ? 's' : '' }} encontrado{{ $recursos->total() !== 1 ? 's' : '' }}
+            </h2>
+        </div>
+        @else
+        <div class="section-header text-center" data-aos="fade-up">
+            <span class="section-badge">Catálogo</span>
+            <h2 class="section-title">Todos los Recursos</h2>
+        </div>
+        @endif
+
+        @if($recursos->isNotEmpty())
+        <div class="resources-grid">
+            @foreach($recursos as $recurso)
+            <div class="resource-card" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 3) * 100 + 100 }}">
+                <div class="resource-thumbnail">
+                    @if($recurso->imagen_portada)
+                        <img src="{{ asset('storage/' . $recurso->imagen_portada) }}" alt="{{ $recurso->titulo }}">
+                    @else
+                        <i class="fas {{ $recurso->tipo_icon }}"></i>
+                    @endif
+                    <span class="resource-type">{{ $recurso->tipo_label }}</span>
+                </div>
+                <div class="resource-content">
+                    <h3>{{ $recurso->titulo }}</h3>
+                    <p class="resource-author"><i class="fas fa-user"></i> {{ $recurso->autor }}</p>
+                    @if($recurso->anio_publicacion)
+                    <p class="resource-year"><i class="fas fa-calendar"></i> {{ $recurso->anio_publicacion }}</p>
+                    @endif
+                    <p class="resource-description">
+                        {{ Str::limit($recurso->descripcion, 100) }}
+                    </p>
+                    {{-- Copyright badge --}}
+                    <div class="resource-copyright">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>{{ $recurso->licencia_badge }}</span>
+                        @if($recurso->solo_colegiados)
+                            <span class="copyright-lock"><i class="fas fa-lock"></i> Solo colegiados</span>
+                        @endif
+                    </div>
+                    <div class="resource-actions">
+                        <a href="{{ route('biblioteca.show', $recurso) }}" class="btn btn-outline">
+                            <i class="fas fa-eye"></i> Ver
+                        </a>
+                        @if($recurso->puede_descargar)
+                        <a href="{{ route('biblioteca.descargar', $recurso) }}" class="btn btn-primary">
+                            <i class="fas fa-download"></i> Descargar
+                        </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        {{-- Paginación --}}
+        @if($recursos->hasPages())
+        <div style="display:flex;justify-content:center;margin-top:40px;">
+            {{ $recursos->links() }}
+        </div>
+        @endif
+
+        @else
+        {{-- Empty state --}}
+        <div class="library-empty" data-aos="fade-up">
+            <div class="library-empty-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>No se encontraron recursos</h3>
+            <p>Intenta con otros filtros o términos de búsqueda.</p>
+            <a href="{{ route('biblioteca') }}" class="btn btn-primary" style="margin-top:10px;">
+                <i class="fas fa-book"></i> Ver toda la biblioteca
+            </a>
+        </div>
+        @endif
     </div>
 </section>
 
@@ -236,10 +308,10 @@
 
             <div class="info-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="info-icon">
-                    <i class="fas fa-clock"></i>
+                    <i class="fas fa-shield-alt"></i>
                 </div>
-                <h3>24/7 Disponible</h3>
-                <p>La biblioteca virtual está disponible las 24 horas del día, los 7 días de la semana.</p>
+                <h3>Derechos de Autor</h3>
+                <p>Todos los recursos incluyen información de licencia y copyright. Respeta las condiciones de uso de cada publicación.</p>
             </div>
 
             <div class="info-card" data-aos="fade-up" data-aos-delay="300">
@@ -260,7 +332,7 @@
         <div class="cta-content" data-aos="zoom-in">
             <h2>¿Necesitas ayuda para encontrar recursos?</h2>
             <p>Nuestro equipo está listo para asistirte en tu búsqueda bibliográfica</p>
-            <a href="#contacto" class="btn btn-light btn-lg">
+            <a href="{{ route('contacto.index') }}" class="btn btn-light btn-lg">
                 <i class="fas fa-envelope"></i>
                 Contactar Biblioteca
             </a>

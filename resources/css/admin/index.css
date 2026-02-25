@@ -4,13 +4,15 @@
    Importa todos los módulos del panel admin en orden
    ============================================ */
 
-@import './variables.css';
-@import './layout.css';
-@import './topbar.css';
-@import './dashboard.css';
-@import './components.css';
-@import './colegiados.css';
-@import './noticias.css';
-@import './invitaciones.css';
-@import './responsive.css';
-@import './mensajes.css';
+@import "./variables.css";
+@import "./layout.css";
+@import "./topbar.css";
+@import "./dashboard.css";
+@import "./components.css";
+@import "./colegiados.css";
+@import "./noticias.css";
+@import "./invitaciones.css";
+@import "./responsive.css";
+@import "./mensajes.css";
+@import "./solicitudes.css";
+@import "./biblioteca.css";

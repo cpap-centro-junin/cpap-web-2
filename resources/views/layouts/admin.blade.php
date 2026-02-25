@@ -83,11 +83,33 @@
             </a>
             @php
                 $unreadMessages = \App\Models\ContactMessage::where('leido', false)->count();
+                $pendingSolicitudes = \App\Models\BolsaTrabajo::noRevisadas()->count();
             @endphp
 
 
+            <a href="{{ route('admin.biblioteca.index') }}" class="menu-item {{ request()->routeIs('admin.biblioteca*') ? 'active' : '' }}">
+                <i class="fas fa-book"></i>
+                <span class="menu-text">Biblioteca</span>
+            </a>
+            <a href="{{ route('admin.bolsa.index') }}" class="menu-item {{ request()->routeIs('admin.bolsa*') ? 'active' : '' }}">
+                <i class="fas fa-briefcase"></i>
+                <span class="menu-text">Bolsa de Trabajo</span>
+            </a>
+            <a href="{{ route('admin.solicitudes.index') }}"
+            class="menu-item {{ request()->routeIs('admin.solicitudes*') ? 'active' : '' }}">
+                <i class="fas fa-clipboard-list"></i>
+                <span class="menu-text">
+                    Solicitudes
+                    @if($pendingSolicitudes > 0)
+                        <span class="badge-mensajes">
+                            {{ $pendingSolicitudes }}
+                        </span>
+                    @endif
+                </span>
+            </a>
             <a href="{{ route('admin.mensajes.index') }}"
             class="menu-item {{ request()->routeIs('admin.mensajes*') ? 'active' : '' }}">
+
 
                 <i class="fas fa-envelope"></i>
 

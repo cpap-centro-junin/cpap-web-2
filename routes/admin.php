@@ -156,3 +156,51 @@ Route::post('/mensajes/{message}/responder', [ContactMessageController::class, '
 Route::delete('/mensajes/{message}', 
     [ContactMessageController::class, 'destroy'])
     ->name('admin.mensajes.destroy');
+
+// ============================================
+// BOLSA DE TRABAJO
+// ============================================
+
+Route::resource('bolsa', \App\Http\Controllers\Admin\BolsaTrabajoController::class)->names([
+    'index'   => 'admin.bolsa.index',
+    'create'  => 'admin.bolsa.create',
+    'store'   => 'admin.bolsa.store',
+    'edit'    => 'admin.bolsa.edit',
+    'update'  => 'admin.bolsa.update',
+    'destroy' => 'admin.bolsa.destroy',
+])->except(['show']);
+
+// ============================================
+// SOLICITUDES DE OFERTAS LABORALES
+// ============================================
+
+use App\Http\Controllers\Admin\SolicitudOfertaController;
+use App\Models\BolsaTrabajo;
+
+Route::model('solicitud', BolsaTrabajo::class);
+
+Route::get('/solicitudes-oferta', [SolicitudOfertaController::class, 'index'])
+    ->name('admin.solicitudes.index');
+
+Route::get('/solicitudes-oferta/{solicitud}', [SolicitudOfertaController::class, 'show'])
+    ->name('admin.solicitudes.show');
+
+Route::patch('/solicitudes-oferta/{solicitud}/aprobar', [SolicitudOfertaController::class, 'aprobar'])
+    ->name('admin.solicitudes.aprobar');
+
+Route::delete('/solicitudes-oferta/{solicitud}/rechazar', [SolicitudOfertaController::class, 'rechazar'])
+    ->name('admin.solicitudes.rechazar');
+
+// ============================================
+// BIBLIOTECA VIRTUAL
+// ============================================
+
+Route::resource('biblioteca', \App\Http\Controllers\Admin\BibliotecaController::class)->names([
+    'index'   => 'admin.biblioteca.index',
+    'create'  => 'admin.biblioteca.create',
+    'store'   => 'admin.biblioteca.store',
+    'show'    => 'admin.biblioteca.show',
+    'edit'    => 'admin.biblioteca.edit',
+    'update'  => 'admin.biblioteca.update',
+    'destroy' => 'admin.biblioteca.destroy',
+]);

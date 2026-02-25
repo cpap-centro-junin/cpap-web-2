@@ -1,0 +1,125 @@
+/* =========================================
+   ADMIN - SOLICITUDES DE OFERTAS LABORALES
+   Estilos propios (hereda de mensajes.css)
+========================================= */
+
+/* ---- Grilla de datos en detalle ---- */
+.sol-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+    background: #faf7f4;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.sol-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sol-detail-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.sol-detail-value {
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.sol-detail-link {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary, #8b1538);
+    text-decoration: none;
+    word-break: break-all;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+}
+
+.sol-detail-link:hover {
+    color: var(--primary-dark, #6b0f2a);
+}
+
+/* ---- Fila de acciones aprobar/rechazar ---- */
+.sol-actions-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.sol-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    font-family: inherit;
+}
+
+.sol-btn--aprobar {
+    background: linear-gradient(135deg, #1a9d75, #157a5c);
+    color: white;
+    box-shadow: 0 6px 20px rgba(26, 157, 117, 0.3);
+}
+
+.sol-btn--aprobar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(26, 157, 117, 0.45);
+}
+
+.sol-btn--rechazar {
+    background: linear-gradient(135deg, #c1121f, #9e0e19);
+    color: white;
+    box-shadow: 0 6px 20px rgba(193, 18, 31, 0.3);
+}
+
+.sol-btn--rechazar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(193, 18, 31, 0.45);
+}
+
+.sol-status-published {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #e6f7ee;
+    color: #1a9d75;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+    .sol-detail-grid {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .sol-actions-row {
+        flex-direction: column;
+    }
+
+    .sol-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

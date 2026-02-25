@@ -1,0 +1,69 @@
+/* ============================================
+   ADMIN - BIBLIOTECA VIRTUAL
+   Estilos específicos para el módulo de biblioteca
+   ============================================ */
+
+/* Override para tabla de biblioteca (portada más alta) */
+.admin-table td img {
+    object-fit: cover;
+}
+
+/* Badge de licencia */
+.badge-licencia {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(201, 169, 97, 0.15);
+    color: #96792e;
+}
+
+.badge-licencia.copyright {
+    background: rgba(139, 21, 56, 0.1);
+    color: var(--primary);
+}
+
+.badge-licencia.cc {
+    background: rgba(46, 125, 50, 0.1);
+    color: #2e7d32;
+}
+
+.badge-licencia.publico {
+    background: rgba(25, 118, 210, 0.1);
+    color: #1976d2;
+}
+
+/* Card de copyright en formularios */
+.copyright-info-card {
+    background: rgba(201, 169, 97, 0.06);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    border-left: 4px solid var(--secondary);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.copyright-info-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.copyright-info-card h4 i {
+    color: var(--secondary);
+}
+
+.copyright-info-card ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 12px;
+    color: var(--medium-gray);
+    line-height: 1.8;
+}

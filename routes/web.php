@@ -25,13 +25,70 @@ Route::get('/', function () {
 // ============================================
 // SERVICIOS PÚBLICOS
 // ============================================
-Route::get('/bolsa-trabajo', function () {
-    return view('bolsa-trabajo');
+Route::get('/bolsa-trabajo', function (\Illuminate\Http\Request $request) {
+    $query = \App\Models\BolsaTrabajo::vigentes();
+
+    // Filtro por búsqueda de texto
+    if ($request->filled('q')) {
+        $buscar = $request->q;
+        $query->where(function ($q) use ($buscar) {
+            $q->where('titulo', 'like', "%{$buscar}%")
+              ->orWhere('empresa', 'like', "%{$buscar}%")
+              ->orWhere('ubicacion', 'like', "%{$buscar}%")
+              ->orWhere('descripcion', 'like', "%{$buscar}%");
+        });
+    }
+
+    // Filtro por tipo
+    if ($request->filled('tipo')) {
+        $query->where('tipo', $request->tipo);
+    }
+
+    // Filtro por área
+    if ($request->filled('area')) {
+        $query->where('area', $request->area);
+    }
+
+    $ofertas = $query->orderBy('fecha_publicacion', 'desc')->paginate(12)->withQueryString();
+
+    return view('bolsa-trabajo', compact('ofertas'));
 })->name('bolsa-trabajo');
 
-Route::get('/biblioteca', function () {
-    return view('biblioteca');
-})->name('biblioteca');
+Route::post('/bolsa-trabajo/solicitar', function (\Illuminate\Http\Request $request) {
+    $data = $request->validate([
+        'nombre_contacto'    => 'required|string|max:100',
+        'email_contacto'     => 'required|email|max:255',
+        'titulo'             => 'required|string|max:255',
+        'empresa'            => 'required|string|max:255',
+        'ubicacion'          => 'required|string|max:255',
+        'tipo'               => 'required|in:fulltime,parttime,freelance,consultoria',
+        'area'               => 'required|in:investigacion,docencia,consultoria,gestion',
+        'descripcion'        => 'required|string|min:20',
+        'salario'            => 'nullable|string|max:255',
+    ]);
+
+    $oferta = \App\Models\BolsaTrabajo::create([
+        'titulo'             => $data['titulo'],
+        'empresa'            => $data['empresa'],
+        'ubicacion'          => $data['ubicacion'],
+        'tipo'               => $data['tipo'],
+        'area'               => $data['area'],
+        'descripcion'        => $data['descripcion'],
+        'salario'            => $data['salario'] ?? null,
+        'email_contacto'     => $data['email_contacto'],
+        'fecha_publicacion'  => now()->toDateString(),
+        'activo'             => false,
+    ]);
+
+    \Illuminate\Support\Facades\Mail::to('juancarloschmm@gmail.com')
+        ->send(new \App\Mail\SolicitudOfertaLaboralMail($oferta));
+
+    return response()->json(['success' => true, 'message' => 'Solicitud enviada correctamente.']);
+})->name('bolsa-trabajo.solicitar');
+
+Route::get('/biblioteca', [\App\Http\Controllers\BibliotecaPublicController::class, 'index'])->name('biblioteca');
+Route::get('/biblioteca/{recurso}', [\App\Http\Controllers\BibliotecaPublicController::class, 'show'])->name('biblioteca.show');
+Route::get('/biblioteca/{recurso}/descargar', [\App\Http\Controllers\BibliotecaPublicController::class, 'descargar'])->name('biblioteca.descargar');
 
 // ============================================
 // NOSOTROS
