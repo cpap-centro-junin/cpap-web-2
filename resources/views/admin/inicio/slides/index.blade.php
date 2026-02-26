@@ -98,8 +98,13 @@
                     @elseif($slide->tipo === 'evento' && $slide->evento)
                         <i class="fas fa-link" style="color:var(--info);font-size:11px;"></i>
                         {{ Str::limit($slide->evento->titulo, 30) }}
+                    @elseif($slide->tipo === 'personalizado')
+                        <span style="color:var(--medium-gray);font-size:12px;">
+                            <i class="fas fa-arrow-right" style="font-size:10px;"></i>
+                            {{ $slide->boton_url ?: 'Sin URL' }}
+                        </span>
                     @else
-                        —
+                        <span style="color:#999;font-style:italic;">Sin vincular</span>
                     @endif
                 </td>
                 <td style="text-align:center;">

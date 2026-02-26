@@ -126,18 +126,18 @@ Route::delete('/habilitaciones/{habilitacion}', [HabilitacionController::class, 
 // POPUP ANUNCIOS EMERGENTES
 // ============================================
 
-Route::resource('anuncios', \App\Http\Controllers\Admin\PopupAnuncioController::class)->names([
-    'index'   => 'admin.anuncios.index',
-    'create'  => 'admin.anuncios.create',
-    'store'   => 'admin.anuncios.store',
-    'show'    => 'admin.anuncios.show',
-    'edit'    => 'admin.anuncios.edit',
-    'update'  => 'admin.anuncios.update',
-    'destroy' => 'admin.anuncios.destroy',
+Route::resource('inicio/anuncios', \App\Http\Controllers\Admin\PopupAnuncioController::class)->names([
+    'index'   => 'admin.inicio.anuncios.index',
+    'create'  => 'admin.inicio.anuncios.create',
+    'store'   => 'admin.inicio.anuncios.store',
+    'show'    => 'admin.inicio.anuncios.show',
+    'edit'    => 'admin.inicio.anuncios.edit',
+    'update'  => 'admin.inicio.anuncios.update',
+    'destroy' => 'admin.inicio.anuncios.destroy',
 ]);
 
-Route::patch('/anuncios/{anuncio}/toggle', [\App\Http\Controllers\Admin\PopupAnuncioController::class, 'toggleActivo'])
-    ->name('admin.anuncios.toggle');
+Route::patch('/inicio/anuncios/{anuncio}/toggle', [\App\Http\Controllers\Admin\PopupAnuncioController::class, 'toggleActivo'])
+    ->name('admin.inicio.anuncios.toggle');
 
 // NORMATIVA LEGAL
 Route::resource('normativa', \App\Http\Controllers\Admin\NormativaController::class)->names([

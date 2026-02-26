@@ -12,12 +12,12 @@ class PopupAnuncioController extends Controller
     public function index()
     {
         $anuncios = PopupAnuncio::latest()->get();
-        return view('admin.anuncios.index', compact('anuncios'));
+        return view('admin.inicio.anuncios.index', compact('anuncios'));
     }
 
     public function create()
     {
-        return view('admin.anuncios.create');
+        return view('admin.inicio.anuncios.create');
     }
 
     public function store(Request $request)
@@ -38,13 +38,13 @@ class PopupAnuncioController extends Controller
 
         PopupAnuncio::create($data);
 
-        return redirect()->route('admin.anuncios.index')
+        return redirect()->route('admin.inicio.anuncios.index')
             ->with('success', 'Anuncio creado correctamente.');
     }
 
     public function edit(PopupAnuncio $anuncio)
     {
-        return view('admin.anuncios.edit', compact('anuncio'));
+        return view('admin.inicio.anuncios.edit', compact('anuncio'));
     }
 
     public function update(Request $request, PopupAnuncio $anuncio)
@@ -71,7 +71,7 @@ class PopupAnuncioController extends Controller
 
         $anuncio->update($data);
 
-        return redirect()->route('admin.anuncios.index')
+        return redirect()->route('admin.inicio.anuncios.index')
             ->with('success', 'Anuncio actualizado correctamente.');
     }
 

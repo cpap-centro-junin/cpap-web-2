@@ -111,14 +111,16 @@ class BannerSlide extends Model
      */
     public function getBotonUrlFinalAttribute(): string
     {
-        if ($this->tipo === 'noticia' && $this->noticia && !$this->boton_url) {
-            return route('noticia.show', $this->noticia->slug);
+        // Para slides vinculados a noticia/evento, SIEMPRE usar la ruta generada
+        if ($this->tipo === 'noticia' && $this->noticia) {
+            return route('noticias.show', $this->noticia->id);
         }
         
-        if ($this->tipo === 'evento' && $this->evento && !$this->boton_url) {
-            return route('evento.show', $this->evento->slug);
+        if ($this->tipo === 'evento' && $this->evento) {
+            return route('eventos.show', $this->evento->id);
         }
         
-        return $this->boton_url;
+        // Para slides personalizados o sin vinculación válida, usar boton_url
+        return $this->boton_url ?? '#';
     }
 }

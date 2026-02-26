@@ -100,7 +100,7 @@
     </a>
 
     <!-- Anuncios Emergentes -->
-    <a href="{{ route('admin.anuncios.index') }}" 
+    <a href="{{ route('admin.inicio.anuncios.index') }}" 
        style="display:block;background:white;border:2px solid #e3e3e3;border-radius:var(--radius);padding:28px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.06);transition:all 0.3s ease;"
        onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 24px rgba(255,152,0,0.12)';this.style.borderColor='#FF9800'"
        onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.06)';this.style.borderColor='#e3e3e3'">

@@ -10,9 +10,14 @@
         <h1 style="font-size:22px;font-weight:700;color:var(--dark);margin:0 0 4px;">Anuncios Emergentes</h1>
         <p style="color:var(--medium-gray);font-size:14px;margin:0;">{{ $anuncios->count() }} anuncio{{ $anuncios->count() !== 1 ? 's' : '' }} registrado{{ $anuncios->count() !== 1 ? 's' : '' }}</p>
     </div>
-    <a href="{{ route('admin.anuncios.create') }}" class="primary-btn">
-        <i class="fas fa-plus"></i> Nuevo Anuncio
-    </a>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="{{ route('admin.inicio.index') }}" class="secondary-btn">
+                <i class="fas fa-arrow-left"></i> Volver a Gestión de Inicio
+        </a>
+        <a href="{{ route('admin.inicio.anuncios.create') }}" class="primary-btn">
+            <i class="fas fa-plus"></i> Nuevo Anuncio
+        </a>
+    </div>
 </div>
 
 @if(session('success'))
@@ -54,7 +59,7 @@
                 <td style="color:var(--medium-gray);font-size:13px;">{{ $anuncio->created_at->format('d/m/Y') }}</td>
                 <td>
                     <div style="display:flex;gap:6px;justify-content:center;">
-                        <form action="{{ route('admin.anuncios.toggle', $anuncio) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('admin.inicio.anuncios.toggle', $anuncio) }}" method="POST" style="display:inline;">
                             @csrf @method('PATCH')
                             <button type="submit" title="{{ $anuncio->activo ? 'Desactivar' : 'Activar' }}"
                                     style="display:inline-flex;align-items:center;padding:6px 10px;background:{{ $anuncio->activo ? 'var(--danger-light)' : 'var(--success-light)' }};color:{{ $anuncio->activo ? 'var(--danger)' : 'var(--success)' }};border-radius:var(--radius-sm);font-size:12px;border:none;cursor:pointer;font-weight:600;gap:4px;">
@@ -62,11 +67,11 @@
                                 {{ $anuncio->activo ? 'Desactivar' : 'Activar' }}
                             </button>
                         </form>
-                        <a href="{{ route('admin.anuncios.edit', $anuncio) }}"
+                        <a href="{{ route('admin.inicio.anuncios.edit', $anuncio) }}"
                            style="display:inline-flex;align-items:center;gap:4px;padding:6px 10px;background:var(--warning-light);color:var(--warning);border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <form action="{{ route('admin.anuncios.destroy', $anuncio) }}" method="POST" style="display:inline;" class="delete-form" id="form-delete-anuncio-{{ $anuncio->id }}">
+                        <form action="{{ route('admin.inicio.anuncios.destroy', $anuncio) }}" method="POST" style="display:inline;" class="delete-form" id="form-delete-anuncio-{{ $anuncio->id }}">
                             @csrf @method('DELETE')
                             <button type="button"
                                     onclick="confirmDelete('Anuncio #{{ $anuncio->id }}', 'form-delete-anuncio-{{ $anuncio->id }}')"
@@ -83,7 +88,7 @@
                     <div class="empty-state">
                         <i class="fas fa-bullhorn"></i>
                         <p>No hay anuncios creados.<br>Crea uno para que aparezca como popup en la página de inicio.</p>
-                        <a href="{{ route('admin.anuncios.create') }}" class="primary-btn" style="display:inline-flex;">
+                        <a href="{{ route('admin.inicio.anuncios.create') }}" class="primary-btn" style="display:inline-flex;">
                             <i class="fas fa-plus"></i> Nuevo Anuncio
                         </a>
                     </div>

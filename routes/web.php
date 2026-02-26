@@ -19,7 +19,7 @@ use App\Http\Controllers\ColegiaturaController;
 // ============================================
 Route::get('/', function () {
     $anuncio  = \App\Models\PopupAnuncio::where('activo', true)->latest()->first();
-    $slides   = \App\Models\BannerSlide::activos()->get();
+    $slides   = \App\Models\BannerSlide::activos()->with(['noticia', 'evento'])->get();
     $config   = \App\Models\ConfiguracionInicio::obtener();
     $noticias = \App\Models\Noticia::where('activo', true)->latest()->take(3)->get();
     $eventos  = \App\Models\Evento::where('activo', true)

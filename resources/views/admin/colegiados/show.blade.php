@@ -120,13 +120,29 @@
                     <i class="fas fa-phone"></i>
                     Teléfono {{ $colegiado->ocultar_telefono ? 'oculto' : 'visible' }}
                 </span>
+                <span class="vis-badge {{ $colegiado->ocultar_grado_academico ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-user-graduate"></i>
+                    Grado {{ $colegiado->ocultar_grado_academico ? 'oculto' : 'visible' }}
+                </span>
                 <span class="vis-badge {{ $colegiado->ocultar_especialidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
                     <i class="fas fa-flask"></i>
                     Especialidad {{ $colegiado->ocultar_especialidad ? 'oculta' : 'visible' }}
                 </span>
+                <span class="vis-badge {{ $colegiado->ocultar_especializacion_detalle ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-list-ul"></i>
+                    Detalle Espec. {{ $colegiado->ocultar_especializacion_detalle ? 'oculto' : 'visible' }}
+                </span>
                 <span class="vis-badge {{ $colegiado->ocultar_orientacion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
                     <i class="fas fa-compass"></i>
                     Orientación {{ $colegiado->ocultar_orientacion ? 'oculta' : 'visible' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_diplomados ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-certificate"></i>
+                    Diplomados {{ $colegiado->ocultar_diplomados ? 'ocultos' : 'visibles' }}
+                </span>
+                <span class="vis-badge {{ $colegiado->ocultar_experiencia ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                    <i class="fas fa-briefcase"></i>
+                    Experiencia {{ $colegiado->ocultar_experiencia ? 'oculta' : 'visible' }}
                 </span>
                 <span class="vis-badge {{ $colegiado->ocultar_universidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
                     <i class="fas fa-university"></i>
@@ -258,6 +274,20 @@
                 <h3><i class="fas fa-briefcase"></i> Información Profesional</h3>
             </div>
             <div class="card-body">
+                @if($colegiado->grado_academico)
+                    <div class="info-group">
+                        <label>
+                            Grado Académico
+                            @if($colegiado->ocultar_grado_academico)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
+                        <p>{{ $colegiado->grado_academico }}</p>
+                    </div>
+                @endif
+
                 @if($colegiado->especialidad)
                     <div class="info-group">
                         <label>
@@ -272,6 +302,20 @@
                     </div>
                 @endif
 
+                @if($colegiado->especializacion_detalle)
+                    <div class="info-group">
+                        <label>
+                            Detalle de la Especialización
+                            @if($colegiado->ocultar_especializacion_detalle)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
+                        <p style="white-space: pre-line;">{{ $colegiado->especializacion_detalle }}</p>
+                    </div>
+                @endif
+
                 @if($colegiado->orientacion)
                     <div class="info-group">
                         <label>
@@ -283,6 +327,50 @@
                             @endif
                         </label>
                         <p>{{ $colegiado->orientacion }}</p>
+                    </div>
+                @endif
+
+                @if($colegiado->diplomados)
+                    <div class="info-group">
+                        <label>
+                            Diplomados
+                            @if($colegiado->ocultar_diplomados)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
+                        <p style="white-space: pre-line;">{{ $colegiado->diplomados }}</p>
+                    </div>
+                @endif
+
+                @if($colegiado->experiencia_anos || $colegiado->experiencia_sector)
+                    <div class="info-group">
+                        <label>
+                            Experiencia Profesional
+                            @if($colegiado->ocultar_experiencia)
+                                <span class="field-hidden-indicator" title="Oculto en perfil público">
+                                    <i class="fas fa-eye-slash"></i>
+                                </span>
+                            @endif
+                        </label>
+                        <p>
+                            @if($colegiado->experiencia_anos)
+                                <strong>{{ $colegiado->experiencia_anos }} años</strong>
+                            @endif
+                            @if($colegiado->experiencia_sector)
+                                @if($colegiado->experiencia_anos) en sector @endif
+                                <span class="badge badge-info">
+                                    @if($colegiado->experiencia_sector === 'publica')
+                                        <i class="fas fa-landmark"></i> Público
+                                    @elseif($colegiado->experiencia_sector === 'privada')
+                                        <i class="fas fa-building"></i> Privado
+                                    @else
+                                        <i class="fas fa-briefcase"></i> Mixto
+                                    @endif
+                                </span>
+                            @endif
+                        </p>
                     </div>
                 @endif
 

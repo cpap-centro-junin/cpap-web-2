@@ -1,7 +1,9 @@
 /* HERO coherente con colegiados */
 .colegiatura-hero {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 40%, var(--primary-dark) 100%);
+    background-size: 400% 400%;
     padding: 110px 0 70px;
+    animation: gradientShift 12s ease infinite;
 }
 
 /* SECCIÓN FLUJO */

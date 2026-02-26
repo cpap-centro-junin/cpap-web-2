@@ -25,7 +25,6 @@
         {{-- Badge --}}
         <div class="form-group" style="margin-bottom:20px;">
             <label for="hero_badge" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                <i class="fas fa-certificate" style="color:var(--primary);"></i>
                 Etiqueta Superior
             </label>
             <input type="text" id="hero_badge" name="hero_badge" value="{{ old('hero_badge', $config->hero_badge) }}" 
@@ -41,7 +40,6 @@
         {{-- Título Principal --}}
         <div class="form-group" style="margin-bottom:20px;">
             <label for="hero_titulo" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                <i class="fas fa-heading" style="color:var(--primary);"></i>
                 Título Principal <span style="color:var(--danger);">*</span>
             </label>
             
@@ -58,7 +56,6 @@
                         style="padding:8px 16px;background:linear-gradient(135deg,#e3a953,#d4941c);border:none;border-radius:6px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:8px;transition:all 0.3s;font-weight:500;color:white;box-shadow:0 2px 4px rgba(212,148,28,0.2);"
                         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 8px rgba(212,148,28,0.3)'"
                         onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 2px 4px rgba(212,148,28,0.2)'">
-                    <i class="fas fa-palette"></i>
                     <span>Aplicar Degradado Dorado</span>
                 </button>
             </div>
@@ -83,7 +80,6 @@
         {{-- Subtítulo --}}
         <div class="form-group" style="margin-bottom:0;">
             <label for="hero_subtitulo" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                <i class="fas fa-align-left" style="color:var(--primary);"></i>
                 Descripción
             </label>
             <textarea id="hero_subtitulo" name="hero_subtitulo" rows="3" class="form-control"
@@ -108,7 +104,6 @@
         {{-- Botón 1: Texto --}}
         <div class="form-group" style="margin-bottom:20px;">
             <label for="hero_btn1_texto" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                <i class="fas fa-font" style="color:var(--primary);"></i>
                 Texto del Botón
             </label>
             <input type="text" id="hero_btn1_texto" name="hero_btn1_texto" value="{{ old('hero_btn1_texto', $config->hero_btn1_texto) }}" 
@@ -122,7 +117,6 @@
             {{-- Botón 1: URL --}}
             <div class="form-group" style="margin-bottom:0;">
                 <label for="hero_btn1_url" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                    <i class="fas fa-link" style="color:var(--primary);"></i>
                     Enlace (¿A dónde va?)
                 </label>
                 <input type="text" id="hero_btn1_url" name="hero_btn1_url" value="{{ old('hero_btn1_url', $config->hero_btn1_url) }}" 
@@ -147,7 +141,6 @@
             {{-- Botón 1: Ícono --}}
             <div class="form-group" style="margin-bottom:0;">
                 <label for="hero_btn1_icono" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                    <i class="fas fa-icons" style="color:var(--primary);"></i>
                     Ícono
                 </label>
                 <input type="text" id="hero_btn1_icono" name="hero_btn1_icono" value="{{ old('hero_btn1_icono', $config->hero_btn1_icono) }}" 
@@ -174,7 +167,6 @@
         {{-- Botón 2: Texto --}}
         <div class="form-group" style="margin-bottom:20px;">
             <label for="hero_btn2_texto" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                <i class="fas fa-font" style="color:var(--primary);"></i>
                 Texto del Botón
             </label>
             <input type="text" id="hero_btn2_texto" name="hero_btn2_texto" value="{{ old('hero_btn2_texto', $config->hero_btn2_texto) }}" 
@@ -188,7 +180,6 @@
             {{-- Botón 2: URL --}}
             <div class="form-group" style="margin-bottom:0;">
                 <label for="hero_btn2_url" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                    <i class="fas fa-link" style="color:var(--primary);"></i>
                     Enlace (¿A dónde va?)
                 </label>
                 <input type="text" id="hero_btn2_url" name="hero_btn2_url" value="{{ old('hero_btn2_url', $config->hero_btn2_url) }}" 
@@ -207,7 +198,6 @@
             {{-- Botón 2: Ícono --}}
             <div class="form-group" style="margin-bottom:0;">
                 <label for="hero_btn2_icono" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:10px;">
-                    <i class="fas fa-icons" style="color:var(--primary);"></i>
                     Ícono
                 </label>
                 <input type="text" id="hero_btn2_icono" name="hero_btn2_icono" value="{{ old('hero_btn2_icono', $config->hero_btn2_icono) }}" 

@@ -65,7 +65,7 @@
     padding-left: 55px;
 }
 
-.form-group i {
+.form-group.has-icon i {
     position: absolute;
     left: 20px;
     top: 50%;
@@ -79,7 +79,7 @@
     top: calc(50% + 12px);
 }
 
-.form-group textarea + i {
+.form-group.has-icon textarea + i {
     top: 45px;
     transform: none;
 }

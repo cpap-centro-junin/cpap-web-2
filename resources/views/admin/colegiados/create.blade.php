@@ -73,6 +73,14 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="fecha_nacimiento">Fecha de Nacimiento <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
+                        <input type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror"
+                               id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}">
+                        @error('fecha_nacimiento')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label for="email">Email <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="email" class="form-control @error('email') is-invalid @enderror"
                                id="email" name="email" value="{{ old('email') }}">
@@ -80,22 +88,14 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group">
                         <label for="telefono">Teléfono <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="text" class="form-control @error('telefono') is-invalid @enderror"
                                id="telefono" name="telefono" value="{{ old('telefono') }}"
                                placeholder="987654321">
                         @error('telefono')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fecha_nacimiento">Fecha de Nacimiento <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
-                        <input type="date" class="form-control @error('fecha_nacimiento') is-invalid @enderror"
-                               id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}">
-                        @error('fecha_nacimiento')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -114,7 +114,22 @@
             {{-- ── INFORMACIÓN PROFESIONAL ─────────────────────── --}}
             <div class="form-section">
                 <h3 class="section-title">Información Profesional</h3>
+                
                 <div class="form-row">
+                    <div class="form-group">
+                        <label for="grado_academico">Grado Académico <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
+                        <select class="form-control @error('grado_academico') is-invalid @enderror"
+                                id="grado_academico" name="grado_academico">
+                            <option value="">-- Selecciona --</option>
+                            <option value="Bachiller" {{ old('grado_academico') == 'Bachiller' ? 'selected' : '' }}>Bachiller</option>
+                            <option value="Licenciado" {{ old('grado_academico') == 'Licenciado' ? 'selected' : '' }}>Licenciado</option>
+                            <option value="Magíster" {{ old('grado_academico') == 'Magíster' ? 'selected' : '' }}>Magíster</option>
+                            <option value="Doctor" {{ old('grado_academico') == 'Doctor' ? 'selected' : '' }}>Doctor</option>
+                        </select>
+                        @error('grado_academico')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="especialidad">Especialidad <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="text" class="form-control @error('especialidad') is-invalid @enderror"
@@ -124,12 +139,12 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
+                
+                <div class="form-row">
                     <div class="form-group">
                         <label for="orientacion">
                             Orientación <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span>
-                            <span class="field-hint" title="Enfoque específico dentro de la especialidad">
-                                <i class="fas fa-info-circle"></i>
-                            </span>
                         </label>
                         <input type="text" class="form-control @error('orientacion') is-invalid @enderror"
                                id="orientacion" name="orientacion" value="{{ old('orientacion') }}"
@@ -138,7 +153,56 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="experiencia_anos">Años de Experiencia <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
+                        <input type="number" class="form-control @error('experiencia_anos') is-invalid @enderror"
+                               id="experiencia_anos" name="experiencia_anos" value="{{ old('experiencia_anos') }}"
+                               min="0" max="50" placeholder="Ej: 5">
+                        @error('experiencia_anos')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experiencia_sector">Experiencia en Sector <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
+                        <select class="form-control @error('experiencia_sector') is-invalid @enderror"
+                                id="experiencia_sector" name="experiencia_sector">
+                            <option value="">-- Selecciona --</option>
+                            <option value="publica" {{ old('experiencia_sector') == 'publica' ? 'selected' : '' }}>Pública</option>
+                            <option value="privada" {{ old('experiencia_sector') == 'privada' ? 'selected' : '' }}>Privada</option>
+                            <option value="mixta" {{ old('experiencia_sector') == 'mixta' ? 'selected' : '' }}>Mixta (Pública y Privada)</option>
+                        </select>
+                        @error('experiencia_sector')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        {{-- Espacio reservado --}}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="especializacion_detalle">Detalle de la Especialización <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
+                    <textarea class="form-control @error('especializacion_detalle') is-invalid @enderror"
+                              id="especializacion_detalle" name="especializacion_detalle" rows="3"
+                              placeholder="Describe tu área específica de especialización y enfoque profesional...">{{ old('especializacion_detalle') }}</textarea>
+                    @error('especializacion_detalle')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                
+                <div class="form-group">
+                    <label for="diplomados">Diplomados <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
+                    <textarea class="form-control @error('diplomados') is-invalid @enderror"
+                              id="diplomados" name="diplomados" rows="3"
+                              placeholder="Lista tus diplomados, cada uno en una línea...">{{ old('diplomados') }}</textarea>
+                    @error('diplomados')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                
                 <div class="form-row">
                     <div class="form-group">
                         <label for="universidad">Universidad <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
@@ -159,9 +223,10 @@
                         @enderror
                     </div>
                 </div>
+                
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="cv">Curriculum Vitae (PDF) <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
+                        <label>Curriculum Vitae (PDF) <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                         <input type="file" class="form-control @error('cv') is-invalid @enderror"
                                id="cv" name="cv" accept=".pdf">
                         <small class="form-text">Archivo PDF. Máximo 5MB.</small>
@@ -173,6 +238,7 @@
                         {{-- Espacio reservado para mantener el grid --}}
                     </div>
                 </div>
+                
                 <div class="form-group">
                     <label for="descripcion">Descripción Profesional <span class="text-muted" style="font-size:11px;font-weight:400;">(opcional)</span></label>
                     <textarea class="form-control @error('descripcion') is-invalid @enderror"
@@ -301,6 +367,19 @@
                         <div class="visibility-fields-grid">
                             <div class="visibility-field-item">
                                 <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-user-graduate"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Grado académico</strong>
+                                        <span>Ocultar grado académico en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_grado_academico" value="1" {{ old('ocultar_grado_academico') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
                                     <div class="visibility-field-label__icon"><i class="fas fa-flask"></i></div>
                                     <div class="visibility-field-label__text">
                                         <strong>Especialidad</strong>
@@ -314,6 +393,19 @@
                             </div>
                             <div class="visibility-field-item">
                                 <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-list-ul"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Detalle de especialización</strong>
+                                        <span>Ocultar detalle de especialización</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_especializacion_detalle" value="1" {{ old('ocultar_especializacion_detalle') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
                                     <div class="visibility-field-label__icon"><i class="fas fa-compass"></i></div>
                                     <div class="visibility-field-label__text">
                                         <strong>Orientación</strong>
@@ -321,6 +413,32 @@
                                     </div>
                                     <label class="toggle-switch toggle-switch--sm">
                                         <input type="checkbox" name="ocultar_orientacion" value="1" {{ old('ocultar_orientacion') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-certificate"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Diplomados</strong>
+                                        <span>Ocultar diplomados en perfil público</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_diplomados" value="1" {{ old('ocultar_diplomados') ? 'checked' : '' }}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="visibility-field-item">
+                                <label class="visibility-field-label">
+                                    <div class="visibility-field-label__icon"><i class="fas fa-briefcase"></i></div>
+                                    <div class="visibility-field-label__text">
+                                        <strong>Experiencia profesional</strong>
+                                        <span>Ocultar años y sector de experiencia</span>
+                                    </div>
+                                    <label class="toggle-switch toggle-switch--sm">
+                                        <input type="checkbox" name="ocultar_experiencia" value="1" {{ old('ocultar_experiencia') ? 'checked' : '' }}>
                                         <span class="toggle-slider"></span>
                                     </label>
                                 </label>

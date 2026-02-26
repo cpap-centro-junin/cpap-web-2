@@ -8,7 +8,7 @@
 <div style="max-width:720px;">
 
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
-        <a href="{{ route('admin.anuncios.index') }}"
+        <a href="{{ route('admin.inicio.anuncios.index') }}"
            style="width:36px;height:36px;border-radius:50%;background:var(--light-gray);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--medium-gray);text-decoration:none;">
             <i class="fas fa-arrow-left" style="font-size:13px;"></i>
         </a>
@@ -27,7 +27,7 @@
     </div>
     @endif
 
-    <form action="{{ route('admin.anuncios.update', $anuncio) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.inicio.anuncios.update', $anuncio) }}" method="POST" enctype="multipart/form-data">
         @csrf @method('PUT')
 
         <div style="display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start;">
@@ -95,7 +95,7 @@
                 </div>
 
                 <div style="display:flex;gap:10px;">
-                    <a href="{{ route('admin.anuncios.index') }}"
+                    <a href="{{ route('admin.inicio.anuncios.index') }}"
                        style="flex:1;display:inline-flex;align-items:center;justify-content:center;padding:12px;background:var(--light-gray);color:var(--medium-gray);border-radius:var(--radius-sm);font-size:14px;font-weight:600;text-decoration:none;">
                         Cancelar
                     </a>

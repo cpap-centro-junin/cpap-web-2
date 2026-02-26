@@ -71,13 +71,12 @@
         {{-- Campo Noticia --}}
         <div class="form-group" id="campo_noticia" style="display:{{ $slide->tipo === 'noticia' ? 'block' : 'none' }};margin-top:24px;padding-top:24px;border-top:2px solid var(--light-gray);">
             <label for="noticia_id" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:12px;">
-                <i class="fas fa-newspaper" style="color:#2196F3;"></i>
                 Seleccionar Noticia
             </label>
-            <select name="noticia_id" id="noticia_id" class="form-control" style="font-size:15px;padding:14px;">
+            <select name="noticia_id" id="noticia_id" class="form-control" style="font-size:15px;padding:14px;" onchange="actualizarUrlSegunVinculacion()">
                 <option value="">-- Selecciona una noticia --</option>
                 @foreach($noticias as $noticia)
-                    <option value="{{ $noticia->id }}" {{ old('noticia_id', $slide->noticia_id) == $noticia->id ? 'selected' : '' }}>
+                    <option value="{{ $noticia->id }}" data-url="{{ route('noticias.show', $noticia->id) }}" {{ old('noticia_id', $slide->noticia_id) == $noticia->id ? 'selected' : '' }}>
                         {{ $noticia->titulo }} ({{ $noticia->created_at->format('d/m/Y') }})
                     </option>
                 @endforeach
@@ -90,13 +89,12 @@
         {{-- Campo Evento --}}
         <div class="form-group" id="campo_evento" style="display:{{ $slide->tipo === 'evento' ? 'block' : 'none' }};margin-top:24px;padding-top:24px;border-top:2px solid var(--light-gray);">
             <label for="evento_id" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:12px;">
-                <i class="fas fa-calendar-alt" style="color:#9C27B0;"></i>
                 Seleccionar Evento
             </label>
-            <select name="evento_id" id="evento_id" class="form-control" style="font-size:15px;padding:14px;">
+            <select name="evento_id" id="evento_id" class="form-control" style="font-size:15px;padding:14px;" onchange="actualizarUrlSegunVinculacion()">
                 <option value="">-- Selecciona un evento --</option>
                 @foreach($eventos as $evento)
-                    <option value="{{ $evento->id }}" {{ old('evento_id', $slide->evento_id) == $evento->id ? 'selected' : '' }}>
+                    <option value="{{ $evento->id }}" data-url="{{ route('eventos.show', $evento->id) }}" {{ old('evento_id', $slide->evento_id) == $evento->id ? 'selected' : '' }}>
                         {{ $evento->titulo }} ({{ $evento->fecha_inicio->format('d/m/Y') }})
                     </option>
                 @endforeach
@@ -116,7 +114,6 @@
 
         <div class="form-group">
             <label for="tag" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                <i class="fas fa-tag" style="color:var(--primary);"></i>
                 Etiqueta Superior (opcional)
             </label>
             <input type="text" id="tag" name="tag" value="{{ old('tag', $slide->tag) }}" 
@@ -132,14 +129,25 @@
 
         <div class="form-group">
             <label for="titulo" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                <i class="fas fa-heading" style="color:var(--primary);"></i>
                 Título del Slide <span style="color:var(--danger);">*</span>
             </label>
+            
+            {{-- Botón para insertar salto de línea --}}
+            <div style="margin-bottom:10px;">
+                <button type="button" onclick="insertarSaltoLineaSlide('titulo')" 
+                        style="padding:8px 16px;background:#f5f5f5;border:1px solid #ddd;border-radius:6px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;font-weight:500;"
+                        onmouseover="this.style.background='#e8e8e8';this.style.borderColor='#ccc'"
+                        onmouseout="this.style.background='#f5f5f5';this.style.borderColor='#ddd'">
+                    <i class="fas fa-level-down-alt" style="color:var(--primary);"></i>
+                    <span>Salto de Línea</span>
+                </button>
+            </div>
+            
             <input type="text" id="titulo" name="titulo" value="{{ old('titulo', $slide->titulo) }}" required 
                    placeholder="¡Proceso de Colegiatura 2026 Abierto!" 
                    maxlength="200" class="form-control" style="font-size:16px;font-weight:600;">
-            <small style="color:var(--medium-gray);font-size:12px;display:block;margin-top:8px;">
-                💡 Puedes usar &lt;br&gt; para saltos de línea
+            <small style="color:var(--medium-gray);font-size:12px;display:block;margin-top:8px;background:#f0f7ff;padding:10px;border-radius:6px;border-left:3px solid var(--primary);">
+                💡 Coloca el cursor donde quieras el salto de línea y presiona el botón
             </small>
             @error('titulo')
                 <p style="color:var(--danger);font-size:13px;margin:8px 0 0;">{{ $message }}</p>
@@ -148,7 +156,6 @@
 
         <div class="form-group">
             <label for="descripcion" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                <i class="fas fa-align-left" style="color:var(--primary);"></i>
                 Descripción (opcional)
             </label>
             <textarea id="descripcion" name="descripcion" rows="4" class="form-control" style="font-size:14px;line-height:1.6;"
@@ -160,7 +167,6 @@
 
         <div class="form-group">
             <label for="imagen" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                <i class="fas fa-image" style="color:var(--primary);"></i>
                 Imagen de Fondo (opcional)
             </label>
             
@@ -200,7 +206,6 @@
         <div style="display:grid;grid-template-columns:1fr 2fr;gap:20px;">
             <div class="form-group">
                 <label for="boton_texto" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                    <i class="fas fa-font" style="color:var(--primary);"></i>
                     Texto del Botón
                 </label>
                 <input type="text" id="boton_texto" name="boton_texto" value="{{ old('boton_texto', $slide->boton_texto ?? 'Ver Más') }}" 
@@ -212,16 +217,18 @@
 
             <div class="form-group">
                 <label for="boton_url" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                    <i class="fas fa-link" style="color:var(--primary);"></i>
-                    URL del Botón <span style="color:var(--danger);">*</span>
+                    Enlace (¿A dónde va?) <span style="color:var(--danger);">*</span>
                 </label>
                 <input type="text" id="boton_url" name="boton_url" value="{{ old('boton_url', $slide->boton_url) }}" required 
                        placeholder="/#colegiatura" class="form-control" style="font-size:15px;">
-                <small style="color:var(--medium-gray);font-size:12px;display:block;margin-top:8px;background:#fff8e6;padding:10px;border-radius:6px;border-left:3px solid #FFC107;">
+                <small id="url_helper" style="color:var(--medium-gray);font-size:12px;display:block;margin-top:8px;background:#fff8e6;padding:10px;border-radius:6px;border-left:3px solid #FFC107;">
                     <strong>📍 Ejemplos:</strong><br>
                     • Sección interna: <code style="background:white;padding:2px 6px;border-radius:3px;">/#colegiatura</code><br>
                     • Página interna: <code style="background:white;padding:2px 6px;border-radius:3px;">/nosotros</code><br>
                     • Sitio externo: <code style="background:white;padding:2px 6px;border-radius:3px;">https://ejemplo.com</code>
+                </small>
+                <small id="url_bloqueado" style="display:none;color:#0288D1;font-size:12px;margin-top:8px;background:#E3F2FD;padding:10px;border-radius:6px;border-left:3px solid #0288D1;">
+                    <strong>URL automática:</strong> Este campo se rellena automáticamente con la URL de la noticia/evento vinculado.
                 </small>
                 @error('boton_url')
                     <p style="color:var(--danger);font-size:13px;margin:8px 0 0;">{{ $message }}</p>
@@ -240,7 +247,6 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
             <div class="form-group">
                 <label for="orden" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                    <i class="fas fa-sort-numeric-down" style="color:var(--primary);"></i>
                     Orden de Aparición
                 </label>
                 <input type="number" id="orden" name="orden" value="{{ old('orden', $slide->orden ?? 0) }}" min="0" class="form-control" style="font-size:15px;">
@@ -254,7 +260,6 @@
 
             <div class="form-group">
                 <label style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:12px;">
-                    <i class="fas fa-eye" style="color:var(--primary);"></i>
                     Estado del Slide
                 </label>
                 <label class="toggle-switch" style="display:flex;align-items:center;gap:12px;margin-top:4px;">
@@ -283,14 +288,75 @@
 
 @push('scripts')
 <script>
+function insertarSaltoLineaSlide(fieldId) {
+    const input = document.getElementById(fieldId);
+    if (!input) return;
+    
+    const cursorPos = input.selectionStart;
+    const textBefore = input.value.substring(0, cursorPos);
+    const textAfter = input.value.substring(cursorPos);
+    
+    input.value = textBefore + '<br>' + textAfter;
+    input.selectionStart = input.selectionEnd = cursorPos + 4;
+    input.focus();
+}
+
 function cambiarTipo(tipo) {
     document.getElementById('campo_noticia').style.display = 'none';
     document.getElementById('campo_evento').style.display = 'none';
     
+    const botonUrlInput = document.getElementById('boton_url');
+    const urlHelper = document.getElementById('url_helper');
+    const urlBloqueado = document.getElementById('url_bloqueado');
+    
     if (tipo === 'noticia') {
         document.getElementById('campo_noticia').style.display = 'block';
+        // Bloquear URL y mostrar mensaje
+        botonUrlInput.readOnly = true;
+        botonUrlInput.style.backgroundColor = '#f5f5f5';
+        botonUrlInput.style.cursor = 'not-allowed';
+        urlHelper.style.display = 'none';
+        urlBloqueado.style.display = 'block';
+        actualizarUrlSegunVinculacion();
     } else if (tipo === 'evento') {
         document.getElementById('campo_evento').style.display = 'block';
+        // Bloquear URL y mostrar mensaje
+        botonUrlInput.readOnly = true;
+        botonUrlInput.style.backgroundColor = '#f5f5f5';
+        botonUrlInput.style.cursor = 'not-allowed';
+        urlHelper.style.display = 'none';
+        urlBloqueado.style.display = 'block';
+        actualizarUrlSegunVinculacion();
+    } else {
+        // Modo personalizado: desbloquear URL
+        botonUrlInput.readOnly = false;
+        botonUrlInput.style.backgroundColor = '';
+        botonUrlInput.style.cursor = '';
+        urlHelper.style.display = 'block';
+        urlBloqueado.style.display = 'none';
+    }
+}
+
+function actualizarUrlSegunVinculacion() {
+    const tipo = document.querySelector('input[name="tipo"]:checked').value;
+    const botonUrlInput = document.getElementById('boton_url');
+    
+    if (tipo === 'noticia') {
+        const noticiaSelect = document.getElementById('noticia_id');
+        const selectedOption = noticiaSelect.options[noticiaSelect.selectedIndex];
+        if (selectedOption && selectedOption.value) {
+            botonUrlInput.value = selectedOption.getAttribute('data-url') || '';
+        } else {
+            botonUrlInput.value = '';
+        }
+    } else if (tipo === 'evento') {
+        const eventoSelect = document.getElementById('evento_id');
+        const selectedOption = eventoSelect.options[eventoSelect.selectedIndex];
+        if (selectedOption && selectedOption.value) {
+            botonUrlInput.value = selectedOption.getAttribute('data-url') || '';
+        } else {
+            botonUrlInput.value = '';
+        }
     }
 }
 

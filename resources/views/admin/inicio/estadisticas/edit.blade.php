@@ -29,10 +29,7 @@
             
             {{-- Colegiados --}}
             <div class="form-group">
-                <label for="stat_colegiados" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                    <div style="width:36px;height:36px;background:rgba(139,21,56,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                        <i class="fas fa-users" style="color:var(--primary);font-size:16px;"></i>
-                    </div>
+                <label for="stat_colegiados" style="font-weight:600;color:var(--dark);margin-bottom:8px;">
                     Número de Colegiados
                 </label>
                 <input type="number" id="stat_colegiados" name="stat_colegiados" value="{{ old('stat_colegiados', $config->stat_colegiados) }}" 
@@ -47,10 +44,7 @@
 
             {{-- Eventos --}}
             <div class="form-group">
-                <label for="stat_eventos" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                    <div style="width:36px;height:36px;background:rgba(76,175,80,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                        <i class="fas fa-calendar-check" style="color:#4CAF50;font-size:16px;"></i>
-                    </div>
+                <label for="stat_eventos" style="font-weight:600;color:var(--dark);margin-bottom:8px;">
                     Eventos Anuales
                 </label>
                 <input type="number" id="stat_eventos" name="stat_eventos" value="{{ old('stat_eventos', $config->stat_eventos) }}" 
@@ -65,10 +59,7 @@
 
             {{-- Años de Servicio --}}
             <div class="form-group">
-                <label for="stat_años" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                    <div style="width:36px;height:36px;background:rgba(255,152,0,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                        <i class="fas fa-award" style="color:#FF9800;font-size:16px;"></i>
-                    </div>
+                <label for="stat_años" style="font-weight:600;color:var(--dark);margin-bottom:8px;">
                     Años de Servicio
                 </label>
                 <input type="number" id="stat_años" name="stat_años" value="{{ old('stat_años', $config->stat_años) }}" 
@@ -83,10 +74,7 @@
 
             {{-- Publicaciones --}}
             <div class="form-group">
-                <label for="stat_publicaciones" style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--dark);margin-bottom:8px;">
-                    <div style="width:36px;height:36px;background:rgba(33,150,243,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                        <i class="fas fa-book" style="color:#2196F3;font-size:16px;"></i>
-                    </div>
+                <label for="stat_publicaciones" style="font-weight:600;color:var(--dark);margin-bottom:8px;">
                     Publicaciones
                 </label>
                 <input type="number" id="stat_publicaciones" name="stat_publicaciones" value="{{ old('stat_publicaciones', $config->stat_publicaciones) }}" 
