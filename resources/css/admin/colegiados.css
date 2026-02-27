@@ -1157,6 +1157,11 @@ div.user-avatar-small {
     border-width: 3px;
 }
 
+.upload-box.upload-box--error {
+    border-color: var(--danger);
+    background: rgba(211,47,47,0.04);
+}
+
 /* Icono del PDF */
 .upload-box .upload-icon {
     font-size: 56px;

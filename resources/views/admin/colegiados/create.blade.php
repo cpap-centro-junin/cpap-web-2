@@ -537,25 +537,6 @@
                     Documento de Habilitación <span class="required">*</span>
                 </h3>
 
-                {{-- ALERTA IMPORTANTE --}}
-                <div class="alert alert-warning" style="background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 16px; margin-bottom: 20px; display: flex; align-items: start; gap: 12px;">
-                    <i class="fas fa-exclamation-triangle" style="color: #856404; font-size: 20px; margin-top: 2px;"></i>
-                    <div style="flex: 1;">
-                        <strong style="color: #856404; font-size: 15px;">⚠️ Documento de Habilitación Obligatorio</strong>
-                        <p style="margin: 6px 0 0 0; color: #856404; font-size: 14px; line-height: 1.5;">
-                            Debes subir el documento de habilitación en formato PDF para completar el registro. 
-                            Sin este documento, el colegiado no podrá aparecer en el directorio público ni tener acceso a su certificado digital.
-                        </p>
-                    </div>
-                </div>
-
-                <p class="section-description">
-                    Obligatorio para que el perfil aparezca en el directorio público. Se generarán
-                    automáticamente un <strong>código UUID único</strong>, un <strong>código QR</strong>
-                    y una <strong>URL de verificación</strong> que se embeben en el PDF.
-                    El colegiado quedará marcado como <strong>ACTIVO</strong> automáticamente.
-                </p>
-
                 <div class="generation-grid" style="margin-bottom: 20px;">
                     <div class="generation-item">
                         <i class="fas fa-fingerprint"></i>
@@ -601,7 +582,6 @@
                         id="documento"
                         class="upload-input @error('documento') is-invalid @enderror"
                         accept=".pdf"
-                        required
                     >
 
                     <div class="file-info" id="habFileInfo" style="display: none;">
@@ -609,6 +589,8 @@
                         <span id="habFileName"></span>
                         <span id="habFileSize"></span>
                     </div>
+
+                    <div class="invalid-feedback" id="docErrorMsg" style="display:none;">Debes adjuntar el documento PDF de habilitación antes de registrar.</div>
 
                     @error('documento')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -640,6 +622,21 @@
     const info     = document.getElementById('habFileInfo');
     const nameSpan = document.getElementById('habFileName');
     const sizeSpan = document.getElementById('habFileSize');
+    const docError = document.getElementById('docErrorMsg');
+
+    // Validación del documento al enviar el formulario
+    const form = input.closest('form');
+    form.addEventListener('submit', function (e) {
+        if (!input.files || input.files.length === 0) {
+            e.preventDefault();
+            box.classList.add('upload-box--error');
+            docError.style.display = 'block';
+            box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        box.classList.remove('upload-box--error');
+        docError.style.display = 'none';
+    });
 
     function mostrarArchivo(file) {
         nameSpan.textContent = file.name;
@@ -651,6 +648,8 @@
     input.addEventListener('change', function () {
         if (this.files.length > 0) {
             mostrarArchivo(this.files[0]);
+            box.classList.remove('upload-box--error');
+            docError.style.display = 'none';
         } else {
             info.style.display = 'none';
             box.style.opacity  = '1';

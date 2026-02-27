@@ -98,23 +98,39 @@
                     <div class="consejo-estructura-list">
                         <div class="consejo-estructura-item consejo-estructura-item--main">
                             <i class="fas fa-star"></i>
-                            <span>Decano Regional</span>
+                            <span>Decano / Decana</span>
                         </div>
                         <div class="consejo-estructura-item">
-                            <i class="fas fa-user-tie"></i>
-                            <span>Secretario General</span>
+                            <i class="fas fa-award"></i>
+                            <span>Vice Decano / Vice Decana</span>
+                        </div>
+                        <div class="consejo-estructura-item">
+                            <i class="fas fa-pen-nib"></i>
+                            <span>Director/a Secretario/a</span>
                         </div>
                         <div class="consejo-estructura-item">
                             <i class="fas fa-coins"></i>
-                            <span>Tesorero</span>
+                            <span>Director/a de Economía</span>
                         </div>
                         <div class="consejo-estructura-item">
-                            <i class="fas fa-file-alt"></i>
-                            <span>Secretario de Actas</span>
+                            <i class="fas fa-bullhorn"></i>
+                            <span>Director/a de Relaciones Públicas</span>
                         </div>
                         <div class="consejo-estructura-item">
-                            <i class="fas fa-users-cog"></i>
-                            <span>Vocales</span>
+                            <i class="fas fa-flask"></i>
+                            <span>Director/a de Actividades Científicas y Culturales</span>
+                        </div>
+                        <div class="consejo-estructura-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Director/a de Seguridad Social</span>
+                        </div>
+                        <div class="consejo-estructura-item">
+                            <i class="fas fa-book"></i>
+                            <span>Director/a de Biblioteca y Archivo</span>
+                        </div>
+                        <div class="consejo-estructura-item">
+                            <i class="fas fa-handshake"></i>
+                            <span>Director/a de Relaciones y Defensa Profesional</span>
                         </div>
                     </div>
                 </div>
@@ -174,12 +190,6 @@
                 <!-- Cuerpo -->
                 <div class="consejo-card__body">
                     <h3 class="consejo-card__nombre">{{ $miembro->nombre }}</h3>
-                    @if($miembro->especialidad)
-                    <p class="consejo-card__especialidad">
-                        <i class="fas fa-graduation-cap"></i>
-                        {{ $miembro->especialidad }}
-                    </p>
-                    @endif
                 </div>
 
                 <!-- Footer -->

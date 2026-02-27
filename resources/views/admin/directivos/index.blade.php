@@ -40,7 +40,6 @@
                 <th style="width:60px;">Foto</th>
                 <th>Nombre</th>
                 <th>Cargo</th>
-                <th>Especialidad</th>
                 <th>Período</th>
                 <th>Orden</th>
                 <th>Estado</th>
@@ -67,7 +66,6 @@
                         {{ $directivo->cargo }}
                     </span>
                 </td>
-                <td style="color:var(--medium-gray);font-size:13px;">{{ $directivo->especialidad ?? '—' }}</td>
                 <td style="color:var(--medium-gray);font-size:13px;">{{ $directivo->periodo }}</td>
                 <td style="text-align:center;">
                     <span style="display:inline-block;width:28px;height:28px;background:var(--light-gray);border-radius:6px;text-align:center;line-height:28px;font-size:13px;font-weight:700;color:var(--dark);">

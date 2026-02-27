@@ -23,12 +23,11 @@ class DirectivoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'cargo'        => 'required|string|max:100',
-            'nombre'       => 'required|string|max:200',
-            'especialidad' => 'nullable|string|max:200',
-            'periodo'      => 'nullable|string|max:50',
-            'orden'        => 'nullable|integer|min:0',
-            'foto'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'cargo'   => 'required|string|max:100',
+            'nombre'  => 'required|string|max:200',
+            'periodo' => 'nullable|string|max:50',
+            'orden'   => 'nullable|integer|min:0',
+            'foto'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $data['activo'] = $request->boolean('activo');
@@ -54,12 +53,11 @@ class DirectivoController extends Controller
     public function update(Request $request, Directivo $directivo)
     {
         $data = $request->validate([
-            'cargo'        => 'required|string|max:100',
-            'nombre'       => 'required|string|max:200',
-            'especialidad' => 'nullable|string|max:200',
-            'periodo'      => 'nullable|string|max:50',
-            'orden'        => 'nullable|integer|min:0',
-            'foto'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'cargo'   => 'required|string|max:100',
+            'nombre'  => 'required|string|max:200',
+            'periodo' => 'nullable|string|max:50',
+            'orden'   => 'nullable|integer|min:0',
+            'foto'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         $data['activo'] = $request->boolean('activo');

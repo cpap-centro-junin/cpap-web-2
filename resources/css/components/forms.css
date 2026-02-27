@@ -359,8 +359,7 @@ select.form-control:focus {
 }
 
 /* Error */
-.form-control.is-invalid,
-.form-control:invalid {
+.form-control.is-invalid {
     border-color: var(--danger);
 }
 

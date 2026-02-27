@@ -47,12 +47,79 @@
 
                 <div style="margin-bottom:14px;">
                     <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">Cargo <span style="color:var(--danger);">*</span></label>
-                    <select name="cargo" class="admin-input" required>
-                        <option value="">— Selecciona un cargo —</option>
-                        @foreach(['Decano','Vice Decano','Secretario General','Secretaria General','Secretario(a) de Actas','Tesorero','Tesorera','Fiscal','Vocal 1','Vocal 2','Vocal 3'] as $c)
-                        <option value="{{ $c }}" {{ old('cargo') == $c ? 'selected' : '' }}>{{ $c }}</option>
-                        @endforeach
-                    </select>
+                    @php
+                    $cargosBase = [
+                        'decano'      => ['label' => 'Decano/a',                                           'm' => 'Decano',                                             'f' => 'Decana'],
+                        'vice'        => ['label' => 'Vice Decano/a',                                      'm' => 'Vice Decano',                                        'f' => 'Vice Decana'],
+                        'secretario'  => ['label' => 'Director/a Secretario/a',                            'm' => 'Director Secretario',                                'f' => 'Directora Secretaria'],
+                        'economia'    => ['label' => 'Director/a de Economía',                             'm' => 'Director de Economía',                               'f' => 'Directora de Economía'],
+                        'rrpp'        => ['label' => 'Director/a de Relaciones Públicas',                  'm' => 'Director de Relaciones Públicas',                    'f' => 'Directora de Relaciones Públicas'],
+                        'actividades' => ['label' => 'Director/a de Actividades Científicas y Culturales', 'm' => 'Director de Actividades Científicas y Culturales',   'f' => 'Directora de Actividades Científicas y Culturales'],
+                        'seguridad'   => ['label' => 'Director/a de Seguridad Social',                     'm' => 'Director de Seguridad Social',                       'f' => 'Directora de Seguridad Social'],
+                        'biblioteca'  => ['label' => 'Director/a de Biblioteca y Archivo',                 'm' => 'Director de Biblioteca y Archivo',                   'f' => 'Directora de Biblioteca y Archivo'],
+                        'defensa'     => ['label' => 'Director/a de Relaciones y Defensa Profesional',     'm' => 'Director de Relaciones y Defensa Profesional',       'f' => 'Directora de Relaciones y Defensa Profesional'],
+                    ];
+                    $oldCargo = old('cargo', '');
+                    $selectedKey = ''; $selectedGender = 'm';
+                    foreach ($cargosBase as $key => $pair) {
+                        if ($oldCargo === $pair['m']) { $selectedKey = $key; $selectedGender = 'm'; break; }
+                        if ($oldCargo === $pair['f']) { $selectedKey = $key; $selectedGender = 'f'; break; }
+                    }
+                    $isOtro = $oldCargo && !$selectedKey;
+                    $initialFinal = $isOtro ? $oldCargo : ($selectedKey ? $cargosBase[$selectedKey][$selectedGender] : '');
+                    @endphp
+
+                    {{-- Fila: select + botones de género --}}
+                    <div style="display:flex;gap:8px;align-items:stretch;">
+                        <select id="cargoSelect" class="admin-input" style="flex:1;"
+                                onchange="onCargoChange(this.value)">
+                            <option value="">— Selecciona un cargo —</option>
+                            @foreach($cargosBase as $key => $pair)
+                            <option value="{{ $key }}" {{ $selectedKey === $key ? 'selected' : '' }}>{{ $pair['label'] }}</option>
+                            @endforeach
+                            <option value="__otro__" {{ $isOtro ? 'selected' : '' }}>&#43; Otro cargo personalizado&hellip;</option>
+                        </select>
+
+                        {{-- Toggle ♂ / ♀ --}}
+                        <div id="genderWrap"
+                             style="display:{{ ($selectedKey && !$isOtro) ? 'flex' : 'none' }};align-items:stretch;border:1.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
+                            <button type="button" id="btnM" onclick="setGender('m')" title="Masculino"
+                                    style="padding:0 13px;border:none;cursor:pointer;font-size:15px;transition:all .15s;
+                                           background:{{ $selectedGender === 'm' ? 'var(--primary)' : 'var(--light-gray)' }};
+                                           color:{{ $selectedGender === 'm' ? 'white' : 'var(--medium-gray)' }};">
+                                <i class="fas fa-mars"></i>
+                            </button>
+                            <div style="width:1px;background:var(--border);"></div>
+                            <button type="button" id="btnF" onclick="setGender('f')" title="Femenino"
+                                    style="padding:0 13px;border:none;cursor:pointer;font-size:15px;transition:all .15s;
+                                           background:{{ $selectedGender === 'f' ? 'var(--primary)' : 'var(--light-gray)' }};
+                                           color:{{ $selectedGender === 'f' ? 'white' : 'var(--medium-gray)' }};">
+                                <i class="fas fa-venus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- Preview del cargo final --}}
+                    <div id="cargoPreview"
+                         style="display:{{ ($selectedKey && !$isOtro) ? 'flex' : 'none' }};margin-top:6px;align-items:center;gap:6px;
+                                padding:6px 10px;background:rgba(139,21,56,0.06);border-radius:6px;font-size:12px;
+                                color:var(--primary);font-weight:600;">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="cargoPreviewText">{{ $initialFinal }}</span>
+                    </div>
+
+                    {{-- Input oculto que se envía al servidor --}}
+                    <input type="hidden" name="cargo" id="cargoFinal" value="{{ $initialFinal }}">
+
+                    {{-- Campo libre para cargo personalizado --}}
+                    <div id="otroCargoCont" style="margin-top:8px;display:{{ $isOtro ? 'block' : 'none' }};">
+                        <input type="text" id="cargoCustom" class="admin-input"
+                               value="{{ $isOtro ? $oldCargo : '' }}"
+                               placeholder="Escribe el cargo exacto"
+                               {{ $isOtro ? 'required' : '' }}
+                               oninput="document.getElementById('cargoFinal').value = this.value.trim()">
+                        <small style="font-size:11px;color:var(--medium-gray);">El icono se asignará automáticamente según el texto.</small>
+                    </div>
                 </div>
 
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
@@ -122,6 +189,69 @@
 
 @push('scripts')
 <script>
+const PARES = {
+    decano:      { m: 'Decano',                                             f: 'Decana' },
+    vice:        { m: 'Vice Decano',                                        f: 'Vice Decana' },
+    secretario:  { m: 'Director Secretario',                                f: 'Directora Secretaria' },
+    economia:    { m: 'Director de Econom\u00eda',                          f: 'Directora de Econom\u00eda' },
+    rrpp:        { m: 'Director de Relaciones P\u00fablicas',               f: 'Directora de Relaciones P\u00fablicas' },
+    actividades: { m: 'Director de Actividades Cient\u00edficas y Culturales', f: 'Directora de Actividades Cient\u00edficas y Culturales' },
+    seguridad:   { m: 'Director de Seguridad Social',                       f: 'Directora de Seguridad Social' },
+    biblioteca:  { m: 'Director de Biblioteca y Archivo',                   f: 'Directora de Biblioteca y Archivo' },
+    defensa:     { m: 'Director de Relaciones y Defensa Profesional',       f: 'Directora de Relaciones y Defensa Profesional' },
+};
+let currentGender = '{{ $selectedGender }}';
+
+function onCargoChange(val) {
+    const genderWrap  = document.getElementById('genderWrap');
+    const preview     = document.getElementById('cargoPreview');
+    const otroCont    = document.getElementById('otroCargoCont');
+    const cargoCustom = document.getElementById('cargoCustom');
+    const cargoFinal  = document.getElementById('cargoFinal');
+    if (val === '__otro__') {
+        genderWrap.style.display  = 'none';
+        preview.style.display     = 'none';
+        otroCont.style.display    = 'block';
+        cargoCustom.required      = true;
+        cargoFinal.value          = '';
+    } else if (val === '') {
+        genderWrap.style.display  = 'none';
+        preview.style.display     = 'none';
+        otroCont.style.display    = 'none';
+        cargoCustom.required      = false;
+        cargoFinal.value          = '';
+    } else {
+        genderWrap.style.display  = 'flex';
+        preview.style.display     = 'flex';
+        otroCont.style.display    = 'none';
+        cargoCustom.required      = false;
+        cargoCustom.value         = '';
+        _updateFinal(val, currentGender);
+    }
+}
+
+function setGender(g) {
+    currentGender = g;
+    const key = document.getElementById('cargoSelect').value;
+    _updateFinal(key, g);
+    const btnM = document.getElementById('btnM');
+    const btnF = document.getElementById('btnF');
+    if (g === 'm') {
+        btnM.style.background = 'var(--primary)'; btnM.style.color = 'white';
+        btnF.style.background = 'var(--light-gray)'; btnF.style.color = 'var(--medium-gray)';
+    } else {
+        btnF.style.background = 'var(--primary)'; btnF.style.color = 'white';
+        btnM.style.background = 'var(--light-gray)'; btnM.style.color = 'var(--medium-gray)';
+    }
+}
+
+function _updateFinal(key, g) {
+    const pair = PARES[key]; if (!pair) return;
+    const val = pair[g];
+    document.getElementById('cargoFinal').value          = val;
+    document.getElementById('cargoPreviewText').textContent = val;
+}
+
 function handleImg(input) {
     if (!input.files[0]) return;
     const reader = new FileReader();

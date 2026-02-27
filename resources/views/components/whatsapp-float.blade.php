@@ -2,9 +2,9 @@
 <a href="https://wa.me/51943667317?text=Hola,%20quisiera%20información%20sobre%20el%20CPAP%20Región%20Centro" 
    target="_blank" 
    class="whatsapp-float" 
-   title="¿Necesitas ayuda? Escríbenos por WhatsApp"
+   title="Escríbenos por WhatsApp"
    aria-label="Contactar por WhatsApp">
-    <i class="fab fa-whatsapp"></i>
+    <i class="fab fa-whatsapp" style="color:white;"></i>
     <span class="whatsapp-float-text">¿Necesitas ayuda?</span>
 </a>
 
@@ -48,6 +48,7 @@
 }
 
 .whatsapp-float-text {
+    color: white;
     display: none;
     margin-left: 10px;
     font-size: 14px;

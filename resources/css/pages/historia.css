@@ -286,10 +286,6 @@
 /* ============================================
    HITOS INSTITUCIONALES
    ============================================ */
-.historia-hitos-section {
-    /* usa section-padding y bg-light ya definidos */
-}
-
 .hitos-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
