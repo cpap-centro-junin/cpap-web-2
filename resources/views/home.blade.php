@@ -467,7 +467,7 @@
         </div>
 
         <div class="text-center" style="margin-top: 50px;" data-aos="fade-up">
-            <a href="{{ url('/#contacto') }}" class="btn btn-primary btn-lg">
+            <a href="{{ url('/contacto') }}" class="btn btn-primary btn-lg">
                 <i class="fas fa-envelope"></i>
                 Iniciar Proceso de Colegiatura
             </a>

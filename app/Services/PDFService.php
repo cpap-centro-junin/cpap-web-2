@@ -95,7 +95,7 @@ class PDFService
 
         // Configuración del QR
         $qrSize = 35;  // Tamaño en mm
-        $margenDerecho  = 10;
+        $margenDerecho  = 15;
         $margenInferior = 15;
         $espacioTexto   = 42; // mm para código + URL + watermark debajo del QR
 
@@ -109,23 +109,21 @@ class PDFService
             $pdf->Image($qrFullPath, $qrX, $qrY, $qrSize, $qrSize, 'PNG');
         }
 
-        // Código de verificación (debajo del QR, sin solaparse con la URL)
-        // El UUID ocupa ~3 líneas en 35mm → ~9mm de alto a 7pt
-        $pdf->SetFont('Arial', 'B', 7);
+        // Código de verificación (debajo del QR, en una línea)
+        $pdf->SetFont('Arial', 'B', 6.5);
         $pdf->SetTextColor(0, 0, 0);
-        $pdf->SetXY($qrX, $qrY + $qrSize + 2);
-        $pdf->MultiCell($qrSize, 3, "Codigo:\n{$codigoVerificacion}", 0, 'C');
+        $pdf->SetXY($qrX - 30, $qrY + $qrSize + 2);
+        $pdf->MultiCell($qrSize + 60, 2.5, "Codigo: {$codigoVerificacion}", 0, 'C');
 
-        // URL de verificación (separada del bloque de código)
-        // Se ubica con offset fijo para no depender de cuántas líneas ocupó el código
-        $pdf->SetFont('Arial', '', 5);
-        $pdf->SetXY($qrX, $qrY + $qrSize + 20);
-        $pdf->MultiCell($qrSize, 2, $urlVerificacion, 0, 'C');
+        // URL de verificación (debajo del código, en línea separada)
+        $pdf->SetFont('Arial', '', 4.5);
+        $pdf->SetXY($qrX - 30, $qrY + $qrSize + 7);
+        $pdf->MultiCell($qrSize + 60, 2, $urlVerificacion, 0, 'C');
 
         // Marca de agua "Documento Verificable"
         $pdf->SetFont('Arial', 'I', 8);
         $pdf->SetTextColor(139, 21, 56); // Color vino CPAP
-        $pdf->SetXY($qrX - 10, $qrY + $qrSize + 32);
-        $pdf->MultiCell($qrSize + 20, 3, "Documento Verificable", 0, 'C');
+        $pdf->SetXY($qrX - 30, $qrY + $qrSize + 12);
+        $pdf->MultiCell($qrSize + 60, 3, "Documento Verificable", 0, 'C');
     }
 }

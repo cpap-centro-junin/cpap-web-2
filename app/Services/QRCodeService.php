@@ -7,6 +7,7 @@ use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Label\Font\OpenSans;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Models\Habilitacion;
@@ -49,16 +50,21 @@ class QRCodeService
 
         // Crear Builder con los parámetros necesarios (v6.0.9)
         // En esta versión, Builder es readonly y se pasan parámetros al constructor
+        $label = !empty($nombreColegiado)
+            ? 'CPAP - ' . Str::limit($nombreColegiado, 30)
+            : '';
+
         $builder = new Builder(
             writer: new PngWriter(),
             data: $url,
             encoding: new Encoding('UTF-8'),
             errorCorrectionLevel: ErrorCorrectionLevel::High,
-            size: 300,
+            size: 350,
             margin: 10,
             foregroundColor: new Color(0, 0, 0),
             backgroundColor: new Color(255, 255, 255),
-            labelText: !empty($nombreColegiado) ? "CPAP - {$nombreColegiado}" : ''
+            labelText: $label,
+            labelFont: new OpenSans(13),
         );
 
         // Construir el QR

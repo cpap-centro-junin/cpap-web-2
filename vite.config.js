@@ -8,7 +8,11 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/css/admin.css',
+                'resources/css/admin/diseno.css',
+                'resources/css/pages/biblioteca.css',
+                'resources/css/pages/bolsa-trabajo.css',
                 'resources/js/app.js',
+                'resources/js/admin/diseno.js',
                 'resources/js/modules/mision-vision.js',
                 'resources/js/modules/consejo.js',
                 'resources/js/modules/historia.js',

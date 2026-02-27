@@ -536,6 +536,19 @@
                     <i class="fas fa-certificate"></i>
                     Documento de Habilitación <span class="required">*</span>
                 </h3>
+
+                {{-- ALERTA IMPORTANTE --}}
+                <div class="alert alert-warning" style="background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 16px; margin-bottom: 20px; display: flex; align-items: start; gap: 12px;">
+                    <i class="fas fa-exclamation-triangle" style="color: #856404; font-size: 20px; margin-top: 2px;"></i>
+                    <div style="flex: 1;">
+                        <strong style="color: #856404; font-size: 15px;">⚠️ Documento de Habilitación Obligatorio</strong>
+                        <p style="margin: 6px 0 0 0; color: #856404; font-size: 14px; line-height: 1.5;">
+                            Debes subir el documento de habilitación en formato PDF para completar el registro. 
+                            Sin este documento, el colegiado no podrá aparecer en el directorio público ni tener acceso a su certificado digital.
+                        </p>
+                    </div>
+                </div>
+
                 <p class="section-description">
                     Obligatorio para que el perfil aparezca en el directorio público. Se generarán
                     automáticamente un <strong>código UUID único</strong>, un <strong>código QR</strong>

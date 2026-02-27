@@ -75,8 +75,9 @@
                 <p>Si crees que este es un error o tienes dudas sobre la autenticidad de un documento, por favor contacta directamente con el:</p>
                 <div class="contact-box">
                     <strong>Colegio Profesional de Antropólogos del Perú - Región Centro</strong><br>
-                    <i class="fas fa-phone"></i> <a href="tel:+51987654321">+51 987 654 321</a><br>
-                    <i class="fas fa-envelope"></i> <a href="mailto:info@cpapcentro.org.pe">info@cpapcentro.org.pe</a>
+                    <i class="fas fa-phone"></i> <a href="tel:+51943667317">+51 943 667 317</a><br>
+                    <i class="fas fa-envelope"></i> <a href="mailto:cpap.rc@gmail.com">cpap.rc@gmail.com</a><br>
+                    <i class="fab fa-whatsapp"></i> <a href="https://wa.me/51943667317" target="_blank">WhatsApp</a>
                 </div>
             </div>
         </div>

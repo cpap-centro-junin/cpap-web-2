@@ -59,19 +59,25 @@
                         <li>
                             <i class="fas fa-map-marker-alt"></i>
                             <div class="footer-contact-info">
-                                Jr. Ejemplo 123, Huancayo<br>Junín, Perú
+                                Jr. Arequipa 734, Huancayo<br>Junín, Perú
                             </div>
                         </li>
                         <li>
-                            <i class="fas fa-phone"></i>
+                            <i class="fas fa-mobile-alt"></i>
                             <div class="footer-contact-info">
-                                <a href="tel:+51064123456">(064) 123-4567</a>
+                                <a href="tel:+51943667317">(+51) 943 667 317</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <div class="footer-contact-info">
+                                <a href="https://wa.me/51943667317" target="_blank">WhatsApp</a>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
                             <div class="footer-contact-info">
-                                <a href="mailto:contacto@cpapcentro.org.pe">contacto@cpapcentro.org.pe</a>
+                                <a href="mailto:cpap.rc@gmail.com">cpap.rc@gmail.com</a>
                             </div>
                         </li>
                         <li>

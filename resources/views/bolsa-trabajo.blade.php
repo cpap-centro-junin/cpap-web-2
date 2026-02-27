@@ -2,6 +2,8 @@
 
 @section('title', 'Bolsa de Trabajo - CPAP Región Centro')
 
+@vite(['resources/css/pages/bolsa-trabajo.css'])
+
 @section('content')
 <!-- Page Header -->
 <section class="page-header">

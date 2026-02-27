@@ -130,6 +130,10 @@
             <div class="menu-separator">
                 <span>Configuración</span>
             </div>
+            <a href="{{ route('admin.diseno.edit') }}" class="menu-item {{ request()->routeIs('admin.diseno*') ? 'active' : '' }}">
+                <i class="fas fa-palette"></i>
+                <span class="menu-text">Diseño del Sitio</span>
+            </a>
             <a href="{{ route('admin.invitaciones') }}" class="menu-item {{ request()->routeIs('admin.invitaciones') ? 'active' : '' }}">
                 <i class="fas fa-user-plus"></i>
                 <span class="menu-text">Invitaciones</span>

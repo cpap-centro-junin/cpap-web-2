@@ -149,6 +149,16 @@ Route::resource('normativa', \App\Http\Controllers\Admin\NormativaController::cl
     'destroy' => 'admin.normativa.destroy',
 ]);
 
+// ============================================
+// PERSONALIZACIÓN DE DISEÑO
+// ============================================
+
+use App\Http\Controllers\Admin\DisenoController;
+
+Route::get('/diseno', [DisenoController::class, 'edit'])->name('admin.diseno.edit');
+Route::put('/diseno', [DisenoController::class, 'update'])->name('admin.diseno.update');
+Route::post('/diseno/restaurar', [DisenoController::class, 'restaurar'])->name('admin.diseno.restaurar');
+
     use App\Http\Controllers\Admin\ContactMessageController;
 
 //MENSAJES

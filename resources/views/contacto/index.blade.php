@@ -29,27 +29,27 @@
 <section class="ctc-channels">
     <div class="container">
         <div class="ctc-channels-grid">
-            <a href="https://wa.me/51900000000" target="_blank" class="ctc-channel ctc-channel--whatsapp" data-aos="fade-up" data-aos-delay="0">
+            <a href="https://wa.me/51943667317" target="_blank" class="ctc-channel ctc-channel--whatsapp" data-aos="fade-up" data-aos-delay="0">
                 <div class="ctc-channel-icon"><i class="fab fa-whatsapp"></i></div>
                 <div class="ctc-channel-body">
                     <span class="ctc-channel-label">WhatsApp</span>
-                    <span class="ctc-channel-val">(+51) 900 000 000</span>
+                    <span class="ctc-channel-val">(+51) 943 667 317</span>
                 </div>
                 <i class="fas fa-arrow-right ctc-channel-arrow"></i>
             </a>
-            <a href="mailto:mesadepartes@cpaprc.org.pe" class="ctc-channel ctc-channel--email" data-aos="fade-up" data-aos-delay="80">
+            <a href="mailto:cpap.rc@gmail.com" class="ctc-channel ctc-channel--email" data-aos="fade-up" data-aos-delay="80">
                 <div class="ctc-channel-icon"><i class="fas fa-envelope"></i></div>
                 <div class="ctc-channel-body">
-                    <span class="ctc-channel-label">Mesa de Partes</span>
-                    <span class="ctc-channel-val">mesadepartes@cpaprc.org.pe</span>
+                    <span class="ctc-channel-label">Correo Electrónico</span>
+                    <span class="ctc-channel-val">cpap.rc@gmail.com</span>
                 </div>
                 <i class="fas fa-arrow-right ctc-channel-arrow"></i>
             </a>
-            <a href="tel:+5164123456" class="ctc-channel ctc-channel--phone" data-aos="fade-up" data-aos-delay="160">
+            <a href="tel:+51943667317" class="ctc-channel ctc-channel--phone" data-aos="fade-up" data-aos-delay="160">
                 <div class="ctc-channel-icon"><i class="fas fa-phone-alt"></i></div>
                 <div class="ctc-channel-body">
-                    <span class="ctc-channel-label">Central Telefónica</span>
-                    <span class="ctc-channel-val">(+51 64) 123456 · Anexo 100</span>
+                    <span class="ctc-channel-label">Celular</span>
+                    <span class="ctc-channel-val">(+51) 943 667 317</span>
                 </div>
                 <i class="fas fa-arrow-right ctc-channel-arrow"></i>
             </a>

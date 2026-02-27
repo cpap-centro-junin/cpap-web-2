@@ -108,62 +108,90 @@
         <div class="visibility-summary-panel__info">
             <strong>{{ $colegiado->perfil_oculto ? 'Perfil oculto del directorio público' : 'Perfil visible en el directorio público' }}</strong>
             <div class="visibility-summary-badges">
-                <span class="vis-badge {{ $colegiado->ocultar_foto ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-user-circle"></i>
-                    Foto {{ $colegiado->ocultar_foto ? 'oculta' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_email ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-envelope"></i>
-                    Email {{ $colegiado->ocultar_email ? 'oculto' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_telefono ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-phone"></i>
-                    Teléfono {{ $colegiado->ocultar_telefono ? 'oculto' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_grado_academico ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-user-graduate"></i>
-                    Grado {{ $colegiado->ocultar_grado_academico ? 'oculto' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_especialidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-flask"></i>
-                    Especialidad {{ $colegiado->ocultar_especialidad ? 'oculta' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_especializacion_detalle ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-list-ul"></i>
-                    Detalle Espec. {{ $colegiado->ocultar_especializacion_detalle ? 'oculto' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_orientacion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-compass"></i>
-                    Orientación {{ $colegiado->ocultar_orientacion ? 'oculta' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_diplomados ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-certificate"></i>
-                    Diplomados {{ $colegiado->ocultar_diplomados ? 'ocultos' : 'visibles' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_experiencia ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-briefcase"></i>
-                    Experiencia {{ $colegiado->ocultar_experiencia ? 'oculta' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_universidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-university"></i>
-                    Universidad {{ $colegiado->ocultar_universidad ? 'oculta' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_anio_graduacion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-calendar-check"></i>
-                    Año grad. {{ $colegiado->ocultar_anio_graduacion ? 'oculto' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_fecha_colegiatura ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-id-card"></i>
-                    F. colegiatura {{ $colegiado->ocultar_fecha_colegiatura ? 'oculta' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_descripcion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-align-left"></i>
-                    Descripción {{ $colegiado->ocultar_descripcion ? 'oculta' : 'visible' }}
-                </span>
-                <span class="vis-badge {{ $colegiado->ocultar_cv ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
-                    <i class="fas fa-file-pdf"></i>
-                    CV {{ $colegiado->ocultar_cv ? 'oculto' : 'visible' }}
-                </span>
+                @if($colegiado->foto)
+                    <span class="vis-badge {{ $colegiado->ocultar_foto ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-user-circle"></i>
+                        Foto {{ $colegiado->ocultar_foto ? 'oculta' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->email)
+                    <span class="vis-badge {{ $colegiado->ocultar_email ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-envelope"></i>
+                        Email {{ $colegiado->ocultar_email ? 'oculto' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->telefono)
+                    <span class="vis-badge {{ $colegiado->ocultar_telefono ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-phone"></i>
+                        Teléfono {{ $colegiado->ocultar_telefono ? 'oculto' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->grado_academico)
+                    <span class="vis-badge {{ $colegiado->ocultar_grado_academico ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-user-graduate"></i>
+                        Grado {{ $colegiado->ocultar_grado_academico ? 'oculto' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->especialidad)
+                    <span class="vis-badge {{ $colegiado->ocultar_especialidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-flask"></i>
+                        Especialidad {{ $colegiado->ocultar_especialidad ? 'oculta' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->especializacion_detalle)
+                    <span class="vis-badge {{ $colegiado->ocultar_especializacion_detalle ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-list-ul"></i>
+                        Detalle Espec. {{ $colegiado->ocultar_especializacion_detalle ? 'oculto' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->orientacion)
+                    <span class="vis-badge {{ $colegiado->ocultar_orientacion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-compass"></i>
+                        Orientación {{ $colegiado->ocultar_orientacion ? 'oculta' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->diplomados)
+                    <span class="vis-badge {{ $colegiado->ocultar_diplomados ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-certificate"></i>
+                        Diplomados {{ $colegiado->ocultar_diplomados ? 'ocultos' : 'visibles' }}
+                    </span>
+                @endif
+                @if($colegiado->experiencia_anos || $colegiado->experiencia_sector)
+                    <span class="vis-badge {{ $colegiado->ocultar_experiencia ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-briefcase"></i>
+                        Experiencia {{ $colegiado->ocultar_experiencia ? 'oculta' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->universidad)
+                    <span class="vis-badge {{ $colegiado->ocultar_universidad ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-university"></i>
+                        Universidad {{ $colegiado->ocultar_universidad ? 'oculta' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->anio_graduacion)
+                    <span class="vis-badge {{ $colegiado->ocultar_anio_graduacion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-calendar-check"></i>
+                        Año grad. {{ $colegiado->ocultar_anio_graduacion ? 'oculto' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->fecha_colegiatura)
+                    <span class="vis-badge {{ $colegiado->ocultar_fecha_colegiatura ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-id-card"></i>
+                        F. colegiatura {{ $colegiado->ocultar_fecha_colegiatura ? 'oculta' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->descripcion)
+                    <span class="vis-badge {{ $colegiado->ocultar_descripcion ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-align-left"></i>
+                        Descripción {{ $colegiado->ocultar_descripcion ? 'oculta' : 'visible' }}
+                    </span>
+                @endif
+                @if($colegiado->cv_path)
+                    <span class="vis-badge {{ $colegiado->ocultar_cv ? 'vis-badge--hidden' : 'vis-badge--visible' }}">
+                        <i class="fas fa-file-pdf"></i>
+                        CV {{ $colegiado->ocultar_cv ? 'oculto' : 'visible' }}
+                    </span>
+                @endif
             </div>
         </div>
         <a href="{{ route('admin.colegiados.edit', $colegiado) }}#visibilidad" class="btn btn-sm btn-outline-secondary">

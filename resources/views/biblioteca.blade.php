@@ -2,9 +2,7 @@
 
 @section('title', 'Biblioteca Virtual - CPAP Región Centro')
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('resources/css/pages/biblioteca.css') }}">
-@endpush
+@vite(['resources/css/pages/biblioteca.css'])
 
 @section('content')
 <!-- Page Header -->
@@ -31,7 +29,7 @@
     <div class="container">
         <div class="library-search" data-aos="fade-up">
             <form method="GET" action="{{ route('biblioteca') }}">
-                <div class="search-box">
+                <div class="search-boxx">
                     <i class="fas fa-search"></i>
                     <input type="text" name="q" value="{{ request('q') }}"
                            placeholder="Buscar libros, artículos, tesis, investigaciones...">
