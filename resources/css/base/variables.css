@@ -54,8 +54,8 @@
        ============================================ */
 
     /* Familias de fuente */
-    --font-primary: 'Poppins', sans-serif;
-    --font-heading: 'Nunito', sans-serif;
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Playfair Display', serif;
 
     /* Tamaños de fuente */
     --font-xs: 0.75rem;      /* 12px */

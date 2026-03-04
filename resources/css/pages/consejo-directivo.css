@@ -134,7 +134,7 @@
 }
 
 .consejo-card__nombre {
-    font-family: var(--font-heading);
+    font-family: var(--font-primary);
     font-size: var(--font-xl);
     font-weight: var(--font-bold);
     color: var(--dark-secondary);

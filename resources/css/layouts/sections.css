@@ -481,7 +481,6 @@
 .news-category {
     position: absolute;
     top: 20px;
-    right: 20px;
     padding: 8px 20px;
     background: linear-gradient(135deg, #8B1538 0%, #6B0F2A 100%);
     color: white;
