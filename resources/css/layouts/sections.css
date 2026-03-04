@@ -13,8 +13,9 @@
     background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 40%, var(--primary-dark) 100%);
     background-size: 400% 400%;
     animation: gradientShift 12s ease infinite;
-    overflow: hidden;
-    padding: 55px 20px 60px; /* top padding > navbar height (92px) so content stays visible */
+    overflow: hidden; /* CRÍTICO: prevenir overflow */
+    max-width: 100vw; /* CRÍTICO: limitar ancho */
+    padding: 55px 15px 60px; /* Reducir padding lateral; top padding > navbar height (92px) so content stays visible */
     z-index: 1;
 }
 
@@ -102,7 +103,8 @@
     background-repeat: no-repeat;
     background-attachment: scroll; /* Estática al hacer scroll */
     min-height: 90vh;
-    padding: 120px 20px 80px;
+    max-width: 100vw; /* CRÍTICO: limitar ancho */
+    padding: 120px 15px 80px; /* Reducir padding lateral */
     animation: heroSlideLeft 35s ease-in-out infinite alternate;
 }
 
@@ -127,7 +129,7 @@
 
 .hero--home .container {
     max-width: 1400px;
-    padding: 0 40px;
+    padding: 0 15px; /* Reducir padding lateral */
 }
 
 .hero--home .hero-content {
@@ -194,6 +196,7 @@
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.3s ease;
+    justify-content: center;
 }
 
 .hero--home .btn-primary {
@@ -863,8 +866,9 @@
 
     .hero--home {
         min-height: 85vh;
-        padding: 100px 20px 60px;
+        padding: 100px 15px 60px; /* Reducir padding lateral */
         background-attachment: scroll;
+        max-width: 100vw; /* CRÍTICO: limitar ancho */
         animation: heroSlideLeftMobile 25s ease-in-out infinite alternate;
     }
 
@@ -887,7 +891,7 @@
     }
 
     .hero--home .container {
-        padding: 0 20px;
+        padding: 0 15px; /* Reducir padding lateral */
     }
 
     .hero--home .hero-content {
@@ -896,7 +900,8 @@
     }
 
     .hero--home .hero-buttons {
-        justify-content: center;
+        justify-content: center !important; /* Forzar centrado */
+        align-items: center;
         flex-direction: column;
         width: 100%;
     }
@@ -904,6 +909,7 @@
     .hero--home .btn {
         width: 100%;
         max-width: 300px;
+        margin: 0 auto; /* Extra centrado */
     }
 
     .section-padding {
@@ -1295,6 +1301,38 @@
 }
 
 @media (max-width: 480px) {
+    .hero--home {
+        min-height: 80vh;
+        padding: 80px 10px 40px; /* Padding mínimo en móviles pequeños */
+        max-width: 100vw; /* CRÍTICO: limitar ancho */
+    }
+
+    .hero--home .container {
+        padding: 0 10px; /* Padding mínimo */
+    }
+
+    .hero--home .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero--home .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero--home .hero-buttons {
+        justify-content: center !important;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 15px; /* Espacio entre botones */
+    }
+
+    .hero--home .btn {
+        width: 100%;
+        max-width: 280px; /* Ligeramente más pequeño en móviles pequeños */
+        margin: 0 auto;
+    }
+
     .antro-body { grid-template-columns: 30px 1fr 30px; }
 
     .antro-side-label span {

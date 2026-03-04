@@ -60,11 +60,12 @@
 
 {{-- TABLA --}}
 <div class="admin-table">
-    <table>
-        <thead>
-            <tr>
-                <th style="width:50px;">Portada</th>
-                <th>Título / Autor</th>
+    <div class="admin-table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:50px;">Portada</th>
+                    <th>Título / Autor</th>
                 <th>Tipo</th>
                 <th>Área</th>
                 <th>Año</th>
@@ -184,6 +185,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 {{-- PAGINACIÓN --}}

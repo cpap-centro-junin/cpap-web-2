@@ -41,11 +41,12 @@
 
 {{-- TABLA --}}
 <div class="admin-table">
-    <table>
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Empresa</th>
+    <div class="admin-table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Empresa</th>
                 <th>Ubicación</th>
                 <th>Tipo</th>
                 <th>Área</th>
@@ -123,6 +124,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 @if($ofertas->hasPages())

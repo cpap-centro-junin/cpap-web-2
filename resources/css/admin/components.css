@@ -14,9 +14,16 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
+/* Wrapper para scroll horizontal */
+.admin-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .admin-table table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 800px; /* Asegura que la tabla mantenga su estructura en mobile */
 }
 
 .admin-table thead {

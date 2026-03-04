@@ -217,12 +217,14 @@
 
 .table-responsive {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
+    min-width: 900px; /* Asegura estructura en mobile */
 }
 
 .table thead {
@@ -338,7 +340,8 @@ div.user-avatar-small {
     display: flex;
     gap: 6px;
     align-items: center;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* Una sola fila en desktop */
+    justify-content: center;
 }
 
 .btn-icon {
@@ -2017,9 +2020,7 @@ div.user-avatar-small {
         justify-content: center;
     }
 
-    .action-buttons {
-        flex-wrap: wrap;
-    }
+    /* .action-buttons mantiene flex-wrap: nowrap por defecto */
 
     .edit-context-banner {
         flex-direction: column;

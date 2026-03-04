@@ -352,11 +352,13 @@
     .btn {
         padding: 10px 24px;
         font-size: var(--font-sm);
+        max-width: 100%; /* CRÍTICO: Evitar overflow */
     }
 
     .btn-lg {
         padding: 12px 30px;
         font-size: var(--font-base);
+        max-width: 100%; /* CRÍTICO: Evitar overflow */
     }
 
     .btn-sm {
@@ -368,5 +370,26 @@
     .btn-mobile-block {
         display: flex;
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+        max-width: 100%; /* CRÍTICO: Evitar overflow */
+        word-wrap: break-word;
+    }
+
+    .btn-lg {
+        padding: 12px 20px; /* Reducir padding horizontal */
+        font-size: 0.9rem;
+        max-width: 100%; /* CRÍTICO: Evitar overflow */
+        word-wrap: break-word;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.75rem;
     }
 }

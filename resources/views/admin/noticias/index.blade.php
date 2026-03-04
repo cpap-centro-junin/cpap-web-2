@@ -27,12 +27,13 @@
 
 {{-- TABLA --}}
 <div class="admin-table">
-    <table>
-        <thead>
-            <tr>
-                <th style="width:60px;">Portada</th>
-                <th>Título</th>
-                <th>Categoría</th>
+    <div class="admin-table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:60px;">Portada</th>
+                    <th>Título</th>
+                    <th>Categoría</th>
                 <th>Autor</th>
                 <th>Estado</th>
                 <th>Publicado</th>
@@ -115,6 +116,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 @if($noticias->hasPages())

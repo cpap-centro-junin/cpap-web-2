@@ -27,10 +27,43 @@
     /* Ajuste topbar */
     .topbar {
         justify-content: space-between;
+        padding: 12px 16px;
+        gap: 12px;
+    }
+
+    .topbar-center {
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+
+    .page-title {
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+    }
+
+    .user-info {
+        gap: 10px;
+        flex-shrink: 0;
     }
 
     .user-name {
         display: none;
+    }
+
+    .logout-btn span {
+        display: none;
+    }
+
+    .logout-btn {
+        padding: 10px 14px;
+        min-width: auto;
+    }
+
+    .topbar-messages {
+        margin-right: 0;
     }
 
     /* Content full width */
@@ -69,5 +102,93 @@
 
     .card {
         padding: 20px;
+    }
+}
+
+/* ============================================
+   TABLAS RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    /* Asegurar scroll suave en tablas */
+    .table-responsive,
+    .admin-table-wrapper {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--secondary) transparent;
+    }
+
+    .table-responsive::-webkit-scrollbar,
+    .admin-table-wrapper::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .table-responsive::-webkit-scrollbar-track,
+    .admin-table-wrapper::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 10px;
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb,
+    .admin-table-wrapper::-webkit-scrollbar-thumb {
+        background: var(--secondary);
+        border-radius: 10px;
+    }
+
+    /* Reducir tamaño de fuente en tablas */
+    .table,
+    .admin-table table {
+        font-size: 13px;
+    }
+
+    .table thead th,
+    .admin-table thead th {
+        padding: 12px 10px;
+        font-size: 11px;
+    }
+
+    .table tbody td,
+    .admin-table tbody td {
+        padding: 12px 10px;
+    }
+
+    /* Action buttons - más compactos, mantienen nowrap */
+    .action-buttons {
+        gap: 4px;
+    }
+
+    .btn-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Tablas aún más compactas */
+    .table,
+    .admin-table table {
+        font-size: 12px;
+    }
+
+    .table thead th,
+    .admin-table thead th {
+        padding: 10px 8px;
+        font-size: 10px;
+    }
+
+    .table tbody td,
+    .admin-table tbody td {
+        padding: 10px 8px;
+    }
+
+    /* Action buttons - extra compactos */
+    .btn-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .action-buttons {
+        gap: 3px;
     }
 }

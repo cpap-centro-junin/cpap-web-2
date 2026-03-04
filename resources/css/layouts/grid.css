@@ -289,3 +289,13 @@
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px; /* Padding mínimo en móviles pequeños */
+    }
+
+    .container-fluid {
+        padding: 0 10px;
+    }
+}

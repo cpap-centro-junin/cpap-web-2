@@ -32,12 +32,13 @@
 @endif
 
 <div class="admin-table">
-    <table>
-        <thead>
-            <tr>
-                <th style="width:50px;">Ícono</th>
-                <th>Título</th>
-                <th>Archivo PDF</th>
+    <div class="admin-table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:50px;">Ícono</th>
+                    <th>Título</th>
+                    <th>Archivo PDF</th>
                 <th>Orden</th>
                 <th>Estado</th>
                 <th style="text-align:center;width:140px;">Acciones</th>
@@ -110,6 +111,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 <div style="margin-top:16px;padding:14px 18px;background:var(--info-light);border-radius:var(--radius-sm);font-size:13px;color:var(--info);display:flex;align-items:center;gap:10px;">

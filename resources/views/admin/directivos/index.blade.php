@@ -34,13 +34,14 @@
 @endif
 
 <div class="admin-table">
-    <table>
-        <thead>
-            <tr>
-                <th style="width:60px;">Foto</th>
-                <th>Nombre</th>
-                <th>Cargo</th>
-                <th>Período</th>
+    <div class="admin-table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:60px;">Foto</th>
+                    <th>Nombre</th>
+                    <th>Cargo</th>
+                    <th>Período</th>
                 <th>Orden</th>
                 <th>Estado</th>
                 <th style="text-align:center;width:140px;">Acciones</th>
@@ -110,6 +111,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 <div style="margin-top:16px;padding:14px 18px;background:var(--info-light);border-radius:var(--radius-sm);font-size:13px;color:var(--info);display:flex;align-items:center;gap:10px;">

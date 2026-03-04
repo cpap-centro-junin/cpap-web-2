@@ -27,12 +27,13 @@
 
 {{-- TABLA --}}
 <div class="admin-table">
-    <table>
-        <thead>
-            <tr>
-                <th style="width:60px;">Portada</th>
-                <th>Título</th>
-                <th>Categoría</th>
+    <div class="admin-table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:60px;">Portada</th>
+                    <th>Título</th>
+                    <th>Categoría</th>
                 <th>Fecha</th>
                 <th>Estado</th>
                 <th style="text-align:center;width:160px;">Acciones</th>
@@ -127,6 +128,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 @if($eventos->hasPages())

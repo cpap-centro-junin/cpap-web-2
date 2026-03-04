@@ -32,12 +32,13 @@
 </div>
 
 <div class="admin-table">
-    <table>
-        <thead>
-            <tr>
-                <th style="width:120px;">Vista Previa</th>
-                <th>Título (interno)</th>
-                <th style="text-align:center;">Estado</th>
+    <div class="admin-table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:120px;">Vista Previa</th>
+                    <th>Título (interno)</th>
+                    <th style="text-align:center;">Estado</th>
                 <th>Creado</th>
                 <th style="text-align:center;width:160px;">Acciones</th>
             </tr>
@@ -97,6 +98,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 
 @endsection

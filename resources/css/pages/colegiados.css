@@ -456,13 +456,89 @@
 }
 
 /* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+    .cpap-hero {
+        padding: 50px 0 50px;
+    }
+
+    .cpap-hero-content {
+        padding: 0 15px;
+    }
+
+    .cpap-hero h1 {
+        font-size: 2rem;
+    }
+
+    .cpap-hero p {
+        font-size: var(--font-base);
+        margin-bottom: 30px;
+    }
+
+    .search-box {
+        padding: 6px 6px 6px 16px;
+        max-width: 100%; /* CRÍTICO: Evitar overflow */
+    }
+
+    .search-box .btn-search {
+        padding: 12px 20px;
+        font-size: var(--font-xs);
+    }
+
+    .filters-section {
+        top: 80px; /* Ajustar para navbar fixed */
+        padding: 15px 0;
+    }
+
+    .filters-inner {
+        padding: 0 15px;
+        gap: 12px;
+    }
+
+    .filter-chips {
+        gap: 6px;
+    }
+
+    .filter-chip {
+        padding: 5px 12px;
+        font-size: 0.75rem;
+    }
+
+    .results-count {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 8px;
+    }
+
+    .cpap-container {
+        padding: 0 15px;
+    }
+
+    .cpap-main {
+        padding: 32px 0;
+    }
+
+    .colegiados-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
 @media (max-width: 640px) {
     .search-box {
         padding: 6px 12px 6px 16px;
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .search-box input {
         font-size: var(--font-sm);
+        padding: 10px 0;
+    }
+
+    .search-box .btn-search {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
     }
 
     .colegiados-grid {
@@ -472,6 +548,88 @@
 
     .filters-inner {
         gap: 10px;
+    }
+
+    .card-name {
+        font-size: var(--font-base);
+    }
+
+    .card-specialty {
+        font-size: 0.8rem;
+        min-height: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cpap-hero {
+        padding: 40px 0 40px;
+    }
+
+    .cpap-hero-content {
+        padding: 0 10px;
+    }
+
+    .cpap-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .cpap-hero-badge {
+        font-size: 0.75rem;
+        padding: 6px 14px;
+    }
+
+    .search-box {
+        padding: 8px;
+    }
+
+    .filters-section {
+        padding: 12px 0;
+    }
+
+    .filters-inner {
+        padding: 0 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filter-chips {
+        width: 100%;
+    }
+
+    .results-count {
+        width: 100%;
+    }
+
+    .cpap-container {
+        padding: 0 10px;
+    }
+
+    .colegiados-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card-header-bg {
+        height: 60px;
+    }
+
+    .card-avatar-wrapper {
+        bottom: -30px;
+    }
+
+    .card-avatar,
+    .card-avatar-placeholder {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+    }
+
+    .card-body {
+        padding: 40px 16px 20px;
+    }
+
+    .empty-state {
+        padding: 60px 16px;
     }
 }
 

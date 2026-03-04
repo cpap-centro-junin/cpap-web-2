@@ -19,6 +19,8 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100%;
+    overflow-x: hidden; /* CRÍTICO: prevenir scroll horizontal */
+    max-width: 100vw; /* CRÍTICO: limitar ancho máximo */
 }
 
 body {
@@ -28,16 +30,19 @@ body {
     line-height: var(--leading-normal);
     color: var(--dark);
     background-color: var(--light);
-    overflow-x: hidden;
+    overflow-x: hidden; /* CRÍTICO: prevenir scroll horizontal */
     min-height: 100%;
+    max-width: 100vw; /* CRÍTICO: limitar ancho máximo */
     margin: 0;
     padding: 0;
+    position: relative; /* Contexto para elementos fixed */
 }
 
 body.app-layout {
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    padding-top: 80px; /* Compensar navbar fixed */
 }
 
 main {
