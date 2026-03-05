@@ -18,7 +18,7 @@ use App\Http\Controllers\ColegiaturaController;
 // PÁGINA PRINCIPAL
 // ============================================
 Route::get('/', function () {
-    $anuncio  = \App\Models\PopupAnuncio::where('activo', true)->latest()->first();
+    $anuncios = \App\Models\PopupAnuncio::where('activo', true)->latest()->get();
     $slides   = \App\Models\BannerSlide::activos()->with(['noticia', 'evento'])->get();
     $config   = \App\Models\ConfiguracionInicio::obtener();
     $noticias = \App\Models\Noticia::where('activo', true)->latest()->take(3)->get();
@@ -30,7 +30,7 @@ Route::get('/', function () {
 
     $galeriaDestacadas = \App\Models\GaleriaImagen::destacados()->take(6)->get();
 
-    return view('home', compact('anuncio', 'slides', 'config', 'noticias', 'eventos', 'galeriaDestacadas'));
+    return view('home', compact('anuncios', 'slides', 'config', 'noticias', 'eventos', 'galeriaDestacadas'));
 })->name('home');
 
 // ============================================

@@ -88,9 +88,9 @@
                             <div style="font-size:11px;color:var(--medium-gray);">Aparece como popup en la página de inicio</div>
                         </div>
                     </label>
-                    <p style="font-size:11px;color:var(--warning);margin:8px 0 0;display:flex;align-items:center;gap:4px;">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        Al activar, cualquier otro anuncio activo se desactivará.
+                    <p style="font-size:11px;color:var(--medium-gray);margin:8px 0 0;display:flex;align-items:center;gap:4px;">
+                        <i class="fas fa-info-circle"></i>
+                        Puedes tener varios anuncios activos al mismo tiempo.
                     </p>
                 </div>
 

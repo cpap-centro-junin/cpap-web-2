@@ -29,10 +29,6 @@ class PopupAnuncioController extends Controller
 
         $data['activo'] = $request->boolean('activo');
 
-        if ($data['activo']) {
-            PopupAnuncio::query()->update(['activo' => false]);
-        }
-
         $file = $request->file('imagen');
         $data['imagen'] = 'data:' . $file->getMimeType() . ';base64,' . base64_encode(file_get_contents($file->getRealPath()));
 
@@ -55,10 +51,6 @@ class PopupAnuncioController extends Controller
         ]);
 
         $data['activo'] = $request->boolean('activo');
-
-        if ($data['activo']) {
-            PopupAnuncio::where('id', '!=', $anuncio->id)->update(['activo' => false]);
-        }
 
         if ($request->hasFile('imagen')) {
             $rawImagen = $anuncio->getOriginal('imagen');
@@ -88,14 +80,10 @@ class PopupAnuncioController extends Controller
 
     public function toggleActivo(PopupAnuncio $anuncio)
     {
-        if (!$anuncio->activo) {
-            PopupAnuncio::query()->update(['activo' => false]);
-            $anuncio->update(['activo' => true]);
-            $msg = 'Anuncio activado. Aparecerá en la página de inicio.';
-        } else {
-            $anuncio->update(['activo' => false]);
-            $msg = 'Anuncio desactivado.';
-        }
+        $anuncio->update(['activo' => !$anuncio->activo]);
+        $msg = $anuncio->activo
+            ? 'Anuncio activado. Aparecerá en la página de inicio.'
+            : 'Anuncio desactivado.';
 
         return back()->with('success', $msg);
     }

@@ -963,6 +963,34 @@
     z-index: 1;
 }
 
+/* Variante con imagen de fondo fotografica */
+.page-header.has-bg {
+    min-height: 380px;
+    background-size: cover;
+    background-position: center 30%;
+    animation: none;
+}
+
+.page-header.has-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 25%, var(--accent) 75%, transparent 100%);
+    z-index: 3;
+}
+
+.page-header.has-bg .page-header-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(60, 8, 22, 0.50) 0%,
+        rgba(107, 15, 42, 0.70) 45%,
+        rgba(40, 5, 15, 0.92) 100%
+    );
+}
+
 .page-header-overlay {
     position: absolute;
     inset: 0;
@@ -986,6 +1014,15 @@
     margin-bottom: 18px;
     line-height: var(--leading-tight);
     text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.page-header.has-bg .page-title {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 8px 32px rgba(40,5,15,0.8);
+    letter-spacing: 0.01em;
+}
+
+.page-header.has-bg .page-subtitle {
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
 
 .page-title i {

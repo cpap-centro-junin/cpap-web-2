@@ -186,6 +186,19 @@
             </div>
         </a>
 
+        <a href="{{ route('admin.inicio.anuncios.index') }}" class="card">
+            <div class="card-icon" style="background: linear-gradient(135deg, #FF9800 0%, #e65100 100%);">
+                <i class="fas fa-bullhorn" style="color: white;"></i>
+            </div>
+            <div class="card-content">
+                <strong>Anuncios Emergentes</strong>
+                <p>Gestionar popups de la página de inicio</p>
+            </div>
+            <div class="card-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+        </a>
+
         <a href="{{ route('admin.bolsa.index') }}" class="card">
             <div class="card-icon" style="background: linear-gradient(135deg, #00695c 0%, #004d40 100%);">
                 <i class="fas fa-briefcase"></i>
