@@ -35,6 +35,10 @@ class BibliotecaController extends Controller
             $query->porArea($request->area);
         }
 
+        if ($request->filled('formato')) {
+            $query->porFormato($request->formato);
+        }
+
         $recursos = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
 
         return view('admin.biblioteca.index', compact('recursos'));
@@ -57,6 +61,7 @@ class BibliotecaController extends Controller
             'titulo'              => 'required|string|max:255',
             'autor'               => 'required|string|max:255',
             'tipo'                => 'required|in:libro,articulo,tesis,documento,revista,multimedia',
+            'formato'             => 'required|in:fisico,digital',
             'area_tematica'       => 'required|in:cultural,social,arqueologia,linguistica,biologica',
             'descripcion'         => 'required|string',
             'editorial'           => 'nullable|string|max:255',
@@ -126,6 +131,7 @@ class BibliotecaController extends Controller
             'titulo'              => 'required|string|max:255',
             'autor'               => 'required|string|max:255',
             'tipo'                => 'required|in:libro,articulo,tesis,documento,revista,multimedia',
+            'formato'             => 'required|in:fisico,digital',
             'area_tematica'       => 'required|in:cultural,social,arqueologia,linguistica,biologica',
             'descripcion'         => 'required|string',
             'editorial'           => 'nullable|string|max:255',

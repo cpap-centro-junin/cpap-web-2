@@ -201,6 +201,13 @@
                         </select>
                     </div>
                     <div style="margin-bottom:12px;">
+                        <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Formato <span style="color:var(--danger);">*</span></label>
+                        <select name="formato" class="admin-input" required>
+                            <option value="digital" {{ old('formato', $recurso->formato)=='digital'?'selected':'' }}>💻 Virtual (Digital)</option>
+                            <option value="fisico" {{ old('formato', $recurso->formato)=='fisico'?'selected':'' }}>📚 Físico</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:12px;">
                         <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Área temática <span style="color:var(--danger);">*</span></label>
                         <select name="area_tematica" class="admin-input" required>
                             <option value="cultural" {{ old('area_tematica', $recurso->area_tematica)=='cultural'?'selected':'' }}>Antropología Cultural</option>

@@ -81,6 +81,10 @@
                 <i class="fas fa-calendar-alt"></i>
                 <span class="menu-text">Eventos</span>
             </a>
+            <a href="{{ route('admin.galeria.index') }}" class="menu-item {{ request()->routeIs('admin.galeria*') ? 'active' : '' }}">
+                <i class="fas fa-images"></i>
+                <span class="menu-text">Galería</span>
+            </a>
 
             {{-- RECURSOS --}}
             <div class="menu-separator">

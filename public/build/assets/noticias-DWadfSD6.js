@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{const r=document.querySelectorAll(".prog-blur"),s=new IntersectionObserver(e=>{e.forEach(t=>{t.isIntersecting&&(t.target.style.opacity=1,t.target.style.transform="translateY(0)")})},{threshold:.2});r.forEach(e=>{e.style.opacity=0,e.style.transform="translateY(30px)",s.observe(e)})});

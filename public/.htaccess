@@ -4,6 +4,8 @@
     </IfModule>
 
     RewriteEngine On
+    RewriteRebase / 
+    RewriteRule ^storage/(.*)$ storage/$1 [L]
 
     # Permitir subida de archivos grandes (imágenes HD)
     php_value upload_max_filesize 256M

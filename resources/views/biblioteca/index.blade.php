@@ -36,6 +36,11 @@
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
                 <div class="search-filters">
+                    <select name="formato" class="filter-select" onchange="this.form.submit()">
+                        <option value="">Todos los formatos</option>
+                        <option value="fisico" {{ request('formato')=='fisico'?'selected':'' }}>📚 Libros Físicos</option>
+                        <option value="digital" {{ request('formato')=='digital'?'selected':'' }}>💻 Libros Virtuales</option>
+                    </select>
                     <select name="tipo" class="filter-select" onchange="this.form.submit()">
                         <option value="">Tipo de Documento</option>
                         <option value="libro" {{ request('tipo')=='libro'?'selected':'' }}>Libros</option>
@@ -61,7 +66,7 @@
                         <option value="older" {{ request('anio')=='older'?'selected':'' }}>Anteriores</option>
                     </select>
                 </div>
-                @if(request()->hasAny(['q','tipo','area','anio']))
+                @if(request()->hasAny(['q','tipo','area','anio','formato']))
                 <div style="text-align:center;margin-top:15px;">
                     <a href="{{ route('biblioteca') }}" class="filter-chip">
                         <i class="fas fa-times"></i> Limpiar filtros
@@ -89,6 +94,28 @@
                 <div class="library-stat-number">{{ $conteos['documento'] + $conteos['multimedia'] }}</div>
                 <div class="library-stat-label">Docs y Multimedia</div>
             </div>
+        </div>
+
+        {{-- Formato tabs (Físico / Virtual) --}}
+        <div class="formato-tabs" data-aos="fade-up" data-aos-delay="150">
+            <a href="{{ route('biblioteca', array_merge(request()->except('formato', 'page'), [])) }}"
+               class="formato-tab {{ !request('formato') ? 'active' : '' }}">
+                <i class="fas fa-layer-group"></i>
+                <span>Todos</span>
+                <span class="formato-count">{{ $totalRecursos }}</span>
+            </a>
+            <a href="{{ route('biblioteca', array_merge(request()->except('page'), ['formato' => 'fisico'])) }}"
+               class="formato-tab {{ request('formato')=='fisico' ? 'active' : '' }}">
+                <i class="fas fa-book"></i>
+                <span>Libros Físicos</span>
+                <span class="formato-count">{{ $conteoFormato['fisico'] }}</span>
+            </a>
+            <a href="{{ route('biblioteca', array_merge(request()->except('page'), ['formato' => 'digital'])) }}"
+               class="formato-tab {{ request('formato')=='digital' ? 'active' : '' }}">
+                <i class="fas fa-laptop"></i>
+                <span>Libros Virtuales</span>
+                <span class="formato-count">{{ $conteoFormato['digital'] }}</span>
+            </a>
         </div>
     </div>
 </section>
@@ -154,7 +181,7 @@
 </section>
 
 {{-- Featured Resources (si hay destacados y NO hay filtro activo) --}}
-@if($destacados->isNotEmpty() && !request()->hasAny(['q','tipo','area','anio']))
+@if($destacados->isNotEmpty() && !request()->hasAny(['q','tipo','area','anio','formato']))
 <section class="section-padding">
     <div class="container">
         <div class="section-header text-center" data-aos="fade-up">
@@ -172,6 +199,9 @@
                         <i class="fas {{ $dest->tipo_icon }}"></i>
                     @endif
                     <span class="resource-type">{{ $dest->tipo_label }}</span>
+                    <span class="resource-formato {{ $dest->formato }}">
+                        <i class="fas {{ $dest->formato_icon }}"></i> {{ $dest->formato_label }}
+                    </span>
                 </div>
                 <div class="resource-content">
                     <h3>{{ $dest->titulo }}</h3>
@@ -211,7 +241,7 @@
 {{-- All Resources / Search Results --}}
 <section class="section-padding">
     <div class="container">
-        @if(request()->hasAny(['q','tipo','area','anio']))
+        @if(request()->hasAny(['q','tipo','area','anio','formato']))
         <div class="section-header text-center" data-aos="fade-up">
             <span class="section-badge">Resultados</span>
             <h2 class="section-title">
@@ -236,6 +266,9 @@
                         <i class="fas {{ $recurso->tipo_icon }}"></i>
                     @endif
                     <span class="resource-type">{{ $recurso->tipo_label }}</span>
+                    <span class="resource-formato {{ $recurso->formato }}">
+                        <i class="fas {{ $recurso->formato_icon }}"></i> {{ $recurso->formato_label }}
+                    </span>
                 </div>
                 <div class="resource-content">
                     <h3>{{ $recurso->titulo }}</h3>

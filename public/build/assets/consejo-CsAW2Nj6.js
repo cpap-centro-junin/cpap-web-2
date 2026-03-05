@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".consejo-card").forEach(e=>{e.addEventListener("mouseenter",function(){this.style.transform="translateY(-10px)"}),e.addEventListener("mouseleave",function(){this.style.transform=""})})});

@@ -31,6 +31,11 @@ class BibliotecaPublicController extends Controller
             $query->porTipo($request->tipo);
         }
 
+        // Filtro por formato (fisico / digital)
+        if ($request->filled('formato')) {
+            $query->porFormato($request->formato);
+        }
+
         // Filtro por área
         if ($request->filled('area')) {
             $query->porArea($request->area);
@@ -70,9 +75,15 @@ class BibliotecaPublicController extends Controller
             'multimedia' => RecursoBiblioteca::activos()->porTipo('multimedia')->count(),
         ];
 
+        // Conteos por formato
+        $conteoFormato = [
+            'fisico'  => RecursoBiblioteca::activos()->porFormato('fisico')->count(),
+            'digital' => RecursoBiblioteca::activos()->porFormato('digital')->count(),
+        ];
+
         $totalRecursos = RecursoBiblioteca::activos()->count();
 
-        return view('biblioteca.index', compact('recursos', 'destacados', 'conteos', 'totalRecursos'));
+        return view('biblioteca.index', compact('recursos', 'destacados', 'conteos', 'conteoFormato', 'totalRecursos'));
     }
 
     /**

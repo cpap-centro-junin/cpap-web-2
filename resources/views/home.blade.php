@@ -402,6 +402,40 @@
     </div>
 </section>
 
+<!-- Galería Institucional Preview -->
+@if(isset($galeriaDestacadas) && $galeriaDestacadas->count() > 0)
+<section class="section-padding" id="galeria-preview">
+    <div class="container">
+        <div class="section-header text-center" data-aos="fade-up">
+            <span class="section-badge">Nuestros Momentos</span>
+            <h2 class="section-title">Galería Institucional</h2>
+            <p class="section-subtitle">Revive los momentos más importantes de nuestra comunidad profesional</p>
+        </div>
+
+        <div class="galeria-preview-grid" data-aos="fade-up" data-aos-delay="100">
+            @foreach($galeriaDestacadas as $img)
+            <div class="galeria-preview-item" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 80 }}">
+                <img src="{{ $img->imagen_url }}" alt="{{ $img->titulo }}" loading="lazy">
+                <div class="galeria-preview-overlay">
+                    @if($img->categoria)
+                    <span class="galeria-preview-categoria">{{ $img->categoria }}</span>
+                    @endif
+                    <h4>{{ $img->titulo }}</h4>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="text-center" style="margin-top: 50px;" data-aos="fade-up" data-aos-delay="200">
+            <a href="{{ route('galeria') }}" class="btn btn-outline">
+                <i class="fas fa-images"></i>
+                Ver Galería Completa
+            </a>
+        </div>
+    </div>
+</section>
+@endif
+
 <!-- Membership Section -->
 <section class="section-padding bg-light" id="colegiatura">
     <div class="container">

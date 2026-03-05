@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){const n=document.querySelectorAll(".tl-item");if(!n.length)return;const r=new IntersectionObserver(e=>{e.forEach(t=>{t.isIntersecting&&(t.target.classList.add("tl-visible"),r.unobserve(t.target))})},{threshold:.15,rootMargin:"0px 0px -50px 0px"});n.forEach(e=>r.observe(e))});

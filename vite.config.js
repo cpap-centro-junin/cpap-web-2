@@ -18,6 +18,7 @@ export default defineConfig({
                 'resources/js/modules/historia.js',
                 'resources/js/modules/login.js',
                 'resources/js/modules/noticias.js',
+                'resources/css/pages/galeria.css',
             ],
             refresh: true,
         }),

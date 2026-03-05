@@ -12,6 +12,7 @@ class RecursoBiblioteca extends Model
         'titulo',
         'autor',
         'tipo',
+        'formato',
         'area_tematica',
         'descripcion',
         'editorial',
@@ -59,6 +60,12 @@ class RecursoBiblioteca extends Model
         return $query->where('tipo', $tipo);
     }
 
+    /** Filtrar por formato (fisico / digital). */
+    public function scopePorFormato($query, string $formato)
+    {
+        return $query->where('formato', $formato);
+    }
+
     /** Filtrar por área temática. */
     public function scopePorArea($query, string $area)
     {
@@ -80,6 +87,26 @@ class RecursoBiblioteca extends Model
     /* -------------------------------------------------------
      * ACCESSORS
      * ----------------------------------------------------- */
+
+    /** Label legible del formato. */
+    public function getFormatoLabelAttribute(): string
+    {
+        return match ($this->formato) {
+            'fisico'  => 'Libro Físico',
+            'digital' => 'Libro Virtual',
+            default   => $this->formato,
+        };
+    }
+
+    /** Icono FontAwesome según formato. */
+    public function getFormatoIconAttribute(): string
+    {
+        return match ($this->formato) {
+            'fisico'  => 'fa-book',
+            'digital' => 'fa-laptop',
+            default   => 'fa-file',
+        };
+    }
 
     /** Label legible del tipo. */
     public function getTipoLabelAttribute(): string

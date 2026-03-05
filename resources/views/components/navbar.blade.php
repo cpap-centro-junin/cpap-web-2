@@ -33,6 +33,7 @@
                         <li><a href="{{ route('nosotros.consejo-directivo') }}" class="{{ request()->routeIs('nosotros.consejo-directivo') ? 'active' : '' }}"><i class="fas fa-users-cog"></i> Consejo Directivo</a></li>
                         <li><a href="{{ route('nosotros.normativa-legal') }}" class="{{ request()->routeIs('nosotros.normativa-legal') ? 'active' : '' }}"><i class="fas fa-gavel"></i> Normativa Legal</a></li>
                         <li><a href="{{ route('nosotros.plan-2026') }}" class="{{ request()->routeIs('nosotros.plan-2026') ? 'active' : '' }}"><i class="fas fa-clipboard-list"></i> Plan de Trabajo 2026</a></li>
+                        <li><a href="{{ route('galeria') }}" class="{{ request()->routeIs('galeria') ? 'active' : '' }}"><i class="fas fa-images"></i> Galería Institucional</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

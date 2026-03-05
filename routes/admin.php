@@ -211,6 +211,36 @@ Route::delete('/solicitudes-oferta/{solicitud}/rechazar', [SolicitudOfertaContro
     ->name('admin.solicitudes.rechazar');
 
 // ============================================
+// GALERÍA INSTITUCIONAL
+// ============================================
+
+use App\Http\Controllers\Admin\GaleriaController;
+
+Route::resource('galeria', GaleriaController::class)->names([
+    'index'   => 'admin.galeria.index',
+    'create'  => 'admin.galeria.create',
+    'store'   => 'admin.galeria.store',
+    'edit'    => 'admin.galeria.edit',
+    'update'  => 'admin.galeria.update',
+    'destroy' => 'admin.galeria.destroy',
+])->except(['show'])->parameters(['galeria' => 'galeria']);
+
+Route::post('/galeria/masivo', [GaleriaController::class, 'storeMasivo'])
+    ->name('admin.galeria.store-masivo');
+
+Route::get('/galeria/masivo/editar', [GaleriaController::class, 'editMasivo'])
+    ->name('admin.galeria.edit-masivo');
+
+Route::put('/galeria/masivo/actualizar', [GaleriaController::class, 'updateMasivo'])
+    ->name('admin.galeria.update-masivo');
+
+Route::patch('/galeria/{galeria}/toggle-destacado', [GaleriaController::class, 'toggleDestacado'])
+    ->name('admin.galeria.toggle-destacado');
+
+Route::patch('/galeria/{galeria}/toggle-activo', [GaleriaController::class, 'toggleActivo'])
+    ->name('admin.galeria.toggle-activo');
+
+// ============================================
 // BIBLIOTECA VIRTUAL
 // ============================================
 

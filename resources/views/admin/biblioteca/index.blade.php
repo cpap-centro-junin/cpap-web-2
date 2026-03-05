@@ -39,6 +39,11 @@
             <option value="revista" {{ request('tipo')=='revista'?'selected':'' }}>Revistas</option>
             <option value="multimedia" {{ request('tipo')=='multimedia'?'selected':'' }}>Multimedia</option>
         </select>
+        <select name="formato" class="admin-input" style="width:170px;">
+            <option value="">Todos los formatos</option>
+            <option value="fisico" {{ request('formato')=='fisico'?'selected':'' }}>📚 Físico</option>
+            <option value="digital" {{ request('formato')=='digital'?'selected':'' }}>💻 Virtual</option>
+        </select>
         <select name="area" class="admin-input" style="width:200px;">
             <option value="">Todas las áreas</option>
             <option value="cultural" {{ request('area')=='cultural'?'selected':'' }}>Antropología Cultural</option>
@@ -50,7 +55,7 @@
         <button type="submit" class="primary-btn" style="padding:10px 18px;">
             <i class="fas fa-search"></i> Filtrar
         </button>
-        @if(request()->hasAny(['q','tipo','area']))
+        @if(request()->hasAny(['q','tipo','area','formato']))
             <a href="{{ route('admin.biblioteca.index') }}" style="color:var(--medium-gray);font-size:13px;text-decoration:none;">
                 <i class="fas fa-times"></i> Limpiar
             </a>
@@ -67,6 +72,7 @@
                     <th style="width:50px;">Portada</th>
                     <th>Título / Autor</th>
                 <th>Tipo</th>
+                <th>Formato</th>
                 <th>Área</th>
                 <th>Año</th>
                 <th>Licencia</th>
@@ -104,6 +110,19 @@
                     <span class="badge" style="background:rgba(139,21,56,0.1);color:var(--primary);font-size:12px;">
                         <i class="fas {{ $recurso->tipo_icon }}" style="margin-right:4px;"></i>{{ $recurso->tipo_label }}
                     </span>
+                </td>
+
+                {{-- Formato --}}
+                <td>
+                    @if($recurso->formato === 'fisico')
+                        <span class="badge" style="background:rgba(201,169,97,0.15);color:#96792e;font-size:12px;">
+                            <i class="fas fa-book" style="margin-right:4px;"></i>Físico
+                        </span>
+                    @else
+                        <span class="badge" style="background:rgba(46,125,50,0.12);color:#2e7d32;font-size:12px;">
+                            <i class="fas fa-laptop" style="margin-right:4px;"></i>Virtual
+                        </span>
+                    @endif
                 </td>
 
                 {{-- Área --}}
@@ -171,7 +190,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="8">
+                <td colspan="9">
                     <div class="empty-state">
                         <i class="fas fa-book"></i>
                         <h3>No hay recursos</h3>

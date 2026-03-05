@@ -28,7 +28,9 @@ Route::get('/', function () {
                     ->take(3)
                     ->get();
 
-    return view('home', compact('anuncio', 'slides', 'config', 'noticias', 'eventos'));
+    $galeriaDestacadas = \App\Models\GaleriaImagen::destacados()->take(6)->get();
+
+    return view('home', compact('anuncio', 'slides', 'config', 'noticias', 'eventos', 'galeriaDestacadas'));
 })->name('home');
 
 // ============================================
@@ -98,6 +100,27 @@ Route::post('/bolsa-trabajo/solicitar', function (\Illuminate\Http\Request $requ
 Route::get('/biblioteca', [\App\Http\Controllers\BibliotecaPublicController::class, 'index'])->name('biblioteca');
 Route::get('/biblioteca/{recurso}', [\App\Http\Controllers\BibliotecaPublicController::class, 'show'])->name('biblioteca.show');
 Route::get('/biblioteca/{recurso}/descargar', [\App\Http\Controllers\BibliotecaPublicController::class, 'descargar'])->name('biblioteca.descargar');
+
+// ============================================
+// GALERÍA INSTITUCIONAL
+// ============================================
+Route::get('/galeria', function (\Illuminate\Http\Request $request) {
+    $query = \App\Models\GaleriaImagen::activos();
+
+    if ($request->filled('categoria')) {
+        $query->where('categoria', $request->categoria);
+    }
+
+    $imagenes = $query->paginate(24)->withQueryString();
+    $categorias = \App\Models\GaleriaImagen::categoriasDisponibles();
+    $imagenesPorCategoria = \App\Models\GaleriaImagen::where('activo', true)
+        ->whereNotNull('categoria')
+        ->selectRaw('categoria, count(*) as total')
+        ->groupBy('categoria')
+        ->pluck('total', 'categoria');
+
+    return view('galeria.index', compact('imagenes', 'categorias', 'imagenesPorCategoria'));
+})->name('galeria');
 
 // ============================================
 // NOSOTROS

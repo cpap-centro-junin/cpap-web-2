@@ -1,0 +1,98 @@
+{
+  "resources/css/admin.css": {
+    "file": "assets/admin-Dd50VoQF.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true,
+    "name": "admin",
+    "names": [
+      "admin.css"
+    ]
+  },
+  "resources/css/admin/diseno.css": {
+    "file": "assets/diseno-Cv0ZjEl-.css",
+    "src": "resources/css/admin/diseno.css",
+    "isEntry": true,
+    "name": "diseno",
+    "names": [
+      "diseno.css"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-Csb8a74R.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/pages/biblioteca.css": {
+    "file": "assets/biblioteca-xJLWh4Lg.css",
+    "src": "resources/css/pages/biblioteca.css",
+    "isEntry": true,
+    "name": "biblioteca",
+    "names": [
+      "biblioteca.css"
+    ]
+  },
+  "resources/css/pages/bolsa-trabajo.css": {
+    "file": "assets/bolsa-trabajo-CSV42qxq.css",
+    "src": "resources/css/pages/bolsa-trabajo.css",
+    "isEntry": true,
+    "name": "bolsa-trabajo",
+    "names": [
+      "bolsa-trabajo.css"
+    ]
+  },
+  "resources/css/pages/galeria.css": {
+    "file": "assets/galeria-3slI2kP_.css",
+    "src": "resources/css/pages/galeria.css",
+    "isEntry": true,
+    "name": "galeria",
+    "names": [
+      "galeria.css"
+    ]
+  },
+  "resources/js/admin/diseno.js": {
+    "file": "assets/diseno-DEeiAhAh.js",
+    "name": "diseno",
+    "src": "resources/js/admin/diseno.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BT2g_3C7.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/modules/consejo.js": {
+    "file": "assets/consejo-CsAW2Nj6.js",
+    "name": "consejo",
+    "src": "resources/js/modules/consejo.js",
+    "isEntry": true
+  },
+  "resources/js/modules/historia.js": {
+    "file": "assets/historia-BxP9A6Xc.js",
+    "name": "historia",
+    "src": "resources/js/modules/historia.js",
+    "isEntry": true
+  },
+  "resources/js/modules/login.js": {
+    "file": "assets/login-Cwvdtka0.js",
+    "name": "login",
+    "src": "resources/js/modules/login.js",
+    "isEntry": true
+  },
+  "resources/js/modules/mision-vision.js": {
+    "file": "assets/mision-vision-BkD0lgOV.js",
+    "name": "mision-vision",
+    "src": "resources/js/modules/mision-vision.js",
+    "isEntry": true
+  },
+  "resources/js/modules/noticias.js": {
+    "file": "assets/noticias-DWadfSD6.js",
+    "name": "noticias",
+    "src": "resources/js/modules/noticias.js",
+    "isEntry": true
+  }
+}
