@@ -923,10 +923,27 @@
 @media (max-width: 1024px) {
     .article-layout {
         grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .article-main {
+        order: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
 
     .article-sidebar {
+        order: 2;
+        width: 100%;
+    }
+
+    .article-cover {
         order: -1;
+        width: 100%;
+        border-radius: var(--radius);
+        max-height: 380px;
     }
 
     .featured-grid {
