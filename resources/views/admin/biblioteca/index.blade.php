@@ -97,11 +97,11 @@
 
                 {{-- Título / Autor --}}
                 <td>
-                    <div style="font-weight:600;color:var(--dark);font-size:14px;margin-bottom:3px;">
-                        {{ Str::limit($recurso->titulo, 50) }}
+                    <div style="font-weight:600;color:var(--dark);font-size:14px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:300px;">
+                        {{ $recurso->titulo }}
                     </div>
-                    <div style="color:var(--medium-gray);font-size:12px;">
-                        <i class="fas fa-user" style="margin-right:3px;"></i>{{ Str::limit($recurso->autor, 40) }}
+                    <div style="color:var(--medium-gray);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:300px;">
+                        <i class="fas fa-user" style="margin-right:3px;"></i>{{ $recurso->autor }}
                     </div>
                 </td>
 

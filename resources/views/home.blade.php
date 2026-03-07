@@ -514,61 +514,71 @@
 
 
 @if(isset($anuncios) && $anuncios->isNotEmpty())
-@php $primerAnuncio = $anuncios->first(); @endphp
-<div id="popupAnuncio"
-     style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:99999;align-items:center;justify-content:center;padding:20px;"
-     onclick="if(event.target===this)cerrarPopup()">
-    <div style="position:relative;max-width:580px;width:100%;">
-        {{-- Slides --}}
-        @foreach($anuncios as $i => $a)
-        <div class="popup-slide" data-index="{{ $i }}"
-             style="display:{{ $i === 0 ? 'block' : 'none' }};border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
-            <img src="{{ $a->imagen }}" alt="{{ $a->titulo }}" style="width:100%;display:block;">
+{{-- Slider de Anuncios Mejorado --}}
+<div id="anunciosModal" class="anuncios-modal" onclick="if(event.target===this) cerrarAnuncios()">
+    <div class="anuncios-container">
+        <div class="anuncios-slider-wrapper" id="anunciosSliderWrapper">
+            <div class="anuncios-slider" id="anunciosSlider">
+                @foreach($anuncios as $index => $anuncio)
+                <div class="anuncio-slide" data-index="{{ $index }}">
+                    <img src="{{ $anuncio->imagen }}" 
+                         alt="{{ $anuncio->titulo }}" 
+                         draggable="false"
+                         loading="lazy">
+                </div>
+                @endforeach
+            </div>
         </div>
-        @endforeach
 
-        {{-- Boton cerrar --}}
-        <button onclick="cerrarPopup()"
-                style="position:absolute;top:-14px;right:-14px;width:36px;height:36px;background:rgba(0,0,0,0.75);color:white;border:none;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;"
-                aria-label="Cerrar anuncio">&times;</button>
+        {{-- Botón cerrar --}}
+        <button class="anuncios-close" onclick="cerrarAnuncios()" aria-label="Cerrar anuncios">
+            <i class="fas fa-times"></i>
+        </button>
 
         @if($anuncios->count() > 1)
-        {{-- Navegacion --}}
-        <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:10px;">
-            <button onclick="popupPrev()" style="background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer;">&#8592;</button>
-            <span id="popupCounter" style="color:rgba(255,255,255,0.85);font-size:13px;font-weight:600;">1 / {{ $anuncios->count() }}</span>
-            <button onclick="popupNext()" style="background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer;">&#8594;</button>
+        {{-- Controles de navegación --}}
+        <button class="anuncios-nav anuncios-prev" id="anunciosPrev" aria-label="Anterior">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="anuncios-nav anuncios-next" id="anunciosNext" aria-label="Siguiente">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        {{-- Indicadores --}}
+        <div class="anuncios-indicators" id="anunciosIndicators"></div>
+
+        {{-- Contador --}}
+        <div class="anuncios-counter" id="anunciosCounter">
+            <span id="anunciosCurrent">1</span> / <span id="anunciosTotal">{{ $anuncios->count() }}</span>
         </div>
         @endif
     </div>
 </div>
+
 <script>
+// Mostrar modal si no se ha cerrado en esta sesión
 (function(){
-    if (!sessionStorage.getItem('popup_dismissed')) {
-        document.getElementById('popupAnuncio').style.display = 'flex';
+    if (!sessionStorage.getItem('anuncios_dismissed')) {
+        document.getElementById('anunciosModal').classList.add('active');
     }
 })();
-var _popupIdx = 0;
-var _popupTotal = {{ $anuncios->count() }};
-function cerrarPopup() {
-    document.getElementById('popupAnuncio').style.display = 'none';
-    sessionStorage.setItem('popup_dismissed', '1');
+
+// Función para cerrar anuncios
+function cerrarAnuncios() {
+    const modal = document.getElementById('anunciosModal');
+    modal.classList.remove('active');
+    sessionStorage.setItem('anuncios_dismissed', '1');
 }
-function popupGoTo(n) {
-    var slides = document.querySelectorAll('.popup-slide');
-    slides[_popupIdx].style.display = 'none';
-    _popupIdx = (n + _popupTotal) % _popupTotal;
-    slides[_popupIdx].style.display = 'block';
-    var counter = document.getElementById('popupCounter');
-    if (counter) counter.textContent = (_popupIdx + 1) + ' / ' + _popupTotal;
-}
-function popupNext() { popupGoTo(_popupIdx + 1); }
-function popupPrev() { popupGoTo(_popupIdx - 1); }
 </script>
 @endif
 @endsection
 
+@push('styles')
+@vite(['resources/css/anuncios-slider.css'])
+@endpush
+
 @push('scripts')
+@vite(['resources/js/anuncios-slider.js'])
 <script>
 // Contador animado para las estadísticas
 document.addEventListener('DOMContentLoaded', function() {

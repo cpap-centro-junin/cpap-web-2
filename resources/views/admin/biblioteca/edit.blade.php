@@ -283,4 +283,30 @@
 
 </div>
 
+@push('styles')
+<style>
+@media (max-width: 768px) {
+    div[style*="grid-template-columns:1fr 320px"] {
+        grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns:1fr 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+    .admin-input,
+    input.admin-input,
+    select.admin-input,
+    textarea.admin-input {
+        min-height: 44px !important;
+    }
+    .primary-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+}
+</style>
+@endpush
+
 @endsection

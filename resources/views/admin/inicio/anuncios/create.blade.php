@@ -3,6 +3,29 @@
 @section('title', 'Nuevo Anuncio Emergente')
 @section('page-title', 'Nuevo Anuncio Emergente')
 
+@push('styles')
+<style>
+@media (max-width: 768px) {
+    div[style*="grid-template-columns:1fr 280px"] {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .admin-card {
+        margin-bottom: 20px !important;
+    }
+    
+    #dropZone {
+        padding: 40px 20px !important;
+    }
+    
+    .admin-input {
+        font-size: 14px !important;
+        min-height: 44px;
+    }
+}
+</style>
+@endpush
+
 @section('content')
 
 <div style="max-width:720px;">

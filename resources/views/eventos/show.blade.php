@@ -147,8 +147,8 @@
         {{-- CTA Inscripción (solo si es próximo) --}}
         @if($evento->es_proximo)
         <div class="evento-cta" data-aos="fade-left" data-aos-delay="100">
-            <h4><i class="fas fa-user-plus"></i> ¡Participa!</h4>
-            <p>No te pierdas este evento. Contáctanos para más información.</p>
+            <h4 style="color: white;"><i class="fas fa-user-plus" style="color: white;"></i> ¡Participa!</h4>
+            <p style="color: white;">No te pierdas este evento. Contáctanos para más información.</p>
             <a href="{{ url('/#contacto') }}" class="btn-inscribir">
                 <i class="fas fa-envelope"></i>
                 Contactar

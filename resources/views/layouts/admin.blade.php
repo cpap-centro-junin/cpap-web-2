@@ -51,13 +51,9 @@
             <div class="menu-separator">
                 <span>Gestión de Inicio</span>
             </div>
-            <a href="{{ route('admin.inicio.index') }}" class="menu-item {{ request()->routeIs('admin.inicio.index') || request()->routeIs('admin.inicio.slides*') || request()->routeIs('admin.inicio.hero*') || request()->routeIs('admin.inicio.estadisticas*') ? 'active' : '' }}">
+            <a href="{{ route('admin.inicio.index') }}" class="menu-item {{ request()->routeIs('admin.inicio.index') || request()->routeIs('admin.inicio.slides*') || request()->routeIs('admin.inicio.hero*') || request()->routeIs('admin.inicio.estadisticas*') || request()->routeIs('admin.inicio.anuncios*') ? 'active' : '' }}">
                 <i class="fas fa-sliders-h"></i>
                 <span class="menu-text">Configurar Home</span>
-            </a>
-            <a href="{{ route('admin.inicio.anuncios.index') }}" class="menu-item {{ request()->routeIs('admin.inicio.anuncios*') ? 'active' : '' }}">
-                <i class="fas fa-bullhorn"></i>
-                <span class="menu-text">Anuncios</span>
             </a>
 
             {{-- GESTIÓN CPAP --}}

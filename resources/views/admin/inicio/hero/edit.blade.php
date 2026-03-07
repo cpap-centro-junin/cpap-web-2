@@ -3,6 +3,36 @@
 @section('title', 'Editar Hero')
 @section('page-title', 'Título y Botones de Bienvenida')
 
+@push('styles')
+<style>
+@media (max-width: 768px) {
+    .admin-form-card > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .form-group label {
+        font-size: 13px !important;
+    }
+    
+    .form-control, .admin-input, textarea {
+        font-size: 14px !important;
+    }
+    
+    /* Mejorar visibilidad del campo de ícono */
+    .form-group input[type="text"] {
+        min-height: 44px;
+        padding: 12px 14px !important;
+    }
+    
+    /* Botones de formato en columna */
+    div[style*="display:flex;gap:8px"] button {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+}
+</style>
+@endpush
+
 @section('content')
 
 <div style="margin-bottom:24px;">

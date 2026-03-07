@@ -210,4 +210,45 @@ dz.addEventListener('drop', e => {
 </script>
 @endpush
 
+@push('styles')
+<style>
+@media (max-width: 768px) {
+    div[style*="grid-template-columns:1fr 300px"] {
+        grid-template-columns: 1fr !important;
+    }
+    div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+    .admin-input,
+    input.admin-input,
+    select.admin-input,
+    textarea.admin-input {
+        min-height: 44px !important;
+    }
+    .primary-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    div[style*="display:flex;gap:10px"] {
+        flex-direction: column !important;
+    }
+    div[style*="display:flex;gap:10px"] > * {
+        width: 100% !important;
+        flex: 1 !important;
+    }
+}
+</style>
+@endpush
+
+@endsection
+    const f = e.dataTransfer.files[0];
+    if (f && f.type.startsWith('image/')) {
+        const dt = new DataTransfer(); dt.items.add(f);
+        const inp = document.getElementById('imgInput');
+        inp.files = dt.files; handleImg(inp);
+    }
+});
+</script>
+@endpush
+
 @endsection

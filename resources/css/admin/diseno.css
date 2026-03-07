@@ -263,3 +263,62 @@
 .diseno-success-alert i {
     font-size: 20px;
 }
+
+/* ========================================== */
+/* RESPONSIVE */
+/* ========================================== */
+
+@media (max-width: 900px) {
+    .actions-bar {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .actions-bar > div:first-child {
+        text-align: center;
+        width: 100%;
+    }
+
+    .actions-bar > div:last-child {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .restore-btn,
+    .save-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+
+    .diseno-features {
+        flex-direction: column;
+    }
+
+    .diseno-feature-card {
+        min-width: 100%;
+    }
+
+    .color-group {
+        grid-template-columns: 1fr;
+    }
+
+    .section-card {
+        padding: 20px;
+    }
+
+    .diseno-header {
+        padding: 24px;
+    }
+
+    .diseno-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .diseno-header h1 {
+        font-size: 22px;
+    }
+}

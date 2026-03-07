@@ -1,6 +1,6 @@
 {
   "resources/css/admin.css": {
-    "file": "assets/admin-Dd50VoQF.css",
+    "file": "assets/admin-Ed_gNqtq.css",
     "src": "resources/css/admin.css",
     "isEntry": true,
     "name": "admin",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/admin/diseno.css": {
-    "file": "assets/diseno-Cv0ZjEl-.css",
+    "file": "assets/diseno-BxiU66os.css",
     "src": "resources/css/admin/diseno.css",
     "isEntry": true,
     "name": "diseno",
@@ -17,8 +17,17 @@
       "diseno.css"
     ]
   },
+  "resources/css/anuncios-slider.css": {
+    "file": "assets/anuncios-slider-B-TuSRWL.css",
+    "src": "resources/css/anuncios-slider.css",
+    "isEntry": true,
+    "name": "anuncios-slider",
+    "names": [
+      "anuncios-slider.css"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-Csb8a74R.css",
+    "file": "assets/app-CsuLJZqU.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -57,6 +66,12 @@
     "file": "assets/diseno-DEeiAhAh.js",
     "name": "diseno",
     "src": "resources/js/admin/diseno.js",
+    "isEntry": true
+  },
+  "resources/js/anuncios-slider.js": {
+    "file": "assets/anuncios-slider-BVnDbsTj.js",
+    "name": "anuncios-slider",
+    "src": "resources/js/anuncios-slider.js",
     "isEntry": true
   },
   "resources/js/app.js": {

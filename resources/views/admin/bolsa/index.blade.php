@@ -60,8 +60,8 @@
             @forelse($ofertas as $oferta)
             <tr>
                 <td>
-                    <div style="font-weight:600;color:var(--dark);font-size:14px;margin-bottom:3px;">
-                        {{ Str::limit($oferta->titulo, 50) }}
+                    <div style="font-weight:600;color:var(--dark);font-size:14px;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:280px;">
+                        {{ $oferta->titulo }}
                     </div>
                     @if($oferta->fecha_vencimiento && $oferta->fecha_vencimiento->isPast())
                     <span style="display:inline-flex;align-items:center;gap:3px;margin-top:4px;background:rgba(198,40,40,0.1);color:var(--danger);padding:2px 8px;border-radius:50px;font-size:11px;font-weight:600;">
@@ -69,8 +69,10 @@
                     </span>
                     @endif
                 </td>
-                <td style="color:var(--medium-gray);font-size:13px;">
-                    <i class="fas fa-building" style="margin-right:4px;font-size:11px;"></i>{{ $oferta->empresa }}
+                <td>
+                    <div style="color:var(--medium-gray);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px;">
+                        <i class="fas fa-building" style="margin-right:4px;font-size:11px;"></i>{{ $oferta->empresa }}
+                    </div>
                 </td>
                 <td style="color:var(--medium-gray);font-size:13px;">
                     <i class="fas fa-map-marker-alt" style="margin-right:4px;font-size:11px;"></i>{{ $oferta->ubicacion }}

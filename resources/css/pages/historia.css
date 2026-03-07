@@ -447,7 +447,15 @@
     #timeline .tl-item,
     #timeline .tl-item:hover {
         width: 100% !important;
-        height: 440px;
+        height: auto;
+        min-height: 500px;
+        padding-bottom: 40px;
+    }
+
+    #timeline .tl-content {
+        top: 50%;
+        max-height: none;
+        overflow: visible;
     }
 
     #timeline .tl-item:hover .tl-year {
@@ -456,7 +464,7 @@
     }
 
     #timeline .tl-year {
-        top: 40%;
+        top: 35%;
     }
 
     .historia-intro-grid {
@@ -497,6 +505,23 @@
     .historia-cta-actions {
         justify-content: center;
     }
+
+    /* Timeline mejoras para tablet */
+    #timeline .tl-content {
+        padding: 0 24px;
+    }
+
+    #timeline .tl-content h1 {
+        font-size: 1.05rem;
+    }
+
+    #timeline .tl-content p {
+        font-size: 0.82rem;
+    }
+
+    .tl-list li {
+        font-size: 0.76rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -506,7 +531,25 @@
 
     #timeline .tl-item,
     #timeline .tl-item:hover {
-        height: 380px;
+        height: auto;
+        min-height: 450px;
+        padding-bottom: 30px;
+    }
+
+    #timeline .tl-content {
+        padding: 0 20px;
+    }
+
+    #timeline .tl-content h1 {
+        font-size: 1rem;
+    }
+
+    #timeline .tl-content p {
+        font-size: 0.8rem;
+    }
+
+    .tl-list li {
+        font-size: 0.75rem;
     }
 }
 

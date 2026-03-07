@@ -3,6 +3,39 @@
 @section('title', 'Editar Anuncio Emergente')
 @section('page-title', 'Editar Anuncio Emergente')
 
+@push('styles')
+<style>
+@media (max-width: 768px) {
+    div[style*="grid-template-columns:1fr 280px"] {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .admin-card {
+        margin-bottom: 20px !important;
+    }
+    
+    #dropZone {
+        padding: 40px 20px !important;
+    }
+    
+    .admin-input {
+        font-size: 14px !important;
+        min-height: 44px;
+    }
+    
+    div[style*="display:flex;gap:10px"] {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    div[style*="display:flex;gap:10px"] button,
+    div[style*="display:flex;gap:10px"] a {
+        width: 100% !important;
+    }
+}
+</style>
+@endpush
+
 @section('content')
 
 <div style="max-width:720px;">

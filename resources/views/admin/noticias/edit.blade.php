@@ -183,4 +183,31 @@ dz.addEventListener('drop', e => {
 </script>
 @endpush
 
+@push('styles')
+<style>
+@media (max-width: 768px) {
+    div[style*="grid-template-columns:1fr 300px"] {
+        grid-template-columns: 1fr !important;
+    }
+    .admin-input,
+    input.admin-input,
+    select.admin-input,
+    textarea.admin-input {
+        min-height: 44px !important;
+    }
+    .primary-btn {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    div[style*="display:flex;gap:10px"] {
+        flex-direction: column !important;
+    }
+    div[style*="display:flex;gap:10px"] > * {
+        width: 100% !important;
+        flex: 1 !important;
+    }
+}
+</style>
+@endpush
+
 @endsection

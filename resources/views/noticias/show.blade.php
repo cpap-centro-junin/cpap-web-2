@@ -30,7 +30,7 @@
 <div class="article-layout">
 
     {{-- CONTENIDO PRINCIPAL --}}
-    <article class="article-main" style="order:0;" data-aos="fade-up">
+    <article class="article-main" data-aos="fade-up">
 
         {{-- Imagen de portada --}}
         @if($noticia->imagen)
@@ -84,7 +84,7 @@
     </article>
 
     {{-- SIDEBAR --}}
-    <aside class="article-sidebar" style="order:1;">
+    <aside class="article-sidebar">
 
         {{-- Noticias relacionadas --}}
         @if($relacionadas->count() > 0)
