@@ -84,6 +84,22 @@
         margin-right: 0;
     }
 
+    /* Botón Ver Sitio: solo ícono en móvil */
+    .view-site-btn {
+        padding: 10px;
+        margin-right: 4px;
+        min-width: 42px;
+        height: 42px;
+    }
+
+    .view-site-text {
+        display: none;
+    }
+
+    .sidebar-footer {
+        padding-bottom: 80px;
+    }
+
     /* Content full width */
     .content {
         width: 100%;

@@ -34,8 +34,7 @@
                 <div class="footer-col">
                     <h4 class="footer-title">Enlaces Rápidos</h4>
                     <ul class="footer-links">
-                        <li><a href="{{ url('/#nosotros') }}"><i class="fas fa-chevron-right"></i> Sobre Nosotros</a></li>
-                        <li><a href="{{ url('/#servicios') }}"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                        <li><a href="{{ url('/nosotros/mision-vision') }}"><i class="fas fa-chevron-right"></i> Sobre Nosotros</a></li>
                         <li><a href="{{ url('/#eventos') }}"><i class="fas fa-chevron-right"></i> Eventos</a></li>
                         <li><a href="{{ route('noticias.index') }}"><i class="fas fa-chevron-right"></i> Noticias</a></li>
                         <li><a href="{{ url('/#colegiatura') }}"><i class="fas fa-chevron-right"></i> Colegiatura</a></li>

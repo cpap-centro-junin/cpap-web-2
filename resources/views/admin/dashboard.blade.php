@@ -16,50 +16,7 @@
     </div>
 </div>
 
-{{-- Stats Overview principal --}}
-<div class="stats-overview">
-    <div class="stat-box">
-        <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
-            <i class="fas fa-id-card"></i>
-        </div>
-        <div class="stat-info">
-            <h3>{{ \App\Models\Colegiado::count() }}</h3>
-            <p>Total Colegiados</p>
-        </div>
-    </div>
-
-    <div class="stat-box">
-        <div class="stat-icon" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);">
-            <i class="fas fa-user-check"></i>
-        </div>
-        <div class="stat-info">
-            <h3>{{ \App\Models\Colegiado::where('estado', 'activo')->count() }}</h3>
-            <p>Colegiados Activos</p>
-        </div>
-    </div>
-
-    <div class="stat-box">
-        <div class="stat-icon" style="background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);">
-            <i class="fas fa-certificate"></i>
-        </div>
-        <div class="stat-info">
-            <h3>{{ \App\Models\Habilitacion::where('activo', true)->count() }}</h3>
-            <p>Habilitaciones Vigentes</p>
-        </div>
-    </div>
-
-    <div class="stat-box">
-        <div class="stat-icon" style="background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);">
-            <i class="fas fa-newspaper"></i>
-        </div>
-        <div class="stat-info">
-            <h3>{{ \App\Models\Noticia::where('activo', true)->count() }}</h3>
-            <p>Noticias Publicadas</p>
-        </div>
-    </div>
-</div>
-
-{{-- Sección CPAP: resumen detallado de colegiados --}}
+{{-- Sección CPAP: resumen del padrón de colegiados --}}
 <div class="dashboard-section">
     <h2 class="section-title">
         <i class="fas fa-id-card"></i>

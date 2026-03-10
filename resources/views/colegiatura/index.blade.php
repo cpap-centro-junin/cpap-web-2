@@ -266,8 +266,8 @@
             <div class="col-cert-content">
                 <div class="col-cert-icon"><i class="fas fa-award"></i></div>
                 <div class="col-cert-text">
-                    <h3>Certificado de Habilidad</h3>
-                    <p>Documento oficial que acredita tu capacidad profesional como antropólogo habilitado. Vigencia trimestral o semestral según disposición del Consejo Directivo.</p>
+                    <h3 style="color: white;">Certificado de Habilidad</h3>
+                    <p style="color: white;">Documento oficial que acredita tu capacidad profesional como antropólogo habilitado. Vigencia trimestral o semestral según disposición del Consejo Directivo.</p>
                 </div>
             </div>
         </div>

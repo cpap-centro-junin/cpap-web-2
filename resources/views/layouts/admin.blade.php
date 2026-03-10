@@ -184,6 +184,11 @@
 
                 </div>
 
+                <a href="{{ url('/') }}" class="view-site-btn" title="Ver Sitio Web" target="_blank">
+                    <i class="fas fa-globe"></i>
+                    <span class="view-site-text">Ver Sitio</span>
+                </a>
+
                 <div class="user-avatar">
                     {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
                 </div>
