@@ -40,4 +40,9 @@ return [
         'secret_key' => env('RECAPTCHA_SECRET_KEY'),
     ],
 
+    'google' => [
+        'site_verification' => env('GOOGLE_SITE_VERIFICATION'),
+        'analytics_id' => env('GOOGLE_ANALYTICS_ID'),
+    ],
+
 ];

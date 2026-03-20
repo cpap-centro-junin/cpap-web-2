@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Verificación Fallida')
+@section('seo_title', 'Verificación de Documento | CPAP Región Centro')
+@section('seo_description', 'Resultado de validación de documento en el sistema de verificación del CPAP Región Centro.')
+@section('seo_canonical', url()->current())
+@section('seo_robots', 'noindex,nofollow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
 
 {{-- Styles en resources/css/pages/verificacion.css --}}
 

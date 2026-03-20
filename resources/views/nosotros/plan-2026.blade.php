@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Plan de Trabajo 2026 | CPAP Región Centro')
+@section('seo_title', 'Plan de Trabajo 2026 | CPAP Región Centro')
+@section('seo_description', 'Revisa el plan de trabajo institucional 2026 del CPAP Región Centro, objetivos, líneas de acción y actividades estratégicas.')
+@section('seo_canonical', route('nosotros.plan-2026'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

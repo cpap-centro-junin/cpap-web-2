@@ -3,6 +3,10 @@
 @extends('layouts.app')
 
 @section('title', $evento->titulo . ' - CPAP')
+@section('seo_title', $evento->titulo . ' | Eventos CPAP Región Centro')
+@section('seo_description', Str::limit(strip_tags($evento->descripcion), 160))
+@section('seo_canonical', route('eventos.show', $evento))
+@section('seo_image', $evento->imagen_portada ?: asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

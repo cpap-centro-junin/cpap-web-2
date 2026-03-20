@@ -6,6 +6,7 @@ use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\VerificacionController;
 use App\Http\Controllers\ColegiadoPublicoController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Admin\NoticiaController as AdminNoticiaController;
 use App\Http\Controllers\Admin\EventoController  as AdminEventoController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -32,6 +33,22 @@ Route::get('/', function () {
 
     return view('home', compact('anuncios', 'slides', 'config', 'noticias', 'eventos', 'galeriaDestacadas'));
 })->name('home');
+
+// ============================================
+// SEO TÉCNICO
+// ============================================
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+Route::get('/robots.txt', function () {
+    $robots = implode("\n", [
+        'User-agent: *',
+        'Allow: /',
+        '',
+        'Sitemap: ' . url('/sitemap.xml'),
+    ]);
+
+    return response($robots, 200)->header('Content-Type', 'text/plain');
+});
 
 // ============================================
 // SERVICIOS PÚBLICOS

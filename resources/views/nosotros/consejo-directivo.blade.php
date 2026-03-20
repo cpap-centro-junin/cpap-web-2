@@ -2,6 +2,10 @@
 @extends('layouts.app')
 
 @section('title', 'Consejo Directivo - CPAP Región Centro')
+@section('seo_title', 'Consejo Directivo | CPAP Región Centro')
+@section('seo_description', 'Conoce al consejo directivo y equipo responsable de la gestión institucional del CPAP Región Centro.')
+@section('seo_canonical', route('nosotros.consejo-directivo'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

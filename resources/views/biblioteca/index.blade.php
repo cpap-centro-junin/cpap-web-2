@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Biblioteca Virtual - CPAP Región Centro')
+@section('seo_title', 'Biblioteca Virtual de Antropología | CPAP Región Centro')
+@section('seo_description', 'Explora recursos bibliográficos, artículos, tesis y documentos de apoyo para la comunidad antropológica del CPAP Región Centro.')
+@section('seo_canonical', route('biblioteca'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @vite(['resources/css/pages/biblioteca.css'])
 

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Misión y Visión - CPAP Región Centro')
+@section('seo_title', 'Misión y Visión | CPAP Región Centro')
+@section('seo_description', 'Conoce la misión y visión institucional del Colegio Profesional de Antropólogos del Perú - Región Centro.')
+@section('seo_canonical', route('nosotros.mision-vision'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

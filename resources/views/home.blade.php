@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Inicio - CPAP Región Centro')
+@section('seo_title', 'CPAP Región Centro | Colegio Profesional de Antropólogos del Perú')
+@section('seo_description', 'Sitio oficial del CPAP Región Centro. Información institucional, noticias, eventos, colegiados, habilitaciones, biblioteca, bolsa de trabajo y contacto.')
+@section('seo_canonical', url('/'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 <!-- Hero Section -->

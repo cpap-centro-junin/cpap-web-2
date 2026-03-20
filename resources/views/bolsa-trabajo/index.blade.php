@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Bolsa de Trabajo - CPAP Región Centro')
+@section('seo_title', 'Bolsa de Trabajo para Antropólogos | CPAP Región Centro')
+@section('seo_description', 'Encuentra oportunidades laborales, consultorías y convocatorias para profesionales en antropología en la Bolsa de Trabajo del CPAP Región Centro.')
+@section('seo_canonical', route('bolsa-trabajo'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @vite(['resources/css/pages/bolsa-trabajo.css'])
 

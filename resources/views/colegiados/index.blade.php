@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Directorio de Colegiados | CPAP')
+@section('seo_title', 'Directorio de Colegiados | CPAP Región Centro')
+@section('seo_description', 'Consulta el directorio oficial de colegiados del CPAP Región Centro y verifica su estado profesional.')
+@section('seo_canonical', route('colegiados.index'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 {{-- Styles en resources/css/pages/colegiados.css --}}
 

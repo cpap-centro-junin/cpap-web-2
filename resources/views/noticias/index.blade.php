@@ -3,6 +3,10 @@
 @extends('layouts.app')
 
 @section('title', 'Noticias - CPAP')
+@section('seo_title', 'Noticias Institucionales | CPAP Región Centro')
+@section('seo_description', 'Consulta noticias, comunicados y novedades del Colegio Profesional de Antropólogos del Perú - Región Centro.')
+@section('seo_canonical', route('noticias.index'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

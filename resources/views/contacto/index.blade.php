@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Contacto | CPAP Región Centro')
+@section('seo_title', 'Contacto Institucional | CPAP Región Centro')
+@section('seo_description', 'Comunícate con el Colegio Profesional de Antropólogos del Perú - Región Centro por formulario, correo o WhatsApp institucional.')
+@section('seo_canonical', route('contacto.index'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

@@ -2,6 +2,10 @@
 @extends('layouts.app')
 
 @section('title', 'Normativa Legal - CPAP Región Centro')
+@section('seo_title', 'Normativa Legal y Documentos | CPAP Región Centro')
+@section('seo_description', 'Consulta reglamentos, documentos y normativa legal oficial del Colegio Profesional de Antropólogos del Perú - Región Centro.')
+@section('seo_canonical', route('nosotros.normativa-legal'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

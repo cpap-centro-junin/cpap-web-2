@@ -3,6 +3,10 @@
 @extends('layouts.app')
 
 @section('title', 'Eventos - CPAP')
+@section('seo_title', 'Eventos Académicos y Profesionales | CPAP Región Centro')
+@section('seo_description', 'Conoce los próximos eventos, actividades académicas y espacios profesionales del CPAP Región Centro.')
+@section('seo_canonical', route('eventos.index'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

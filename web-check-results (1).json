@@ -1,0 +1,1724 @@
+{
+  "location": {
+    "city": "Los Angeles",
+    "region": "California",
+    "country": "United States",
+    "postCode": "90025",
+    "regionCode": "CA",
+    "countryCode": "US",
+    "coords": {
+      "latitude": 34.042577,
+      "longitude": -118.458925
+    },
+    "isp": "IONOS SE",
+    "timezone": "America/Los_Angeles",
+    "languages": "en-US,es-US,haw,fr",
+    "currencyCode": "USD",
+    "currency": "Dollar",
+    "countryDomain": ".us",
+    "countryAreaSize": 9629091,
+    "countryPopulation": 327167434
+  },
+  "ssl": {
+    "subject": {
+      "CN": "*.bloggerito.com"
+    },
+    "issuer": {
+      "C": "GB",
+      "O": "Sectigo Limited",
+      "CN": "Sectigo Public Server Authentication CA DV R36"
+    },
+    "subjectaltname": "DNS:*.bloggerito.com, DNS:bloggerito.com",
+    "infoAccess": {
+      "CA Issuers - URI": [
+        "http://crt.sectigo.com/SectigoPublicServerAuthenticationCADVR36.crt"
+      ],
+      "OCSP - URI": [
+        "http://ocsp.sectigo.com"
+      ]
+    },
+    "ca": false,
+    "modulus": "B4C31EC903B153994598801F17F7819C38173635CC8B16022A71D8475B42C4EE894F9F21C7D309E62E7BC147B21A1A3B4EFB3C60D07C3818A2095EE25EFC721B6A7BEFE21A43EF6B3D002F9F00A66BECE941917997B2D948B00922C1D149A9118F903377ADBD3BD76AA8447BE920C7DAE453A53F9993107260376886703CCC42C77966753CEE48CBD68B140B37C3B30F3B726873A03B17140978C88A4881F1FB8729C18CA2CC497B3EF4608402FE8B6FC6E0F01C7892DB5EA3522BD389B4D3B737336287A7996D1F46C64723F7A03A05DC1D43C27BF8270C1ECAB96CF1D906654238989FF47ED479FEA8B4D1830FC51D8AD3F7DA72AF8A288B5BA4C1D67AB0AD",
+    "bits": 2048,
+    "exponent": "0x10001",
+    "pubkey": {
+      "type": "Buffer",
+      "data": [
+        48,
+        130,
+        1,
+        34,
+        48,
+        13,
+        6,
+        9,
+        42,
+        134,
+        72,
+        134,
+        247,
+        13,
+        1,
+        1,
+        1,
+        5,
+        0,
+        3,
+        130,
+        1,
+        15,
+        0,
+        48,
+        130,
+        1,
+        10,
+        2,
+        130,
+        1,
+        1,
+        0,
+        180,
+        195,
+        30,
+        201,
+        3,
+        177,
+        83,
+        153,
+        69,
+        152,
+        128,
+        31,
+        23,
+        247,
+        129,
+        156,
+        56,
+        23,
+        54,
+        53,
+        204,
+        139,
+        22,
+        2,
+        42,
+        113,
+        216,
+        71,
+        91,
+        66,
+        196,
+        238,
+        137,
+        79,
+        159,
+        33,
+        199,
+        211,
+        9,
+        230,
+        46,
+        123,
+        193,
+        71,
+        178,
+        26,
+        26,
+        59,
+        78,
+        251,
+        60,
+        96,
+        208,
+        124,
+        56,
+        24,
+        162,
+        9,
+        94,
+        226,
+        94,
+        252,
+        114,
+        27,
+        106,
+        123,
+        239,
+        226,
+        26,
+        67,
+        239,
+        107,
+        61,
+        0,
+        47,
+        159,
+        0,
+        166,
+        107,
+        236,
+        233,
+        65,
+        145,
+        121,
+        151,
+        178,
+        217,
+        72,
+        176,
+        9,
+        34,
+        193,
+        209,
+        73,
+        169,
+        17,
+        143,
+        144,
+        51,
+        119,
+        173,
+        189,
+        59,
+        215,
+        106,
+        168,
+        68,
+        123,
+        233,
+        32,
+        199,
+        218,
+        228,
+        83,
+        165,
+        63,
+        153,
+        147,
+        16,
+        114,
+        96,
+        55,
+        104,
+        134,
+        112,
+        60,
+        204,
+        66,
+        199,
+        121,
+        102,
+        117,
+        60,
+        238,
+        72,
+        203,
+        214,
+        139,
+        20,
+        11,
+        55,
+        195,
+        179,
+        15,
+        59,
+        114,
+        104,
+        115,
+        160,
+        59,
+        23,
+        20,
+        9,
+        120,
+        200,
+        138,
+        72,
+        129,
+        241,
+        251,
+        135,
+        41,
+        193,
+        140,
+        162,
+        204,
+        73,
+        123,
+        62,
+        244,
+        96,
+        132,
+        2,
+        254,
+        139,
+        111,
+        198,
+        224,
+        240,
+        28,
+        120,
+        146,
+        219,
+        94,
+        163,
+        82,
+        43,
+        211,
+        137,
+        180,
+        211,
+        183,
+        55,
+        51,
+        98,
+        135,
+        167,
+        153,
+        109,
+        31,
+        70,
+        198,
+        71,
+        35,
+        247,
+        160,
+        58,
+        5,
+        220,
+        29,
+        67,
+        194,
+        123,
+        248,
+        39,
+        12,
+        30,
+        202,
+        185,
+        108,
+        241,
+        217,
+        6,
+        101,
+        66,
+        56,
+        152,
+        159,
+        244,
+        126,
+        212,
+        121,
+        254,
+        168,
+        180,
+        209,
+        131,
+        15,
+        197,
+        29,
+        138,
+        211,
+        247,
+        218,
+        114,
+        175,
+        138,
+        40,
+        139,
+        91,
+        164,
+        193,
+        214,
+        122,
+        176,
+        173,
+        2,
+        3,
+        1,
+        0,
+        1
+      ]
+    },
+    "valid_from": "Feb 26 00:00:00 2026 GMT",
+    "valid_to": "Mar 12 23:59:59 2027 GMT",
+    "fingerprint": "63:53:97:92:73:4C:34:15:73:AD:40:7F:62:84:61:DE:C8:18:68:E8",
+    "fingerprint256": "D8:42:37:6C:7F:B6:60:4C:4B:FB:AC:B6:82:37:12:4E:53:A2:27:19:A5:1C:45:6F:3E:ED:23:F2:CC:D4:7D:11",
+    "fingerprint512": "E2:98:96:54:DD:53:7F:1D:51:A8:E8:E8:A7:FE:60:30:C5:07:8D:72:63:C2:5B:57:57:F9:B8:25:7D:7B:35:71:58:E2:EB:B7:E4:25:FD:04:1F:53:13:E8:26:73:05:57:BC:83:2B:DD:BA:17:F0:87:13:1A:72:B6:2F:FD:58:8F",
+    "ext_key_usage": [
+      "1.3.6.1.5.5.7.3.1"
+    ],
+    "serialNumber": "53FAE29F495CEA5888A30091EF3D62E0"
+  },
+  "domain": {
+    "internicData": {
+      "Domain_Name": "BLOGGERITO.COM",
+      "Registry_Domain_ID": "2966332821_DOMAIN_COM-VRSN",
+      "Registrar_WHOIS_Server": "whois.ionos.com",
+      "Registrar_URL": "http://www.ionos.com",
+      "Updated_Date": "2026-03-12T08:56:14Z",
+      "Creation_Date": "2025-03-11T20:36:06Z",
+      "Registry_Expiry_Date": "2027-03-11T20:36:06Z",
+      "Registrar": "IONOS SE",
+      "Registrar_IANA_ID": "83",
+      "Registrar_Abuse_Contact_Email": "abuse@ionos.com",
+      "Registrar_Abuse_Contact_Phone": "+1.6105601459",
+      "Domain_Status": "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+      "Name_Server": "NS1113.UI-DNS.DE",
+      "DNSSEC": "unsigned",
+      "URL_of_the_ICANN_Whois_Inaccuracy_Complaint_Form": "https://www.icann.org/wicf/",
+      "_Last_update_of_whois_database": "2026-03-13T04:31:04Z <<< ",
+      "For_more_information_on_Whois_status_codes_please_visit_https": "//icann.org/epp ",
+      "NOTICE": "The expiration date displayed in this record is the date the registrar's sponsorship of the domain name registration in the registry is currently set to expire. This date does not necessarily reflect the expiration date of the domain name registrant's agreement with the sponsoring registrar.  Users may consult the sponsoring registrar's Whois database to view the registrar's reported date of expiration for this registration. ",
+      "TERMS_OF_USE": "You are not authorized to access or query our Whois database through the use of electronic processes that are high-volume and automated except as reasonably necessary to register domain names or modify existing registrations; the Data in VeriSign Global Registry Services' (\"VeriSign\") Whois database is provided by VeriSign for information purposes only, and to assist persons in obtaining information about or related to a domain name registration record. VeriSign does not guarantee its accuracy. By submitting a Whois query, you agree to abide",
+      "by_the_following_terms_of_use": "You agree that you may use this Data only for lawful purposes and that under no circumstances will you use this Data",
+      "to": "(1) allow, enable, or otherwise support the transmission of mass unsolicited, commercial advertising or solicitations via e-mail, telephone, or facsimile; or (2) enable high volume, automated, electronic processes that apply to VeriSign (or its computer systems). The compilation, repackaging, dissemination or other use of this Data is expressly prohibited without the prior written consent of VeriSign. You agree not to use electronic processes that are automated and high-volume to access or query the Whois database except as reasonably necessary to register domain names or modify existing registrations. VeriSign reserves the right to restrict your access to the Whois database in its sole discretion to ensure operational stability.  VeriSign may restrict or terminate your access to the Whois database for failure to abide by these terms of use. VeriSign reserves the right to modify these terms at any time.  The Registry database contains ONLY .COM, .NET, .EDU domains and Registrars. "
+    },
+    "whoisData": null
+  },
+  "server-info": {
+    "loc": "",
+    "type": ""
+  },
+  "cookies": {
+    "headerCookies": [
+      "XSRF-TOKEN=eyJpdiI6ImFnaW15OHdza2NRUlByYWJuOXZ3TEE9PSIsInZhbHVlIjoicEt0NXJUWmEweWFLL3NTa2lRQk0vRzNmMG9Mb05DN2crMnNtaGJ6KzMwRFZad01kOW00Rmk2YWJEc0JWQWF6QTUrNHJPbU01SE9sYitUOWtkNFExemFKTTV0cnZLQVhPbEMrWElRNkV1THE0enRoek9FRFZ2RklXSHh5SEVYR00iLCJtYWMiOiI4MDlkYzczODk5OTJkMzc4YzVmMGMzNDJkNDk2ZGE2MDZlMDkyOWUyZWMyNjE4YjE4ODhjYTNhZjg4ZmM1ZjFkIiwidGFnIjoiIn0%3D; expires=Fri, 13 Mar 2026 06:31:24 GMT; Max-Age=7200; path=/; secure; samesite=lax",
+      "laravel-session=eyJpdiI6IkNUakxVdmNSZ3FFZnFud2xJSVVCV2c9PSIsInZhbHVlIjoiSkttdXo5K2ZjcFEzQzI4RE1tSXZBQm1nZ3F6L0IyR3Z4MCtxUEtSVXdRZXRWKzV4TmJsUFd3TitvZWt5ek8wcTNrbytoMDl3MmQxc2dEZjNGWGJ5RFQ5QnZHUHpPVmdxcGNyYXlmeUFCM0x1aWtZWk1kQjU2cis2NU0xWGJBUXUiLCJtYWMiOiJjMzcwOTc0OTE1YjFmYTljNTQ5OTE0ZGUxZjg2ZDNlMGFkODRkOTZiNGI0MDk5MGVkMWM4NGI3MWI5OTM3OTJmIiwidGFnIjoiIn0%3D; expires=Fri, 13 Mar 2026 06:31:24 GMT; Max-Age=7200; path=/; secure; httponly; samesite=lax"
+    ],
+    "clientCookies": null
+  },
+  "headers": {
+    "content-type": "text/html; charset=utf-8",
+    "transfer-encoding": "chunked",
+    "connection": "keep-alive",
+    "x-ws-origin": "available",
+    "x-ws-ratelimit-limit": "1000",
+    "x-ws-ratelimit-remaining": "999",
+    "date": "Fri, 13 Mar 2026 04:31:24 GMT",
+    "server": "Apache",
+    "cache-control": "no-cache, private",
+    "set-cookie": [
+      "XSRF-TOKEN=eyJpdiI6InFDSzdqZ1VPeStSRkhqeDAyV1ZFNlE9PSIsInZhbHVlIjoiZXprM0ZhblZXSU5rcURBOWwwdXA5MWN5bU9vTzBHcDhqTXpGb0x5VVJWUXM5NzZJL3JldkpqNm1qZEg5aTV1K2dnRnFXRHpXZHZXenpyRHFYTzlvMWNvVGhzK3FHOGNvdUV1ZUk2c29sdVBBc1pQVVQ0NXJkYTFlMXc0UDJCcDIiLCJtYWMiOiIzYzg2MTk5ODViZTVjOTYwNjI4OTYwMDFjM2RhNGEyMDY3YTYyOGNkYjVjMzY1NTIwMjNiOWNiZjg3OTljNGZiIiwidGFnIjoiIn0%3D; expires=Fri, 13 Mar 2026 06:31:24 GMT; Max-Age=7200; path=/; secure; samesite=lax",
+      "laravel-session=eyJpdiI6Ijg3dDJ5b3NCZ2wzVVN0dDF5eVB3TkE9PSIsInZhbHVlIjoiQldWTURkN0FORW5UZUphVjVlRE1FZkE1ZHE0S3BXclF0MHJaTUhYWnk3K0FudVVXS3RkdGx4bWExdU9hdTFJVlN1R3kxR1NRai83cHVqTThheUNOZGtZZ0xocmlOT05pU1NCeVdPYUlWMVhyRXlHa2VjL2NRV3B1NXV2WTE3MmgiLCJtYWMiOiJkNDIzYzI2OWY1OWZlMGY5NDQzYmNiNTg5MjJjNTI5ZGQ1ZGZjYzRjOWI2YjRhNzlkZjc5MzZkZDlhMDBkNWU5IiwidGFnIjoiIn0%3D; expires=Fri, 13 Mar 2026 06:31:24 GMT; Max-Age=7200; path=/; secure; httponly; samesite=lax"
+    ]
+  },
+  "dns": {
+    "A": {
+      "address": "74.208.236.88",
+      "family": 4
+    },
+    "AAAA": [
+      "74.208.236.88"
+    ],
+    "MX": [
+      "2607:f1c0:100f:f000::200"
+    ],
+    "TXT": [
+      {
+        "exchange": "mx00.ionos.com",
+        "priority": 10
+      },
+      {
+        "exchange": "mx01.ionos.com",
+        "priority": 10
+      }
+    ],
+    "NS": [
+      [
+        "v=spf1 include:_spf-us.ionos.com ~all"
+      ]
+    ],
+    "CNAME": [
+      "ns1105.ui-dns.biz",
+      "ns1084.ui-dns.com",
+      "ns1087.ui-dns.org",
+      "ns1113.ui-dns.de"
+    ],
+    "SOA": [],
+    "SRV": {
+      "nsname": "ns1113.ui-dns.de",
+      "hostmaster": "hostmaster.1und1.com",
+      "serial": 2017060136,
+      "refresh": 28800,
+      "retry": 7200,
+      "expire": 604800,
+      "minttl": 600
+    },
+    "PTR": []
+  },
+  "hosts": null,
+  "http-security": {
+    "strictTransportPolicy": false,
+    "xFrameOptions": false,
+    "xContentTypeOptions": false,
+    "xXSSProtection": false,
+    "contentSecurityPolicy": false
+  },
+  "social-tags": {
+    "title": "Inicio - CPAP Región Centro",
+    "viewport": "width=device-width, initial-scale=1.0",
+    "favicon": "https://bloggerito.com/images/logos/cpap-logo.jpg"
+  },
+  "security-txt": {
+    "isPresent": false
+  },
+  "dns-server": {
+    "domain": "bloggerito.com",
+    "dns": [
+      {
+        "address": "74.208.236.88",
+        "hostname": [
+          "74-208-236-88.elastic-ssl.ui-r.com"
+        ],
+        "dohDirectSupports": false
+      }
+    ]
+  },
+  "firewall": {
+    "hasWaf": false
+  },
+  "dnssec": {
+    "DNSKEY": {
+      "isFound": false,
+      "answer": null,
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "https://bloggerito.com.",
+            "type": 48
+          }
+        ],
+        "Authority": [
+          {
+            "name": "com.",
+            "type": 6,
+            "TTL": 900,
+            "data": "a.gtld-servers.net. nstld.verisign-grs.com. 1773376261 1800 900 604800 900"
+          }
+        ],
+        "Comment": "Response from 192.48.79.30."
+      }
+    },
+    "DS": {
+      "isFound": false,
+      "answer": null,
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "https://bloggerito.com.",
+            "type": 43
+          }
+        ],
+        "Authority": [
+          {
+            "name": "com.",
+            "type": 6,
+            "TTL": 900,
+            "data": "a.gtld-servers.net. nstld.verisign-grs.com. 1773376261 1800 900 604800 900"
+          }
+        ],
+        "Comment": "Response from 2001:501:b1f9::30."
+      }
+    },
+    "RRSIG": {
+      "isFound": false,
+      "answer": null,
+      "response": {
+        "Status": 3,
+        "TC": false,
+        "RD": true,
+        "RA": true,
+        "AD": false,
+        "CD": false,
+        "Question": [
+          {
+            "name": "https://bloggerito.com.",
+            "type": 46
+          }
+        ],
+        "Authority": [
+          {
+            "name": "com.",
+            "type": 6,
+            "TTL": 900,
+            "data": "a.gtld-servers.net. nstld.verisign-grs.com. 1773376261 1800 900 604800 900"
+          }
+        ],
+        "Comment": "Response from 2001:502:7094::30."
+      }
+    }
+  },
+  "hsts": {
+    "message": "Site does not serve any HSTS headers.",
+    "compatible": false,
+    "hstsHeader": null
+  },
+  "threats": {
+    "urlHaus": {
+      "error": "Request to URLHaus failed, Request failed with status code 401"
+    },
+    "phishTank": {
+      "url0": {
+        "url": "https://bloggerito.com",
+        "in_database": "false"
+      }
+    },
+    "cloudmersive": {
+      "error": "Request to Cloudmersive failed: Request failed with status code 401"
+    },
+    "safeBrowsing": {
+      "error": "GOOGLE_CLOUD_API_KEY is required for the Google Safe Browsing check"
+    }
+  },
+  "archives": {
+    "firstScan": "2009-12-31T03:06:55.000Z",
+    "lastScan": "2025-12-04T23:21:06.000Z",
+    "totalScans": 117,
+    "changeCount": 91,
+    "averagePageSize": 6627,
+    "scanFrequency": {
+      "daysBetweenScans": 49.73,
+      "daysBetweenChanges": 63.93,
+      "scansPerDay": 0.02,
+      "changesPerDay": 0.02
+    },
+    "scans": [
+      [
+        "20091231030655",
+        "200",
+        "QLSQFSNT7KSQUQNS6EDXC65SPYOKU6K2",
+        "4932",
+        null
+      ],
+      [
+        "20091231030655",
+        "200",
+        "QLSQFSNT7KSQUQNS6EDXC65SPYOKU6K2",
+        "4932",
+        null
+      ],
+      [
+        "20100203215353",
+        "200",
+        "7PXELNX2CEYLVWQRI4KE3XRL574CG3MZ",
+        "11664",
+        null
+      ],
+      [
+        "20100317132631",
+        "200",
+        "BHM6XHOLYD55BP7JH34L5MHHPUPH5VM5",
+        "8202",
+        null
+      ],
+      [
+        "20100507103825",
+        "200",
+        "OT2OQLMFKOUPP3V76S33GS4LQBXAYRT6",
+        "5736",
+        null
+      ],
+      [
+        "20110309163421",
+        "200",
+        "SDU4XFC3D6WS6NRXPU2JZDIV53WJCZOM",
+        "3037",
+        null
+      ],
+      [
+        "20130518031518",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "447",
+        null
+      ],
+      [
+        "20130607151840",
+        "200",
+        "MU3TVWXXC6E3NO4R4BOAUBERMGN2VLGA",
+        "10115",
+        null
+      ],
+      [
+        "20130708004215",
+        "200",
+        "BZJL75MG7PBUPHZK2OJP3OCEKGCOMUB7",
+        "10115",
+        null
+      ],
+      [
+        "20130709005514",
+        "200",
+        "BZJL75MG7PBUPHZK2OJP3OCEKGCOMUB7",
+        "10115",
+        null
+      ],
+      [
+        "20130727112241",
+        "200",
+        "F5EQYCPV7AJGLR2PQGEKXCHIPWFQWHTA",
+        "10253",
+        null
+      ],
+      [
+        "20130730074033",
+        "200",
+        "T6RP7ZEB3R6GNKHUEE3J6IJHWNUPN7SU",
+        "10108",
+        null
+      ],
+      [
+        "20130905111034",
+        "200",
+        "46NL3ZFKZRAWFUNJZLZF4SFUJG2BWDAH",
+        "7125",
+        null
+      ],
+      [
+        "20131031221118",
+        "200",
+        "W7BZMMHIBKOGB7RDUYJ7NLUKXGMYBLTE",
+        "6324",
+        null
+      ],
+      [
+        "20140407180501",
+        "200",
+        "VC5GIZCB77MVPDQODJVA6ZAZTSHP6UW3",
+        "6384",
+        null
+      ],
+      [
+        "20140516211548",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "419",
+        null
+      ],
+      [
+        "20140929081955",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "272",
+        null
+      ],
+      [
+        "20140929081955",
+        "200",
+        "NG24DW63XUQY6CAKUWCVBAVTJLGNQDQ7",
+        "6663",
+        null
+      ],
+      [
+        "20141107132740",
+        "200",
+        "KTNPHA5S42JVXEV7KCTN3VY5S2F6GMKI",
+        "6772",
+        null
+      ],
+      [
+        "20141216203207",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "416",
+        null
+      ],
+      [
+        "20141219015742",
+        "200",
+        "XUYF4XUQCTZPGBDUQMHY2ZHV2ARWLADM",
+        "7009",
+        null
+      ],
+      [
+        "20141220021636",
+        "302",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "170",
+        null
+      ],
+      [
+        "20150324123606",
+        "200",
+        "2WANHVAS3UKCMWRPLLL6KRUZFRIHP37N",
+        "10680",
+        null
+      ],
+      [
+        "20150406011215",
+        "200",
+        "EYV5MCU4UFRKOYYUNGHEI4OAYKQ2WZMV",
+        "10611",
+        null
+      ],
+      [
+        "20150416094807",
+        "200",
+        "BRL2GGBXTSDPAU2SUH4BHBB4NUM3W7YU",
+        "11253",
+        null
+      ],
+      [
+        "20150801004427",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "440",
+        null
+      ],
+      [
+        "20150831052457",
+        "200",
+        "M3AJU4ZOCEAWE7BX5GF66J7NY3N3DYBX",
+        "12322",
+        null
+      ],
+      [
+        "20151024183409",
+        "-",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "493",
+        null
+      ],
+      [
+        "20151123200603",
+        "200",
+        "GTGBG4KRLXC4PHB3WIRDSWQNYTJJS3ZT",
+        "12467",
+        null
+      ],
+      [
+        "20151227174658",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "441",
+        null
+      ],
+      [
+        "20160109055652",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "441",
+        null
+      ],
+      [
+        "20160113124548",
+        "200",
+        "MHKYWFOBIQ5Q36AZBRJLHBV2UNOIYFVW",
+        "13032",
+        null
+      ],
+      [
+        "20160120232958",
+        "200",
+        "LQTLVTVTNNSSE7SOEKOEBPITA6IL3BQP",
+        "13030",
+        null
+      ],
+      [
+        "20160203115200",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "442",
+        null
+      ],
+      [
+        "20160227043237",
+        "200",
+        "JT3P5EH6ENVZUWXM525ITSRI74YOOECQ",
+        "12867",
+        null
+      ],
+      [
+        "20160304024837",
+        "200",
+        "Y2ZJJG6X6J2LN2KLIBQZHFJ5FVUWPTEG",
+        "13075",
+        null
+      ],
+      [
+        "20160304170340",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "423",
+        null
+      ],
+      [
+        "20160314143453",
+        "200",
+        "EFMQ3CONRIRGG7D4CQBQKI7CMQYSDTTH",
+        "13075",
+        null
+      ],
+      [
+        "20160330040936",
+        "200",
+        "4EBB6FV3PAJB3HLTWBMPTXK7GKJ6G6FZ",
+        "12923",
+        null
+      ],
+      [
+        "20160430140040",
+        "200",
+        "NGI356KXWMD5YK3O2TTQACSREZWDCPUD",
+        "13243",
+        null
+      ],
+      [
+        "20160531225828",
+        "200",
+        "HHRRDTPI4TGPWRZWKHX75FRIIYAM2MTR",
+        "13243",
+        null
+      ],
+      [
+        "20160809052544",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "423",
+        null
+      ],
+      [
+        "20160916011000",
+        "200",
+        "AY6GYJ24XJYW6SPNPAJPWJ6562GXN7MM",
+        "13245",
+        null
+      ],
+      [
+        "20161001152748",
+        "-",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "475",
+        null
+      ],
+      [
+        "20161010151233",
+        "200",
+        "DYTC2SSUSLJKF5PHPF3DAVP2NC25Y3BV",
+        "13386",
+        null
+      ],
+      [
+        "20161017111804",
+        "200",
+        "HTIX72UTIYOHULKSQANPBBFVLZM3UEDP",
+        "13244",
+        null
+      ],
+      [
+        "20170522030105",
+        "200",
+        "PXDTJ52LQ374GCUASEH5JOPPUC6LFBCS",
+        "17539",
+        null
+      ],
+      [
+        "20170613054311",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "597",
+        null
+      ],
+      [
+        "20170808082815",
+        "200",
+        "I357INVJPCOR45MKKIZJXTRLRQMUGDRV",
+        "17712",
+        null
+      ],
+      [
+        "20170918224312",
+        "200",
+        "HWS2W3N5PTSZZ4DLN2TWCNN4GLDP2FOS",
+        "18050",
+        null
+      ],
+      [
+        "20170922163310",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "595",
+        null
+      ],
+      [
+        "20171014151509",
+        "200",
+        "JHKMWKWM3BRNLNNQVE7IPB2GI4OJPFU6",
+        "17999",
+        null
+      ],
+      [
+        "20180206182048",
+        "200",
+        "6FQ5FBUE2RSVNCCH3SQGSPKXG5Z2URCW",
+        "17809",
+        null
+      ],
+      [
+        "20180207200641",
+        "200",
+        "J5GRAU6N66GM37MUY4TT7OYA7SBKXCWW",
+        "17856",
+        null
+      ],
+      [
+        "20180313152555",
+        "200",
+        "MM2Z4XYMA36PP4PZJORKB7H7SXQBRGU2",
+        "17859",
+        null
+      ],
+      [
+        "20180320152930",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "589",
+        null
+      ],
+      [
+        "20180414022655",
+        "200",
+        "RZ43ETH3ESIFWHSJ4USH2GPMHM5HYVEC",
+        "13169",
+        null
+      ],
+      [
+        "20180511231252",
+        "200",
+        "PNCCDWW3XSIF24LCMQOHZL32CFG3MAJ6",
+        "13249",
+        null
+      ],
+      [
+        "20180516134847",
+        "200",
+        "5YJIOONETVZQQSDNXLFCHVDDYRKFHYDX",
+        "13221",
+        null
+      ],
+      [
+        "20180617044821",
+        "200",
+        "W2GWXNKRNEQSCEYEEGXMWXX47FDDLLTH",
+        "13173",
+        null
+      ],
+      [
+        "20180721063438",
+        "200",
+        "4ZVPXHW2YLQNUUTGNT3APRBYWFKURRNS",
+        "13181",
+        null
+      ],
+      [
+        "20180722193054",
+        "200",
+        "AJRYK3SIRUA5IQ24TPR74PTRUC6322E6",
+        "13172",
+        null
+      ],
+      [
+        "20180804153014",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "592",
+        null
+      ],
+      [
+        "20180815032602",
+        "200",
+        "SUBIECYAIP34BMK3ILDUE4PG4ZKBSZUK",
+        "13311",
+        null
+      ],
+      [
+        "20180823070719",
+        "200",
+        "SUBIECYAIP34BMK3ILDUE4PG4ZKBSZUK",
+        "13169",
+        null
+      ],
+      [
+        "20180925030403",
+        "200",
+        "YAY4FVEHDWBLBVF25PUAAVFK6FY4NQTU",
+        "13167",
+        null
+      ],
+      [
+        "20181027214848",
+        "200",
+        "HC2AEYKGOS3W6YH36HUT7GG7KIWI3W4A",
+        "13224",
+        null
+      ],
+      [
+        "20181205130403",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "275",
+        null
+      ],
+      [
+        "20181228172610",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "491",
+        null
+      ],
+      [
+        "20190107002745",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "275",
+        null
+      ],
+      [
+        "20190118094304",
+        "-",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "503",
+        null
+      ],
+      [
+        "20190208223932",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "276",
+        null
+      ],
+      [
+        "20190312145010",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "275",
+        null
+      ],
+      [
+        "20190414195749",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "276",
+        null
+      ],
+      [
+        "20190516092633",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "277",
+        null
+      ],
+      [
+        "20190525210916",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "492",
+        null
+      ],
+      [
+        "20190617012350",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "274",
+        null
+      ],
+      [
+        "20190807060103",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "275",
+        null
+      ],
+      [
+        "20190908120458",
+        "301",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "276",
+        null
+      ],
+      [
+        "20210921192627",
+        "200",
+        "ECCKZLCXYEHODWIVSXQ5HC3J436PHYNW",
+        "9051",
+        null
+      ],
+      [
+        "20210921221727",
+        "200",
+        "ECCKZLCXYEHODWIVSXQ5HC3J436PHYNW",
+        "9045",
+        null
+      ],
+      [
+        "20211016013630",
+        "200",
+        "ECCKZLCXYEHODWIVSXQ5HC3J436PHYNW",
+        "9047",
+        null
+      ],
+      [
+        "20211127001629",
+        "301",
+        "QH732FYSV7UM34JYWVYMB7EZGR2CYM6B",
+        "447",
+        null
+      ],
+      [
+        "20211129195246",
+        "200",
+        "ECCKZLCXYEHODWIVSXQ5HC3J436PHYNW",
+        "9051",
+        null
+      ],
+      [
+        "20211219045059",
+        "200",
+        "SSAZZKDRT5EDTBXOBVK7JYFRLHL4D3IR",
+        "9008",
+        null
+      ],
+      [
+        "20220123072606",
+        "301",
+        "QH732FYSV7UM34JYWVYMB7EZGR2CYM6B",
+        "446",
+        null
+      ],
+      [
+        "20220127172320",
+        "200",
+        "SSAZZKDRT5EDTBXOBVK7JYFRLHL4D3IR",
+        "9212",
+        null
+      ],
+      [
+        "20220328053348",
+        "-",
+        "QH732FYSV7UM34JYWVYMB7EZGR2CYM6B",
+        "448",
+        null
+      ],
+      [
+        "20220624214118",
+        "200",
+        "SSAZZKDRT5EDTBXOBVK7JYFRLHL4D3IR",
+        "9215",
+        null
+      ],
+      [
+        "20221206005430",
+        "301",
+        "HLNR6AWVWYCU3YAENY3HYHLIPNWN66X7",
+        "554",
+        null
+      ],
+      [
+        "20221206005431",
+        "301",
+        "HLNR6AWVWYCU3YAENY3HYHLIPNWN66X7",
+        "556",
+        null
+      ],
+      [
+        "20221206005432",
+        "-",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "650",
+        null
+      ],
+      [
+        "20230122165405",
+        "-",
+        "HLNR6AWVWYCU3YAENY3HYHLIPNWN66X7",
+        "625",
+        null
+      ],
+      [
+        "20230122165406",
+        "-",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "678",
+        null
+      ],
+      [
+        "20230129054537",
+        "200",
+        "GSTS5WJSVRBJD7VWT57LBPDXOMSLEO3R",
+        "5739",
+        null
+      ],
+      [
+        "20230322165619",
+        "-",
+        "HLNR6AWVWYCU3YAENY3HYHLIPNWN66X7",
+        "619",
+        null
+      ],
+      [
+        "20230322211252",
+        "-",
+        "HLNR6AWVWYCU3YAENY3HYHLIPNWN66X7",
+        "611",
+        null
+      ],
+      [
+        "20230322211253",
+        "-",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "682",
+        null
+      ],
+      [
+        "20230323142051",
+        "200",
+        "GSTS5WJSVRBJD7VWT57LBPDXOMSLEO3R",
+        "5736",
+        null
+      ],
+      [
+        "20230412161030",
+        "301",
+        "HLNR6AWVWYCU3YAENY3HYHLIPNWN66X7",
+        "431",
+        null
+      ],
+      [
+        "20230601080534",
+        "200",
+        "GUWKZRUBVLT2PQPHWNDHY5N5PKPXLY2D",
+        "1332",
+        null
+      ],
+      [
+        "20230601085134",
+        "200",
+        "GAGFZORABW7VFEUH5662IXRML73UZIOH",
+        "3272",
+        null
+      ],
+      [
+        "20240305011259",
+        "200",
+        "Z5PSRJOUV5IY7G2G62BVQ3ZPHG36OR7H",
+        "16342",
+        null
+      ],
+      [
+        "20250311205328",
+        "500",
+        "3I42H3S6NNFQ2MSVX7XZKYAYSCX5QBYJ",
+        "545",
+        null
+      ],
+      [
+        "20250314230542",
+        "200",
+        "JEEG6SHPYP63OCND5V7ZDMUVEMCRXB6X",
+        "4748",
+        null
+      ],
+      [
+        "20250315034729",
+        "200",
+        "JEEG6SHPYP63OCND5V7ZDMUVEMCRXB6X",
+        "4739",
+        null
+      ],
+      [
+        "20250407035144",
+        "200",
+        "7HTNGVAWJ3B4GAQ4U2CCFYHRDADTHAW7",
+        "5282",
+        null
+      ],
+      [
+        "20250418184949",
+        "200",
+        "MZ4ITOX2UDUHNJVEJXCK6G5EKE4MJUII",
+        "5946",
+        null
+      ],
+      [
+        "20250516163837",
+        "200",
+        "6ZCXRHMVJROFQC5ZJCTKS2TBZJIJNUF3",
+        "6270",
+        null
+      ],
+      [
+        "20250615141821",
+        "200",
+        "QGB2B3JIXBXRDKXOHN65NE7UEVUWOLTL",
+        "5893",
+        null
+      ],
+      [
+        "20250710192300",
+        "301",
+        "BMBRKHYUI6R77QQ4SD4NWWOJVHL5JI3F",
+        "393",
+        null
+      ],
+      [
+        "20250719043321",
+        "200",
+        "PGHJPDLIBSW4DTQQVJAGO5GXE3K7PTH2",
+        "6468",
+        null
+      ],
+      [
+        "20250815083539",
+        "200",
+        "PGHJPDLIBSW4DTQQVJAGO5GXE3K7PTH2",
+        "6474",
+        null
+      ],
+      [
+        "20250910164635",
+        "200",
+        "44KIOZNPFCDME2DGSQGOVBLRT5CSR553",
+        "6514",
+        null
+      ],
+      [
+        "20251013025545",
+        "200",
+        "44KIOZNPFCDME2DGSQGOVBLRT5CSR553",
+        "6521",
+        null
+      ],
+      [
+        "20251115111546",
+        "200",
+        "44KIOZNPFCDME2DGSQGOVBLRT5CSR553",
+        "6518",
+        null
+      ],
+      [
+        "20251204232106",
+        "200",
+        "44KIOZNPFCDME2DGSQGOVBLRT5CSR553",
+        "6521",
+        null
+      ]
+    ],
+    "scanUrl": "https://bloggerito.com"
+  },
+  "rank": {
+    "ranks": [
+      {
+        "date": "2026-03-12",
+        "rank": 3608093
+      },
+      {
+        "date": "2026-03-11",
+        "rank": 3559413
+      },
+      {
+        "date": "2026-03-10",
+        "rank": 3584403
+      },
+      {
+        "date": "2026-03-09",
+        "rank": 3597801
+      },
+      {
+        "date": "2026-03-08",
+        "rank": 3606906
+      },
+      {
+        "date": "2026-03-07",
+        "rank": 3705587
+      },
+      {
+        "date": "2026-03-06",
+        "rank": 3718952
+      },
+      {
+        "date": "2026-03-05",
+        "rank": 3754358
+      },
+      {
+        "date": "2026-03-04",
+        "rank": 3762107
+      },
+      {
+        "date": "2026-03-03",
+        "rank": 3751713
+      },
+      {
+        "date": "2026-03-02",
+        "rank": 3757932
+      },
+      {
+        "date": "2026-03-01",
+        "rank": 3753055
+      },
+      {
+        "date": "2026-02-28",
+        "rank": 3765459
+      },
+      {
+        "date": "2026-02-27",
+        "rank": 3766672
+      },
+      {
+        "date": "2026-02-26",
+        "rank": 3791221
+      },
+      {
+        "date": "2026-02-25",
+        "rank": 3793969
+      },
+      {
+        "date": "2026-02-24",
+        "rank": 3791827
+      },
+      {
+        "date": "2026-02-23",
+        "rank": 3792933
+      },
+      {
+        "date": "2026-02-22",
+        "rank": 3786224
+      },
+      {
+        "date": "2026-02-21",
+        "rank": 3791795
+      },
+      {
+        "date": "2026-02-20",
+        "rank": 3789324
+      },
+      {
+        "date": "2026-02-19",
+        "rank": 3803720
+      },
+      {
+        "date": "2026-02-18",
+        "rank": 3790720
+      },
+      {
+        "date": "2026-02-17",
+        "rank": 3772970
+      },
+      {
+        "date": "2026-02-16",
+        "rank": 3758620
+      },
+      {
+        "date": "2026-02-15",
+        "rank": 3742908
+      },
+      {
+        "date": "2026-02-14",
+        "rank": 3748014
+      },
+      {
+        "date": "2026-02-13",
+        "rank": 4203252
+      }
+    ],
+    "domain": "bloggerito.com"
+  },
+  "redirects": {
+    "redirects": [
+      "https://bloggerito.com"
+    ]
+  },
+  "linked-pages": {
+    "internal": [
+      "https://bloggerito.com/colegiatura",
+      "https://bloggerito.com/contacto",
+      "https://bloggerito.com/",
+      "https://bloggerito.com/noticias",
+      "https://bloggerito.com/biblioteca",
+      "https://bloggerito.com/bolsa-trabajo",
+      "https://bloggerito.com/#colegiatura",
+      "https://bloggerito.com/galeria",
+      "https://bloggerito.com/colegiados",
+      "https://bloggerito.com/#nosotros",
+      "https://bloggerito.com/nosotros/mision-vision",
+      "https://bloggerito.com/nosotros/historia",
+      "https://bloggerito.com/nosotros/consejo-directivo",
+      "https://bloggerito.com/nosotros/normativa-legal",
+      "https://bloggerito.com/nosotros/plan-2026",
+      "https://bloggerito.com/eventos",
+      "https://bloggerito.com/noticias/9",
+      "https://bloggerito.com/noticias/16",
+      "https://bloggerito.com/noticias/11",
+      "https://bloggerito.com/noticias/10",
+      "https://bloggerito.com/#servicios",
+      "https://bloggerito.com/#eventos"
+    ],
+    "external": [
+      "http://127.0.0.1:8000/eventos/2",
+      "https://www.facebook.com/",
+      "https://www.twitter.com/",
+      "https://www.instagram.com/",
+      "https://www.linkedin.com/",
+      "https://wa.me/51943667317",
+      "https://wa.me/51943667317?text=Hola,%20quisiera%20información%20sobre%20el%20CPAP%20Región%20Centro"
+    ]
+  },
+  "robots-txt": {
+    "robots": [
+      {
+        "lbl": "User-agent",
+        "val": "*"
+      },
+      {
+        "lbl": "Disallow",
+        "val": ""
+      }
+    ]
+  },
+  "status": {
+    "isUp": true,
+    "responseTime": 2113.800803999882,
+    "responseCode": 200
+  },
+  "ports": {
+    "openPorts": [
+      80,
+      443
+    ],
+    "failedPorts": [
+      20,
+      21,
+      22,
+      23,
+      25,
+      53,
+      67,
+      68,
+      69,
+      110,
+      119,
+      123,
+      143,
+      156,
+      161,
+      162,
+      179,
+      194,
+      389,
+      587,
+      993,
+      995,
+      3000,
+      3306,
+      3389,
+      5060,
+      5900,
+      8000,
+      8080,
+      8888
+    ]
+  },
+  "txt-records": {
+    "v": "spf1 include:_spf-us.ionos.com ~all"
+  },
+  "block-lists": {
+    "blocklists": [
+      {
+        "server": "AdGuard",
+        "serverIp": "176.103.130.130",
+        "isBlocked": false
+      },
+      {
+        "server": "AdGuard Family",
+        "serverIp": "176.103.130.132",
+        "isBlocked": false
+      },
+      {
+        "server": "CleanBrowsing Adult",
+        "serverIp": "185.228.168.10",
+        "isBlocked": false
+      },
+      {
+        "server": "CleanBrowsing Family",
+        "serverIp": "185.228.168.168",
+        "isBlocked": false
+      },
+      {
+        "server": "CleanBrowsing Security",
+        "serverIp": "185.228.168.9",
+        "isBlocked": false
+      },
+      {
+        "server": "CloudFlare",
+        "serverIp": "1.1.1.1",
+        "isBlocked": false
+      },
+      {
+        "server": "CloudFlare Family",
+        "serverIp": "1.1.1.3",
+        "isBlocked": false
+      },
+      {
+        "server": "Comodo Secure",
+        "serverIp": "8.26.56.26",
+        "isBlocked": false
+      },
+      {
+        "server": "Google DNS",
+        "serverIp": "8.8.8.8",
+        "isBlocked": false
+      },
+      {
+        "server": "Neustar Family",
+        "serverIp": "156.154.70.3",
+        "isBlocked": false
+      },
+      {
+        "server": "Neustar Protection",
+        "serverIp": "156.154.70.2",
+        "isBlocked": false
+      },
+      {
+        "server": "Norton Family",
+        "serverIp": "199.85.126.20",
+        "isBlocked": false
+      },
+      {
+        "server": "OpenDNS",
+        "serverIp": "208.67.222.222",
+        "isBlocked": false
+      },
+      {
+        "server": "OpenDNS Family",
+        "serverIp": "208.67.222.123",
+        "isBlocked": false
+      },
+      {
+        "server": "Quad9",
+        "serverIp": "9.9.9.9",
+        "isBlocked": false
+      },
+      {
+        "server": "Yandex Family",
+        "serverIp": "77.88.8.7",
+        "isBlocked": false
+      },
+      {
+        "server": "Yandex Safe",
+        "serverIp": "77.88.8.88",
+        "isBlocked": false
+      }
+    ]
+  }
+}

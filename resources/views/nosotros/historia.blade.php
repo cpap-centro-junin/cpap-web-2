@@ -2,6 +2,10 @@
 @extends('layouts.app')
 
 @section('title', 'Historia - CPAP Región Centro')
+@section('seo_title', 'Historia Institucional | CPAP Región Centro')
+@section('seo_description', 'Revisa la historia institucional y trayectoria del Colegio Profesional de Antropólogos del Perú - Región Centro.')
+@section('seo_canonical', route('nosotros.historia'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @section('content')
 

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', $recurso->titulo . ' - Biblioteca CPAP')
+@section('seo_title', $recurso->titulo . ' | Biblioteca CPAP Región Centro')
+@section('seo_description', Str::limit(strip_tags($recurso->descripcion ?: ('Recurso de tipo ' . $recurso->tipo_label . ' en la Biblioteca Virtual del CPAP Región Centro.')), 160))
+@section('seo_canonical', route('biblioteca.show', $recurso))
+@section('seo_image', $recurso->imagen_portada ? asset('storage/' . $recurso->imagen_portada) : asset('images/logos/cpap-logo.jpg'))
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('resources/css/pages/biblioteca.css') }}">

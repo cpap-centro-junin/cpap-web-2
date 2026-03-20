@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Galería Institucional - CPAP Región Centro')
+@section('seo_title', 'Galería Institucional | CPAP Región Centro')
+@section('seo_description', 'Explora la galería institucional del CPAP Región Centro con actividades, ceremonias y eventos académicos.')
+@section('seo_canonical', route('galeria'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @push('styles')
 @vite(['resources/css/pages/galeria.css'])

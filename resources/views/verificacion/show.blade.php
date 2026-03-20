@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'Verificación de Documento | CPAP')
+@section('seo_title', 'Verificación de Documento | CPAP Región Centro')
+@section('seo_description', 'Validación de autenticidad de documentos de habilitación emitidos por el CPAP Región Centro.')
+@section('seo_canonical', route('verificacion.show', ['codigo' => $habilitacion->codigo_verificacion]))
+@section('seo_robots', 'noindex,nofollow,max-image-preview:large,max-snippet:-1,max-video-preview:-1')
 
 {{-- Styles en resources/css/pages/verificacion.css --}}
 

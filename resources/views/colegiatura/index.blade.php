@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title','Colegiatura y Habilitación | CPAP Región Centro')
+@section('seo_title', 'Colegiatura y Habilitación | CPAP Región Centro')
+@section('seo_description', 'Infórmate sobre requisitos, proceso de colegiatura y habilitación profesional en el CPAP Región Centro.')
+@section('seo_canonical', route('colegiatura.index'))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/pages/colegiatura.css') }}">

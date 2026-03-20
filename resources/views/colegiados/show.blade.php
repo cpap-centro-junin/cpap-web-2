@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', $colegiado->nombre_completo . ' | Directorio CPAP')
+@section('seo_title', $colegiado->nombre_completo . ' | Directorio CPAP Región Centro')
+@section('seo_description', 'Perfil profesional en el directorio oficial del CPAP Región Centro. Código CPAP: ' . $colegiado->codigo_cpap . '.')
+@section('seo_canonical', route('colegiados.show', $colegiado->codigo_cpap))
+@section('seo_image', asset('images/logos/cpap-logo.jpg'))
 
 {{-- Styles en resources/css/pages/colegiado-perfil.css --}}
 
