@@ -29,6 +29,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\EventoController' => $baseDir . '/app/Http/Controllers/EventoController.php',
     'App\\Http\\Controllers\\NoticiaController' => $baseDir . '/app/Http/Controllers/NoticiaController.php',
+    'App\\Http\\Controllers\\SitemapController' => $baseDir . '/app/Http/Controllers/SitemapController.php',
     'App\\Http\\Controllers\\VerificacionController' => $baseDir . '/app/Http/Controllers/VerificacionController.php',
     'App\\Http\\Middleware\\AdminMiddleware' => $baseDir . '/app/Http/Middleware/AdminMiddleware.php',
     'App\\Http\\Middleware\\AuthMiddleware' => $baseDir . '/app/Http/Middleware/AuthMiddleware.php',
