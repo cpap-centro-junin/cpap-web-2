@@ -1,9 +1,10 @@
 {{-- resources/views/nosotros/historia.blade.php --}}
 @extends('layouts.app')
 
-@section('title', 'Historia - CPAP Región Centro')
-@section('seo_title', 'Historia Institucional | CPAP Región Centro')
-@section('seo_description', 'Revisa la historia institucional y trayectoria del Colegio Profesional de Antropólogos del Perú - Región Centro.')
+@section('title', 'Historia | Colegio de Antropólogos del Perú')
+@section('seo_title', 'Historia del Colegio de Antropólogos del Perú - Región Centro | Desde 1985')
+@section('seo_description', 'Historia del Colegio Profesional de Antropólogos del Perú - Región Centro. Más de 39 años promoviendo la antropología en Huancayo, Junín y la Región Centro del Perú.')
+@section('seo_keywords', 'historia colegio antropólogos, CPAP historia, antropología perú historia, colegio profesional antropólogos, fundación CPAP, región centro perú')
 @section('seo_canonical', route('nosotros.historia'))
 @section('seo_image', asset('images/logos/cpap-logo.jpg'))
 

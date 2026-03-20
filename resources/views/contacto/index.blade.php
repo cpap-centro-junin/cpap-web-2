@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Contacto | CPAP Región Centro')
-@section('seo_title', 'Contacto Institucional | CPAP Región Centro')
-@section('seo_description', 'Comunícate con el Colegio Profesional de Antropólogos del Perú - Región Centro por formulario, correo o WhatsApp institucional.')
+@section('title', 'Contacto | Colegio de Antropólogos del Perú')
+@section('seo_title', 'Contacto - Colegio de Antropólogos del Perú Región Centro | Huancayo')
+@section('seo_description', 'Contacta al Colegio de Antropólogos del Perú - Región Centro. Dirección: Jr. Loreto 363, Huancayo. WhatsApp: 943 667 317. Email: cpap.rc@gmail.com. Atención de colegiatura y habilitación.')
+@section('seo_keywords', 'contacto colegio antropólogos, CPAP huancayo teléfono, colegio antropólogos dirección, contacto CPAP región centro, antropólogos junín contacto')
 @section('seo_canonical', route('contacto.index'))
 @section('seo_image', asset('images/logos/cpap-logo.jpg'))
 

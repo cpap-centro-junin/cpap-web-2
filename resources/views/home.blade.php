@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Inicio - CPAP Región Centro')
-@section('seo_title', 'CPAP Región Centro | Colegio Profesional de Antropólogos del Perú')
-@section('seo_description', 'Sitio oficial del CPAP Región Centro. Información institucional, noticias, eventos, colegiados, habilitaciones, biblioteca, bolsa de trabajo y contacto.')
+@section('title', 'Colegio de Antropólogos del Perú - Región Centro | Inicio')
+@section('seo_title', 'Colegio de Antropólogos del Perú - Región Centro | CPAP Oficial Huancayo')
+@section('seo_description', 'Colegio Profesional de Antropólogos del Perú - Región Centro. Colegiatura, habilitación profesional, certificaciones, directorio de antropólogos colegiados, eventos académicos y bolsa de trabajo en Huancayo, Junín.')
+@section('seo_keywords', 'colegio de antropólogos, colegio de antropólogos del perú, CPAP, antropólogos perú, colegio profesional antropología, colegiatura antropología, antropólogos huancayo, antropólogos junín, habilitación profesional, certificado antropólogo, región centro')
 @section('seo_canonical', url('/'))
 @section('seo_image', asset('images/logos/cpap-logo.jpg'))
 

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title','Colegiatura y Habilitación | CPAP Región Centro')
-@section('seo_title', 'Colegiatura y Habilitación | CPAP Región Centro')
-@section('seo_description', 'Infórmate sobre requisitos, proceso de colegiatura y habilitación profesional en el CPAP Región Centro.')
+@section('title','Colegiatura Antropólogo | Colegio de Antropólogos del Perú')
+@section('seo_title', 'Colegiatura y Habilitación Profesional | Colegio de Antropólogos del Perú - Región Centro')
+@section('seo_description', 'Requisitos y proceso para colegiarse como antropólogo en Perú. Colegiatura S/. 700, habilitación profesional, certificaciones y carnet de antropólogo colegiado. CPAP Región Centro Huancayo.')
+@section('seo_keywords', 'colegiatura antropología, cómo colegiarse antropólogo, requisitos colegiatura antropólogo, colegio de antropólogos perú, habilitación profesional antropología, carnet antropólogo, certificado habilitación, CPAP huancayo')
 @section('seo_canonical', route('colegiatura.index'))
 @section('seo_image', asset('images/logos/cpap-logo.jpg'))
 

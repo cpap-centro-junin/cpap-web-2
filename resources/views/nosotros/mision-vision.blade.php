@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Misión y Visión - CPAP Región Centro')
-@section('seo_title', 'Misión y Visión | CPAP Región Centro')
-@section('seo_description', 'Conoce la misión y visión institucional del Colegio Profesional de Antropólogos del Perú - Región Centro.')
+@section('title', 'Misión y Visión | Colegio de Antropólogos del Perú')
+@section('seo_title', 'Misión y Visión Institucional | Colegio de Antropólogos del Perú - Región Centro')
+@section('seo_description', 'Misión y visión del Colegio Profesional de Antropólogos del Perú - Región Centro. Institución que promueve el desarrollo profesional de la antropología en Junín, Huancavelica, Pasco y Ayacucho.')
+@section('seo_keywords', 'colegio de antropólogos, misión visión CPAP, antropología perú, colegio profesional antropología, institución antropológica, región centro perú')
 @section('seo_canonical', route('nosotros.mision-vision'))
 @section('seo_image', asset('images/logos/cpap-logo.jpg'))
 

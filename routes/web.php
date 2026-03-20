@@ -43,8 +43,21 @@ Route::get('/robots.txt', function () {
     $robots = implode("\n", [
         'User-agent: *',
         'Allow: /',
+        'Disallow: /admin/',
+        'Disallow: /login',
+        'Disallow: /register',
+        'Disallow: /forgot-password',
+        'Disallow: /reset-password',
         '',
+        '# Sitemaps',
         'Sitemap: ' . url('/sitemap.xml'),
+        '',
+        '# Crawl-delay para bots específicos',
+        'User-agent: AhrefsBot',
+        'Crawl-delay: 10',
+        '',
+        'User-agent: SemrushBot',
+        'Crawl-delay: 10',
     ]);
 
     return response($robots, 200)->header('Content-Type', 'text/plain');

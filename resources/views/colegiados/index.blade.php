@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Directorio de Colegiados | CPAP')
-@section('seo_title', 'Directorio de Colegiados | CPAP Región Centro')
-@section('seo_description', 'Consulta el directorio oficial de colegiados del CPAP Región Centro y verifica su estado profesional.')
+@section('title', 'Directorio de Antropólogos Colegiados | CPAP Perú')
+@section('seo_title', 'Directorio de Antropólogos Colegiados del Perú | Verificar Habilitación - CPAP Región Centro')
+@section('seo_description', 'Directorio oficial de antropólogos colegiados en Perú. Verifica la habilitación profesional de antropólogos por nombre, DNI o código CPAP. Colegio de Antropólogos del Perú - Región Centro.')
+@section('seo_keywords', 'directorio antropólogos colegiados, verificar antropólogo habilitado, antropólogos colegiados perú, consultar habilitación antropólogo, colegio de antropólogos, CPAP región centro, antropólogos huancayo junín')
 @section('seo_canonical', route('colegiados.index'))
 @section('seo_image', asset('images/logos/cpap-logo.jpg'))
 

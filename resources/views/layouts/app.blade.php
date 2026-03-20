@@ -6,28 +6,121 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @php
-        $siteName = 'CPAP Región Centro';
-        $defaultTitle = 'CPAP Región Centro | Colegio Profesional de Antropólogos del Perú';
-        $defaultDescription = 'Sitio oficial del Colegio Profesional de Antropólogos del Perú - Región Centro. Noticias, eventos, colegiados, habilitaciones, normativa, bolsa de trabajo y contacto institucional.';
+        $siteName = 'Colegio de Antropólogos del Perú - Región Centro';
+        $defaultTitle = 'Colegio de Antropólogos del Perú - Región Centro | CPAP Oficial';
+        $defaultDescription = 'Colegio Profesional de Antropólogos del Perú - Región Centro. Colegiatura, habilitación profesional, certificaciones, eventos académicos, bolsa de trabajo y directorio de antropólogos colegiados en Huancayo y Junín.';
+        $defaultKeywords = 'colegio de antropólogos, colegio de antropólogos del perú, antropólogos perú, CPAP, colegio profesional antropología, colegiatura antropología, antropólogos huancayo, antropólogos junín, habilitación profesional antropología, certificado de habilitación antropólogo, región centro perú';
+
         $seoTitle = trim($__env->yieldContent('seo_title')) ?: $defaultTitle;
         $seoDescription = trim($__env->yieldContent('seo_description')) ?: $defaultDescription;
+        $seoKeywords = trim($__env->yieldContent('seo_keywords')) ?: $defaultKeywords;
         $seoImage = trim($__env->yieldContent('seo_image')) ?: asset('images/logos/cpap-logo.jpg');
         $seoCanonical = trim($__env->yieldContent('seo_canonical')) ?: url()->current();
         $seoRobots = trim($__env->yieldContent('seo_robots')) ?: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
 
+        // Schema.org - Organización Profesional Completa
         $organizationSchema = [
             '@context' => 'https://schema.org',
-            '@type' => 'Organization',
-            'name' => 'CPAP Región Centro',
-            'url' => 'https://cpapregioncentro.com',
-            'logo' => asset('images/logos/cpap-logo.jpg'),
+            '@type' => ['Organization', 'ProfessionalService'],
+            '@id' => url('/') . '#organization',
+            'name' => 'Colegio Profesional de Antropólogos del Perú - Región Centro',
+            'alternateName' => ['CPAP Región Centro', 'Colegio de Antropólogos del Perú', 'CPAP RC'],
+            'url' => url('/'),
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => asset('images/logos/cpap-logo.jpg'),
+                'width' => 512,
+                'height' => 512
+            ],
+            'image' => asset('images/logos/cpap-logo.jpg'),
+            'description' => 'Institución oficial que agremia a los profesionales antropólogos de la Región Centro del Perú. Brindamos colegiatura, habilitación profesional, certificaciones y desarrollo profesional continuo.',
+            'foundingDate' => '1985',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => 'Jr. Loreto 363',
+                'addressLocality' => 'Huancayo',
+                'addressRegion' => 'Junín',
+                'postalCode' => '12001',
+                'addressCountry' => 'PE'
+            ],
+            'geo' => [
+                '@type' => 'GeoCoordinates',
+                'latitude' => '-12.0651',
+                'longitude' => '-75.2049'
+            ],
+            'contactPoint' => [
+                '@type' => 'ContactPoint',
+                'telephone' => '+51-943-667-317',
+                'contactType' => 'customer service',
+                'email' => 'cpap.rc@gmail.com',
+                'availableLanguage' => 'Spanish'
+            ],
+            'sameAs' => [
+                'https://www.facebook.com/cpapregioncentro'
+            ],
+            'areaServed' => [
+                '@type' => 'AdministrativeArea',
+                'name' => 'Región Centro del Perú (Junín, Huancavelica, Pasco, Ayacucho)'
+            ],
+            'serviceType' => ['Colegiatura profesional', 'Habilitación profesional', 'Certificaciones', 'Capacitación', 'Bolsa de trabajo'],
+            'priceRange' => 'S/. 700'
         ];
 
+        // Schema.org - WebSite con SearchAction
         $websiteSchema = [
             '@context' => 'https://schema.org',
             '@type' => 'WebSite',
-            'name' => 'CPAP Región Centro',
-            'url' => 'https://cpapregioncentro.com',
+            '@id' => url('/') . '#website',
+            'name' => 'Colegio de Antropólogos del Perú - Región Centro',
+            'alternateName' => 'CPAP Región Centro',
+            'url' => url('/'),
+            'description' => 'Portal oficial del Colegio Profesional de Antropólogos del Perú - Región Centro',
+            'publisher' => [
+                '@id' => url('/') . '#organization'
+            ],
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => [
+                    '@type' => 'EntryPoint',
+                    'urlTemplate' => url('/colegiados') . '?q={search_term_string}'
+                ],
+                'query-input' => 'required name=search_term_string'
+            ],
+            'inLanguage' => 'es-PE'
+        ];
+
+        // Schema.org - Breadcrumb dinámico
+        $breadcrumbItems = [];
+        $breadcrumbItems[] = ['@type' => 'ListItem', 'position' => 1, 'name' => 'Inicio', 'item' => url('/')];
+
+        $currentRouteName = Route::currentRouteName();
+        $breadcrumbMap = [
+            'nosotros.mision-vision' => ['Nosotros', 'Misión y Visión'],
+            'nosotros.historia' => ['Nosotros', 'Historia'],
+            'nosotros.consejo-directivo' => ['Nosotros', 'Consejo Directivo'],
+            'nosotros.normativa-legal' => ['Nosotros', 'Normativa Legal'],
+            'noticias.index' => ['Noticias'],
+            'eventos.index' => ['Eventos'],
+            'colegiados.index' => ['Directorio de Colegiados'],
+            'colegiatura.index' => ['Proceso de Colegiatura'],
+            'biblioteca' => ['Biblioteca Virtual'],
+            'bolsa-trabajo' => ['Bolsa de Trabajo'],
+            'galeria' => ['Galería Institucional'],
+            'contacto.index' => ['Contacto'],
+        ];
+
+        if (isset($breadcrumbMap[$currentRouteName])) {
+            $pos = 2;
+            foreach ($breadcrumbMap[$currentRouteName] as $name) {
+                $breadcrumbItems[] = ['@type' => 'ListItem', 'position' => $pos, 'name' => $name];
+                $pos++;
+            }
+        }
+
+        $breadcrumbSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => $breadcrumbItems
         ];
     @endphp
 
@@ -35,7 +128,13 @@
 
     <!-- SEO Básico -->
     <meta name="description" content="{{ $seoDescription }}">
+    <meta name="keywords" content="{{ $seoKeywords }}">
     <meta name="robots" content="{{ $seoRobots }}">
+    <meta name="author" content="Colegio Profesional de Antropólogos del Perú - Región Centro">
+    <meta name="geo.region" content="PE-JUN">
+    <meta name="geo.placename" content="Huancayo, Junín, Perú">
+    <meta name="geo.position" content="-12.0651;-75.2049">
+    <meta name="ICBM" content="-12.0651, -75.2049">
     <link rel="canonical" href="{{ $seoCanonical }}">
 
     <!-- Open Graph -->
@@ -85,9 +184,11 @@
     </script>
     @endif
 
-    <!-- Datos estructurados -->
-    <script type="application/ld+json">{!! json_encode($organizationSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
-    <script type="application/ld+json">{!! json_encode($websiteSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+    <!-- Datos estructurados Schema.org -->
+    <script type="application/ld+json">{!! json_encode($organizationSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}</script>
+    <script type="application/ld+json">{!! json_encode($websiteSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}</script>
+    <script type="application/ld+json">{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}</script>
+    @yield('schema')
     
     {{-- CSS Personalizado desde configuración de diseño --}}
     @php
