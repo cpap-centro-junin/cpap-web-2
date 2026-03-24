@@ -91,9 +91,28 @@ class RecursoBiblioteca extends Model
     /** Label legible del formato. */
     public function getFormatoLabelAttribute(): string
     {
+        // Si es documento, no mostrar "Libro"
+        if ($this->tipo === 'documento') {
+            return match ($this->formato) {
+                'fisico'  => 'Físico',
+                'digital' => 'Digital',
+                default   => $this->formato,
+            };
+        }
+
+        // Para libros, usar "Libro Físico/Virtual"
+        if ($this->tipo === 'libro') {
+            return match ($this->formato) {
+                'fisico'  => 'Libro Físico',
+                'digital' => 'Libro Virtual',
+                default   => $this->formato,
+            };
+        }
+
+        // Para otros tipos (tesis, artículos, etc.)
         return match ($this->formato) {
-            'fisico'  => 'Libro Físico',
-            'digital' => 'Libro Virtual',
+            'fisico'  => 'Físico',
+            'digital' => 'Digital',
             default   => $this->formato,
         };
     }

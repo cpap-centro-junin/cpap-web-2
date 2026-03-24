@@ -128,7 +128,7 @@
         <!-- Pagination -->
         @if($ofertas->hasPages())
         <div class="pagination-wrapper" data-aos="fade-up">
-            {{ $ofertas->links() }}
+            {{ $ofertas->appends(request()->query())->links('pagination.custom') }}
         </div>
         @endif
         @else

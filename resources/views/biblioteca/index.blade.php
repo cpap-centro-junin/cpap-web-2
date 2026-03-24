@@ -203,9 +203,11 @@
                         <i class="fas {{ $dest->tipo_icon }}"></i>
                     @endif
                     <span class="resource-type">{{ $dest->tipo_label }}</span>
-                    <span class="resource-formato {{ $dest->formato }}">
-                        <i class="fas {{ $dest->formato_icon }}"></i> {{ $dest->formato_label }}
-                    </span>
+                    @if($dest->tipo !== 'documento')
+                        <span class="resource-formato {{ $dest->formato }}">
+                            <i class="fas {{ $dest->formato_icon }}"></i> {{ $dest->formato_label }}
+                        </span>
+                    @endif
                 </div>
                 <div class="resource-content">
                     <h3>{{ $dest->titulo }}</h3>
@@ -270,9 +272,11 @@
                         <i class="fas {{ $recurso->tipo_icon }}"></i>
                     @endif
                     <span class="resource-type">{{ $recurso->tipo_label }}</span>
-                    <span class="resource-formato {{ $recurso->formato }}">
-                        <i class="fas {{ $recurso->formato_icon }}"></i> {{ $recurso->formato_label }}
-                    </span>
+                    @if($recurso->tipo !== 'documento')
+                        <span class="resource-formato {{ $recurso->formato }}">
+                            <i class="fas {{ $recurso->formato_icon }}"></i> {{ $recurso->formato_label }}
+                        </span>
+                    @endif
                 </div>
                 <div class="resource-content">
                     <h3>{{ $recurso->titulo }}</h3>
@@ -308,9 +312,7 @@
 
         {{-- Paginación --}}
         @if($recursos->hasPages())
-        <div style="display:flex;justify-content:center;margin-top:40px;">
-            {{ $recursos->links() }}
-        </div>
+            {{ $recursos->links('pagination.custom') }}
         @endif
 
         @else
