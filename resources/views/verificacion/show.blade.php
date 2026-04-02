@@ -30,7 +30,7 @@
 
                 {{-- Foto y nombre --}}
                 <div class="sidebar-perfil">
-                    @if($colegiado->foto)
+                    @if($colegiado->foto && !$colegiado->ocultar_foto)
                         <img src="{{ Storage::url($colegiado->foto) }}"
                              alt="{{ $colegiado->nombre_completo }}"
                              class="sidebar-avatar">
@@ -61,7 +61,7 @@
                         <i class="fas fa-user-graduate"></i>
                         Información Profesional
                     </div>
-                    @if($colegiado->orientacion)
+                    @if($colegiado->orientacion && !$colegiado->ocultar_orientacion)
                     <div class="sidebar-field">
                         <i class="fas fa-compass"></i>
                         <div>
@@ -71,7 +71,7 @@
                     </div>
                     @endif
 
-                    @if($colegiado->especialidad)
+                    @if($colegiado->especialidad && !$colegiado->ocultar_especialidad)
                     <div class="sidebar-field">
                         <i class="fas fa-briefcase"></i>
                         <div>
@@ -81,7 +81,7 @@
                     </div>
                     @endif
 
-                    @if($colegiado->universidad)
+                    @if($colegiado->universidad && !$colegiado->ocultar_universidad)
                     <div class="sidebar-field">
                         <i class="fas fa-university"></i>
                         <div>
