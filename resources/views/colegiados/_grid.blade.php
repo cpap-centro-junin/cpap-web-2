@@ -35,7 +35,7 @@
 
                 <div class="card-header-bg">
                     <div class="card-avatar-wrapper">
-                        @if($colegiado->foto)
+                        @if($colegiado->foto && !$colegiado->ocultar_foto)
                             <img src="{{ Storage::url($colegiado->foto) }}"
                                  alt="{{ $colegiado->nombre_completo }}"
                                  class="card-avatar">
@@ -50,13 +50,17 @@
                 <div class="card-body">
                     <div class="card-name">{{ $colegiado->nombre_completo }}</div>
                     <div class="card-code">{{ $colegiado->codigo_cpap }}</div>
+                    @php
+                        $mostrarOrientacion = $colegiado->orientacion && !$colegiado->ocultar_orientacion;
+                        $mostrarEspecialidad = $colegiado->especialidad && !$colegiado->ocultar_especialidad;
+                    @endphp
                     <div class="card-specialty">
-                        @if($colegiado->orientacion)
+                        @if($mostrarOrientacion)
                             {{ $colegiado->orientacion }}
-                            @if($colegiado->especialidad)
+                            @if($mostrarEspecialidad)
                                 <br><small style="opacity:0.75; font-size:11px;">{{ $colegiado->especialidad }}</small>
                             @endif
-                        @elseif($colegiado->especialidad)
+                        @elseif($mostrarEspecialidad)
                             {{ $colegiado->especialidad }}
                         @else
                             Antropólogo Profesional

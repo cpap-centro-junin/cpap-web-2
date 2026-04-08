@@ -18,7 +18,8 @@ class ColegiadoPublicoController extends Controller
         $query = Colegiado::select(
             'id', 'codigo_cpap', 'nombres', 'apellidos',
             'foto', 'especialidad', 'orientacion', 'estado',
-            'perfil_oculto'
+            'perfil_oculto',
+            'ocultar_foto', 'ocultar_especialidad', 'ocultar_orientacion'
         )
         ->visiblesPublico();
 
