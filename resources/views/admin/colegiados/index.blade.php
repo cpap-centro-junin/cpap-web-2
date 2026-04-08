@@ -206,7 +206,7 @@
             </div>
 
             {{-- Paginación --}}
-            {{ $colegiados->render('pagination.custom') }}
+            {{ $colegiados->links('pagination.admin') }}
         @else
             <div class="empty-state">
                 <i class="fas fa-users"></i>

@@ -76,11 +76,7 @@
         @endforelse
     </div>
 
-    @if($messages->hasPages())
-    <div class="msg-pagination">
-        {{ $messages->links() }}
-    </div>
-    @endif
+{{ $messages->links('pagination.admin') }}
 
 </div>
 

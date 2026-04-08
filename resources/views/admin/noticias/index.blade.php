@@ -119,11 +119,7 @@
     </div>
 </div>
 
-@if($noticias->hasPages())
-<div style="margin-top:20px;display:flex;justify-content:center;">
-    {{ $noticias->links() }}
-</div>
-@endif
+{{ $noticias->links('pagination.admin') }}
 
 @endsection
 

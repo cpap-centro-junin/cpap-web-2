@@ -155,11 +155,7 @@
 </div>
 @endif
 
-@if($imagenes->hasPages())
-<div style="margin-top:20px;display:flex;justify-content:center;">
-    {{ $imagenes->links() }}
-</div>
-@endif
+{{ $imagenes->links('pagination.admin') }}
 
 {{-- MODAL SUBIDA MASIVA --}}
 <div id="modalMasivo" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">

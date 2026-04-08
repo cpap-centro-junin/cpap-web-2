@@ -11,11 +11,20 @@ class SolicitudOfertaController extends Controller
     /**
      * Listado tipo bandeja de entrada de solicitudes de ofertas laborales.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Manejar parámetro de items per page
+        if ($request->has('perpage')) {
+            $perpage = (int) $request->get('perpage');
+            if (in_array($perpage, [10, 20, 50, 100])) {
+                session(['pagination_perpage' => $perpage]);
+            }
+        }
+        
+        $perpage = session('pagination_perpage', 10);
         $solicitudes = BolsaTrabajo::solicitudes()
             ->latest()
-            ->paginate(10);
+            ->paginate($perpage);
 
         return view('admin.solicitudes.index', compact('solicitudes'));
     }

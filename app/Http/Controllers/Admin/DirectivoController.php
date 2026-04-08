@@ -9,9 +9,19 @@ use Illuminate\Support\Facades\Storage;
 
 class DirectivoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $directivos = Directivo::orderBy('orden')->orderBy('id')->get();
+        // Manejar parámetro de items per page
+        if ($request->has('perpage')) {
+            $perpage = (int) $request->get('perpage');
+            if (in_array($perpage, [10, 20, 50, 100])) {
+                session(['pagination_perpage' => $perpage]);
+            }
+        }
+        
+        $perpage = session('pagination_perpage', 20);
+        $directivos = Directivo::orderBy('orden')->orderBy('id')->paginate($perpage);
+        
         return view('admin.directivos.index', compact('directivos'));
     }
 

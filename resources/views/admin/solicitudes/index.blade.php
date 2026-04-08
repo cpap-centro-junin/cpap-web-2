@@ -86,11 +86,7 @@
         @endforelse
     </div>
 
-    @if($solicitudes->hasPages())
-    <div class="msg-pagination">
-        {{ $solicitudes->links() }}
-    </div>
-    @endif
+{{ $solicitudes->links('pagination.admin') }}
 
 </div>
 

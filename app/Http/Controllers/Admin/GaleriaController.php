@@ -14,6 +14,16 @@ class GaleriaController extends Controller
      */
     public function index(Request $request)
     {
+        // Manejar parámetro de items per page
+        if ($request->has('perpage')) {
+            $perpage = (int) $request->get('perpage');
+            if (in_array($perpage, [10, 20, 50, 100])) {
+                session(['pagination_perpage' => $perpage]);
+            }
+        }
+        
+        $perpage = session('pagination_perpage', 20);
+        
         $query = GaleriaImagen::query();
 
         if ($request->filled('categoria')) {
@@ -35,7 +45,7 @@ class GaleriaController extends Controller
         $imagenes = $query->orderByDesc('destacado')
                           ->orderBy('orden')
                           ->orderByDesc('created_at')
-                          ->paginate(20)
+                          ->paginate($perpage)
                           ->withQueryString();
 
         $categorias = GaleriaImagen::categoriasDisponibles();

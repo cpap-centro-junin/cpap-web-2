@@ -129,11 +129,7 @@
     </div>
 </div>
 
-@if($ofertas->hasPages())
-<div style="margin-top:20px;display:flex;justify-content:center;">
-    {{ $ofertas->links() }}
-</div>
-@endif
+{{ $ofertas->links('pagination.admin') }}
 
 @endsection
 

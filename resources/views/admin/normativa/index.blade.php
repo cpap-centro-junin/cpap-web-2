@@ -114,6 +114,9 @@
     </div>
 </div>
 
+{{-- Paginación --}}
+{{ $documentos->links('pagination.admin') }}
+
 <div style="margin-top:16px;padding:14px 18px;background:var(--info-light);border-radius:var(--radius-sm);font-size:13px;color:var(--info);display:flex;align-items:center;gap:10px;">
     <i class="fas fa-lightbulb"></i>
     <span>Los documentos activos se mostrarán en la página pública <strong>Nosotros → Normativa Legal</strong>. Sube archivos PDF de hasta 10 MB.</span>

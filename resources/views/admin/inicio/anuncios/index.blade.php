@@ -101,6 +101,9 @@
     </div>
 </div>
 
+{{-- Paginación --}}
+{{ $anuncios->links('pagination.admin') }}
+
 @endsection
 
 @push('scripts')

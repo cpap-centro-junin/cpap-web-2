@@ -159,6 +159,11 @@
                 </button>
             </div>
         @endif
+
+        {{-- Paginación --}}
+        @if($invitaciones->count() > 0)
+            {{ $invitaciones->links('pagination.admin') }}
+        @endif
     </div>
 
 </div>

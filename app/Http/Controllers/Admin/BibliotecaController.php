@@ -14,6 +14,16 @@ class BibliotecaController extends Controller
      * ----------------------------------------------------- */
     public function index(Request $request)
     {
+        // Manejar parámetro de items per page
+        if ($request->has('perpage')) {
+            $perpage = (int) $request->get('perpage');
+            if (in_array($perpage, [10, 20, 50, 100])) {
+                session(['pagination_perpage' => $perpage]);
+            }
+        }
+        
+        $perpage = session('pagination_perpage', 15);
+        
         $query = RecursoBiblioteca::query();
 
         // Filtros
@@ -39,7 +49,7 @@ class BibliotecaController extends Controller
             $query->porFormato($request->formato);
         }
 
-        $recursos = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
+        $recursos = $query->orderBy('created_at', 'desc')->paginate($perpage)->withQueryString();
 
         return view('admin.biblioteca.index', compact('recursos'));
     }

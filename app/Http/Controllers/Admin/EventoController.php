@@ -9,9 +9,19 @@ use Illuminate\Support\Facades\Storage;
 
 class EventoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $eventos = Evento::latest('fecha_inicio')->paginate(20);
+        // Manejar parámetro de items per page
+        if ($request->has('perpage')) {
+            $perpage = (int) $request->get('perpage');
+            if (in_array($perpage, [10, 20, 50, 100])) {
+                session(['pagination_perpage' => $perpage]);
+            }
+        }
+        
+        $perpage = session('pagination_perpage', 20);
+        $eventos = Evento::latest('fecha_inicio')->paginate($perpage);
+        
         return view('admin.eventos.index', compact('eventos'));
     }
 

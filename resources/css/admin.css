@@ -16,5 +16,8 @@
 @import './components/buttons.css';
 @import './components/forms.css';
 
+/* ---- PAGINACIÓN DEL PANEL ADMIN ---- */
+@import './components/admin-pagination.css';
+
 /* ---- MÓDULOS DEL PANEL ADMIN ---- */
 @import './admin/index.css';

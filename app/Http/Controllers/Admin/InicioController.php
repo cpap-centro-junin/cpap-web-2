@@ -28,9 +28,19 @@ class InicioController extends Controller
     // BANNER SLIDES - CRUD
     // =====================================
     
-    public function slidesIndex()
+    public function slidesIndex(Request $request)
     {
-        $slides = BannerSlide::with(['noticia', 'evento'])->orderBy('orden')->get();
+        // Manejar parámetro de items per page
+        if ($request->has('perpage')) {
+            $perpage = (int) $request->get('perpage');
+            if (in_array($perpage, [10, 20, 50, 100])) {
+                session(['pagination_perpage' => $perpage]);
+            }
+        }
+        
+        $perpage = session('pagination_perpage', 20);
+        $slides = BannerSlide::with(['noticia', 'evento'])->orderBy('orden')->paginate($perpage);
+        
         return view('admin.inicio.slides.index', compact('slides'));
     }
 

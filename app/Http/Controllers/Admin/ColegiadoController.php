@@ -122,6 +122,16 @@ class ColegiadoController extends Controller
      */
     public function index(Request $request)
     {
+        // Manejar parámetro de items per page
+        if ($request->has('perpage')) {
+            $perpage = (int) $request->get('perpage');
+            if (in_array($perpage, [10, 20, 50, 100])) {
+                session(['pagination_perpage' => $perpage]);
+            }
+        }
+        
+        $perpage = session('pagination_perpage', 10);
+        
         $query = Colegiado::query();
 
         if ($request->filled('buscar')) {
@@ -148,7 +158,7 @@ class ColegiadoController extends Controller
             ? strtolower($request->get('order', 'desc'))
             : 'desc';
 
-        $colegiados = $query->orderBy($sort, $order)->paginate(10);
+        $colegiados = $query->orderBy($sort, $order)->paginate($perpage);
 
         return view('admin.colegiados.index', compact('colegiados', 'sort', 'order'));
     }

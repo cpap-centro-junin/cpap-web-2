@@ -131,11 +131,7 @@
     </div>
 </div>
 
-@if($eventos->hasPages())
-<div style="margin-top:20px;display:flex;justify-content:center;">
-    {{ $eventos->links() }}
-</div>
-@endif
+{{ $eventos->links('pagination.admin') }}
 
 @endsection
 

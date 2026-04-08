@@ -208,11 +208,7 @@
 </div>
 
 {{-- PAGINACIÓN --}}
-@if($recursos->hasPages())
-<div style="display:flex;justify-content:center;margin-top:24px;">
-    {{ $recursos->links() }}
-</div>
-@endif
+{{ $recursos->links('pagination.admin') }}
 
 @endsection
 
