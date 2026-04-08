@@ -208,14 +208,10 @@
                         </select>
                     </div>
                     <div style="margin-bottom:12px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Área temática <span style="color:var(--danger);">*</span></label>
-                        <select name="area_tematica" class="admin-input" required>
-                            <option value="cultural" {{ old('area_tematica', $recurso->area_tematica)=='cultural'?'selected':'' }}>Antropología Cultural</option>
-                            <option value="social" {{ old('area_tematica', $recurso->area_tematica)=='social'?'selected':'' }}>Antropología Social</option>
-                            <option value="arqueologia" {{ old('area_tematica', $recurso->area_tematica)=='arqueologia'?'selected':'' }}>Arqueología</option>
-                            <option value="linguistica" {{ old('area_tematica', $recurso->area_tematica)=='linguistica'?'selected':'' }}>Lingüística</option>
-                            <option value="biologica" {{ old('area_tematica', $recurso->area_tematica)=='biologica'?'selected':'' }}>Antropología Biológica</option>
-                        </select>
+                        <label style="display:block;font-size:12px;font-weight:600;color:var(--dark);margin-bottom:6px;">Área temática <span style="color:var(--danger);">*</span></label>
+                        <input type="text" name="area_tematica" value="{{ old('area_tematica', $recurso->area_tematica) }}"
+                               placeholder="Ej: Antropología Cultural, Arqueología, etc."
+                               class="admin-input" required>
                     </div>
                 </div>
 

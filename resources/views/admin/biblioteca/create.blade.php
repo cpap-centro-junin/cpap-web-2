@@ -96,7 +96,7 @@
                     </h3>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
                         <div>
-                            <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">Archivo PDF <span style="color:var(--medium-gray);font-weight:400;">(máx 50MB)</span></label>
+                            <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px;">Archivo PDF <span style="color:var(--medium-gray);font-weight:400;">(máx 200MB)</span></label>
                             <input type="file" name="archivo_pdf" accept=".pdf"
                                    class="admin-input" style="padding:8px;">
                         </div>
@@ -200,14 +200,10 @@
                         </select>
                     </div>
                     <div style="margin-bottom:12px;">
-                        <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Área temática <span style="color:var(--danger);">*</span></label>
-                        <select name="area_tematica" class="admin-input" required>
-                            <option value="cultural" {{ old('area_tematica')=='cultural'?'selected':'' }}>Antropología Cultural</option>
-                            <option value="social" {{ old('area_tematica')=='social'?'selected':'' }}>Antropología Social</option>
-                            <option value="arqueologia" {{ old('area_tematica')=='arqueologia'?'selected':'' }}>Arqueología</option>
-                            <option value="linguistica" {{ old('area_tematica')=='linguistica'?'selected':'' }}>Lingüística</option>
-                            <option value="biologica" {{ old('area_tematica')=='biologica'?'selected':'' }}>Antropología Biológica</option>
-                        </select>
+                        <label style="display:block;font-size:12px;font-weight:600;color:var(--dark);margin-bottom:6px;">Área temática <span style="color:var(--danger);">*</span></label>
+                        <input type="text" name="area_tematica" value="{{ old('area_tematica') }}"
+                               placeholder="Ej: Antropología Cultural, Arqueología, etc."
+                               class="admin-input" required>
                     </div>
                 </div>
 

@@ -53,14 +53,11 @@
             ]
         ],
         [
-            'field' => 'area',
-            'label' => 'Área Temática',
+            'field' => 'estado',
+            'label' => 'Estado',
             'options' => [
-                'cultural' => 'Antropología Cultural',
-                'social' => 'Antropología Social',
-                'arqueologia' => 'Arqueología',
-                'linguistica' => 'Lingüística',
-                'biologica' => 'Antropología Biológica',
+                'publicado' => 'Publicados',
+                'oculto' => 'Ocultos',
             ]
         ],
     ]"

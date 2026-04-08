@@ -41,8 +41,12 @@ class BibliotecaController extends Controller
             $query->porTipo($request->tipo);
         }
 
-        if ($request->filled('area')) {
-            $query->porArea($request->area);
+        if ($request->filled('estado')) {
+            if ($request->estado === 'publicado') {
+                $query->where('activo', true);
+            } elseif ($request->estado === 'oculto') {
+                $query->where('activo', false);
+            }
         }
 
         if ($request->filled('formato')) {
@@ -80,7 +84,7 @@ class BibliotecaController extends Controller
             'paginas'             => 'nullable|integer|min:1',
             'idioma'              => 'nullable|string|max:80',
             'enlace_externo'      => 'nullable|url|max:500',
-            'archivo_pdf'         => 'nullable|file|mimes:pdf|max:51200',      // 50 MB
+            'archivo_pdf'         => 'nullable|file|mimes:pdf|max:204800',     // 200 MB
             'imagen_portada'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120', // 5 MB
             'copyright_titular'   => 'nullable|string|max:255',
             'copyright_anio'      => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
@@ -142,7 +146,7 @@ class BibliotecaController extends Controller
             'autor'               => 'required|string|max:255',
             'tipo'                => 'required|in:libro,articulo,tesis,documento,revista,multimedia',
             'formato'             => 'required|in:fisico,digital',
-            'area_tematica'       => 'required|in:cultural,social,arqueologia,linguistica,biologica',
+            'area_tematica'       => 'required|string|max:255',
             'descripcion'         => 'required|string',
             'editorial'           => 'nullable|string|max:255',
             'anio_publicacion'    => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
@@ -150,7 +154,7 @@ class BibliotecaController extends Controller
             'paginas'             => 'nullable|integer|min:1',
             'idioma'              => 'nullable|string|max:80',
             'enlace_externo'      => 'nullable|url|max:500',
-            'archivo_pdf'         => 'nullable|file|mimes:pdf|max:51200',
+            'archivo_pdf'         => 'nullable|file|mimes:pdf|max:204800',      // 200 MB,      // 200 MB
             'imagen_portada'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'copyright_titular'   => 'nullable|string|max:255',
             'copyright_anio'      => 'nullable|integer|min:1900|max:' . (date('Y') + 1),
