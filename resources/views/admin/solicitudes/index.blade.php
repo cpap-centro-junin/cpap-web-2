@@ -30,6 +30,24 @@
         @endif
     </div>
 
+    {{-- FILTROS --}}
+    <x-admin-filters
+        :searchPlaceholder="'Buscar por nombre o email...'"
+        :searchField="'q'"
+        :route="route('admin.solicitudes.index')"
+        :clearRoute="route('admin.solicitudes.index')"
+        :filters="[
+            [
+                'field' => 'estado',
+                'label' => 'Estado',
+                'options' => [
+                    'revisado' => 'Revisadas',
+                    'no-revisado' => 'No revisadas',
+                ]
+            ],
+        ]"
+    />
+
     <div class="msg-list-body">
         @forelse($solicitudes as $sol)
         <div class="msg-row {{ !$sol->revisado ? 'msg-row--new' : '' }}">

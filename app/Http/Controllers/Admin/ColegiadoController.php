@@ -134,8 +134,10 @@ class ColegiadoController extends Controller
         
         $query = Colegiado::query();
 
-        if ($request->filled('buscar')) {
-            $query->buscar($request->buscar);
+        // Support both 'q' (new) and 'buscar' (legacy) parameters
+        $search = $request->filled('q') ? $request->q : $request->buscar;
+        if ($search) {
+            $query->buscar($search);
         }
 
         if ($request->filled('estado')) {
@@ -158,7 +160,7 @@ class ColegiadoController extends Controller
             ? strtolower($request->get('order', 'desc'))
             : 'desc';
 
-        $colegiados = $query->orderBy($sort, $order)->paginate($perpage);
+        $colegiados = $query->orderBy($sort, $order)->paginate($perpage)->withQueryString();
 
         return view('admin.colegiados.index', compact('colegiados', 'sort', 'order'));
     }

@@ -22,9 +22,24 @@ class SolicitudOfertaController extends Controller
         }
         
         $perpage = session('pagination_perpage', 10);
-        $solicitudes = BolsaTrabajo::solicitudes()
-            ->latest()
-            ->paginate($perpage);
+        
+        $query = BolsaTrabajo::solicitudes();
+
+        // Search by applicant name or email
+        if ($request->filled('q')) {
+            $buscar = $request->q;
+            $query->where(function ($q) use ($buscar) {
+                $q->where('nombre_contacto', 'like', "%{$buscar}%")
+                  ->orWhere('email', 'like', "%{$buscar}%");
+            });
+        }
+
+        // Filter by review status
+        if ($request->filled('estado')) {
+            $query->where('revisado', $request->estado === 'revisado');
+        }
+
+        $solicitudes = $query->latest()->paginate($perpage)->withQueryString();
 
         return view('admin.solicitudes.index', compact('solicitudes'));
     }

@@ -39,6 +39,44 @@
 </div>
 @endif
 
+{{-- FILTROS --}}
+<x-admin-filters
+    :searchPlaceholder="'Buscar por título, empresa o descripción...'"
+    :searchField="'q'"
+    :route="route('admin.bolsa.index')"
+    :clearRoute="route('admin.bolsa.index')"
+    :filters="[
+        [
+            'field' => 'tipo',
+            'label' => 'Tipo de contrato',
+            'options' => [
+                'fulltime' => 'Tiempo completo',
+                'parttime' => 'Medio tiempo',
+                'freelance' => 'Freelance',
+                'consultoria' => 'Consultoría',
+            ]
+        ],
+        [
+            'field' => 'area',
+            'label' => 'Área',
+            'options' => [
+                'investigacion' => 'Investigación',
+                'docencia' => 'Docencia',
+                'consultoria' => 'Consultoría',
+                'gestion' => 'Gestión',
+            ]
+        ],
+        [
+            'field' => 'estado',
+            'label' => 'Estado',
+            'options' => [
+                'activo' => 'Activas',
+                'inactivo' => 'Inactivas',
+            ]
+        ],
+    ]"
+/>
+
 {{-- TABLA --}}
 <div class="admin-table">
     <div class="admin-table-wrapper">

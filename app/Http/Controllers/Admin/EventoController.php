@@ -20,7 +20,29 @@ class EventoController extends Controller
         }
         
         $perpage = session('pagination_perpage', 20);
-        $eventos = Evento::latest('fecha_inicio')->paginate($perpage);
+        
+        $query = Evento::query();
+        
+        // Búsqueda
+        if ($request->filled('q')) {
+            $search = $request->q;
+            $query->where(function ($q) use ($search) {
+                $q->where('titulo', 'like', "%{$search}%")
+                  ->orWhere('descripcion', 'like', "%{$search}%");
+            });
+        }
+        
+        // Filtro por categoría
+        if ($request->filled('categoria')) {
+            $query->where('categoria', $request->categoria);
+        }
+        
+        // Filtro por estado
+        if ($request->filled('estado')) {
+            $query->where('activo', $request->estado === 'activo');
+        }
+        
+        $eventos = $query->latest('fecha_inicio')->paginate($perpage)->withQueryString();
         
         return view('admin.eventos.index', compact('eventos'));
     }

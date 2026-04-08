@@ -24,41 +24,27 @@
 </div>
 
 {{-- FILTROS --}}
-<div class="admin-card" style="margin-bottom:20px;padding:16px;">
-    <form action="{{ route('admin.galeria.index') }}" method="GET" style="display:flex;gap:12px;flex-wrap:wrap;align-items:end;">
-        <div style="flex:1;min-width:180px;">
-            <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Buscar</label>
-            <input type="text" name="q" value="{{ request('q') }}" placeholder="Título o descripción..." class="admin-input" style="margin:0;">
-        </div>
-        <div style="min-width:160px;">
-            <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Categoría</label>
-            <select name="categoria" class="admin-input" style="margin:0;">
-                <option value="">Todas</option>
-                @foreach($categorias as $key => $label)
-                    <option value="{{ $key }}" {{ request('categoria') === $key ? 'selected' : '' }}>{{ $label }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div style="min-width:130px;">
-            <label style="display:block;font-size:12px;font-weight:600;color:var(--medium-gray);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Estado</label>
-            <select name="estado" class="admin-input" style="margin:0;">
-                <option value="">Todos</option>
-                <option value="activo" {{ request('estado') === 'activo' ? 'selected' : '' }}>Activos</option>
-                <option value="inactivo" {{ request('estado') === 'inactivo' ? 'selected' : '' }}>Ocultos</option>
-            </select>
-        </div>
-        <div style="display:flex;gap:6px;">
-            <button type="submit" class="primary-btn" style="height:42px;">
-                <i class="fas fa-search"></i> Filtrar
-            </button>
-            @if(request()->hasAny(['q', 'categoria', 'estado']))
-                <a href="{{ route('admin.galeria.index') }}" style="height:42px;display:inline-flex;align-items:center;padding:0 14px;background:var(--light-gray);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--medium-gray);text-decoration:none;font-size:13px;">
-                    <i class="fas fa-times"></i>
-                </a>
-            @endif
-        </div>
-    </form>
-</div>
+<x-admin-filters
+    :searchPlaceholder="'Buscar por título o descripción...'"
+    :searchField="'q'"
+    :route="route('admin.galeria.index')"
+    :clearRoute="route('admin.galeria.index')"
+    :filters="[
+        [
+            'field' => 'categoria',
+            'label' => 'Categoría',
+            'options' => $categorias
+        ],
+        [
+            'field' => 'estado',
+            'label' => 'Estado',
+            'options' => [
+                'activo' => 'Activos',
+                'inactivo' => 'Ocultos',
+            ]
+        ],
+    ]"
+/>
 
 {{-- FLASH --}}
 @if(session('success'))

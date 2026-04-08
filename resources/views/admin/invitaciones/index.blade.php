@@ -66,6 +66,24 @@
         </div>
     </div>
 
+    {{-- FILTROS --}}
+    <x-admin-filters
+        :searchPlaceholder="'Buscar por email...'"
+        :searchField="'q'"
+        :route="route('admin.invitaciones.index')"
+        :clearRoute="route('admin.invitaciones.index')"
+        :filters="[
+            [
+                'field' => 'estado',
+                'label' => 'Estado',
+                'options' => [
+                    'usado' => 'Usadas',
+                    'no-usado' => 'Pendientes',
+                ]
+            ],
+        ]"
+    />
+
     {{-- Tabla de invitaciones --}}
     <div class="table-card">
 

@@ -25,6 +25,44 @@
 </div>
 @endif
 
+{{-- FILTROS --}}
+<x-admin-filters
+    :searchPlaceholder="'Buscar por título, autor o contenido...'"
+    :searchField="'q'"
+    :route="route('admin.noticias.index')"
+    :clearRoute="route('admin.noticias.index')"
+    :filters="[
+        [
+            'field' => 'categoria',
+            'label' => 'Categoría',
+            'options' => [
+                'tecnologia' => 'Tecnología',
+                'investigacion' => 'Investigación',
+                'cultura' => 'Cultura',
+                'educacion' => 'Educación',
+                'eventos' => 'Eventos',
+                'otro' => 'Otro',
+            ]
+        ],
+        [
+            'field' => 'estado',
+            'label' => 'Estado',
+            'options' => [
+                'activo' => 'Publicado',
+                'inactivo' => 'Oculto',
+            ]
+        ],
+        [
+            'field' => 'destacado',
+            'label' => 'Destacado',
+            'options' => [
+                'si' => 'Destacados',
+                'no' => 'No destacados',
+            ]
+        ],
+    ]"
+/>
+
 {{-- TABLA --}}
 <div class="admin-table">
     <div class="admin-table-wrapper">

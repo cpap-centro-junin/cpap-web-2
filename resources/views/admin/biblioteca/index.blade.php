@@ -26,42 +26,45 @@
 @endif
 
 {{-- FILTROS --}}
-<div class="admin-card" style="margin-bottom:20px;padding:16px 20px;">
-    <form method="GET" action="{{ route('admin.biblioteca.index') }}" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-        <input type="text" name="q" value="{{ request('q') }}" placeholder="Buscar por título, autor, editorial..."
-               class="admin-input" style="flex:1;min-width:200px;">
-        <select name="tipo" class="admin-input" style="width:180px;">
-            <option value="">Todos los tipos</option>
-            <option value="libro" {{ request('tipo')=='libro'?'selected':'' }}>Libros</option>
-            <option value="articulo" {{ request('tipo')=='articulo'?'selected':'' }}>Artículos</option>
-            <option value="tesis" {{ request('tipo')=='tesis'?'selected':'' }}>Tesis</option>
-            <option value="documento" {{ request('tipo')=='documento'?'selected':'' }}>Documentos CPAP</option>
-            <option value="revista" {{ request('tipo')=='revista'?'selected':'' }}>Revistas</option>
-            <option value="multimedia" {{ request('tipo')=='multimedia'?'selected':'' }}>Multimedia</option>
-        </select>
-        <select name="formato" class="admin-input" style="width:170px;">
-            <option value="">Todos los formatos</option>
-            <option value="fisico" {{ request('formato')=='fisico'?'selected':'' }}>📚 Físico</option>
-            <option value="digital" {{ request('formato')=='digital'?'selected':'' }}>💻 Virtual</option>
-        </select>
-        <select name="area" class="admin-input" style="width:200px;">
-            <option value="">Todas las áreas</option>
-            <option value="cultural" {{ request('area')=='cultural'?'selected':'' }}>Antropología Cultural</option>
-            <option value="social" {{ request('area')=='social'?'selected':'' }}>Antropología Social</option>
-            <option value="arqueologia" {{ request('area')=='arqueologia'?'selected':'' }}>Arqueología</option>
-            <option value="linguistica" {{ request('area')=='linguistica'?'selected':'' }}>Lingüística</option>
-            <option value="biologica" {{ request('area')=='biologica'?'selected':'' }}>Antropología Biológica</option>
-        </select>
-        <button type="submit" class="primary-btn" style="padding:10px 18px;">
-            <i class="fas fa-search"></i> Filtrar
-        </button>
-        @if(request()->hasAny(['q','tipo','area','formato']))
-            <a href="{{ route('admin.biblioteca.index') }}" style="color:var(--medium-gray);font-size:13px;text-decoration:none;">
-                <i class="fas fa-times"></i> Limpiar
-            </a>
-        @endif
-    </form>
-</div>
+<x-admin-filters
+    :searchPlaceholder="'Buscar por título, autor, editorial...'"
+    :searchField="'q'"
+    :route="route('admin.biblioteca.index')"
+    :clearRoute="route('admin.biblioteca.index')"
+    :filters="[
+        [
+            'field' => 'tipo',
+            'label' => 'Tipo',
+            'options' => [
+                'libro' => 'Libros',
+                'articulo' => 'Artículos',
+                'tesis' => 'Tesis',
+                'documento' => 'Documentos',
+                'revista' => 'Revistas',
+                'multimedia' => 'Multimedia',
+            ]
+        ],
+        [
+            'field' => 'formato',
+            'label' => 'Formato',
+            'options' => [
+                'fisico' => 'Físico',
+                'digital' => 'Digital',
+            ]
+        ],
+        [
+            'field' => 'area',
+            'label' => 'Área Temática',
+            'options' => [
+                'cultural' => 'Antropología Cultural',
+                'social' => 'Antropología Social',
+                'arqueologia' => 'Arqueología',
+                'linguistica' => 'Lingüística',
+                'biologica' => 'Antropología Biológica',
+            ]
+        ],
+    ]"
+/>
 
 {{-- TABLA --}}
 <div class="admin-table">

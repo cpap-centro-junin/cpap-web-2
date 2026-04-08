@@ -20,7 +20,21 @@ class PopupAnuncioController extends Controller
         }
         
         $perpage = session('pagination_perpage', 20);
-        $anuncios = PopupAnuncio::latest()->paginate($perpage);
+        
+        $query = PopupAnuncio::query();
+
+        // Search by title
+        if ($request->filled('q')) {
+            $buscar = $request->q;
+            $query->where('titulo', 'like', "%{$buscar}%");
+        }
+
+        // Filter by active status
+        if ($request->filled('estado')) {
+            $query->where('activo', $request->estado === 'activo');
+        }
+
+        $anuncios = $query->latest()->paginate($perpage)->withQueryString();
         
         return view('admin.inicio.anuncios.index', compact('anuncios'));
     }

@@ -19,7 +19,35 @@ class BolsaTrabajoController extends Controller
         }
         
         $perpage = session('pagination_perpage', 15);
-        $ofertas = BolsaTrabajo::orderBy('fecha_publicacion', 'desc')->paginate($perpage);
+        
+        $query = BolsaTrabajo::query();
+        
+        // Búsqueda
+        if ($request->filled('q')) {
+            $search = $request->q;
+            $query->where(function ($q) use ($search) {
+                $q->where('titulo', 'like', "%{$search}%")
+                  ->orWhere('empresa', 'like', "%{$search}%")
+                  ->orWhere('descripcion', 'like', "%{$search}%");
+            });
+        }
+        
+        // Filtro por tipo
+        if ($request->filled('tipo')) {
+            $query->where('tipo', $request->tipo);
+        }
+        
+        // Filtro por área
+        if ($request->filled('area')) {
+            $query->where('area', $request->area);
+        }
+        
+        // Filtro por estado
+        if ($request->filled('estado')) {
+            $query->where('activo', $request->estado === 'activo');
+        }
+        
+        $ofertas = $query->orderBy('fecha_publicacion', 'desc')->paginate($perpage)->withQueryString();
         
         return view('admin.bolsa.index', compact('ofertas'));
     }

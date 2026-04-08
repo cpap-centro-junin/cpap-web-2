@@ -21,7 +21,25 @@ class ContactMessageController extends Controller
         }
         
         $perpage = session('pagination_perpage', 10);
-        $messages = ContactMessage::latest()->paginate($perpage);
+        
+        $query = ContactMessage::query();
+
+        // Search by subject or message
+        if ($request->filled('q')) {
+            $buscar = $request->q;
+            $query->where(function ($q) use ($buscar) {
+                $q->where('asunto', 'like', "%{$buscar}%")
+                  ->orWhere('mensaje', 'like', "%{$buscar}%")
+                  ->orWhere('email', 'like', "%{$buscar}%");
+            });
+        }
+
+        // Filter by read status
+        if ($request->filled('estado')) {
+            $query->where('leido', $request->estado === 'leido');
+        }
+
+        $messages = $query->latest()->paginate($perpage)->withQueryString();
 
         return view('admin.mensajes.index', compact('messages'));
     }

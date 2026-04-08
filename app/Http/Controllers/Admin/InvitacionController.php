@@ -21,7 +21,21 @@ class InvitacionController extends Controller
         }
         
         $perpage = session('pagination_perpage', 20);
-        $invitaciones = Invitaciones::latest()->paginate($perpage);
+        
+        $query = Invitaciones::query();
+
+        // Search by email
+        if ($request->filled('q')) {
+            $buscar = $request->q;
+            $query->where('email', 'like', "%{$buscar}%");
+        }
+
+        // Filter by usage status
+        if ($request->filled('estado')) {
+            $query->where('usado', $request->estado === 'usado');
+        }
+
+        $invitaciones = $query->latest()->paginate($perpage)->withQueryString();
         
         return view('admin.invitaciones.index', compact('invitaciones'));
     }

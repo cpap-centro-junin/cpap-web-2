@@ -39,7 +39,29 @@ class InicioController extends Controller
         }
         
         $perpage = session('pagination_perpage', 20);
-        $slides = BannerSlide::with(['noticia', 'evento'])->orderBy('orden')->paginate($perpage);
+        
+        $query = BannerSlide::with(['noticia', 'evento']);
+
+        // Search by title or tipo
+        if ($request->filled('q')) {
+            $buscar = $request->q;
+            $query->where(function ($q) use ($buscar) {
+                $q->where('titulo', 'like', "%{$buscar}%")
+                  ->orWhere('subtitulo', 'like', "%{$buscar}%");
+            });
+        }
+
+        // Filter by slide type
+        if ($request->filled('tipo')) {
+            $query->where('tipo', $request->tipo);
+        }
+
+        // Filter by active status
+        if ($request->filled('estado')) {
+            $query->where('activo', $request->estado === 'activo');
+        }
+
+        $slides = $query->orderBy('orden')->paginate($perpage)->withQueryString();
         
         return view('admin.inicio.slides.index', compact('slides'));
     }

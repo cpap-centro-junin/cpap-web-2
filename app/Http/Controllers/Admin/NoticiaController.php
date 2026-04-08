@@ -20,7 +20,35 @@ class NoticiaController extends Controller
         }
         
         $perpage = session('pagination_perpage', 20);
-        $noticias = Noticia::latest()->paginate($perpage);
+        
+        $query = Noticia::query();
+        
+        // Búsqueda
+        if ($request->filled('q')) {
+            $search = $request->q;
+            $query->where(function ($q) use ($search) {
+                $q->where('titulo', 'like', "%{$search}%")
+                  ->orWhere('resumen', 'like', "%{$search}%")
+                  ->orWhere('autor', 'like', "%{$search}%");
+            });
+        }
+        
+        // Filtro por categoría
+        if ($request->filled('categoria')) {
+            $query->where('categoria', $request->categoria);
+        }
+        
+        // Filtro por estado
+        if ($request->filled('estado')) {
+            $query->where('activo', $request->estado === 'activo');
+        }
+        
+        // Filtro por destacado
+        if ($request->filled('destacado')) {
+            $query->where('destacado', $request->destacado === 'si');
+        }
+        
+        $noticias = $query->latest()->paginate($perpage)->withQueryString();
         
         return view('admin.noticias.index', compact('noticias'));
     }

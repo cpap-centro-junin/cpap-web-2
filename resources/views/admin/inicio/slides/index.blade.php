@@ -29,6 +29,32 @@
 </div>
 @endif
 
+{{-- FILTROS --}}
+<x-admin-filters
+    :searchPlaceholder="'Buscar por título...'"
+    :searchField="'q'"
+    :route="route('admin.inicio.slides.index')"
+    :clearRoute="route('admin.inicio.slides.index')"
+    :filters="[
+        [
+            'field' => 'tipo',
+            'label' => 'Tipo',
+            'options' => [
+                'noticia' => 'Noticia',
+                'evento' => 'Evento',
+            ]
+        ],
+        [
+            'field' => 'estado',
+            'label' => 'Estado',
+            'options' => [
+                'activo' => 'Activos',
+                'inactivo' => 'Inactivos',
+            ]
+        ],
+    ]"
+/>
+
 @if($slides->count() === 0)
 <div style="background:var(--warning-light);color:var(--warning);border:1px solid rgba(230,81,0,0.2);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px;font-size:14px;">
     <i class="fas fa-info-circle" style="margin-top:2px;flex-shrink:0;"></i>

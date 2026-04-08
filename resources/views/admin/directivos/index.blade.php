@@ -21,6 +21,24 @@
 </div>
 @endif
 
+{{-- FILTROS --}}
+<x-admin-filters
+    :searchPlaceholder="'Buscar por nombre o cargo...'"
+    :searchField="'q'"
+    :route="route('admin.directivos.index')"
+    :clearRoute="route('admin.directivos.index')"
+    :filters="[
+        [
+            'field' => 'estado',
+            'label' => 'Estado',
+            'options' => [
+                'activo' => 'Activos',
+                'inactivo' => 'Inactivos',
+            ]
+        ],
+    ]"
+/>
+
 {{-- Aviso datos ejemplo --}}
 @if($directivos->count() === 0)
 <div style="background:var(--warning-light);color:var(--warning);border:1px solid rgba(230,81,0,0.2);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:20px;display:flex;align-items:flex-start;gap:10px;font-size:14px;">

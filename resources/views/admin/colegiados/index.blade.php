@@ -20,47 +20,30 @@
     </div>
 
     {{-- Filtros y búsqueda --}}
-    <div class="filters-card">
-        <form action="{{ route('admin.colegiados.index') }}" method="GET" class="filters-form">
-            <div class="filter-group">
-                <input
-                    type="text"
-                    name="buscar"
-                    class="form-control"
-                    placeholder="Buscar por DNI, código o nombre..."
-                    value="{{ request('buscar') }}"
-                >
-            </div>
-            <div class="filter-group">
-                <select name="estado" class="form-control">
-                    <option value="">Todos los estados</option>
-                    <option value="activo" {{ request('estado') == 'activo' ? 'selected' : '' }}>Activos</option>
-                    <option value="inactivo" {{ request('estado') == 'inactivo' ? 'selected' : '' }}>Inactivos</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <select name="visibilidad" class="form-control">
-                    <option value="">Toda visibilidad</option>
-                    <option value="visible" {{ request('visibilidad') == 'visible' ? 'selected' : '' }}>
-                        Visible en público
-                    </option>
-                    <option value="oculto" {{ request('visibilidad') == 'oculto' ? 'selected' : '' }}>
-                        Ocultos de público
-                    </option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-search"></i>
-                Buscar
-            </button>
-            @if(request()->anyFilled(['buscar', 'estado', 'visibilidad']))
-                <a href="{{ route('admin.colegiados.index', ['sort' => $sort, 'order' => $order]) }}" class="btn btn-secondary">
-                    <i class="fas fa-times"></i>
-                    Limpiar
-                </a>
-            @endif
-        </form>
-    </div>
+    <x-admin-filters
+        :searchPlaceholder="'Buscar por DNI, código o nombre...'"
+        :searchField="'q'"
+        :route="route('admin.colegiados.index')"
+        :clearRoute="route('admin.colegiados.index')"
+        :filters="[
+            [
+                'field' => 'estado',
+                'label' => 'Estado',
+                'options' => [
+                    'activo' => 'Activos',
+                    'inactivo' => 'Inactivos',
+                ]
+            ],
+            [
+                'field' => 'visibilidad',
+                'label' => 'Visibilidad',
+                'options' => [
+                    'visible' => 'Públicos',
+                    'oculto' => 'Ocultos',
+                ]
+            ],
+        ]"
+    />
 
     {{-- Tabla de colegiados --}}
     <div class="table-card">

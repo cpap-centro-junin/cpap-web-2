@@ -21,6 +21,24 @@
         @endif
     </div>
 
+    {{-- FILTROS --}}
+    <x-admin-filters
+        :searchPlaceholder="'Buscar por asunto o email...'"
+        :searchField="'q'"
+        :route="route('admin.mensajes.index')"
+        :clearRoute="route('admin.mensajes.index')"
+        :filters="[
+            [
+                'field' => 'estado',
+                'label' => 'Estado',
+                'options' => [
+                    'leido' => 'Leídos',
+                    'no-leido' => 'No leídos',
+                ]
+            ],
+        ]"
+    />
+
     <div class="msg-list-body">
         @forelse($messages as $msg)
         <div class="msg-row {{ !$msg->leido ? 'msg-row--new' : '' }}">

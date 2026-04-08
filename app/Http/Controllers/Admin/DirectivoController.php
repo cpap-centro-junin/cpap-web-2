@@ -20,7 +20,24 @@ class DirectivoController extends Controller
         }
         
         $perpage = session('pagination_perpage', 20);
-        $directivos = Directivo::orderBy('orden')->orderBy('id')->paginate($perpage);
+        
+        $query = Directivo::query();
+
+        // Search by name or position
+        if ($request->filled('q')) {
+            $buscar = $request->q;
+            $query->where(function ($q) use ($buscar) {
+                $q->where('nombre', 'like', "%{$buscar}%")
+                  ->orWhere('cargo', 'like', "%{$buscar}%");
+            });
+        }
+
+        // Filter by active status
+        if ($request->filled('estado')) {
+            $query->where('activo', $request->estado === 'activo');
+        }
+
+        $directivos = $query->orderBy('orden')->orderBy('id')->paginate($perpage)->withQueryString();
         
         return view('admin.directivos.index', compact('directivos'));
     }

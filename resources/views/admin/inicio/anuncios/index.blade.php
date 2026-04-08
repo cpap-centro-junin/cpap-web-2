@@ -26,6 +26,24 @@
 </div>
 @endif
 
+{{-- FILTROS --}}
+<x-admin-filters
+    :searchPlaceholder="'Buscar por título...'"
+    :searchField="'q'"
+    :route="route('admin.inicio.anuncios.index')"
+    :clearRoute="route('admin.inicio.anuncios.index')"
+    :filters="[
+        [
+            'field' => 'estado',
+            'label' => 'Estado',
+            'options' => [
+                'activo' => 'Activos',
+                'inactivo' => 'Inactivos',
+            ]
+        ],
+    ]"
+/>
+
 <div style="background:var(--info-light);color:var(--info);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:20px;font-size:13px;display:flex;align-items:flex-start;gap:10px;">
     <i class="fas fa-info-circle" style="margin-top:2px;flex-shrink:0;"></i>
     <span>Puedes tener <strong>varios anuncios activos</strong> al mismo tiempo. Todos los activos se mostrarán en el popup de la página de inicio con navegación de flechas.</span>

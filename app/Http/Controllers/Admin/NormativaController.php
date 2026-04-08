@@ -20,7 +20,24 @@ class NormativaController extends Controller
         }
         
         $perpage = session('pagination_perpage', 20);
-        $documentos = NormativaDocumento::orderBy('orden')->orderBy('id')->paginate($perpage);
+        
+        $query = NormativaDocumento::query();
+
+        // Search by title
+        if ($request->filled('q')) {
+            $buscar = $request->q;
+            $query->where(function ($q) use ($buscar) {
+                $q->where('titulo', 'like', "%{$buscar}%")
+                  ->orWhere('descripcion', 'like', "%{$buscar}%");
+            });
+        }
+
+        // Filter by active status
+        if ($request->filled('estado')) {
+            $query->where('activo', $request->estado === 'activo');
+        }
+
+        $documentos = $query->orderBy('orden')->orderBy('id')->paginate($perpage)->withQueryString();
         
         return view('admin.normativa.index', compact('documentos'));
     }

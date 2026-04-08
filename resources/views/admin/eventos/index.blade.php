@@ -25,6 +25,35 @@
 </div>
 @endif
 
+{{-- FILTROS --}}
+<x-admin-filters
+    :searchPlaceholder="'Buscar por título, descripción o lugar...'"
+    :searchField="'q'"
+    :route="route('admin.eventos.index')"
+    :clearRoute="route('admin.eventos.index')"
+    :filters="[
+        [
+            'field' => 'categoria',
+            'label' => 'Categoría',
+            'options' => [
+                'conferencia' => 'Conferencia',
+                'taller' => 'Taller',
+                'seminario' => 'Seminario',
+                'reunion' => 'Reunión',
+                'otro' => 'Otro',
+            ]
+        ],
+        [
+            'field' => 'estado',
+            'label' => 'Estado',
+            'options' => [
+                'activo' => 'Activo',
+                'inactivo' => 'Inactivo',
+            ]
+        ],
+    ]"
+/>
+
 {{-- TABLA --}}
 <div class="admin-table">
     <div class="admin-table-wrapper">
